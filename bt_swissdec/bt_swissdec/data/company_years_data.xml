@@ -1,0 +1,20 @@
+<openerp>
+    <data noupdate="1">
+        <!-- Create First Company Year -->
+
+        <record id="res_company_year_2020" model="res.company.year.template">
+            <field name="name">2020</field>
+            <field name="ahv_freigrenze_monat">1400</field>
+            <field name="ahv_alv_untergrenze_jahr">2300</field>
+            <field name="beginn_ahv">18</field>
+            <field name="beginn_rentenalter_m">65</field>
+            <field name="beginn_rentenalter_f">64</field>
+            <field name="ahv_arbeitnehmer_beitrag">5.275</field>
+            <field name="alv_hoechstlohn_monat">12350</field>
+            <field name="alv_arbeitnehmer_beitrag">1.10</field>
+            <field name="alvz_hoechstlohn_monat">999999999</field>
+            <field name="alvz_arbeitnehmer_beitrag">0.50</field>
+        </record>
+
+    </data>
+</openerp>

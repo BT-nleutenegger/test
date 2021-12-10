@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_payslip_document">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.employee_id.lang or o.employee_id.lang_fnct or 'de_DE'})"/>
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div t-attf-class="#{get_class_address_left(o)} #{get_class_address_margin_top(o)} #{get_class_address_margin_bottom(o)}" style="border: 0px solid black">
+                            <div t-esc="get_address_home_id(o)" t-options="{'widget': 'contact', 'fields': ['address', 'name'], 'no_marker': True}"/>
+                        </div>
+                    </div>
+                    <section class="oe_mb32">
+                        <h4><strong>Payslip <span t-esc="get_month_year(o)"/></strong></h4>
+                    </section>
+
+                    <div class="row oe_mb8">
+                        <div class="col-3" style="border: 0px solid black">
+                            Personal-Nr.
+                        </div>
+                        <div class="col-3" style="border: 0px solid black">
+                            <div t-field="o.employee_id.identification_id_bt"/>
+                        </div>
+                        <div class="col-3" style="border: 0px solid black">
+                            Datum
+                        </div>
+                        <div class="col-3" style="border: 0px solid black">
+                            <div t-field="o.date"/>
+                        </div>
+                    </div>
+                    <div class="row oe_mb8">
+                        <div class="col-3" style="border: 0px solid black">
+                            Bereich
+                        </div>
+                        <div class="col-3" style="border: 0px solid black">
+                            <div t-field="o.employee_id.department_id.name"/>
+                        </div>
+                        <div class="col-3" style="border: 0px solid black">
+                            SVN
+                        </div>
+                        <div class="col-3" style="border: 0px solid black">
+                            <div t-esc="get_ahv_number(o)"/>
+                        </div>
+                    </div>
+                    <table class="table table-condensed oe_mt32">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-1">Nr.</th>
+                                <th class="col-xs-5">Bezeichnung</th>
+                                <th class="col-xs-2" style="text-align: right">Menge</th>
+                                <th class="col-xs-2" style="text-align: right">Ansatz</th>
+                                <th class="col-xs-2" style="text-align: right">Betrag</th>
+                            </tr>
+                        </thead>
+                        <p t-if="len(get_parts(o, 'bruttolohn')) > 0">
+                        <tbody>
+                            <tr t-foreach="get_parts(o, 'bruttolohn')" t-as="line">
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['matrix_nr']"/></td>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['name']"/></td>
+                                <p>
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['basic']" t-esc="line['basic']" t-options="{'widget': 'float', 'decimal_precision': line['payslip_report_basic_dp']}"/><span t-esc="line['uom_basic']"/></td>
+                                </p>
+                                <p>
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['amount']" t-esc="line['amount']" t-options="{'widget': 'float', 'decimal_precision': line['payslip_report_amount_dp']}"/><span t-esc="line['uom_amount']"/></td>
+                                </p>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-esc="line['total']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td/>
+                                <td style="padding-top: 1mm; padding-bottom: 1mm;"><strong>Bruttolohn</strong></td>
+                                <td/>
+                                <td/>
+                                <td style="text-align: right; font-weight: bold; padding-top: 1mm; padding-bottom: 1mm;"><span t-esc="o.basic" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+                        </p>
+
+                        <p t-if="o.total_sozialabzuege != 0">
+                        <tbody>
+                            <tr t-foreach="get_parts(o, 'total_sozialabzuege')" t-as="line">
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['matrix_nr']"/></td>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['name']"/></td>
+                                <p>
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['basic']" t-esc="line['basic']" t-options="{'widget': 'float', 'decimal_precision': line['payslip_report_basic_dp']}"/><span t-esc="line['uom_basic']"/></td>
+                                </p>
+                                <p>
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['amount']" t-esc="line['amount']" t-options="{'widget': 'float', 'decimal_precision': line['payslip_report_amount_dp']}"/><span t-esc="line['uom_amount']"/></td>
+                                </p>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-esc="line['total']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+
+                        <tbody>
+                            <tr>
+                                <td/>
+                                <td style="padding-top: 1mm; padding-bottom: 1mm;"><strong>Sozialabzüge</strong></td>
+                                <td/>
+                                <td/>
+                                <td style="text-align: right; font-weight: bold; padding-top: 1mm; padding-bottom: 1mm;"><span t-esc="o.total_sozialabzuege * -1" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+                        </p>
+
+                        <p t-if="o.total_sozialabzuege != 0 and o.total_sonstigeabzuege_zulagen != 0">
+                        <tbody>
+                            <tr t-foreach="get_parts(o, 'total_sonstigeabzuege_zulagen')" t-as="line">
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['matrix_nr']"/></td>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['name']"/></td>
+                                <p>
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['basic']" t-esc="line['basic']" t-options="{'widget': 'float', 'decimal_precision': line['payslip_report_basic_dp']}"/><span t-esc="line['uom_basic']"/></td>
+                                </p>
+                                <p>
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['amount']" t-esc="line['amount']" t-options="{'widget': 'float', 'decimal_precision': line['payslip_report_amount_dp']}"/><span t-esc="line['uom_amount']"/></td>
+                                </p>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-esc="line['total']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+
+                        <tbody>
+                            <tr>
+                                <td/>
+                                <td style="padding-top: 1mm; padding-bottom: 1mm;"><strong>Abzüge/Zulagen</strong></td>
+                                <td/>
+                                <td/>
+                                <td style="text-align: right; font-weight: bold; padding-top: 1mm; padding-bottom: 1mm;"><span t-esc="(o.total_sozialabzuege+o.total_sonstigeabzuege_zulagen)" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+                        </p>
+
+                        <!--p t-if="o.total_spesen != 0">
+                        <tbody>
+                            <tr t-foreach="get_parts(o, 'total_spesen')" t-as="line">
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['matrix_nr']"/></td>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['name']"/></td>
+                                <p t-if="line['uom_basic'] == o.employee_id.company_id.currency_id.symbol">
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['basic']" t-esc="line['basic']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                </p>
+                                <p t-else="">
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['basic']" t-esc="line['basic']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/> <span t-esc="line['uom_basic']"/></td>
+                                </p>
+                                <p t-if="line['uom_amount'] == o.employee_id.company_id.currency_id.symbol">
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['amount']" t-esc="line['amount']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                </p>
+                                <p t-else="">
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['amount']" t-esc="line['amount']" t-options="{'widget': 'float', 'decimal_precision': line['payslip_report_decimal_precision'] or 'Payroll Rate'}"/> <span t-esc="line['uom_amount']"/></td>
+                                </p>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-esc="line['total']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+
+                        <tbody>
+                            <tr>
+                                <td/>
+                                <td><strong>Nicht pflichtige Spesen</strong></td>
+                                <td/>
+                                <td/>
+                                <td style="text-align: right; font-weight: bold; padding-top: 1mm; padding-bottom: 1mm;"><span t-esc="o.total_spesen" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+                        </p-->
+
+                        <tbody>
+                            <tr>
+                                <td/>
+                                <td style="padding-top: 1mm; padding-bottom: 1mm;"><strong>Nettolohn</strong></td>
+                                <td/>
+                                <td/>
+                                <td style="text-align: right; font-weight: bold; padding-top: 1mm; padding-bottom: 1mm;"><span t-esc="o.nettolohn" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+
+                        <p t-if="o.total_abzuege_zulagen_nach_nettolohn != 0">
+                        <tbody>
+                            <tr t-foreach="get_parts(o, 'total_abzuege_zulagen_nach_nettolohn')" t-as="line">
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['matrix_nr']"/></td>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0;"><span t-esc="line['name']"/></td>
+                                <p>
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['basic']" t-esc="line['basic']" t-options="{'widget': 'float', 'decimal_precision': line['payslip_report_basic_dp']}"/><span t-esc="line['uom_basic']"/></td>
+                                </p>
+                                <p>
+                                    <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-if="line['amount']" t-esc="line['amount']" t-options="{'widget': 'float', 'decimal_precision': line['payslip_report_amount_dp']}"/><span t-esc="line['uom_amount']"/></td>
+                                </p>
+                                <td style="border-top: 0; padding-top: 0; padding-bottom: 0; text-align: right"><span t-esc="line['total']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+                        </p>
+
+                        <tbody>
+                            <tr>
+                                <td/>
+                                <td style="padding-top: 1mm; padding-bottom: 1mm;"><strong>Auszahlung</strong></td>
+                                <td/>
+                                <td/>
+                                <td style="text-align: right; font-weight: bold; padding-top: 1mm; padding-bottom: 1mm;"><span t-esc="o.auszahlung" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <p t-if="o.payment_details" class="oe_mt32">
+                        Der Betrag wird überwiesen auf:<br/>
+                        <span t-field="o.payment_details"/>
+                    </p>
+                    <p t-else="" class="oe_mt32">Der Betrag wird auf folgendes Konto überwiesen: <span t-field="o.employee_id.bank_account_id"/></p>
+                    <p t-if="o.note" class="oe_mt16">
+                        <span t-field="o.note"/>
+                    </p>
+                </div>
+            </t>
+        <!--/t>
+    </t-->
+</template>
+
+<template id="report_payslip">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_payslip_document" t-lang="o.employee_id.lang or o.employee_id.lang_fnct or 'de_DE'"/>
+        </t>
+    </t>
+</template>
+
+<template id="report_payslip_register">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_payslip_document" t-lang="o.employee_id.lang or o.employee_id.lang_fnct or 'de_DE'"/>
+        </t>
+    </t>
+</template>
+</odoo>

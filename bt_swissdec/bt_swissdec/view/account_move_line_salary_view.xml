@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+        <record id="view_move_line_salary_tree" model="ir.ui.view">
+            <field name="name">account.move.line.salary.tree</field>
+            <field name="model">account.move.line.salary</field>
+            <field name="arch" type="xml">
+                <tree string="Journal Items" create="false" edit="false">
+                    <field name="date" optional="show"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="move_id" optional="show"/>
+                    <field name="account_id" options="{'no_open': True}" groups="account.group_account_user"/>
+                    <field name="partner_id" optional="show"/>
+                    <field name="name" optional="show"/>
+                    <field name="debit" sum="Total Debit"/>
+                    <field name="credit" sum="Total Credit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_move_line_salary_form" model="ir.ui.view">
+            <field name="name">account.move.line.salary.form</field>
+            <field name="model">account.move.line.salary</field>
+            <field name="arch" type="xml">
+                <form string="Journal Items">
+                    <sheet>
+                        <group readonly="1">
+                            <field name="date"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="move_id"/>
+                            <field name="account_move_line_id"/>
+                            <field name="account_id" groups="account.group_account_user" readonly="1"/>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="name" readonly="1"/>
+                            <field name="debit" readonly="1"/>
+                            <field name="credit" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_move_line_salary_search" model="ir.ui.view">
+            <field name="name">account.move.line.salary.search</field>
+            <field name="model">account.move.line.salary</field>
+            <field name="arch" type="xml">
+                <search string="Account move line salary">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="date"/>
+                    <field name="account_id"/>
+                    <field name="company_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Label" name="name" context="{'group_by': 'name'}"/>
+                        <filter string="Partner" name="partner_id" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Date" name="date" context="{'group_by': 'date'}"/>
+                        <filter string="Account" name="account_id" groups="account.group_account_user" context="{'group_by': 'account_id'}"/>
+                        <filter string="Company" name="company_id" groups="base.group_multi_company" context="{'group_by': 'company_id'}"/>
+                    </group>
+                    <filter string="Booked Entries" name="booked" domain="[('account_move_line_id', '!=', False)]"/>
+                    <filter string="Not Booked Entries" name="not_booked" domain="[('account_move_line_id', '=', False)]"/>
+                    <filter string="Date" name="date" date="date"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_account_move_line_salary_view" model="ir.actions.act_window">
+            <field name="name">Account Move Lines Salary</field>
+            <field name="res_model">account.move.line.salary</field>
+            <field name="view_mode">tree,form</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="target">current</field>
+            <field name="search_view_id" ref="view_move_line_salary_search"/>
+        </record>
+
+        <menuitem name="Account Move Lines Salary"
+                  action=""
+                  id="menu_account_move_line_salary_view"
+                  parent="menu_hr_root_payroll"
+                  sequence="150"/>
+
+	</data>
+</openerp>

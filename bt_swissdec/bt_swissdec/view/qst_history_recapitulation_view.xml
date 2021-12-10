@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+
+        <record id="qst_history_recapitulation_per_month_tree_view" model="ir.ui.view">
+            <field name="name">qst_history_recapitulation_per_month_tree_view</field>
+            <field name="model">qst_history_recapitulation_per_month</field>
+            <field name="arch" type="xml">
+                <tree string="Per Month" editable="top">
+                    <field name="hr_qst_id"/>
+                    <field name="qst_state_id"/>
+                    <field name="category_predefined"/>
+                    <field name="category_open"/>
+                    <field name="hr_employee_calculationparameter_qst_id"/>
+                    <field name="current"/>
+                    <field name="workdays_ch" />
+                    <field name="qst_municipality" />
+                </tree>
+            </field>
+        </record>
+        <record id="qst_history_recapitulation_per_month_search_view" model="ir.ui.view">
+            <field name="name">qst_history_recapitulation_per_month_search_view</field>
+            <field name="model">qst_history_recapitulation_per_month</field>
+            <field name="arch" type="xml">
+                <search string="Per Month">
+                    <field name="hr_qst_id"/>
+                    <field name="qst_state_id"/>
+                    <field name="category_predefined"/>
+                    <field name="category_open"/>
+                    <field name="current"/>
+                    <field name="hr_employee_calculationparameter_qst_id"/>
+                </search>
+            </field>
+        </record>
+        <record id="action_qst_history_recapitulation_per_month" model="ir.actions.act_window">
+            <field name="name">QST History Action</field>
+            <field name="res_model">qst_history_recapitulation_per_month</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_hr_employee_calculationparameter_qst_id': [active_id],
+                'default_hr_employee_calculationparameter_qst_id': [active_id]}
+            </field>
+            <field name="target">new</field>
+            <field name="domain">[('test_case', '=', False)]</field>
+        </record>
+
+        <record id="action_qst_history_recapitulation_per_month_test" model="ir.actions.act_window">
+            <field name="name">QST History Action</field>
+            <field name="res_model">qst_history_recapitulation_per_month</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_hr_employee_calculationparameter_qst_id': [active_id],
+                'default_hr_employee_calculationparameter_qst_id': [active_id]}
+            </field>
+            <field name="target">new</field>
+            <field name="domain">[('test_case', '=', True)]</field>
+        </record>
+
+
+    </data>
+</openerp>

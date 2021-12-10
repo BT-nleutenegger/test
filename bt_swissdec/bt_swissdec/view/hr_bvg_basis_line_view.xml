@@ -1,0 +1,96 @@
+<openerp>
+	<data>
+		<record id="bvg_basis_line_tree_view_ds" model="ir.ui.view">
+			<field name="name">bvg_basis_line_tree_view</field>
+			<field name="model">hr.bvg.basis.line</field>
+			<field name="arch" type="xml">
+				<tree string="HR Bvg basis line"
+					  decoration-danger="amount_calculated_line != amount_transmitted_line">
+					<field name="employee_identification_id_bt" />
+					<field name="employee_name" />
+					<field name="employee_besch_degree" />
+					<field name="employee_bvg_code" />
+					<field name="sequence" invisible="1" />
+					<field name="amount_calculated_line" />
+					<field name="amount_transmitted_line" />
+					<field name="employee_year_id" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="validasof_date" groups="bt_swissdec.bt_swissdec_admin" />
+				</tree>
+			</field>
+		</record>
+		<record id="bvg_basis_line_form_view_ds" model="ir.ui.view">
+			<field name="name">bvg_basis_line_form_view</field>
+			<field name="model">hr.bvg.basis.line</field>
+			<field name="arch" type="xml">
+				<form string="HR Bvg basis line">
+					<sheet>
+						<group colspan="4">
+							<field name="employee_identification_id_bt" />
+							<field name="employee_name" />
+							<field name="employee_besch_degree" />
+							<field name="employee_bvg_code" />
+						</group>
+						<group colspan="2" groups="bt_swissdec.bt_swissdec_admin">
+							<field name="employee_year_id" options='{"no_open": True, "no_create": True}' />
+							<field name="validasof_date" groups="bt_swissdec.bt_swissdec_admin"/>
+						</group>
+						<notebook colspan="4">
+							<page string="Employee Detail">
+								<field name="detail_ids" nolabel="1" colspan="4"
+									context="{'tree_view_ref': 'bt_swissdec.bvg_basis_line_detail_tree_view_ds',
+										      'form_view_ref': 'bt_swissdec.bvg_basis_line_detail_form_view_ds'}" />
+							</page>
+						</notebook>
+						<group col="2" colspan="1">
+							<field name="amount_calculated_line" />
+							<field name="amount_transmitted_line" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="bvg_basis_line_tree_view_sc" model="ir.ui.view">
+			<field name="name">bvg_basis_line_tree_view</field>
+			<field name="model">hr.bvg.basis.line</field>
+			<field name="arch" type="xml">
+				<tree string="HR Bvg basis line">
+					<field name="employee_identification_id_bt" />
+					<field name="employee_name" />
+					<field name="employee_besch_degree" />
+					<field name="employee_bvg_code" />
+					<field name="sequence" invisible="1" />
+					<field name="employee_year_id" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="validasof_date" groups="bt_swissdec.bt_swissdec_admin" />
+				</tree>
+			</field>
+		</record>
+		<record id="bvg_basis_line_form_view_sc" model="ir.ui.view">
+			<field name="name">bvg_basis_line_form_view</field>
+			<field name="model">hr.bvg.basis.line</field>
+			<field name="arch" type="xml">
+				<form string="HR Bvg basis line">
+					<sheet>
+						<group colspan="4">
+							<field name="employee_identification_id_bt" />
+							<field name="employee_name" />
+							<field name="employee_besch_degree" />
+							<field name="employee_bvg_code" />
+						</group>
+						<group colspan="2" groups="bt_swissdec.bt_swissdec_admin">
+							<field name="employee_year_id" options='{"no_open": True, "no_create": True}' />
+							<field name="validasof_date" groups="bt_swissdec.bt_swissdec_admin" />
+						</group>
+						<notebook colspan="4">
+							<page string="Employee Detail">
+								<field name="detail_ids" nolabel="1" colspan="4"
+									context="{'tree_view_ref': 'bt_swissdec.bvg_basis_line_detail_tree_view_sc',
+										      'form_view_ref': 'bt_swissdec.bvg_basis_line_detail_form_view_sc'}" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

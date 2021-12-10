@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- ========== Calculation paramter BVG ========== -->
+
+        <record id="view_hr_allowance_calculationparameter_bvg_form"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.bvg.form</field>
+            <field name="model">hr.employee.calculationparameter.bvg</field>
+            <field name="arch" type="xml">
+                <form string="BVG">
+                    <group col="4" colspan="4">
+                        <field name="valid_from" attrs="{'readonly':[('set_readonly','!=',False)]}" options="{'showInitDate': False, 'useCurrent': False}"/>
+                        <field name="valid_to" attrs="{'readonly':['|', ('valid_from','=',False), ('set_readonly_valid_to','!=',False)],
+                            'invisible':[('valid_from','=',False)]}"
+                               options="{'showInitDate': False, 'useCurrent': False}"/>
+                        <field name="not_bvg" attrs="{'readonly':['|', ('set_readonly','!=',False), ('valid_from','=',False)],
+                            'invisible':[('valid_from','=',False)]}" />
+                        <newline />
+                        <field name="bvg_id" options='{"no_open": True, "no_create": True}'
+                            attrs="{'readonly':['|', ('set_readonly','!=',False), ('valid_from','=',False)],
+                            'required':[('not_bvg','=',False)], 'invisible':['|', ('not_bvg','!=',False),
+                            ('valid_from','=',False)]}" />
+                        <field name="bvg_code_id" options='{"no_open": True, "no_create": True}'
+                            attrs="{'readonly':['|', ('set_readonly','!=',False),
+                            ('valid_from','=',False)], 'invisible':['|',('bvg_id','=',False),('not_bvg','=',True)]}"
+                            domain="[('group_bvg_id','=', group_bvg_id), ('bvg_id','=', bvg_id)]" />
+                        <field name="group_bvg_id"
+                            options='{"no_open": True, "no_create": True}'  attrs="{'readonly':['|', ('set_readonly','!=',False),
+                            ('valid_from','=',False)], 'invisible':['|',('bvg_id','=',False),('not_bvg','=',True)]}" />
+                    </group>
+                    <group col="4" colspan="4" string="Beiträge" attrs="{'invisible':['|',('valid_from','=',False),('not_bvg','=',True)]}">
+                        <field name="bvg_beitrag_an" attrs="{'readonly':[('set_readonly','!=',False)]}" />
+                        <field name="bvg_beitrag_ag" attrs="{'readonly':[('set_readonly','!=',False)]}" />
+                        <field name="bvg_beitrag_dritte" attrs="{'readonly':[('set_readonly','!=',False)]}" />
+                        <field name="year_id_int" invisible="1"/>
+                    </group>
+                    <span style="color:red;font-weight:bold">
+                        <field name="set_readonly" />
+                    </span>
+                    <span style="color:red;font-weight:bold">
+                        <field name="set_readonly_valid_to" />
+                    </span>
+                </form>
+            </field>
+        </record>
+        <record id="view_hr_allowance_calculationparameter_bvg_tree"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.bvg.tree</field>
+            <field name="model">hr.employee.calculationparameter.bvg</field>
+            <field name="arch" type="xml">
+                <tree string="BVG">
+                    <field name="valid_from" />
+                    <field name="valid_to" />
+                    <field name="not_bvg" />
+                    <field name="bvg_id" />
+                    <field name="bvg_code_id" />
+                    <field name="group_bvg_id" groups="bt_swissdec.bt_swissdec_admin" />
+                    <field name="bvg_beitrag_an" />
+                    <field name="bvg_beitrag_ag" />
+                    <field name="bvg_beitrag_dritte" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_allowance_calculationparameter_bvg_tree_menu"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.bvg.tree.menu</field>
+            <field name="model">hr.employee.calculationparameter.bvg</field>
+            <field name="arch" type="xml">
+                <tree string="BVG" delete="0" create="0">
+                    <field name="employee_id" />
+                    <field name="valid_from" />
+                    <field name="valid_to" />
+                    <field name="not_bvg" />
+                    <field name="bvg_id" />
+                    <field name="bvg_code_id" />
+                    <field name="group_bvg_id" groups="bt_swissdec.bt_swissdec_admin" />
+                    <field name="bvg_beitrag_an" />
+                    <field name="bvg_beitrag_ag" />
+                    <field name="bvg_beitrag_dritte" />
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record id="gui_ahv_mutations_form_view" model="ir.ui.view">
+			<field name="name">gui_ahv_mutations_form_view</field>
+			<field name="model">bt_swissdec.gui_ahv_mutations</field>
+			<field name="arch" type="xml">
+				<form string="AHV Mutation" create="false">
+					<header>
+						<button name="action_print_data_review" type="object"
+							string="Data Review" class="oe_highlight" states="draft" />
+						<button name="action_send_ema_ahv_mutations" type="object"
+							string="Send EMA/AHV Mutations" class="oe_highlight" states="data_review" />
+
+						<button name="action_get_status" type="object" string="Get Status"
+							class="oe_highlight" states="get_status" />
+
+
+						<button name="print_report" type="object" string="Print attachment"
+							attrs="{'invisible': [('valid_print','=', False)]}" class="oe_highlight" />
+						
+						<button name="parser_response" type="object" string="Parser response" groups="bt_swissdec.bt_swissdec_admin"
+							 class="oe_highlight" />
+							
+						<button name="do_next" type="object" string="Next" class="oe_highlight"
+							states="get_result" />
+
+						<button name="action_unlink" type="object" string="Force unlink"
+							class="oe_highlight" groups="bt_swissdec.bt_swissdec_admin" />
+							
+						<field name="state" widget="statusbar" />
+
+					</header>
+					<sheet>
+						<label for="name" />
+						<field name="name" />
+						<group attrs="{'invisible':[('error_in_declare_exists', '=', False)]}"
+							colspan="4">
+							<h1>There are some errors:</h1>
+							<br />
+							<field name="error_in_declare" colspan="4" nolabel="1" />
+							<field name="error_in_declare_exists" invisible="1" />
+							<button name="action_brain_tec_send" string="Report Error by Mail to brain-tec"
+								type="object" attrs="{'invisible':[('error_in_declare_exists', '=', False)]}"
+								class="oe_highlight" />
+							<field name="last_mail_id_text" colspan="4" nolabel="1"/>
+						</group>
+
+						<group attrs="{'invisible':[('extra_information_exists', '=', False)]}"
+							colspan="4">
+							<h1>Information...</h1>
+							<br />
+							<field name="extra_information" colspan="4" />
+							<field name="extra_information_exists" invisible="1" />
+						</group>
+
+						<notebook>
+							<page string="Results" states="done">
+								<field name="sent_mutation_ids" colspan="4" />
+							</page>
+							<page string="AHV Mutations" states="get_status,get_result,done">
+								<group colspan="4" col="2">
+									<field name="transmission_date" />
+									<field name="declaration_id" />
+									<field name="valid_print" groups="bt_swissdec.bt_swissdec_admin" />
+									<field name="transmitter_id" invisible="1" />
+
+									<group colspan="4"
+										attrs="{'invisible':[('validity_plausibility_checking', '=', False)]}">
+										<ul>
+											<li>Validity plausibility checking.</li>
+											<li>Try again in few minutes.</li>
+										</ul>
+									</group>
+									<group colspan="4"
+										attrs="{'invisible':[('job_finished', '=', True)]}">
+										<ul>
+											<li>Just waiting to receive all the information from the
+												server.
+											</li>
+											<li>Try again in few minutes.</li>
+										</ul>
+									</group>
+									<field name="validity_plausibility_checking" invisible="1" />
+									<field name="job_finished" invisible="1" />
+
+
+
+									<group colspan="4" col="2" states="get_result,done">
+										<field name="transmitter_get_status_ids" readonly="1"
+											colspan="4" options="{'reload_on_button': True}" nolabel="1" />
+
+									</group>
+								</group>
+							</page>
+							<page string="Options">
+								<separator string="General Options" colspan="4"/>
+								<group colspan="4" col="2">
+									<field name="replace_message" attrs="{'readonly': [('state', 'not in', ['draft', 'data_review'])]}" groups="bt_swissdec.bt_swissdec_admin"/>
+									<field name="to_correct_id"
+										attrs="{'required':[('replace_message', '=', True)],
+											'invisible':[('replace_message', '=', False)],
+											'readonly': [('state', 'not in', ['draft', 'data_review'])]}"
+										options='{"no_open": True, "no_create": True}' domain="[('state', 'in', ['done'])]"
+										groups="bt_swissdec.bt_swissdec_admin"/>
+									<field name="year_id" options='{"no_open": True, "no_create": True}' attrs="{'readonly': [('state', 'not in', ['draft', 'data_review'])]}" groups="bt_swissdec.bt_swissdec_admin"/>
+                                    <field name="company_id" invisible="1"/>
+									<field name="transmitter_configuration_id" options='{"no_open": True, "no_create": True}' attrs="{'readonly': [('state', 'not in', ['draft', 'data_review'])]}" groups="bt_swissdec.bt_swissdec_admin"/>
+									<field name="test_case" attrs="{'readonly': [('state', 'not in', ['draft', 'data_review'])]}"/>
+									<!-- removed the part of working_offline because it is not fully working and tested -->
+									<!--field name="working_offline" attrs="{'readonly': [('state', 'not in', ['draft', 'data_review'])]}"/-->
+									<field name="mutation_ids" nolabel="True" states="data_review,get_status,get_result,done"
+										options='{"reload_on_button": True}' widget="many2many_checkboxes" attrs="{'readonly': [('state', 'not in', ['draft', 'data_review'])]}"/>
+								</group>
+							</page>
+							<page string="Advance Mode" attrs="{'invisible': [('advance_mode', '=', False)]}">
+								<group colspan="4" col="2">
+									<field name="execution_ids" readonly="1" nolabel="1" />
+								</group>
+							</page>
+
+						</notebook>
+
+					</sheet>
+					<footer>
+						<field name="advance_mode" invisible="1" />
+						<button name="action_technical_details" type="object"
+							string="Techn. Details" class="oe_stat_button" states="data_review,get_status,get_result,done" />
+
+					</footer>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"
+							groups="base.group_user" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="gui_ahv_mutations_tree_view" model="ir.ui.view">
+			<field name="name">gui_ahv_mutations_tree_view</field>
+			<field name="model">bt_swissdec.gui_ahv_mutations</field>
+			<field name="arch" type="xml">
+				<tree string="AHV Mutation" create="false"
+					  decoration-success="state=='done'"
+                      decoration-warning="state in ('data_review','get_status')"
+                      decoration-info="state=='draft'"
+                      decoration-muted="state=='corrected'">
+					<field name="name" />
+					<field name="year_id" />
+					<field name="state" />
+					<field name="test_case" />
+					<field name="working_offline" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="gui_ahv_mutations_search_view" model="ir.ui.view">
+			<field name="name">gui_ahv_mutations_search_view</field>
+			<field name="model">bt_swissdec.gui_ahv_mutations</field>
+			<field name="arch" type="xml">
+				<search string="AHV Mutation">
+					<field name="name" />
+					<field name="year_id" />
+					<field name="state" />
+					<field name="test_case" />
+					<field name="working_offline" />
+				</search>
+			</field>
+		</record>
+
+	</data>
+</openerp>

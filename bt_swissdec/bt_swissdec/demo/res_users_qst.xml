@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- RES PARTNER ADDRESS -->
+        <record id="res_partner_0001a_qst" model="res.partner">
+            <field name="name">Rinaldi Massimo</field>
+            <field name="street">Via Roma 5</field>
+            <field name="active" eval="True"/>
+            <field name="city">Como</field>
+            <field name="zip">22100</field>
+            <field name="state_id" search="[('code','=','EX'), ('country_id.code','=','CH')]" />
+            <field name="country_id" ref="base.it" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+
+        <record id="res_partner_0001b_qst" model="res.partner">
+            <field name="name">Rinaldi Massimo</field>
+            <field name="street">Wiesenstrasse 14</field>
+            <field name="active" eval="True"/>
+            <field name="city">Köniz</field>
+            <field name="zip">3098</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">355</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0002a_qst" model="res.partner">
+            <field name="name">Andrey René</field>
+            <field name="street">Bundesplatz 5</field>
+            <field name="active" eval="True"/>
+            <field name="city">Luzern</field>
+            <field name="zip">6003</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]" />
+            <field name="municipality">1061</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0002b_qst" model="res.partner">
+            <field name="name">Andrey René</field>
+            <field name="street">Blockweg 2</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3007</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0003_qst" model="res.partner">
+            <field name="name">Koller Ludwig</field>
+            <field name="street">Bahnhofstrasse 20</field>
+            <field name="active" eval="True"/>
+            <field name="city">Horw</field>
+            <field name="zip">6048</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]" />
+            <field name="municipality">1058</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0004a_qst" model="res.partner">
+            <field name="name">Lehmann Nadine</field>
+            <field name="street">Lopperstrasse 8</field>
+            <field name="active" eval="True"/>
+            <field name="city">Kriens</field>
+            <field name="zip">6010</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]" />
+            <field name="municipality">1059</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0004b_qst" model="res.partner">
+            <field name="name">Lehmann Nadine</field>
+            <field name="street">Hauptstrasse 4</field>
+            <field name="active" eval="True"/>
+            <field name="city">Malters</field>
+            <field name="zip">6102</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]" />
+            <field name="municipality">1062</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0005_qst" model="res.partner">
+            <field name="name">Blanc Pierre</field>
+            <field name="street">Grand Rue</field>
+            <field name="active" eval="True"/>
+            <field name="city">Delle</field>
+            <field name="zip">90100</field>
+            <field name="state_id" search="[('code','=','EX'), ('country_id.code','=','CH')]" />
+            <field name="country_id" ref="base.fr" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0006_qst" model="res.partner">
+            <field name="name">Meier Christian</field>
+            <field name="street">Maffeistrasse 5</field>
+            <field name="active" eval="True"/>
+            <field name="city">München</field>
+            <field name="zip">80333</field>
+            <field name="state_id" search="[('code','=','EX'), ('country_id.code','=','CH')]" />
+            <field name="country_id" ref="base.de" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0007a_qst" model="res.partner">
+            <field name="name">Müller Heinrich</field>
+            <field name="street">Lilienstrasse 22</field>
+            <field name="active" eval="True"/>
+            <field name="city">München</field>
+            <field name="zip">81669</field>
+            <field name="state_id" search="[('code','=','EX'), ('country_id.code','=','CH')]" />
+            <field name="country_id" ref="base.de" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0007b_qst" model="res.partner">
+            <field name="name">Müller Heinrich</field>
+            <field name="street">Dorfstrasse 2</field>
+            <field name="active" eval="True"/>
+            <field name="city">Luzern</field>
+            <field name="zip">6005</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]" />
+            <field name="municipality">1061</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0008_qst" model="res.partner">
+            <field name="name">Armanini Laura</field>
+            <field name="street">Kehrgasse 8</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3018</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0009_qst" model="res.partner">
+            <field name="name">Maldini Fabio</field>
+            <field name="street">Via Milano 26</field>
+            <field name="active" eval="True"/>
+            <field name="city">Como</field>
+            <field name="zip">22100</field>
+            <field name="state_id" search="[('code','=','EX'), ('country_id.code','=','CH')]" />
+            <field name="country_id" ref="base.it" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0010_qst" model="res.partner">
+            <field name="name">Utzinger Jan</field>
+            <field name="street">Kornweg 15</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3027</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0010a_qst" model="res.partner">
+            <field name="name">Utzinger Julie</field>
+            <field name="street">Amselweg 21</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3012</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0011_qst" model="res.partner">
+            <field name="name">Uhlmann Rita</field>
+            <field name="street">Thunstrasse 12</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3005</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0012_qst" model="res.partner">
+            <field name="name">Oberli Christine</field>
+            <field name="street">Hopfenweg 22</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3007</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0013_qst" model="res.partner">
+            <field name="name">Bolletto Franca</field>
+            <field name="street">Freiburgstrasse 312</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3018</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0014_qst" model="res.partner">
+            <field name="name">Rast Eva</field>
+            <field name="street">Hubelweg 12</field>
+            <field name="active" eval="True"/>
+            <field name="city">Köniz</field>
+            <field name="zip">3098</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">355</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_0015_qst" model="res.partner">
+            <field name="name">Saner Renate</field>
+            <field name="street">Talweg 6</field>
+            <field name="active" eval="True"/>
+            <field name="city">Schwarzenburg</field>
+            <field name="zip">3150</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">855</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+
+    </data>
+
+    <data>
+        <!-- RES PARTNER ADDRESS -->
+
+        <record id="res_partner_address1_qst" model="res.partner">
+            <field name="name">AHV Adresse</field>
+            <field name="street">AHV Adresse</field>
+            <field name="active" eval="True"/>
+            <field name="city">Naters</field>
+            <field name="zip">3904</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','VS'), ('country_id.code','=','CH')]" />
+        </record>
+        <record id="res_partner_address2_qst" model="res.partner">
+            <field name="name">UVG 1 Name</field>
+            <field name="street">Adresse UVG</field>
+            <field name="active" eval="True"/>
+            <field name="city">Glis</field>
+            <field name="zip">3902</field>
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','VS'), ('country_id.code','=','CH')]" />
+        </record>
+        
+        <record id="res_company_uvg_2014_qst" model="res.company.uvg">
+            <field name="address_id" ref="res_partner_address2_qst" />
+        </record>
+        <record id="res_company_uvg_2014_qst" model="res.company.uvg">
+            <field name="address_id" ref="res_partner_address2_qst" />
+        </record>
+        
+        <record id="res_partner_address3" model="res.partner">
+            <field name="name">Suva Name</field>
+            <field name="street">Strasse Suva</field>
+            <field name="active" eval="True"/>
+            <field name="city">Brig</field>
+            <field name="zip">3900</field>
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','VS'), ('country_id.code','=','CH')]" />
+        </record>
+        <record id="res_partner_address4" model="res.partner">
+            <field name="name">UVG 2 Name</field>
+            <field name="street">Adresse UVG2</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3000</field>
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+        </record>
+
+        <!-- RES USERS -->
+        <record model="res.users" id="base.user_root">
+            <field eval="[(4,ref('user_swissdec'))]" name="groups_id"/>
+        </record>
+
+        <record model="res.users" id="base.user_admin">
+            <field eval="[(4,ref('user_swissdec'))]" name="groups_id"/>
+            <field name="company_ids" eval="[(4, ref('second_company'))]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="transmitter_configuration_0003_qst5" model="transmitter_configuration">
+            <field name="name">[brain-tec] TESTING PROCESS_5 AG</field>
+            <field name="description">Testing version 4</field>
+            <field name="group">identification_id_bt</field>
+            <field name="company_id" ref="second_company5" />
+            <field name="end_point">https://tst.itserve.ch/swissdec/refapps/stable/receiver/services/SalaryDeclarationService20130514</field>
+        </record>
+    </data>
+</odoo>

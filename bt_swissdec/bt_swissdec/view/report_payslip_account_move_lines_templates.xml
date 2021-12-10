@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_payslip_account_move_lines_document">
+    <!--t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o"-->
+            <t t-call="web.internal_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.employee_id.lang or o.employee_id.lang_fnct or 'de_DE'})" />
+<div class="page">
+                    <section class="oe_mt64 oe_mb32">
+                        <h4><strong>Account move lines - <span t-esc="o.name"/></strong></h4>
+                    </section>
+
+                    <table class="table table-condensed oe_mt32">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-4">Description</th>
+                                <th class="col-xs-3">Account</th>
+                                <th class="col-xs-2" style="text-align: right">Debit</th>
+                                <th class="col-xs-2" style="text-align: right">Credit</th>
+                                <th class="col-xs-1">Analytic account</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="count_bold" t-value="0"/>
+                            <p t-if="o.salary_consolidated_lines_value == True">
+                                <t t-set="move_lines" t-value="o.move_line_salary_ids"/>
+                            </p>
+                            <p t-else="">
+                                <t t-set="move_lines" t-value="o.move_line_ids"/>
+                            </p>
+                            <tr t-foreach="move_lines" t-as="line">
+                                <t t-set="style" t-value="'border-top: 1; padding-top: 0; padding-bottom:0; font-size: 75%;'"/>
+                                <p t-if="count_bold%2 == 0">
+                                    <t t-set="style" t-value="style + ' background-color: #eeeeee;'"/>
+                                </p>
+                                <t t-set="style_right" t-value="style + ' text-align: right;'"/>
+                                <td t-att-style="style"><span t-field="line.name"/></td>
+                                <td t-att-style="style"><span t-field="line.account_id.code"/> <span t-field="line.account_id.name"/></td>
+                                <td t-att-style="style_right"><span t-field="line.debit" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                <td t-att-style="style_right"><span t-field="line.credit" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                <td t-att-style="style"><span t-field="line.analytic_account_id.code"/></td>
+                                <t t-set="count_bold" t-value="count_bold+1"/>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </t>
+        <!--/t>
+    </t-->
+</template>
+
+<template id="report_payslip_account_move_lines">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_payslip_account_move_lines_document" t-lang="o.employee_id.lang or o.employee_id.lang_fnct or 'de_DE'"/>
+        </t>
+    </t>
+</template>
+
+<template id="report_payslip_account_move_lines_register">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_payslip_account_move_lines_document" t-lang="o.employee_id.lang or o.employee_id.lang_fnct or 'de_DE'"/>
+        </t>
+    </t>
+</template>
+</odoo>

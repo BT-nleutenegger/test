@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tutorial_link,access_tutorial_link,model_tutorial_link,,1,0,0,0
+access_tutorial_link_tag,access_tutorial_link_tag,model_tutorial_link_tag,,1,0,0,0
+access_open_url,access_open_url,model_open_url,,1,0,0,0

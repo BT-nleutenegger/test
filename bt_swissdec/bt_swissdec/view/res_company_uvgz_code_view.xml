@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_res_company_uvgz_code_form" model="ir.ui.view">
+			<field name="name">res.company.uvgz.code.form</field>
+			<field name="model">res.company.uvgz.code</field>
+			<field name="arch" type="xml">
+				<form string="UVGZ Code">
+					<sheet>
+						<group col="4" colspan="4">
+							<field name="name" readonly="1" />
+							<field name="beschreibung" readonly="1" />
+							<field name="category_beitrag_id" readonly="1" />
+							<field name="category_salary_id" readonly="1" />
+							<newline />
+							<field name="taggeld" readonly="1" />
+							<field name="tod" readonly="1" />
+							<newline />
+							<field name="invaliditaet" readonly="1" />
+							<field name="andere" readonly="1" />
+							<newline />
+							<field name="uvgz_lohn_ab" readonly="1" />
+							<field name="uvgz_hoechstlohn_bis" readonly="1" />
+							<newline />
+							<field name="uvgz_beitrag_m" readonly="1" />
+							<field name="uvgz_beitrag_f" readonly="1" />
+							<newline />
+							<field name="uvgz_beitrag_m_employer" readonly="1" />
+							<field name="uvgz_beitrag_f_employer" readonly="1" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_res_company_uvgz_code_tree" model="ir.ui.view">
+			<field name="name">res.company.uvgz.code.tree</field>
+			<field name="model">res.company.uvgz.code</field>
+			<field name="arch" type="xml">
+				<tree string="UVGZ Code">
+					<field name="name" readonly="1" />
+					<field name="beschreibung" readonly="1" />
+					<field name="category_beitrag_id" readonly="1" />
+					<field name="category_salary_id" readonly="1" />
+					<field name="taggeld" readonly="1" />
+					<field name="tod" readonly="1" />
+					<field name="invaliditaet" readonly="1" />
+					<field name="andere" readonly="1" />
+					<field name="uvgz_lohn_ab" readonly="1" />
+					<field name="uvgz_hoechstlohn_bis" readonly="1" />
+					<field name="uvgz_beitrag_m" readonly="1" />
+					<field name="uvgz_beitrag_f" readonly="1" />
+					<field name="uvgz_beitrag_m_employer" readonly="1" />
+					<field name="uvgz_beitrag_f_employer" readonly="1" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

@@ -1,0 +1,546 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <wsse:Security soap:mustUnderstand="1"
+                       xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+            <wsse:BinarySecurityToken
+                    ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"
+                    EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary"
+                    wsu:Id="BST-2fe4013c-b87d-4231-9b18-c73dddad0c0e"
+                    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                MIIDEzCCAfugAwIBAgIBAzANBgkqhkiG9w0BAQUFADAgMQswCQYDVQQGEwJDSDERMA8GA1UEAxMIU3dpc3NkZWMwHhcNMDYwNTAxMTYyMjEwWhcNMzEwNDI1MTYyMjEwWjA7MQswCQYDVQQGEwJDSDERMA8GA1UEChMIU3dpc3NkZWMxDTALBgNVBAMTBFRlc3QxCjAIBgNVBAUTATMwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAM0BXDQYClTt417yIYrf579xbJ3GgIEuvn3MERwWQqN96fQW6HnT5nLbQvhzkNCWvdEA+IVFYGjBiupuFOqqxTrqf/7AU97aJd8w6SfUItoeDfKvPytj8xVdVgmmZkOObrxxFqve9nDknOdW6e8f07tyiZn7ujb8Vj0n1+QEZx2tAgMBAAGjgcAwgb0wCQYDVR0TBAIwADALBgNVHQ8EBAMCBPAwEwYDVR0lBAwwCgYIKwYBBQUHAwIwHQYDVR0OBBYEFNRzj4QAiYWM69mIWCqD3JC+QBI8MEgGA1UdIwRBMD+AFJb+i8DmIQ0IIqgnBF4mmb8GGK1poSSkIjAgMQswCQYDVQQGEwJDSDERMA8GA1UEAxMIU3dpc3NkZWOCAQAwGgYDVR0RBBMwEYEPcGtpQHN3aXNzZGVjLmNoMAkGA1UdEgQCMAAwDQYJKoZIhvcNAQEFBQADggEBAJr48OTCNvb14stpTcpRo6PB59Kf7+rBaK+s5YdMD9mCS8TdZoQFJbeq9IUgOhpArxG6nEfvcQEk4DmujCBoOi9cEaa6LZ+VEHUHtUtL7n0cbTXpipf63i4hSyqHHnF/sfUNUjU0rxtynFEgsUsPgkK+DlARExMU8DPa69sCS2pK0CJzICQGaojAJHQtEp1CwxbEKoUP9Yf+E8xMT7x1e5RFPKw6UxyBJagpXHMyX71tCqdOIkHhA62gmnciF0LqYDz8QMApQlMu2rNRDR7/bMRWsjNU3+liT404s9lmO4JyCsLOUCP5DYXjJUBhFkZPPVaBXTNziCRDIyTeSOB+3mE=
+            </wsse:BinarySecurityToken>
+            <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+                <SignedInfo>
+                    <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                    <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+                    <Reference URI="#TS-d459ebff-8010-4961-bc65-bcfcf8b4a165">
+                        <Transforms>
+                            <Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                        </Transforms>
+                        <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                        <DigestValue>lgs+6u2itilFTNRhF+ICmSSUDycpyu0d710dbwCbpOE=</DigestValue>
+                    </Reference>
+                    <Reference URI="#BD-c50a4ef0-549a-4501-8163-13006c445f14">
+                        <Transforms>
+                            <Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                        </Transforms>
+                        <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                        <DigestValue>WLCCmZHdrmy8LJ8qUaHj65/kf5jl+vYZ2b7fs43gQ+w=</DigestValue>
+                    </Reference>
+                </SignedInfo>
+                <SignatureValue>
+                    c4hAbJQPJ1tLlIYR6+MorxuV2iVOvUulbksB6wtUEl7g3ni4wh25Lsg4oRHHDYhdzWkG5F01qBILfHA5pH9hcDWE+HVvJrWk+zYnm3G9EQKW+JYAlDtcGxguDeKrCV6wuNb1xk6C/gP1dBxBGjVFh0nvaTeP127+trr3xUDNUvg=
+                </SignatureValue>
+                <KeyInfo>
+                    <wsse:SecurityTokenReference>
+                        <wsse:Reference URI="#BST-2fe4013c-b87d-4231-9b18-c73dddad0c0e"
+                                        ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/>
+                    </wsse:SecurityTokenReference>
+                </KeyInfo>
+            </Signature>
+            <wsu:Timestamp wsu:Id="TS-d459ebff-8010-4961-bc65-bcfcf8b4a165"
+                           xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                <wsu:Created>2020-07-28T13:15:04.532+02:00</wsu:Created>
+                <wsu:Expires>2020-07-28T13:30:04.533+02:00</wsu:Expires>
+            </wsu:Timestamp>
+        </wsse:Security>
+    </soap:Header>
+    <soap:Body Id="BD-c50a4ef0-549a-4501-8163-13006c445f14">
+        <sdst:DeclareSalary xmlns:sdc="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationContainer"
+                            xmlns:sd="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclaration"
+                            xmlns:c="http://www.swissdec.ch/schema/common/20200220/Common"
+                            xmlns:sdst="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationServiceTypes"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xsi:schemaLocation="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationServiceTypes file:/C:/projects/swissdec/schemas/sd/trunk/wsdl/SalaryDeclarationServiceTypes.xsd">
+            <sdc:RequestContext>
+                <c:UserAgent>
+                    <c:Producer>Swissdec TransmitterSample .NET</c:Producer>
+                    <c:Name>Swissdec</c:Name>
+                    <c:Version>2020.11</c:Version>
+                    <c:StandardVersion>5.0</c:StandardVersion>
+                    <c:Certificate>9999.99</c:Certificate>
+                </c:UserAgent>
+                <c:CompanyName>
+                    <c:HR-RC-Name>ICHAGCompany</c:HR-RC-Name>
+                </c:CompanyName>
+                <c:TransmissionDate>2006-05-04T18:13:51.0</c:TransmissionDate>
+                <c:RequestID>RequestID0</c:RequestID>
+                <c:LanguageCode>de</c:LanguageCode>
+            </sdc:RequestContext>
+            <sdc:Job>
+                <sdc:Addressees>
+                    <sdc:AHV-AVS institutionIDRef="#AHV">
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:AHV-AVS>
+                    <sdc:FAK-CAF institutionIDRef="#FAK">
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:FAK-CAF>
+                    <sdc:UVG-LAA institutionIDRef="#UVG">
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:UVG-LAA>
+                    <sdc:UVGZ-LAAC institutionIDRef="#UVGZ">
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:UVGZ-LAAC>
+                    <sdc:KTG-AMC institutionIDRef="#KTG">
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:KTG-AMC>
+                    <sdc:BVG-LPP institutionIDRef="#BVG">
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:BVG-LPP>
+                    <sdc:Tax>
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:Tax>
+                    <sdc:TaxAtSource institutionIDRef="#taxAtSource">
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:TaxAtSource>
+                    <sdc:TaxCrossborder institutionIDRef="#TaxCrossborder">
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:TaxCrossborder>
+                    <sdc:Statistic institutionIDRef="#BFS">
+                        <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+                    </sdc:Statistic>
+                </sdc:Addressees>
+            </sdc:Job>
+            <sdc:SalaryDeclaration schemaVersion="0.0">
+                <sd:Company>
+                    <sd:CompanyDescription>
+                        <c:Name>
+                            <c:HR-RC-Name>ICHAG</c:HR-RC-Name>
+                        </c:Name>
+                        <c:Address>
+                            <c:Street>Länggassstrasse 26</c:Street>
+                            <c:Postbox>690</c:Postbox>
+                            <c:ZIP-Code>3000</c:ZIP-Code>
+                            <c:City>Bern 9</c:City>
+                        </c:Address>
+                        <c:UID-BFS>
+                            <c:UID>CHE-123.456.789</c:UID>
+                        </c:UID-BFS>
+                        <c:Workplace workplaceID="#ichag">
+                            <c:AddressExtended>
+                                <c:ZIP-Code>3012</c:ZIP-Code>
+                                <c:City>Bern</c:City>
+                            </c:AddressExtended>
+                            <c:CompanyWorkingTime>
+                                <c:WeeklyHours companyWeeklyHoursID="#cwhID">40.00</c:WeeklyHours>
+                            </c:CompanyWorkingTime>
+                        </c:Workplace>
+                    </sd:CompanyDescription>
+                    <sd:Staff>
+                        <sd:Person>
+                            <sd:Particulars>
+                                <c:Social-InsuranceIdentification>
+                                    <c:SV-AS-Number>123.4517.8128.11</c:SV-AS-Number>
+                                </c:Social-InsuranceIdentification>
+                                <c:Lastname>Balmer</c:Lastname>
+                                <c:Firstname>Fredi</c:Firstname>
+                                <c:Sex>M</c:Sex>
+                                <c:DateOfBirth>1966-11-11</c:DateOfBirth>
+                                <c:Nationality>CH</c:Nationality>
+                                <c:CivilStatus>
+                                    <c:Status>married</c:Status>
+                                </c:CivilStatus>
+                                <c:Address>
+                                    <c:Street>Länggassstrasse 26</c:Street>
+                                    <c:Postbox>690</c:Postbox>
+                                    <c:Locality>Länggassquartier</c:Locality>
+                                    <c:ZIP-Code>3000</c:ZIP-Code>
+                                    <c:City>Bern 9</c:City>
+                                    <c:Country>Schweiz</c:Country>
+                                </c:Address>
+                                <c:EmailAddress>fredi.balmer@ichag.ch</c:EmailAddress>
+                                <c:ResidenceCanton>BE</c:ResidenceCanton>
+                                <c:LanguageCode>de</c:LanguageCode>
+                            </sd:Particulars>
+                            <sd:Work>
+                                <c:WorkingTime>
+                                    <c:Steady>
+                                        <c:WeeklyHours>40.00</c:WeeklyHours>
+                                        <c:ActivityRate>100.00</c:ActivityRate>
+                                    </c:Steady>
+                                </c:WorkingTime>
+                                <c:EntryDate>1980-01-01</c:EntryDate>
+                            </sd:Work>
+                            <sd:AHV-AVS-Salaries>
+                                <sd:AHV-AVS-Salary institutionIDRef="#AHV">
+                                    <sd:AccountingTime>
+                                        <c:from>2019-01-01</c:from>
+                                        <c:until>2019-12-31</c:until>
+                                    </sd:AccountingTime>
+                                    <sd:AHV-AVS-Income>65000.00</sd:AHV-AVS-Income>
+                                    <sd:ALV-AC-Income>65000.00</sd:ALV-AC-Income>
+                                </sd:AHV-AVS-Salary>
+                            </sd:AHV-AVS-Salaries>
+                            <sd:FAK-CAF-Salaries>
+                                <sd:FAK-CAF-Salary institutionIDRef="#FAK">
+                                    <sd:FAK-CAF-Period>
+                                        <c:from>2019-01-01</c:from>
+                                        <c:until>2019-12-31</c:until>
+                                    </sd:FAK-CAF-Period>
+                                    <sd:FAK-CAF-ContributorySalary>65000.00</sd:FAK-CAF-ContributorySalary>
+                                    <sd:FAK-CAF-FamilyIncomeSupplement>
+                                        <sd:FAK-CAF-FamilyIncomeSupplementPerPerson>1800.00
+                                        </sd:FAK-CAF-FamilyIncomeSupplementPerPerson>
+                                    </sd:FAK-CAF-FamilyIncomeSupplement>
+                                    <sd:FAK-CAF-WorkplaceCanton>BE</sd:FAK-CAF-WorkplaceCanton>
+                                </sd:FAK-CAF-Salary>
+                            </sd:FAK-CAF-Salaries>
+                            <sd:UVG-LAA-Salaries>
+                                <sd:UVG-LAA-Salary institutionIDRef="#UVG">
+                                    <sd:AccountingTime>
+                                        <c:from>2019-01-01</c:from>
+                                        <c:until>2019-12-31</c:until>
+                                    </sd:AccountingTime>
+                                    <sd:UVG-LAA-Code>A1</sd:UVG-LAA-Code>
+                                    <sd:UVG-LAA-GrossSalary>71960.00</sd:UVG-LAA-GrossSalary>
+                                    <sd:UVG-LAA-BaseSalary>65000.00</sd:UVG-LAA-BaseSalary>
+                                    <sd:UVG-LAA-ContributorySalary>65000.00</sd:UVG-LAA-ContributorySalary>
+                                </sd:UVG-LAA-Salary>
+                            </sd:UVG-LAA-Salaries>
+                            <sd:UVGZ-LAAC-Salaries>
+                                <sd:UVGZ-LAAC-Salary institutionIDRef="#UVGZ">
+                                    <sd:AccountingTime>
+                                        <c:from>2019-01-01</c:from>
+                                        <c:until>2019-12-31</c:until>
+                                    </sd:AccountingTime>
+                                    <sd:UVGZ-LAAC-Code>9Z</sd:UVGZ-LAAC-Code>
+                                    <sd:UVGZ-LAAC-BaseSalary>65000.00</sd:UVGZ-LAAC-BaseSalary>
+                                    <sd:UVGZ-LAAC-ContributorySalary>65000.00</sd:UVGZ-LAAC-ContributorySalary>
+                                </sd:UVGZ-LAAC-Salary>
+                            </sd:UVGZ-LAAC-Salaries>
+                            <sd:KTG-AMC-Salaries>
+                                <sd:KTG-AMC-Salary institutionIDRef="#KTG">
+                                    <sd:AccountingTime>
+                                        <c:from>2019-01-01</c:from>
+                                        <c:until>2019-12-31</c:until>
+                                    </sd:AccountingTime>
+                                    <sd:KTG-AMC-Code>X7</sd:KTG-AMC-Code>
+                                    <sd:Reference-AHV-AVS-Salary>65000.00</sd:Reference-AHV-AVS-Salary>
+                                    <sd:KTG-AMC-ContributorySalary>65000.00</sd:KTG-AMC-ContributorySalary>
+                                </sd:KTG-AMC-Salary>
+                            </sd:KTG-AMC-Salaries>
+                            <sd:BVG-LPP-Salaries>
+                                <sd:BVG-LPP-Salary institutionIDRef="#BVG">
+                                    <sd:BVG-LPP-AnnualBasis>10.00</sd:BVG-LPP-AnnualBasis>
+                                </sd:BVG-LPP-Salary>
+                            </sd:BVG-LPP-Salaries>
+                            <sd:TaxSalaries>
+                                <sd:TaxSalary>
+                                    <sd:DocID>1</sd:DocID>
+                                    <sd:Period>
+                                        <c:from>2019-01-01</c:from>
+                                        <c:until>2019-12-31</c:until>
+                                    </sd:Period>
+                                    <sd:FreeTransport/>
+                                    <sd:CanteenLunchCheck/>
+                                    <sd:Income>48118.70</sd:Income>
+                                    <sd:FringeBenefits>
+                                        <sd:FoodLodging>1000.00</sd:FoodLodging>
+                                        <sd:CompanyCar>5160.00</sd:CompanyCar>
+                                        <sd:Other>
+                                            <sd:Text>Verbilligung Mietwohnung, Geldwerter Vorteil</sd:Text>
+                                            <sd:Sum>2400.00</sd:Sum>
+                                        </sd:Other>
+                                    </sd:FringeBenefits>
+                                    <sd:SporadicBenefits>
+                                        <sd:Text>Gratifikation, Gewinnbeteiligung</sd:Text>
+                                        <sd:Sum>5000.00</sd:Sum>
+                                    </sd:SporadicBenefits>
+                                    <sd:CapitalPayment>
+                                        <sd:Text>Abgangsentschädigung</sd:Text>
+                                        <sd:Sum>3000.00</sd:Sum>
+                                    </sd:CapitalPayment>
+                                    <sd:OwnershipRight>300.00</sd:OwnershipRight>
+                                    <sd:BoardOfDirectorsRemuneration>2000.00</sd:BoardOfDirectorsRemuneration>
+                                    <sd:OtherBenefits>
+                                        <sd:Text>Arbeitgeberanteil AHV/IV/EO/ALV</sd:Text>
+                                        <sd:Sum>1021.30</sd:Sum>
+                                    </sd:OtherBenefits>
+                                    <sd:GrossIncome>68000.00</sd:GrossIncome>
+                                    <sd:AHV-ALV-NBUV-AVS-AC-AANP-Contribution>3657.00
+                                    </sd:AHV-ALV-NBUV-AVS-AC-AANP-Contribution>
+                                    <sd:BVG-LPP-Contribution>
+                                        <sd:Regular>6500.00</sd:Regular>
+                                        <sd:Purchase>1500.00</sd:Purchase>
+                                    </sd:BVG-LPP-Contribution>
+                                    <sd:NetIncome>56343.00</sd:NetIncome>
+                                    <sd:DeductionAtSource>3647.55</sd:DeductionAtSource>
+                                    <sd:ChargesRule>
+                                        <sd:WithRegulation>
+                                            <sd:Allowed>2019-01-01</sd:Allowed>
+                                            <sd:Canton>BE</sd:Canton>
+                                        </sd:WithRegulation>
+                                    </sd:ChargesRule>
+                                    <sd:Charges>
+                                        <sd:Effective>
+                                            <sd:Other><!-- variante mit Spesenreglement und ohne Betrag -->
+                                                <sd:Text>effektive Spesen Expatriate</sd:Text>
+                                                <sd:Sum>7500.00</sd:Sum>
+                                            </sd:Other>
+                                        </sd:Effective>
+                                        <sd:LumpSum>
+                                            <sd:Representation>3000.00</sd:Representation>
+                                            <sd:Car>500.00</sd:Car>
+                                            <sd:Other>
+                                                <sd:Text>Übrige Pauschalspesen</sd:Text>
+                                                <sd:Sum>1500.00</sd:Sum>
+                                            </sd:Other>
+                                        </sd:LumpSum>
+                                        <sd:Education>12001.00</sd:Education>
+                                    </sd:Charges>
+                                    <sd:OtherFringeBenefits>Übermässige Vergünstigung auf
+                                        Versicherungsprämien
+                                    </sd:OtherFringeBenefits>
+                                    <sd:StandardRemark>
+                                        <sd:ChildAllowancePerAHV-AVS/>
+                                        <sd:RelocationCosts>5000.00</sd:RelocationCosts>
+                                        <sd:StaffShareMarketValue>
+                                            <sd:Allowed>2019-01-01</sd:Allowed>
+                                            <sd:Canton>ZG</sd:Canton>
+                                        </sd:StaffShareMarketValue>
+                                        <sd:StaffShareWithoutTaxableIncome>
+                                            <sd:BlockedOptions/>
+                                        </sd:StaffShareWithoutTaxableIncome>
+                                    </sd:StandardRemark>
+                                    <sd:Remark>Ein erster Testfall (noch kontrollieren)!!</sd:Remark>
+                                </sd:TaxSalary>
+                            </sd:TaxSalaries>
+                            <sd:TaxAtSourceSalaries>
+                                <sd:TaxAtSourceSalary institutionIDRef="#taxAtSource">
+                                    <sd:TaxAtSourceCanton>BE</sd:TaxAtSourceCanton>
+                                    <sd:TaxAtSourceMunicipalityID>361</sd:TaxAtSourceMunicipalityID>
+                                    <sd:CurrentMonth>2019-04</sd:CurrentMonth>
+                                </sd:TaxAtSourceSalary>
+                            </sd:TaxAtSourceSalaries>
+                            <sd:TaxCrossborderSalaries>
+                                <sd:TaxCrossborderSalary institutionIDRef="#TaxCrossborder">
+                                    <sd:Period>
+                                        <c:from>2019-01-01</c:from>
+                                        <c:until>2019-12-31</c:until>
+                                    </sd:Period>
+                                    <sd:TaxAtSourceCanton>BE</sd:TaxAtSourceCanton>
+                                    <sd:ResidenceAbroadCountry>FR</sd:ResidenceAbroadCountry>
+                                    <sd:TaxableEarning>100000.00</sd:TaxableEarning>
+                                </sd:TaxCrossborderSalary>
+                            </sd:TaxCrossborderSalaries>
+                            <sd:StatisticSalaries>
+                                <sd:StatisticSalary workplaceIDRef="#ichag" institutionIDRef="#BFS">
+                                    <sd:CurrentMonth>2019-10</sd:CurrentMonth>
+                                    <sd:AdditionalParticulars>
+                                        <sd:Education>enterpriseEducation</sd:Education>
+                                        <sd:Position>highestCadre</sd:Position>
+                                        <sd:JobTitle>Arbeiter</sd:JobTitle>
+                                        <sd:LeaveEntitlement>320</sd:LeaveEntitlement>
+                                    </sd:AdditionalParticulars>
+                                    <sd:KindOfWagePayment>
+                                        <sd:Monthly>
+                                            <sd:Contract>indefiniteSalaryMth</sd:Contract>
+                                            <sd:ContractualMonthlyWage>10000.00</sd:ContractualMonthlyWage>
+                                            <sd:Contractual13th>9000.00</sd:Contractual13th>
+                                            <sd:WorkingTime>
+                                                <c:WeeklyHours companyWeeklyHoursIDRef="#cwhID">40.00</c:WeeklyHours>
+                                            </sd:WorkingTime>
+                                            <sd:ActivityRate>100.00</sd:ActivityRate>
+                                        </sd:Monthly>
+                                    </sd:KindOfWagePayment>
+                                    <sd:MonthlyValues>
+                                        <sd:GrossBaseSalaryAndRegularAllowance>100000.00
+                                        </sd:GrossBaseSalaryAndRegularAllowance>
+                                        <sd:Allowances>10000.00</sd:Allowances>
+                                        <sd:FamilyIncomeSupplement>2000.00</sd:FamilyIncomeSupplement>
+                                        <sd:PaymentsByThird>1.00</sd:PaymentsByThird>
+                                        <sd:SocialContributions>3000.00</sd:SocialContributions>
+                                        <sd:BVG-LPP-RegularContribution>500.00</sd:BVG-LPP-RegularContribution>
+                                    </sd:MonthlyValues>
+                                    <sd:AnnualValues>
+                                        <sd:Period>
+                                            <c:from>2019-01-01</c:from>
+                                            <c:until>2019-12-31</c:until>
+                                        </sd:Period>
+                                        <sd:Overtime>20000.00</sd:Overtime>
+                                        <sd:Earnings13th>2000.00</sd:Earnings13th>
+                                        <sd:SporadicBenefits>2000.00</sd:SporadicBenefits>
+                                        <sd:FringeBenefits>3000.00</sd:FringeBenefits>
+                                        <sd:CapitalPayment>1234.55</sd:CapitalPayment>
+                                        <sd:OtherBenefits>456.70</sd:OtherBenefits>
+                                    </sd:AnnualValues>
+                                </sd:StatisticSalary>
+                            </sd:StatisticSalaries>
+                        </sd:Person>
+                    </sd:Staff>
+                    <sd:Institutions>
+                        <sd:AHV-AVS institutionID="#AHV">
+                            <sd:AK-CC-BranchNumber>003.000</sd:AK-CC-BranchNumber>
+                            <sd:AK-CC-CustomerNumber>100-9976.9</sd:AK-CC-CustomerNumber>
+                            <sd:UVG-LAA-Insurance>
+                                <sd:Name>Montana Versicherungen</sd:Name>
+                                <sd:UID-BFS>
+                                    <c:UID>CHE-111.222.333</c:UID>
+                                </sd:UID-BFS>
+                                <sd:ValidAsOf>2010-03-01</sd:ValidAsOf>
+                            </sd:UVG-LAA-Insurance>
+                            <sd:BVG-LPP-Insurance>
+                                <sd:Name>Montana Versicherungen</sd:Name>
+                                <sd:UID-BFS>
+                                    <c:UID>CHE-111.222.333</c:UID>
+                                </sd:UID-BFS>
+                                <sd:ValidAsOf>2010-03-01</sd:ValidAsOf>
+                            </sd:BVG-LPP-Insurance>
+                        </sd:AHV-AVS>
+                        <sd:FAK-CAF institutionID="#FAK">
+                            <sd:FAK-CAF-BranchNumber>005.000</sd:FAK-CAF-BranchNumber>
+                            <sd:FAK-CAF-CustomerNumber>100-9934.8</sd:FAK-CAF-CustomerNumber>
+                        </sd:FAK-CAF>
+                        <sd:UVG-LAA institutionID="#UVG">
+                            <sd:InsuranceID>S1000</sd:InsuranceID>
+                            <sd:InsuranceCompanyName>Montana Versicherungen</sd:InsuranceCompanyName>
+                            <sd:CustomerIdentity>7651-873.1</sd:CustomerIdentity>
+                            <sd:ContractIdentity>4566-4</sd:ContractIdentity>
+                        </sd:UVG-LAA>
+                        <sd:UVGZ-LAAC institutionID="#UVGZ">
+                            <sd:InsuranceID>S1000</sd:InsuranceID>
+                            <sd:InsuranceCompanyName>Montana Versicherungen</sd:InsuranceCompanyName>
+                            <sd:CustomerIdentity>7651-873.1</sd:CustomerIdentity>
+                            <sd:ContractIdentity>4566-4</sd:ContractIdentity>
+                        </sd:UVGZ-LAAC>
+                        <sd:KTG-AMC institutionID="#KTG">
+                            <sd:InsuranceID>S1000</sd:InsuranceID>
+                            <sd:InsuranceCompanyName>Montana Versicherungen</sd:InsuranceCompanyName>
+                            <sd:CustomerIdentity>7651-873.1</sd:CustomerIdentity>
+                            <sd:ContractIdentity>4567-4</sd:ContractIdentity>
+                        </sd:KTG-AMC>
+                        <sd:BVG-LPP institutionID="#BVG">
+                            <sd:InsuranceID>S1000</sd:InsuranceID>
+                            <sd:InsuranceCompanyName>Montana Versicherungen</sd:InsuranceCompanyName>
+                            <sd:CustomerIdentity>1099-8777.1</sd:CustomerIdentity>
+                            <sd:ContractIdentity>4500-0</sd:ContractIdentity>
+                            <sd:GeneralValidAsOf>2012-09-04</sd:GeneralValidAsOf>
+                        </sd:BVG-LPP>
+                        <sd:TaxAtSource institutionID="#taxAtSource">
+                            <sd:CantonID>BE</sd:CantonID>
+                            <sd:CustomerIdentity>ICHAG</sd:CustomerIdentity>
+                        </sd:TaxAtSource>
+                        <sd:TaxCrossborder institutionID="#TaxCrossborder">
+                            <sd:CantonID>BE</sd:CantonID>
+                            <sd:CustomerIdentity>ICHAG</sd:CustomerIdentity>
+                        </sd:TaxCrossborder>
+                        <sd:Statistic institutionID="#BFS">
+                            <sd:PayAgreement>CLA-Association</sd:PayAgreement>
+                        </sd:Statistic>
+                    </sd:Institutions>
+                    <sd:SalaryTotals>
+                        <sd:AHV-AVS-Totals institutionIDRef="#AHV">
+                            <sd:Total-AHV-AVS-Incomes>65000.00</sd:Total-AHV-AVS-Incomes>
+                            <sd:Total-AHV-AVS-Open>0.00</sd:Total-AHV-AVS-Open>
+                            <sd:Total-ALV-AC-Incomes>65000.00</sd:Total-ALV-AC-Incomes>
+                            <sd:Total-ALVZ-ACS-Incomes>0.00</sd:Total-ALVZ-ACS-Incomes>
+                            <sd:Total-ALV-AC-Open>0.00</sd:Total-ALV-AC-Open>
+                        </sd:AHV-AVS-Totals>
+                        <sd:FAK-CAF-Totals institutionIDRef="#FAK">
+                            <sd:Total-FAK-CAF-PerCanton>
+                                <sd:Total-FAK-CAF-ContributorySalary>65000.00</sd:Total-FAK-CAF-ContributorySalary>
+                                <sd:Total-FAK-CAF-FamilyIncomeSupplement>1800.00
+                                </sd:Total-FAK-CAF-FamilyIncomeSupplement>
+                                <sd:Canton>BE</sd:Canton>
+                            </sd:Total-FAK-CAF-PerCanton>
+                        </sd:FAK-CAF-Totals>
+                        <sd:UVG-LAA-Totals institutionIDRef="#UVG">
+                            <sd:UVG-LAA-BranchTotals>
+                                <sd:UVG-LAA-BranchTotal>
+                                    <sd:BranchIdentifier>A</sd:BranchIdentifier>
+                                    <sd:Female-Totals>
+                                        <sd:NBU-BU-ANP-AP-Total>65000.00</sd:NBU-BU-ANP-AP-Total>
+                                        <sd:BU-AP-Total>0.00</sd:BU-AP-Total>
+                                    </sd:Female-Totals>
+                                    <sd:Male-Totals>
+                                        <sd:NBU-BU-ANP-AP-Total>65000.00</sd:NBU-BU-ANP-AP-Total>
+                                        <sd:BU-AP-Total>0.00</sd:BU-AP-Total>
+                                    </sd:Male-Totals>
+                                </sd:UVG-LAA-BranchTotal>
+                            </sd:UVG-LAA-BranchTotals>
+                            <sd:UVG-LAA-MasterTotal>65000.00</sd:UVG-LAA-MasterTotal>
+                            <sd:NumberOfFemalePersons>0</sd:NumberOfFemalePersons>
+                            <sd:NumberOfMalePersons>1</sd:NumberOfMalePersons>
+                        </sd:UVG-LAA-Totals>
+                        <sd:UVGZ-LAAC-Totals institutionIDRef="#UVGZ">
+                            <sd:UVGZ-LAAC-CategoryTotals>
+                                <sd:UVGZ-LAAC-CategoryTotal>
+                                    <sd:CategoryCode>01</sd:CategoryCode>
+                                    <sd:Female-Total>0.00</sd:Female-Total>
+                                    <sd:Male-Total>65000.00</sd:Male-Total>
+                                </sd:UVGZ-LAAC-CategoryTotal>
+                            </sd:UVGZ-LAAC-CategoryTotals>
+                            <sd:UVGZ-LAAC-MasterTotal>65000.00</sd:UVGZ-LAAC-MasterTotal>
+                        </sd:UVGZ-LAAC-Totals>
+                        <sd:KTG-AMC-Totals institutionIDRef="#KTG">
+                            <sd:KTG-AMC-CategoryTotals>
+                                <sd:KTG-AMC-CategoryTotal>
+                                    <sd:CategoryCode>02</sd:CategoryCode>
+                                    <sd:Female-Total>0.00</sd:Female-Total>
+                                    <sd:Male-Total>65000.00</sd:Male-Total>
+                                </sd:KTG-AMC-CategoryTotal>
+                            </sd:KTG-AMC-CategoryTotals>
+                            <sd:KTG-AMC-MasterTotal>65000.00</sd:KTG-AMC-MasterTotal>
+                        </sd:KTG-AMC-Totals>
+                        <sd:BVG-LPP-Totals institutionIDRef="#BVG">
+                            <sd:BVG-LPP-PeriodCategoryTotals>
+                                <sd:BVG-LPP-PeriodCategoryTotal>
+                                    <sd:AccountingTime>
+                                        <c:from>2019-01-01</c:from>
+                                        <c:until>2019-12-31</c:until>
+                                    </sd:AccountingTime>
+                                    <sd:BVG-LPP-PeriodBasisTotal>100000.00</sd:BVG-LPP-PeriodBasisTotal>
+                                </sd:BVG-LPP-PeriodCategoryTotal>
+                            </sd:BVG-LPP-PeriodCategoryTotals>
+                            <sd:BVG-LPP-PeriodMasterTotal>100000.00</sd:BVG-LPP-PeriodMasterTotal>
+                        </sd:BVG-LPP-Totals>
+                        <sd:TaxAtSourceTotals institutionIDRef="#taxAtSource">
+                            <sd:TotalMonth>
+                                <sd:TotalTaxableEarning>50000.00</sd:TotalTaxableEarning>
+                                <sd:TotalTaxAtSource>4000.00</sd:TotalTaxAtSource>
+                                <sd:TotalCommission>300.00</sd:TotalCommission>
+                                <sd:CurrentMonth>2019-06</sd:CurrentMonth>
+                            </sd:TotalMonth>
+                        </sd:TaxAtSourceTotals>
+                        <sd:TaxCrossborderTotals institutionIDRef="#TaxCrossborder">
+                            <sd:Period>
+                                <c:from>2019-01-01</c:from>
+                                <c:until>2019-12-31</c:until>
+                            </sd:Period>
+                            <sd:TaxAtSourceCanton>BE</sd:TaxAtSourceCanton>
+                            <sd:TaxableEarning>100000.00</sd:TaxableEarning>
+                        </sd:TaxCrossborderTotals>
+                    </sd:SalaryTotals>
+                    <sd:SalaryCounters>
+                        <sd:NumberOf-AHV-AVS-Salary-Tags>1</sd:NumberOf-AHV-AVS-Salary-Tags>
+                        <sd:NumberOf-FAK-CAF-Salary-Tags>1</sd:NumberOf-FAK-CAF-Salary-Tags>
+                        <sd:NumberOf-UVG-LAA-Salary-Tags>1</sd:NumberOf-UVG-LAA-Salary-Tags>
+                        <sd:NumberOf-UVGZ-LAAC-Salary-Tags>1</sd:NumberOf-UVGZ-LAAC-Salary-Tags>
+                        <sd:NumberOf-KTG-AMC-Salary-Tags>1</sd:NumberOf-KTG-AMC-Salary-Tags>
+                        <sd:NumberOf-BVG-LPP-Salary-Tags>1</sd:NumberOf-BVG-LPP-Salary-Tags>
+                        <sd:NumberOf-TaxSalary-Tags>1</sd:NumberOf-TaxSalary-Tags>
+                        <sd:NumberOf-TaxAtSourceSalary-Tags>1</sd:NumberOf-TaxAtSourceSalary-Tags>
+                        <sd:NumberOf-TaxCrossborderSalary-Tags>1</sd:NumberOf-TaxCrossborderSalary-Tags>
+                        <sd:NumberOf-StatisticSalary-Tags>1</sd:NumberOf-StatisticSalary-Tags>
+                    </sd:SalaryCounters>
+                </sd:Company>
+                <sd:GeneralSalaryDeclarationDescription>
+                    <sd:CreationDate>2020-02-20T20:20:02.0</sd:CreationDate>
+                    <sd:AccountingPeriod>2019</sd:AccountingPeriod>
+                    <sd:ContactPerson>
+                        <sd:Name>Marcel René Müller</sd:Name>
+                        <sd:EmailAddress>ichag@xxxxx.ch</sd:EmailAddress>
+                        <sd:PhoneNumber>031 345 23 87</sd:PhoneNumber>
+                    </sd:ContactPerson>
+                    <sd:Comment>
+                        <c:Notification>
+                            <c:QualityLevel>Comment</c:QualityLevel>
+                            <c:DescriptionCode>1</c:DescriptionCode>
+                            <c:Description>Bitte senden Sie eine Suva-Apotheke an hôtel-garçon in genève</c:Description>
+                        </c:Notification>
+                    </sd:Comment>
+                </sd:GeneralSalaryDeclarationDescription>
+            </sdc:SalaryDeclaration>
+        </sdst:DeclareSalary>
+    </soap:Body>
+</soap:Envelope>

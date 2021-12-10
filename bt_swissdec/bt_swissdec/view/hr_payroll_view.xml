@@ -1,0 +1,1593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_passport_form" model="ir.ui.view">
+        <field name="name">hr.passport.form</field>
+        <field name="model">hr.passport</field>
+        <field name="arch" type="xml">
+            <form string="Passport">
+                <sheet>
+                    <group col="6" colspan="4">
+                        <field name="name" colspan="4"/>
+                        <!--<field name="employee_id" /> -->
+                    </group>
+                    <group col="2" colspan="2">
+                        <separator string="Country &amp; Address" colspan="4" />
+                        <field name="country_id"/>
+                        <field name="address_id"/>
+                    </group>
+                    <group col="2" colspan="2">
+                        <separator string="Valid From" colspan="2" />
+                        <field name="date_issue"/>
+                        <field name="date_expire"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Description">
+                            <separator string="Description" colspan="2" />
+                            <field name="note" colspan="4" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_passport_tree" model="ir.ui.view">
+        <field name="name">hr.passport.tree</field>
+        <field name="model">hr.passport</field>
+        <field name="arch" type="xml">
+            <tree string="Passport">
+                <field name="name" />
+                <!--<field name="employee_id" /> -->
+                <field name="address_id" />
+                <field name="country_id" />
+                <field name="date_expire" />
+                <field name="date_issue" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_passport_filter" model="ir.ui.view">
+        <field name="name">hr.passport.select</field>
+        <field name="model">hr.passport</field>
+        <field name="arch" type="xml">
+            <search string="Search Passport">
+                <group col="8" colspan="4">
+                    <field name="name" />
+                    <field name="country_id" />
+                    <field name="address_id" />
+                </group>
+                <newline />
+                <group col="8" colspan="4" expand="0" string="Group By...">
+                    <filter string="Country" name="country_id"
+                        context="{'group_by':'country_id'}" />
+                    <filter string="Expire" name="date_expire"
+                        context="{'group_by':'date_expire'}" />
+                    <filter string="Issue" name="date_issue"
+                        context="{'group_by':'date_issue'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hr_passport_tree" model="ir.actions.act_window">
+        <field name="name">All Passports</field>
+        <field name="res_model">hr.passport</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hr_passport_tree" />
+        <field name="search_view_id" ref="view_hr_passport_filter" />
+    </record>
+    <!-- End Passport Views -->
+
+    <record id="view_hr_employee_children_tree" model="ir.ui.view">
+        <field name="name">view_hr_employee_children_tree</field>
+        <field name="model">hr.employee.children</field>
+        <field name="arch" type="xml">
+            <tree string="HR Employee Children">
+                <field name="name" />
+                <field name="firstname" />
+                <field name="birthday" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Contract View -->
+    <record id="hr_contract_view_form_extended" model="ir.ui.view">
+        <field name="name">hr.contract.view.form.extended</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="related_adc_ids" invisible="1" />
+                <field name="len_slip_ids" invisible="1" />
+                <field name="country_id" invisible="1" />
+                <field name="company_id_company_used_for_bt_swissdec" invisible="1" />
+                <field name="is_freelancer" invisible="1" />
+            </xpath>
+            <xpath expr="//page[@name='other']" position="before">
+                <page string="Gross Wage" name="grosswage" attrs="{'invisible':['|', ('company_id_company_used_for_bt_swissdec','!=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}">
+                    <group>
+                        <field name="grosswage_ids" nolabel="1"
+                        height="300" context="{'date_from_contract' : date_start}">
+                            <form string="Gross Wage">
+                                <group>
+                                    <field name="category_adc_id"
+                                        options='{"no_open": True, "no_create": True}'
+                                        domain="[('id','in',parent.related_adc_ids),('type', '!=', 'grosswage')]"/>
+                                    <field name="related_child_link_id" invisible="1" />
+                                    <field name="related_child_correction_link_id" invisible="1" />
+                                    <field name="name"/>
+                                    <field name="value"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"
+                                        options='{"no_open": True, "no_create": True}'
+                                        domain="[('category_id','=', %(uom.uom_categ_wtime)d)]" />
+                                    <field name="amount_total"/>
+                                    <field name="code" invisible="1" />
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                                    <field name="child_id"
+                                        domain="[('parent_id','=',parent.employee_id)]"
+                                        options='{"no_open": True, "no_create": True}'
+                                        attrs="{'required': [('related_child_link_id','!=',False)], 'invisible': [('related_child_link_id','=',False)]}"
+                                        context="{'tree_view_ref' : 'bt_swissdec.view_hr_employee_children_tree'}" />
+                                    <field name="child_correction_month_id" domain="[('id', 'in', child_correction_month_ids)]"
+                                        options='{"no_open": True, "no_create": True}'
+                                        attrs="{'required': [('related_child_correction_link_id','!=',False)], 'invisible': [('related_child_correction_link_id','=',False)]}"/>
+                                    <field name="child_correction_month_ids" invisible="1" widget="many2many_checkboxes"/>
+                                    <field name="account_id"
+                                        domain="[('company_id','=',parent.company_id)]"
+                                        options='{"no_open": True, "no_create": True}'/>
+                                </group>
+                            </form>
+                            <tree string="Gross Wage">
+                                <field name="sequence" widget="handle"/>
+                                <field name="category_adc_id" />
+                                <field name="name" />
+                                <field name="value" />
+                                <field name="quantity" />
+                                <field name="uom_id"
+                                   domain="[('category_id','=', %(uom.uom_categ_wtime)d)]" />
+                                <field name="amount_total" />
+                                <field name="code" invisible="1" />
+                                <field name="date_from" />
+                                <field name="date_to" />
+                                <field name="account_id" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+                <page string="Gross Wage History" name="grosswage_history" attrs="{'invisible':['|', ('company_id_company_used_for_bt_swissdec','!=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}">
+                    <field name="grosswage_history_ids" nolabel="1"
+                    height="300" context="{'date_from_contract' : date_start}">
+                        <form string="Gross Wage">
+                            <group>
+                                <field name="category_adc_id"
+                                options='{"no_open": True, "no_create": True}'
+                                domain="[('id','in',parent.related_adc_ids),('type', '!=', 'grosswage')]"/>
+                                <field name="related_child_link_id" invisible="1" />
+                                <field name="related_child_correction_link_id" invisible="1" />
+                                <field name="name" />
+                                <field name="value" />
+                                <field name="quantity" />
+                                <field name="uom_id"
+                                options='{"no_open": True, "no_create": True}'
+                                domain="[('category_id','=', %(uom.uom_categ_wtime)d)]" />
+                                <field name="amount_total" />
+                                <field name="code" invisible="1" />
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <field name="child_id"
+                                domain="[('parent_id','=',parent.employee_id)]"
+                                options='{"no_open": True, "no_create": True}'
+                                attrs="{'required': [('related_child_link_id','!=',False)], 'invisible': [('related_child_link_id','=',False)]}"
+                                context="{'tree_view_ref' : 'bt_swissdec.view_hr_employee_children_tree'}" />
+                                <field name="child_correction_month_id" domain="[('id', 'in', child_correction_month_ids)]"
+                                options='{"no_open": True, "no_create": True}'
+                                attrs="{'required': [('related_child_correction_link_id','!=',False)], 'invisible': [('related_child_correction_link_id','=',False)]}"/>
+                                <field name="child_correction_month_ids" invisible="1" widget="many2many_checkboxes"/>
+                                <field name="account_id"
+                                domain="[('company_id','=',parent.company_id)]"
+                                options='{"no_open": True, "no_create": True}'/>
+                            </group>
+                        </form>
+                        <tree string="Gross Wage">
+                            <field name="category_adc_id" />
+                            <field name="name" />
+                            <field name="value" />
+                            <field name="quantity" />
+                            <field name="uom_id"
+                            domain="[('category_id','=', %(uom.uom_categ_wtime)d)]" />
+                            <field name="amount_total" />
+                            <field name="code" invisible="1" />
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="sequence" invisible="1" />
+                            <field name="account_id" />
+                        </tree>
+                    </field>
+                <div>
+                <p class="oe_grey">Im Tab <em><strong>Bruttolohn Historie</strong></em> befinden sich alle nicht mehr aktuellen Bruttolohn Einträge.</p>
+                </div>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='information']" position="attributes">
+                <attribute name="attrs">{'invisible': [('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','!=',True)]}</attribute>
+            </xpath>
+            <xpath expr="//page[@name='information']" position="after">
+                <page string="Groups" attrs="{'invisible':['|', ('company_id_company_used_for_bt_swissdec','!=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}">
+                    <field name="group_ids" nolabel="1" domain="[('company_id','=',company_id)]"/>
+                    <div>
+                        <p class="oe_grey">Der Mitarbeiter kann einer Unternehmensgruppe zugewiesen werden. Für Gruppen können unternehmensweit oder nur auf den Mitarbeiter bezogen Zulagen oder Abzüge definiert werden (siehe dazu Tab &quot;Spezial Abzüge und Zulagen&quot; bei der Unternehmskonfiguration).</p>
+                    </div>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('len_slip_ids','>',0)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='structure_type_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+                <attribute name="required">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='structure_type_id']" position="after">
+                <field name="type_id" required="1" options='{"no_open": True, "no_create": True}' attrs="{'readonly': [('len_slip_ids','>',0)]}"/>
+                <field name="monthly_hours_company" attrs="{'required': [('type_id_salary_type','=','1')], 'invisible': [('type_id_salary_type','=','0')]}"/>
+                <field name="type_id_salary_type" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook" position="after">
+                <div>
+                    <p class="oe_grey">Der chronologisch jüngste Arbeitsvertrag pro Mitarbeiter muss ein 'von Datum' besitzen, und kann optional auch ein 'bis Datum' besitzen.</p><p class="oe_grey">Alle älteren Arbeitsverträge müssen jeweils ein 'von Datum' und ein 'bis Datum' konfiguriert haben.</p><p class="oe_grey">Dabei dürfen sich Arbeitsverträge nicht gegenseitig überschneiden.</p>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_contract_view_search_ext" model="ir.ui.view">
+        <field name="name">hr.contract.view.search.ext</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_id']" position="replace"/>
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="employee_id"/>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name="company_id" groups="base.group_multi_company"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Payslip Line -->
+    <!-- changed cesa1 -->
+    <record id="view_hr_payslip_line_tree_swissdec_ext" model="ir.ui.view">
+        <field name="name">hr.payslip.line.tree.swissdec.ext</field>
+        <field name="model">hr.payslip.line</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="/tree" position="replace">
+                <tree string="Salary Structure" editable="bottom">
+                    <field name="category_adc_id" context="{'parent_date' : parent.date}" />
+                    <!--field name="sequence" groups="base.group_extended"/ -->
+                    <field name="name" />
+                    <field name="code" />
+                    <field name="type" />
+                    <field name="amount_type" />
+                    <field name="amount" />
+                </tree>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- changed cesa1 -->
+    <record id="view_hr_payslip_line_form_swissdec_ext" model="ir.ui.view">
+        <field name="name">hr.payslip.line.form.swissdec.ext</field>
+        <field name="model">hr.payslip.line</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_line_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="/form" position="replace">
+            <form string="Payslip Line">
+                <sheet>
+                    <group col="6" colspan="4">
+                        <field name="name" colspan="4" />
+                        <field name="code" />
+                        <field name="slip_id" />
+                        <field name="employee_id" />
+                    </group>
+                    <group col="2" colspan="2">
+                        <separator colspan="4" string="Calculations" />
+                        <field name="category_adc_id" context="{'parent_date' : parent.date}"
+                            domain="[('id','in',parent.related_adc_ids),('type', '!=', 'grosswage'),('matrix_bruttolohn', '!=', 1),('matrix_ahvalv', '!=', 1),('matrix_nr', '!=', 6510)]" />
+                        <field name="type" />
+                        <field name="amount_type" />
+                        <field name="amount" attrs="{'readonly':[('amount_type','=','func')]}" />
+                        <!--field name="sequence" groups="base.group_extended"/ -->
+                    </group>
+                    <group col="2" colspan="2">
+                        <separator colspan="4" string="Company contribution" />
+                        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                        <field name="account_id" required="1" domain="[('company_id','=',parent.company_id)]"/>
+                        <field name="qst_month_id" groups="bt_swissdec.bt_swissdec_admin"/>
+                        <field name="qst_mindestabzug_in_chf" groups="bt_swissdec.bt_swissdec_admin"/>
+                        <field name="qst_code_used" groups="bt_swissdec.bt_swissdec_admin"/>
+                        <field name="qst_state_id_used" groups="bt_swissdec.bt_swissdec_admin"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Function">
+                            <field name="line_ids" colspan="4" nolabel="1"
+                                attrs="{'readonly':[('amount_type','!=','func')]}">
+                                <tree string="Function Arguments" editable="bottom">
+                                    <field name="name" />
+                                    <field name="sequence" groups="hr.group_hr_manager" />
+                                    <field name="from_val" />
+                                    <field name="to_val" />
+                                    <field name="amount_type" />
+                                    <field name="value" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="QST Correction Detail" attrs="{'invisible':[('qst_correction_line_ids','=',[])]}">
+                            <field name="qst_correction_line_ids" colspan="4" nolabel="1"
+                                    attrs="{'readonly':[('qst_correction_line_ids','=',False)]}">
+                                    <tree string="QST Correction Detail" editable="bottom">
+                                        <field name="qst_month_id" />
+                                        <field name="qst_yearly_date_from" />
+                                        <field name="qst_yearly_date_until" />
+                                        <field name="qst_yearly_days_count" />
+                                        <field name="qst_yearly_qst_salary" />
+                                        <field name="qst_yearly_qst_salary_new" />
+                                        <field name="qst_yearly_sb_salary_old" />
+                                        <field name="qst_yearly_sb_salary_new" />
+                                        <field name="qst_yearly_steuer_prozent_satz_old" />
+                                        <field name="qst_yearly_mindestabzug_in_chf_old" />
+                                        <field name="qst_yearly_qst_deduction_old" />
+                                        <field name="qst_yearly_steuer_prozent_satz_new" />
+                                        <field name="qst_yearly_mindestabzug_in_chf_new" />
+                                        <field name="qst_yearly_qst_deduction_new" />
+                                        <field name="qst_yearly_qst_deduction_diff" />
+                                        <field name="correction_for_payslip_id" />
+                                    </tree>
+                            </field>
+                        </page>
+                        <page string="Description">
+                            <separator colspan="4" string="Description" />
+                            <field name="note" colspan="4" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- modified cesa1 -->
+    <record id="view_hr_payslip_tree_swissdec_ext" model="ir.ui.view">
+        <field name="name">hr.payslip.tree.swissdec.ext</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="model">hr.payslip</field>
+        <field name="arch" type="xml">
+        <xpath expr="/tree" position="replace">
+            <tree decoration-info="state in ('approval2','approval3','hr_check','confirm')"
+                  decoration-success="state == 'done'"
+                  decoration-muted="state == 'cancel'" string="Payslip">
+                <field name="number" />
+                <field name="employee_id" />
+                <field name="register_id" invisible="1" />
+                <field name="name" />
+                <field name="date" />
+                <field name="zahlung_nach_austritt" />
+                <field name="basic" />
+                <field name="nettolohn" />
+                <field name="auszahlung" />
+                <field name="state" />
+                <field name="company_id" groups="base.group_multi_company"
+                    options='{"no_open": True, "no_create": True}' />
+                <button name="%(action_report_payslip)d" icon="fa-print" type="action" />
+            </tree>
+        </xpath>
+        </field>
+    </record>
+
+    <!-- changed cesa1 -->
+    <record id="view_hr_payslip_form_swissdec_ext" model="ir.ui.view">
+        <field name="name">hr.payslip.form.swissdec.ext</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="priority">15</field>
+        <field name="arch" type="xml">
+        <xpath expr="/form" position="replace">
+            <form string="Payslip">
+                <header>
+                    <!-- odoo13 I needed to add this as there is a new state 'verify' in hr.payslip -->
+                    <button string="Confirm" name="action_payslip_done" type="object" invisible="True" class="oe_highlight" context="{'payslip_generate_pdf': True}"/>
+                    <button string="Compute Sheet" class="oe_highlight"
+                        name="compute_sheet_check_wizard" groups="hr.group_hr_manager" type="object" attrs="{'invisible':['|', ('id','=',False), ('state','!=', 'new')]}"/>
+                    <button string="Berechne Neu" class="oe_highlight"
+                        name="compute_sheet_new" type="object" states="draft"
+                        groups="hr.group_hr_manager" />
+
+                    <button string="Approval 1" class="oe_highlight" name="approval2"
+                        states="draft" groups="hr.group_hr_manager" type="object"/>
+                    <button string="Approval 2" class="oe_highlight" name="verify_sheet"
+                        states="approval2" groups="hr.group_hr_manager" type="object"/>
+
+                    <button string="Booking" class="oe_highlight" name="final_verify_sheet"
+                        states="hr_check" groups="hr.group_hr_manager" type="object"/>
+                    <button string="Pay Salary" class="oe_highlight" name="process_sheet"
+                        states="confirm" groups="hr.group_hr_manager" confirm="Are you sure?" type="object"/>
+                    <button string="Set to Draft" class="oe_highlight"
+                        name="set_to_draft" states="cancel" type="object"
+                        attrs="{'readonly':[('employee_year_closed','=',True)]}" groups="hr.group_hr_manager" />
+                    <button string="Cancel" name="cancel_sheet" type="object"
+                        confirm="Payslips will be set to 'Reject' and bookings will be deleted if already done. Are you sure?"
+                        states="draft,hr_check,confirm,approval2" groups="hr.group_hr_manager" />
+                    <field name="state" widget="statusbar" statusbar_visible="new,draft,approval2,hr_check,confirm,done,cancel"/>
+                </header>
+                <sheet>
+                    <group col="6" colspan="4">
+                        <div attrs="{'invisible':[('missing_qst_transmission_previous_months','=',False)]}" colspan="6">
+                            <span style="color:red;font-weight:bold">Attention! You have a missing qst transmission for the actual year before this month. We recommend to send the missing qst transmission before doing a new payslip.</span>
+                        </div>
+                        <newline/>
+                        <div attrs="{'invisible':[('info_zahlung_nach_austritt_for_prev_year_for_qst_pflichtige','=',False)]}" colspan="6">
+                            <span style="color:red;font-weight:bold">Attention! You are doing a payment after leaving for an employee which is liable to withholding tax. As this is a correction for previous year, you must calculate the withholding tax manually and as well send it to the tax administration manually.</span>
+                        </div>
+                        <newline/>
+                        <field name="employee_id"
+                            options='{"no_open": True, "no_create": True}'
+                            domain="[('company_id','=',company_id)]"/>
+                        <field name="date" required="1" />
+                        <field name="employee_year_closed" invisible="1" />
+                        <newline/>
+                        <field name="name" />
+                        <field name="number" />
+                        <field name="zahlung_nach_austritt" />
+                        <newline/>
+                        <field name="journal_id"
+                            options='{"no_open": True, "no_create": True}'
+                            domain="[('company_id','=',company_id)]" required="1"/>
+                        <field name="payment_journal_id"
+                            options='{"no_open": True, "no_create": True}'
+                            domain="[('type', '=', 'bank'), ('outbound_payment_method_ids', '!=', False), ('company_id', '=', company_id)]"
+                            attrs="{'required':[('default_booking_salary_payment', '=', True)]}"
+                        />
+                        <field name="zahlung_nach_austritt_qst_separate_sb"
+                            attrs="{'invisible': [('zahlung_nach_austritt','=',False)]}"/>
+                        <newline/>
+                        <button string="13. Monatslohn bis jetzt" icon="fa-plus"
+                            name="compute_13ml" type="object" states="draft" groups="hr.group_hr_manager" />
+                        <button string="13. Monatslohn entfernen" icon="fa-minus"
+                            name="remove_13ml" type="object" states="draft" groups="hr.group_hr_manager" />
+                        <newline/>
+                        <button string="Vorauszahlung 13. Monatslohn" icon="fa-plus"
+                            name="compute_vorauszahlung_13ml" type="object" groups="hr.group_hr_manager"
+                            attrs="{'invisible':['|', ('state','!=','draft'), ('pay_13ml_in_november_enabled','=',False)]}"/>
+                        <newline/>
+                        <button string="Ausgleich Vorauszahlung 13. Monatslohn" icon="fa-plus"
+                            name="compute_ausgleich_vorauszahlung_13ml" type="object" groups="hr.group_hr_manager"
+                            attrs="{'invisible':['|', ('state','!=','draft'), ('pay_13ml_in_november_enabled','=',False)]}"/>
+                        <newline/>
+                        <field name="related_adc_ids" invisible="1" />
+                        <field name="pay_13ml_in_november_enabled" invisible="1"/>
+                        <field name="default_booking_salary_payment" invisible="1"/>
+                        <field name="missing_qst_transmission_previous_months" invisible="1"/>
+                        <field name="info_zahlung_nach_austritt_for_prev_year_for_qst_pflichtige" invisible="1"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Gross Wage">
+                            <field name="grosswage_ids" colspan="4" nolabel="1"
+                                height="300">
+                                <form string="Gross Wage">
+                                    <group col="6" colspan="6">
+                                        <field name="category_adc_id" colspan="4"
+                                            context="{'parent_date' : parent.date}"
+                                            options='{"no_open": True, "no_create": True}'
+                                            domain="[('id','in',parent.related_adc_ids),('type', '!=', 'grosswage')]"
+                                            attrs="{'readonly': [('parent.state','not in',('new','draft'))]}" />
+                                        <newline/>
+                                        <field name="name" colspan="4" attrs="{'readonly': [('parent.state','in',('confirm','done'))]}"/>
+                                        <newline/>
+                                        <field name="account_id" colspan="4" domain="[('company_id','=',parent.company_id)]"
+                                            attrs="{'readonly': [('parent.state','in',('confirm','done'))]}"
+                                            options='{"no_open": True, "no_create": True}'/>
+                                        <newline/>
+                                        <field name="value" attrs="{'readonly': [('parent.state','not in',('new','draft'))]}"/>
+                                        <field name="quantity"
+                                            attrs="{'readonly': [('parent.state','not in',('new','draft'))]}"/>
+                                        <field name="amount_total"/>
+                                        <field name="uom_id"
+                                            options='{"no_open": True, "no_create": True}'
+                                            attrs="{'readonly': [('parent.state','not in',('new','draft'))]}"
+                                            domain="[('category_id','=', %(uom.uom_categ_wtime)d)]" />
+                                        <field name="child_id" colspan="4"
+                                            options='{"no_open": True, "no_create": True}'
+                                            domain="[('parent_id','=',parent.employee_id)]"
+                                            attrs="{'required': [('related_child_link_id','!=',False)], 'invisible': [('related_child_link_id','=',False)], 'readonly': [('parent.state','in',('confirm','done'))]}"
+                                            context="{'tree_view_ref' : 'bt_swissdec.view_hr_employee_children_tree'}" />
+                                        <field name="child_correction_month_id" domain="[('id', 'in', child_correction_month_ids)]"
+                                            options='{"no_open": True, "no_create": True}'
+                                            attrs="{'required': [('related_child_correction_link_id','!=',False)], 'invisible': [('related_child_correction_link_id','=',False)]}"/>
+                                        <field name="child_correction_month_ids" invisible="1" widget="many2many_checkboxes"/>
+                                        <field name="related_child_link_id" invisible="1" />
+                                        <field name="related_child_correction_link_id" invisible="1" />
+                                        <field name="quantity_changed" invisible="1"/>
+                                        <field name="quantity_original" invisible="1"/>
+                                        <field name="code" invisible="1" />
+                                        <field name="contract_id" invisible="1"/>
+                                        <field name="date_from" invisible="1"/>
+                                        <field name="date_to" invisible="1"/>
+                                    </group>
+                                </form>
+                                <tree string="Gross Wage">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="category_adc_id" />
+                                    <field name="name" />
+                                    <field name="value" />
+                                    <field name="quantity" />
+                                    <field name="uom_id"
+                                           domain="[('category_id','=', %(uom.uom_categ_wtime)d)]" />
+                                    <field name="amount_total" />
+                                    <field name="code" invisible="1" />
+                                    <field name="account_id" domain="[('company_id','=',parent.company_id)]"/>
+                                </tree>
+                            </field>
+                        </page>
+
+
+                        <page string="Salary Computation Employee">
+                            <group col="4" colspan="4">
+                                <field name="reset_line_ids" groups="bt_swissdec.bt_swissdec_admin" />
+                                <div attrs="{'invisible':[('reset_line_ids','=',False)]}"
+                                    colspan="4">
+                                    <h2 style="color:red">You cannot delete this line because it was generated by the system and relates to the data you have in the employee. You need to check the employee data why this line was created by the system. You need to click on the flag 'RESET' in order to refresh the page.</h2>
+                                </div>
+                                <field name="do_reset_line_ids"
+                                    context="{'employee_id': id, 'line_ids': line_ids}"
+                                    attrs="{'invisible':[('reset_line_ids','=',False)]}" colspan="2" />
+                            </group>
+                            <field name="line_ids" colspan="4" nolabel="1" attrs="{'readonly':[('reset_line_ids','=',True)]}" context="{'line_ids': line_ids}">
+                                <tree string="Salary Structure">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="category_adc_id" context="{'parent_date' : parent.date}" />
+                                    <field name="name" />
+                                    <field name="type" />
+                                    <field name="amount_type" />
+                                    <field name="amount" />
+                                    <field name="total" />
+                                    <field name="account_id" required="1" domain="[('company_id','=',parent.company_id)]"/>
+                                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                    <field name="hourly_rate" invisible="1"/>
+                                    <field name="total_hours" invisible="1"/>
+                                    <field name="base" attrs="{'readonly':[('amount_type','=','fix')]}"/>
+                                    <field name="qst_mindestabzug_in_chf" groups="bt_swissdec.bt_swissdec_admin"/>
+                                    <field name="qst_code_used" groups="bt_swissdec.bt_swissdec_admin"/>
+                                    <field name="qst_state_id_used" groups="bt_swissdec.bt_swissdec_admin"/>
+                                    <field name="base_changed" invisible="1"/>
+                                    <field name="base_original" invisible="1"/>
+                                </tree>
+                                <form string="Payslip Line">
+                                    <group col="6" colspan="4">
+                                        <field name="category_adc_id"
+                                            options='{"no_open": True, "no_create": True}'
+                                            context="{'parent_date' : parent.date}"
+                                            domain="[('id','in',parent.related_adc_ids),('type', '!=', 'grosswage'),('matrix_bruttolohn', '!=', 1),('matrix_ahvalv', '!=', 1),('matrix_nr', '!=', 6510)]"
+                                            attrs="{'readonly': ['|',('parent.state','not in',('new','draft')),'&amp;',('category_adc_id_matrix_nr','in',('5060','5061')),('contract_id','!=',False)]}" />
+                                        <field name="name" colspan="4" attrs="{'readonly': [('parent.state','in',('confirm','done'))]}"/>
+                                        <field name="code" invisible="1"/>
+                                        <field name="category_adc_id_matrix_nr" invisible="1"/>
+                                        <field name="contract_id" invisible="1"/>
+                                    </group>
+                                    <group col="4" colspan="4">
+                                        <separator colspan="4" string="Calculations" />
+                                        <field name="type" attrs="{'readonly': ['|',('parent.state','not in',('new','draft')),'&amp;',('category_adc_id_matrix_nr','in',('5060','5061')),('contract_id','!=',False)]}"/>
+                                        <field name="amount_type" attrs="{'readonly': ['|',('parent.state','not in',('new','draft')),'&amp;',('category_adc_id_matrix_nr','in',('5060','5061')),('contract_id','!=',False)]}"/>
+                                        <field name="amount" attrs="{'readonly':['|','|',('amount_type','=','func'),('parent.state','not in',('new','draft')),'&amp;',('category_adc_id_matrix_nr','in',('5060','5061')),('contract_id','!=',False)]}"/>
+                                        <field name="account_id" required="1"
+                                            options='{"no_open": True, "no_create": True}'
+                                            domain="[('company_id','=',parent.company_id)]" attrs="{'readonly': [('parent.state','in',('confirm','done'))]}"/>
+                                        <field name="total"/>
+                                        <field name="total_hours" invisible="1"/>
+                                        <field name="base" attrs="{'readonly':['|','|',('amount_type','=','fix'),('parent.state','not in',('new','draft')),'&amp;',('category_adc_id_matrix_nr','in',('5060','5061')),('contract_id','!=',False)]}" />
+                                        <field name="qst_mindestabzug_in_chf" groups="bt_swissdec.bt_swissdec_admin"/>
+                                        <field name="qst_code_used" groups="bt_swissdec.bt_swissdec_admin"/>
+                                        <field name="qst_state_id_used" groups="bt_swissdec.bt_swissdec_admin"/>
+                                        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                                        <field name="hourly_rate" invisible="1"/>
+                                        <field name="base_changed" invisible="1"/>
+                                        <field name="base_original" invisible="1"/>
+                                    </group>
+                                    <notebook colspan="4">
+                                        <page string="Function"
+                                            attrs="{'invisible':[('amount_type','!=','func')]}">
+                                            <field name="line_ids" colspan="4" nolabel="1"
+                                                attrs="{'readonly':[('amount_type','!=','func')]}">
+                                                <tree string="Function Arguments" editable="bottom">
+                                                    <field name="name" />
+                                                    <field name="sequence" groups="hr.group_hr_manager" />
+                                                    <field name="from_val" />
+                                                    <field name="to_val" />
+                                                    <field name="amount_type" />
+                                                    <field name="value" />
+                                                </tree>
+                                            </field>
+                                        </page>
+                                        <page string="QST Correction Detail" attrs="{'invisible':[('qst_correction_line_ids','=',[])]}">
+                                            <field name="qst_correction_line_ids" colspan="4" nolabel="1" readonly="1"
+                                                   attrs="{'invisible':[('qst_correction_line_ids','=',False)]}">
+                                                <tree string="QST Correction Detail" editable="bottom">
+                                                    <field name="qst_month_id" />
+                                                    <field name="qst_yearly_date_from" />
+                                                    <field name="qst_yearly_date_until" />
+                                                    <field name="qst_yearly_days_count" />
+                                                    <field name="qst_yearly_qst_salary" />
+                                                    <field name="qst_yearly_qst_salary_new" />
+                                                    <field name="qst_yearly_sb_salary_old" />
+                                                    <field name="qst_yearly_sb_salary_new" />
+                                                    <field name="qst_yearly_steuer_prozent_satz_old" />
+                                                    <field name="qst_yearly_mindestabzug_in_chf_old" />
+                                                    <field name="qst_yearly_qst_deduction_old" />
+                                                    <field name="qst_yearly_steuer_prozent_satz_new" />
+                                                    <field name="qst_yearly_mindestabzug_in_chf_new" />
+                                                    <field name="qst_yearly_qst_deduction_new" />
+                                                    <field name="qst_yearly_qst_deduction_diff" />
+                                                    <field name="correction_for_payslip_id" />
+                                                </tree>
+                                            </field>
+                                        </page>
+                                        <page string="Description">
+                                            <separator colspan="4" string="Description" />
+                                            <field name="note" colspan="4" nolabel="1" />
+                                        </page>
+                                    </notebook>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Salary Computation Employer">
+                            <field name="line_employer_ids" colspan="4" nolabel="1">
+                                <tree string="Salary Structure">
+                                    <field name="category_adc_id" context="{'parent_date' : parent.date}" />
+                                    <field name="name" />
+                                    <field name="type" />
+                                    <field name="amount_type" />
+                                    <field name="amount" />
+                                    <field name="total" />
+                                    <field name="account_id" required="1" domain="[('company_id','=',parent.company_id)]"/>
+                                    <field name="base" attrs="{'readonly':[('amount_type','=','fix')]}" />
+                                    <field name="base_changed" invisible="1"/>
+                                    <field name="base_original" invisible="1"/>
+                                </tree>
+                                <form string="Payslip Line Employer">
+                                    <group col="6" colspan="4">
+                                        <field name="category_adc_id"
+                                            options='{"no_open": True, "no_create": True}'
+                                            context="{'parent_date' : parent.date}"
+                                            domain="[('id','in',parent.related_adc_ids),('type', '!=', 'grosswage'),('matrix_bruttolohn', '!=', 1),('matrix_ahvalv', '!=', 1),('matrix_nr', '!=', 6510)]"
+                                            attrs="{'readonly': [('parent.state','not in',('new','draft'))]}" />
+                                        <field name="name" colspan="4" attrs="{'readonly': [('parent.state','in',('confirm','done'))]}"/>
+                                        <field name="code" invisible="1"/>
+                                    </group>
+                                    <group col="4" colspan="4">
+                                        <separator colspan="4" string="Calculations" />
+                                        <field name="type" attrs="{'readonly': [('parent.state','not in',('new','draft'))]}"/>
+                                        <field name="amount_type" attrs="{'readonly': [('parent.state','not in',('new','draft'))]}"/>
+                                        <field name="amount" attrs="{'readonly':['|',('amount_type','=','func'),('parent.state','not in',('new','draft'))]}"/>
+                                        <field name="account_id" required="1"
+                                            options='{"no_open": True, "no_create": True}'
+                                            domain="[('company_id','=',parent.company_id)]" attrs="{'readonly': [('parent.state','in',('confirm','done'))]}"/>
+                                        <field name="total"/>
+                                        <field name="base" attrs="{'readonly':['|',('amount_type','=','fix'),('parent.state','not in',('new','draft'))]}" />
+                                        <field name="base_changed" invisible="1"/>
+                                        <field name="base_original" invisible="1"/>
+                                    </group>
+                                    <notebook colspan="4">
+                                        <page string="Description">
+                                            <separator colspan="4" string="Description" />
+                                            <field name="note" colspan="4" nolabel="1" />
+                                        </page>
+                                    </notebook>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Accounting Details" name="accounting_details">
+                            <group col="4" colspan="3">
+                                <separator colspan="4" string="Accounting Informations"/>
+                                <field name="move_ids" colspan="4" nolabel="1" readonly="1">
+                                    <tree string="Accounting Vouchers">
+                                        <field name="sequence"/>
+                                        <field name="name"/>
+                                        <field name="move_id"/>
+                                    </tree>
+                                    <form string="Accounting Vouchers">
+                                        <field name="sequence"/>
+                                        <field name="name"/>
+                                        <field name="move_id"/>
+                                    </form>
+                                </field>
+                            </group>
+                            <group col="2" colspan="1">
+                                <separator colspan="2" string="Other Informations"/>
+                                <field name="paid" readonly="1"/>
+                                <field name="company_id" readonly="1"/>
+                                <field name="register_id"
+                                    options='{"no_open": True, "no_create": True}'/>
+                                <field name="contract_id"
+                                    options='{"no_open": True, "no_create": True}'
+                                    domain="[('employee_id','=',employee_id)]"/>
+                            </group>
+                            <separator colspan="4" string="Description"/>
+                            <field name="note" colspan="4" nolabel="1"/>
+                        </page>
+                        <page string="Account Lines">
+                            <field name="salary_consolidated_lines_value" invisible="1"/>
+                            <field name="move_line_ids" colspan="4" nolabel="1" context="{'editable':False}"
+                                   attrs="{'invisible': [('salary_consolidated_lines_value','=', True)]}"/>
+                            <field name="move_line_salary_ids" colspan="4" nolabel="1" context="{'editable':False}"
+                                   attrs="{'invisible': [('salary_consolidated_lines_value','=', False)]}"/>
+                        </page>
+                        <page string="Payment Lines">
+                            <field name="move_payment_ids" colspan="4" nolabel="1" context="{'editable':False}"
+                                   attrs="{'invisible': [('salary_consolidated_lines_value','=', True)]}"/>
+                            <field name="move_payment_salary_ids" colspan="4" nolabel="1" context="{'editable':False}"
+                                   attrs="{'invisible': [('salary_consolidated_lines_value','=', False)]}"/>
+                            <separator colspan="4" string="Payment details"/>
+                            <field name="payment_details"/>
+                        </page>
+                    </notebook>
+                    <group col="2" colspan="2">
+                        <separator string="Computation Overview" colspan="2"/>
+                        <group>
+                            <field name="basic"/>
+                            <field name="total_sozialabzuege"/>
+                            <field name="total_sonstigeabzuege_zulagen"/>
+                            <field name="nettolohn"/>
+                            <field name="total_abzuege_zulagen_nach_nettolohn"/>
+                            <field name="auszahlung"/>
+                            <field name="qst_taxatsource_month" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_salary" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_salary_corrections" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_salary_total" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_salary_year" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_sb_salary" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_sb_salary_corrections" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_sb_salary_aperiodic" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_sb_salary_aperiodic_corrections" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_sb_salary_periodic" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="qst_sb_salary_periodic_corrections" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="virtual_qst_sb_salary_plus" groups="bt_swissdec.bt_swissdec_admin"  />
+                            <field name="virtual_qst_salary_plus" groups="bt_swissdec.bt_swissdec_admin"  />
+                            <field name="virtual_corrections" groups="bt_swissdec.bt_swissdec_admin"  />
+                            <field name="qst_month_id" groups="bt_swissdec.bt_swissdec_admin"  />
+                        </group>
+                        <group groups="bt_swissdec.bt_swissdec_admin">
+                            <separator string="QST calculation used values" colspan="4"/>
+                            <field name="qst_yearly_date_from"/>
+                            <field name="qst_yearly_date_until"/>
+                            <field name="qst_yearly_days_count"/>
+                            <field name="qst_yearly_days_count_year"/>
+                            <field name="qst_yearly_effective_work_days_count"/>
+                            <field name="qst_yearly_effective_work_days_count_year"/>
+                            <field name="qst_yearly_ch_work_days_count"/>
+                            <field name="qst_yearly_ch_work_days_count_year"/>
+                            <field name="qst_yearly_qst_salary_yearly_payment"/>
+                            <field name="qst_yearly_qst_salary_yearly_payment_year"/>
+                            <field name="qst_yearly_qst_salary_yearly_payment_ch_work_days"/>
+                            <field name="qst_yearly_qst_salary_yearly_payment_ch_work_days_year"/>
+                            <field name="qst_yearly_qst_sb_salary_periodic_month"/>
+                            <field name="qst_yearly_qst_sb_salary_aperiodic_month"/>
+                            <field name="qst_yearly_qst_sb_salary_month"/>
+                            <field name="qst_yearly_qst_sb_salary_periodic_year"/>
+                            <field name="qst_yearly_qst_sb_salary_aperiodic_year"/>
+                            <field name="qst_yearly_qst_sb_salary_year"/>
+                            <field name="qst_yearly_steuer_prozent_satz"/>
+                            <field name="qst_yearly_mindestabzug_in_chf"/>
+                            <field name="res_company_qst_compensation_used"/>
+                        </group>
+                        <group groups="bt_swissdec.bt_swissdec_admin">
+                            <separator string="Other TMP values (fields will only be set if not QST Pflichtig)" colspan="4"/>
+                            <field name="tmp_virtual_qst_salary"/>
+                            <field name="tmp_virtual_qst_salary_corrections"/>
+                            <field name="tmp_virtual_qst_salary_total"/>
+                            <field name="tmp_virtual_qst_sb_salary"/>
+                            <field name="tmp_virtual_qst_sb_salary_corrections"/>
+                            <field name="tmp_virtual_qst_sb_salary_total"/>
+                        </group>
+                        <group groups="bt_swissdec.bt_swissdec_admin">
+                            <separator string="QST Calculation" colspan="4"/>
+                            <field name="note_qst_calculation" nolabel="1"/>
+                        </group>
+                    </group>
+                    <group col="4" colspan="4">
+                        <field name="help_field_save_line_ids_not_allowed"
+                            attrs="{'required':[('reset_line_ids','=',True)]}"
+                            invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </xpath>
+        </field>
+    </record>
+
+    <!-- override view from hr_payroll_account -->
+    <record id="view_hr_payslip_inherit_form_ext" model="ir.ui.view">
+        <field name="name">hr.payslip.inherit.form.ext</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll_account.hr_payslip_view_form"/>
+        <field name="priority">17</field>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='accounting_details']//field[@name='date']" position="replace"/>
+            <xpath expr="//page[@name='accounting_details']//field[@name='journal_id']" position="replace"/>
+        </field>
+    </record>
+
+    <!-- changed cesa1 -->
+    <record id="view_hr_payslip_filter_swissdec_ext" model="ir.ui.view">
+        <field name="name">hr.payslip.select.swissdec.ext</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_filter"/>
+        <field name="arch" type="xml">
+        <xpath expr="/search" position="replace">
+            <search string="Search Payslips">
+                <filter string="New Slip" name="state_new_filter"
+                    domain="[('state','=','new')]" />
+                <filter string="Waiting for Approval 1" name="state_draft_filter"
+                    domain="[('state','=','draft')]" />
+                <filter string="Waiting for Approval 2" name="state_approval2_filter"
+                    domain="[('state','=','approval2')]"/>
+                <filter string="Waiting for Booking" name="state_hr_check_filter"
+                    domain="[('state','=','hr_check')]"/>
+                <filter string="Waiting for Payment" name="state_confirm_filter"
+                    domain="[('state','=','confirm')]"/>
+                <filter string="Paid Salary" name="state_done_filter"
+                    domain="[('state','=','done')]"/>
+                <filter string="Reject" name="state_cancel_filter"
+                    domain="[('state','=','cancel')]"/>
+                <separator orientation="vertical" />
+                <field name="name" />
+                <field name="employee_id" />
+                <field name="number" />
+                <field name="date" />
+                <field name="company_id" groups="base.group_multi_company"/>
+                <group col="8" colspan="4" expand="0" string="Group By...">
+                    <filter string="Employees" name="employee_id"
+                        context="{'group_by':'employee_id'}" domain="[('parent_id','=',False)]"/>
+                    <separator orientation="vertical" />
+                    <filter string="Register" name="register_id"
+                        context="{'group_by':'register_id'}" domain="[('parent_id','=',False)]"/>
+                    <separator orientation="vertical" />
+                    <filter string="Companies" name="company_id"
+                        context="{'group_by':'company_id'}" domain="[('parent_id','=',False)]"/>
+                    <separator orientation="vertical" />
+                    <filter string="States" name="state"
+                        context="{'group_by':'state'}" domain="[('parent_id','=',False)]"/>
+                </group>
+            </search>
+        </xpath>
+        </field>
+    </record>
+
+    <record id="hr_payslip_view_kanban_swissdec_ext" model="ir.ui.view">
+        <field name="name">hr.payslip.kanban.swissdec.ext</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="/kanban" position="replace">
+                <kanban class="o_kanban_mobile">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong><field name="employee_id"/></strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="float-right badge badge-secondary">
+                                            <field name="state"/>
+                                        </span>
+                                    </div>
+                                    <div class="col-10">
+                                        <span>
+                                            <field name="date"/>
+                                        </span>
+                                    </div>
+                                    <div class="col-2">
+                                        <a name="%(action_report_payslip)d" class="fa fa-print" aria-label="Print" title="Print" type="action" />
+                                    </div>
+                                    <div class="col-12">
+                                        <span><field name="name"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Cancel selected entries -->
+    <record model="ir.actions.server" id="action_selected_payslips_cancel">
+        <field name="name">Cancel</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="bt_swissdec.model_hr_payslip"/>
+        <field name="binding_model_id" ref="bt_swissdec.model_hr_payslip" />
+        <field name="sequence" eval="50"/>
+        <field name="state">code</field>
+        <field name="code">
+#the allowed groups must be specified here in this list as this example: allowed_groups = ['base.group_erp_manager', 'base.group_system']
+#if allowed_groups is set empty, the execution is allowed for all who can click on the action
+allowed_groups = ['hr.group_hr_manager']
+
+records.selected_payslips_cancel(allowed_groups)
+        </field>
+    </record>
+
+    <!-- Set to Draft selected entries -->
+    <record model="ir.actions.server" id="action_selected_payslips_set_to_draft">
+        <field name="name">Set to Draft</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="bt_swissdec.model_hr_payslip"/>
+        <field name="binding_model_id" ref="bt_swissdec.model_hr_payslip" />
+        <field name="sequence" eval="51"/>
+        <field name="state">code</field>
+        <field name="code">
+#the allowed groups must be specified here in this list as this example: allowed_groups = ['base.group_erp_manager', 'base.group_system']
+#if allowed_groups is set empty, the execution is allowed for all who can click on the action
+allowed_groups = ['hr.group_hr_manager']
+
+records.selected_payslips_set_to_draft(allowed_groups)
+        </field>
+    </record>
+
+    <!-- Cancel and Set to Draft selected entries -->
+    <record model="ir.actions.server" id="action_selected_payslips_cancel_and_set_to_draft">
+        <field name="name">Cancel and Set to Draft</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="bt_swissdec.model_hr_payslip"/>
+        <field name="binding_model_id" ref="bt_swissdec.model_hr_payslip" />
+        <field name="sequence" eval="52"/>
+        <field name="state">code</field>
+        <field name="code">
+#the allowed groups must be specified here in this list as this example: allowed_groups = ['base.group_erp_manager', 'base.group_system']
+#if allowed_groups is set empty, the execution is allowed for all who can click on the action
+allowed_groups = ['hr.group_hr_manager']
+
+records.selected_payslips_cancel(allowed_groups)
+records.selected_payslips_set_to_draft(allowed_groups)
+        </field>
+    </record>
+
+    <!-- Compute New selected entries -->
+    <record model="ir.actions.server" id="action_selected_payslips_compute_sheet_new">
+        <field name="name">Compute New</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="bt_swissdec.model_hr_payslip"/>
+        <field name="binding_model_id" ref="bt_swissdec.model_hr_payslip" />
+        <field name="sequence" eval="53"/>
+        <field name="state">code</field>
+        <field name="code">
+#the allowed groups must be specified here in this list as this example: allowed_groups = ['base.group_erp_manager', 'base.group_system']
+#if allowed_groups is set empty, the execution is allowed for all who can click on the action
+allowed_groups = ['hr.group_hr_manager']
+
+records.selected_payslips_compute_sheet_new(allowed_groups)
+        </field>
+    </record>
+
+    <!-- Approval 1 selected entries -->
+    <record model="ir.actions.server" id="action_selected_payslips_approval2">
+        <field name="name">Approval 1</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="bt_swissdec.model_hr_payslip"/>
+        <field name="binding_model_id" ref="bt_swissdec.model_hr_payslip" />
+        <field name="sequence" eval="54"/>
+        <field name="state">code</field>
+        <field name="code">
+#the allowed groups must be specified here in this list as this example: allowed_groups = ['base.group_erp_manager', 'base.group_system']
+#if allowed_groups is set empty, the execution is allowed for all who can click on the action
+allowed_groups = ['hr.group_hr_manager']
+
+records.selected_payslips_approval2(allowed_groups)
+        </field>
+    </record>
+
+    <!-- Approval 2 new selected entries -->
+    <record model="ir.actions.server" id="action_selected_payslips_verify_sheet">
+        <field name="name">Approval 2</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="bt_swissdec.model_hr_payslip"/>
+        <field name="binding_model_id" ref="bt_swissdec.model_hr_payslip" />
+        <field name="sequence" eval="55"/>
+        <field name="state">code</field>
+        <field name="code">
+#the allowed groups must be specified here in this list as this example: allowed_groups = ['base.group_erp_manager', 'base.group_system']
+#if allowed_groups is set empty, the execution is allowed for all who can click on the action
+allowed_groups = ['hr.group_hr_manager']
+
+records.selected_payslips_verify_sheet(allowed_groups)
+        </field>
+    </record>
+
+    <!-- Booking new selected entries -->
+    <record model="ir.actions.server" id="action_selected_payslips_final_verify_sheet">
+        <field name="name">Booking</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="bt_swissdec.model_hr_payslip"/>
+        <field name="binding_model_id" ref="bt_swissdec.model_hr_payslip" />
+        <field name="sequence" eval="56"/>
+        <field name="state">code</field>
+        <field name="code">
+#the allowed groups must be specified here in this list as this example: allowed_groups = ['base.group_erp_manager', 'base.group_system']
+#if allowed_groups is set empty, the execution is allowed for all who can click on the action
+allowed_groups = ['hr.group_hr_manager']
+
+records.selected_payslips_final_verify_sheet(allowed_groups)
+        </field>
+    </record>
+
+    <!-- Pay Salary new selected entries -->
+    <record model="ir.actions.server" id="action_selected_payslips_process_sheet">
+        <field name="name">Pay Salary</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="bt_swissdec.model_hr_payslip"/>
+        <field name="binding_model_id" ref="bt_swissdec.model_hr_payslip" />
+        <field name="sequence" eval="57"/>
+        <field name="state">code</field>
+        <field name="code">
+#the allowed groups must be specified here in this list as this example: allowed_groups = ['base.group_erp_manager', 'base.group_system']
+#if allowed_groups is set empty, the execution is allowed for all who can click on the action
+allowed_groups = ['hr.group_hr_manager']
+
+records.selected_payslips_process_sheet(allowed_groups)
+        </field>
+    </record>
+
+    <!--record id="hr_payroll.action_view_hr_payslip_form" model="ir.actions.act_window">
+        <field name="name">Employee Payslip</field> <field name="res_model">hr.payslip</field>
+        <field name="view_type">form</field> <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hr_payroll.view_hr_payslip_tree"/> <field name="search_view_id"
+        ref="hr_payroll.view_hr_payslip_filter"/> </record -->
+
+
+    <!-- Payment Heads -->
+    <record id="hr_allounce_deduction_categoty_form" model="ir.ui.view">
+        <field name="name">hr.allounce.deduction.categoty.form</field>
+        <field name="model">hr.allounce.deduction.categoty</field>
+        <field name="arch" type="xml">
+            <form string="Salary Heads" duplicate="0">
+                <sheet>
+                    <group col="6" colspan="6">
+                        <field name="state" invisible="1" />
+                        <group col="6" colspan="6">
+                            <field name="name" colspan="2" />
+                            <!--group col="4" colspan="4" attrs="{'invisible':[(('state','=','draft'))]}" -->
+                            <field name="code" colspan="2"
+                                attrs="{'readonly':[(('state','!=','draft'))], 'invisible':[(('state','=','draft'))]}" />
+                            <field name="type" colspan="2"
+                                attrs="{'readonly':[(('state','!=','draft'))], 'required':[(('state','!=','draft'))], 'invisible':[(('state','=','draft'))]}" />
+                            <field name="calculate_allowance" />
+                            <field name="calculate_for_previousyear" />
+                            <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                            <!--/group -->
+                            <!--group col="4" colspan="4" attrs="{'invisible':[(('state','!=','draft'))]}" -->
+                            <!--field name="name" attrs="{'readonly':[(('state','!=','draft'))],
+                                'invisible':[(('state','=','draft'))]}"/ -->
+                            <field name="code_save" colspan="2"
+                                attrs="{'readonly':[(('state','!=','draft'))], 'required':[(('state','=','draft'))], 'invisible':[(('state','!=','draft'))]}" />
+                            <field name="type_save" colspan="2"
+                                attrs="{'readonly':[(('state','!=','draft'))], 'required':[(('state','=','draft'))], 'invisible':[(('state','!=','draft'))]}" />
+                            <!--/group -->
+                        </group>
+                        <group col="2" colspan="2">
+                            <separator colspan="2" string="Description" />
+                            <field name="note" colspan="2" nolabel="1" />
+                            <separator colspan="2" string="Based on" />
+                            <field name="base" colspan="2" nolabel="1"
+                                attrs="{'readonly':[(('state','!=','draft'))]}" />
+                        </group>
+                        <group col="2" colspan="2">
+                            <separator colspan="2" string="Dynamic Computation" />
+                            <field name="condition" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                            <field name="sequence" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                            <field name="uom_id"
+                                   domain="[('category_id','=', %(uom.uom_categ_wtime)d)]" />
+                            <field name="default_value" />
+                            <field name="integer_rounding" />
+                            <field name="contains_tax_id" />
+                        </group>
+                        <group col="2" colspan="2">
+                            <separator colspan="2" string="Payslip report (PDF)" />
+                            <field name="payslip_report_grouping" />
+                            <field name="payslip_report_basic_dp" widget="selection"/>
+                            <field name="payslip_report_amount_dp" widget="selection"/>
+                            <field name="payslip_report_basic_as_percentage"/>
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <!-- <page string="Description"> <field name="note" colspan="4" nolabel="1"/>
+                            </page> -->
+                        <page string="Matrix">
+                            <group col="2" colspan="2">
+                                <field name="matrix_all_fields_empty" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="base_changed_ok" readonly="True" groups="bt_swissdec.bt_swissdec_admin" />
+                                <field name="matrix_nr" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_buchhaltung" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_buchhaltung_account" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_plusminus" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_bruttolohn" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_ahvalv" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_uvg" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_uvgz" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_ktg" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_bvg_voraussichtlich" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_faktor" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_bvg_rueckwirkend" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_quellensteuer" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_quellensteuer_detail" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_lohnausweis" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_statistik" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_statistik_oktober" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_beruecksichtigen_bei_abwesenheit"
+                                    attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="is_sum_field" attrs="{'readonly':[(('state','!=','draft'))]}" />
+                                <field name="matrix_python_function" height="200"
+                                    attrs="{'readonly':[(('state','!=','draft'))]}" />
+                            </group>
+                        </page>
+                        <page string="History">
+                            <field name="adc_history_ids" colspan="4" nolabel="1">
+                                <tree string="History">
+                                    <field name="adc_id" readonly="1" invisible="1" />
+                                    <field name="field_id" readonly="1" />
+                                    <field name="old_value" readonly="1" />
+                                    <field name="new_value" readonly="1" />
+                                    <field name="valid_from" readonly="1" />
+                                    <field name="create_uid" readonly="1" />
+                                    <field name="create_date" readonly="1" />
+                                    <field name="id" readonly="1" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hr_allounce_deduction_categoty_tree" model="ir.ui.view">
+        <field name="name">hr.allounce.deduction.categoty.tree</field>
+        <field name="model">hr.allounce.deduction.categoty</field>
+        <field name="arch" type="xml">
+            <tree string="Salary Heads">
+                <field name="matrix_nr" />
+                <field name="name" />
+                <field name="company_id" groups="base.group_multi_company"/>
+                <!--field name="code"/ -->
+                <!--field name="type"/ -->
+                <!--field name="base"/ -->
+                <!--field name="condition"/ -->
+                <!--field name="sequence"/ -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- hack jool: removed search for alle fields except name, because all
+        fields are function fields and store=false -->
+    <record id="view_allounce_deduction_categoty_filter" model="ir.ui.view">
+        <field name="name">hr.allounce.deduction.categoty.select</field>
+        <field name="model">hr.allounce.deduction.categoty</field>
+        <field name="arch" type="xml">
+            <search string="Salary Heads">
+                <field name="matrix_nr" />
+                <field name="name" />
+                <field name="company_id" groups="base.group_multi_company"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="hr_allounce_deduction_tree" model="ir.actions.act_window">
+        <field name="name">Salary Heads</field>
+        <field name="res_model">hr.allounce.deduction.categoty</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hr_allounce_deduction_categoty_tree" />
+        <field name="search_view_id" ref="view_allounce_deduction_categoty_filter" />
+    </record>
+
+    <!-- End Payment Heads -->
+
+    <!-- Company Contribution -->
+    <record id="hr_company_contribution_form" model="ir.ui.view">
+        <field name="name">company.contribution.form</field>
+        <field name="model">company.contribution</field>
+        <field name="arch" type="xml">
+            <form string="Company Contribution">
+                <sheet>
+                    <group col="6" colspan="6">
+                        <field name="category_adc_id" domain="[('company_id','=',company_id)]" required="1"/>
+                        <field name="account_id" domain="[('company_id','=',company_id)]" required="1"/>
+                        <field name="active" />
+                        <field name="company_id" groups="base.group_multi_company" required="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hr_company_contribution_tree" model="ir.ui.view">
+        <field name="name">company.contribution.tree</field>
+        <field name="model">company.contribution</field>
+        <field name="arch" type="xml">
+            <tree string="Company Contribution">
+                <field name="category_adc_id" />
+                <field name="account_id" />
+                <field name="active" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_company_contribution_filter" model="ir.ui.view">
+        <field name="name">company.contribution.select</field>
+        <field name="model">company.contribution</field>
+        <field name="arch" type="xml">
+            <search string="Search Company Contribution">
+                <field name="category_adc_id"/>
+                <!--group col="8" colspan="4"> <filter icon="terp-document-new" string="Fixed
+                    Amount" domain="[('amount_type','=','fix')]" help="Draft Slip"/> <filter
+                    icon="terp-camera_test" string="Function Calculation" domain="[('amount_type','=','func')]"
+                    help="Posted Slip"/> <separator orientation="vertical"/> <field name="name"/>
+                    <field name="code"/> <field name="contribute_per"/> <field name="register_id"/>
+                    </group> <newline/ -->
+                <group col="8" colspan="4">
+                    <field name="category_adc_id"/>
+                </group>
+                <group col="8" colspan="4" expand="0" string="Group By...">
+                    <!--filter string="Type" icon="terp-stock_symbol-selection" name="amount_type"
+                        context="{'group_by':'amount_type'}"/ -->
+                    <filter string="Category" name="category_adc_id"
+                        context="{'group_by':'category_adc_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_hr_company_contribution_tree" model="ir.actions.act_window">
+        <field name="name">Company Contributions</field>
+        <field name="res_model">company.contribution</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hr_company_contribution_tree" />
+        <field name="search_view_id" ref="view_hr_company_contribution_filter" />
+    </record>
+
+    <!-- End Company Contribution -->
+    <record id="view_hr_payroll_register_filter" model="ir.ui.view">
+        <field name="name">hr.payroll.register.filter</field>
+        <field name="model">hr.payroll.register</field>
+        <field name="arch" type="xml">
+            <search string="Search Register">
+                <filter string="New Slip" name="state_new_filter"
+                    domain="[('state','=','new')]" />
+                <filter string="Waiting for Approval 1" name="state_draft_filter"
+                    domain="[('state','=','draft')]" />
+                <filter string="Waiting for Approval 2" name="state_approval2_filter"
+                    domain="[('state','=','approval2')]"/>
+                <filter string="Waiting for Booking" name="state_hr_check_filter"
+                    domain="[('state','=','hr_check')]"/>
+                <filter string="Waiting for Payment" name="state_confirm_filter"
+                    domain="[('state','=','confirm')]"/>
+                <filter string="Paid Salary" name="state_done_filter"
+                    domain="[('state','=','done')]"/>
+                <filter string="Reject" name="state_cancel_filter"
+                    domain="[('state','=','cancel')]"/>
+                <group col="8" colspan="4">
+                    <field name="date" widget="range"/>
+                    <field name="name"/>
+                    <field name="number"/>
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_hr_payroll_register_tree" model="ir.ui.view">
+        <field name="name">hr.payroll.register.tree</field>
+        <field name="model">hr.payroll.register</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state in ('approval2','approval3','hr_check','confirm')"
+                  decoration-success="state == 'done'"
+                  decoration-muted="state == 'cancel'" string="Payroll Register">
+                <field name="name" />
+                <field name="date" />
+                <field name="date_valuta" />
+                <field name="bruttolohn" />
+                <field name="nettolohn" />
+                <field name="auszahlung" />
+                <field name="state" />
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="line_ids" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_hr_payroll_register_form" model="ir.ui.view">
+        <field name="name">hr.payroll.register.form</field>
+        <field name="model">hr.payroll.register</field>
+        <field name="arch" type="xml">
+            <form string="Payroll Register">
+                <header>
+                    <!-- Cancel draft - just hr_manager -->
+                    <!--button string="Cancel" name="cancel_sheet" icon="terp-dialog-close"
+                        states="draft" type="object" groups="hr.group_hr_manager"/ -->
+                    <!-- Cancel hr_check - just account_manager -->
+                    <!--button string="Cancel" name="cancel_sheet" icon="terp-dialog-close"
+                        states="hr_check" type="object" groups="account.group_account_manager"/ -->
+                    <!-- Cancel approval2 - just hr_manager -->
+                    <!--button string="Cancel" name="cancel_sheet" icon="terp-dialog-close"
+                        states="approval2" type="object" groups="hr.group_hr_manager"/ -->
+                    <!-- Cancel confirm - just hr_manager -->
+                    <!--button string="Cancel" name="cancel_sheet" icon="terp-dialog-close"
+                        states="confirm" type="object" groups="hr.group_hr_manager"/ -->
+
+                    <button string="Compute" name="compute_sheet_check_wizard" attrs="{'invisible':['|', ('id','=',False), ('state','!=', 'new')]}"
+                        class="oe_highlight" type="object" groups="hr.group_hr_manager" />
+                    <button string="Berechne Neu" class="oe_highlight"
+                        name="compute_sheet_new" type="object" states="draft"
+                        groups="hr.group_hr_manager" />
+
+                    <button string="Approval 1" class="oe_highlight" name="approval2"
+                        states="draft" type="object" groups="hr.group_hr_manager" />
+                    <button string="Approval 2" class="oe_highlight" name="verify_sheet"
+                        states="approval2" type="object" groups="hr.group_hr_manager" />
+
+                    <button string="Booking" class="oe_highlight" name="final_verify_sheet"
+                        type="object" states="hr_check" groups="hr.group_hr_manager" />
+                    <button string="Pay Salary" class="oe_highlight" name="process_sheet"
+                        states="confirm" type="object" groups="hr.group_hr_manager"
+                        confirm="Are you sure?" />
+                    <button string="Set to Draft" name="set_to_draft" states="cancel"
+                        type="object" class="oe_highlight" groups="hr.group_hr_manager" />
+                    <button name="open2generated" type="object" states="done"
+                        string="Generate Payment File" class="oe_highlight"/>
+                    <button string="Cancel" name="cancel_sheet"
+                        states="draft,hr_check,confirm,approval2" type="object"
+                        groups="hr.group_hr_manager" confirm="Are you sure?" />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <div class="alert alert-info" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('has_payslips_not_in_same_state','=',False)]}">
+                    <bold><a class="alert-link">Attention! Not all payslips are in the same state. You need to check the payslips manually or set the whole register via 'Cancel' to the same state. But with this all payslips need to be recalculated.</a></bold>
+                </div>
+                <field name="has_payslips_not_in_same_state" invisible="1"/>
+                <field name="missing_qst_transmission_previous_months" invisible="1"/>
+                <sheet>
+                    <group col="6" colspan="4">
+                        <div attrs="{'invisible':[('missing_qst_transmission_previous_months','=',False)]}" colspan="6">
+                            <span style="color:red;font-weight:bold">Attention! You have a missing qst transmission for the actual year before this month. We recommend to send the missing qst transmission before doing a new register.</span>
+                        </div>
+                        <newline/>
+                        <field name="name" colspan="2" />
+                        <field name="date" />
+                        <field name="date_valuta" />
+                        <newline/>
+                        <!--field name="account_id" required="1" /-->
+                        <field name="journal_id" required="1" domain="[('company_id','=',company_id)]"/>
+                        <field name="payment_journal_id"
+                               domain="[('type', '=', 'bank'), ('outbound_payment_method_ids', '!=', False), ('company_id', '=', company_id)]"
+                               attrs="{'required':[('default_booking_salary_payment', '=', True)]}"/>
+                        <newline/>
+
+                        <!-- BT mojo2 start -->
+                        <field name="manual_employee_selection" attrs="{'readonly': [('state', '!=', 'new')], 'invisible': [('manual_employee_selection_enabled', '=', False)]}"/>
+                        <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                        <field name="manual_employee_selection_enabled" invisible="1"/>
+                        <field name="pay_13ml_in_november_enabled" invisible="1"/>
+                        <field name="default_booking_salary_payment" invisible="1"/>
+                        <newline/>
+                        <!-- BT mojo2 end -->
+                    </group>
+                    <group colspan="6" col="2">
+                        <button string="13. Monatslohn bis jetzt" icon="fa-plus"
+                            name="compute_13ml" type="object" states="draft" groups="hr.group_hr_manager" />
+                        <button string="13. Monatslohn entfernen" icon="fa-minus"
+                            name="remove_13ml" type="object" states="draft" groups="hr.group_hr_manager" />
+                        <newline/>
+                        <button string="Vorauszahlung 13. Monatslohn" icon="fa-plus"
+                            name="compute_vorauszahlung_13ml" type="object" groups="hr.group_hr_manager"
+                            attrs="{'invisible':['|', ('state','!=','draft'), ('pay_13ml_in_november_enabled','=',False)]}"/>
+                        <newline/>
+                        <button string="Ausgleich Vorauszahlung 13. Monatslohn" icon="fa-plus"
+                            name="compute_ausgleich_vorauszahlung_13ml" type="object" groups="hr.group_hr_manager"
+                            attrs="{'invisible':['|', ('state','!=','draft'), ('pay_13ml_in_november_enabled','=',False)]}"/>
+                        <newline/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Payslips" attrs="{'invisible': [('state', '=', 'new')]}">
+                            <field name="line_ids" options="{'reload_on_button': True}" colspan="4" nolabel="1">
+                                <tree decoration-info="state in ('approval2','approval3','hr_check','confirm')"
+                                      decoration-success="state == 'done'"
+                                      decoration-muted="state == 'cancel'" string="Payslip">
+                                    <button name="button_remove_payslip_from_register" help="Remove Payslip from Register" icon="fa-times-circle text-danger" type="object" attrs="{'invisible': ['|', ('create_uid', '=', False), ('state', 'in', ('done'))]}"/>
+                                    <field name="number" />
+                                    <field name="identification_id_bt" string="ID"/>
+                                    <field name="employee_id" />
+                                    <field name="zahlung_nach_austritt" />
+                                    <field name="basic" />
+                                    <field name="total_sozialabzuege" />
+                                    <field name="total_sonstigeabzuege_zulagen" />
+                                    <field name="nettolohn" />
+                                    <field name="total_abzuege_zulagen_nach_nettolohn" />
+                                    <field name="auszahlung" />
+                                    <field name="state" />
+                                    <button name="%(action_report_payslip)d" icon="fa-print" type="action" />
+                                    <field name="name" invisible="1" />
+                                    <field name="date" invisible="1" />
+                                    <field name="create_uid" invisible="1" />
+                                </tree>
+                            </field>
+                            <group col="2" colspan="2">
+                                <separator colspan="2" string="Details" />
+                                <field name="bruttolohn" />
+                                <field name="total_sozialabzuege" />
+                                <field name="total_sonstigeabzuege_zulagen" />
+                                <field name="nettolohn" />
+                                <field name="total_abzuege_zulagen_nach_nettolohn" />
+                                <field name="auszahlung" />
+                            </group>
+                        </page>
+                        <page string="Employees Manually Selected" attrs="{'invisible': ['|', ('manual_employee_selection', '=', False), ('manual_employee_selection_enabled', '=', False)]}">
+                            <field name="employee_ids" colspan="6" attrs="{'required': [('manual_employee_selection', '=', True)], 'readonly': [('state', '!=', 'new')]}" domain="[('search_for_manual_employee_selection_in_register', '=', date), ('is_freelancer', '=', False)]">
+                            <tree>
+                                <field name="identification_id_bt"/>
+                                <field name="name"/>
+                                <field name="firstname"/>
+                            </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="action_view_hr_payroll_register_form" model="ir.actions.act_window">
+        <field name="name">Payroll Register</field>
+        <field name="res_model">hr.payroll.register</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new payroll register
+          </p>
+        </field>
+    </record>
+
+    <record id="hr_payroll.action_view_hr_payslip_form" model="ir.actions.act_window">
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new payslip
+          </p>
+        </field>
+    </record>
+
+    <!-- Shortcuts -->
+    <record id="hr_payroll.act_hr_employee_payslip_list" model="ir.actions.act_window">
+        <field name="name">Payslips</field>
+        <field name="res_model">hr.payslip</field>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="domain">[('employee_id', '=', active_id)]</field>
+        <field name="view_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="groups_id" eval="[(4, ref('hr.group_hr_manager'))]"/>
+    </record>
+
+    <!-- Add readonly tree view for all hr.payslip.grosswage.line entries -->
+    <record id="view_hr_contract_grosswage_line_filter" model="ir.ui.view">
+        <field name="name">hr.contract.grosswage.line.filter</field>
+        <field name="model">hr.payslip.grosswage.line</field>
+        <field name="arch" type="xml">
+            <search string="Search Contract Grosswage Lines">
+                <group col='8' colspan='4'>
+                    <field name="employee_id"/>
+                    <field name="category_adc_id"/>
+                    <field name="account_id"/>
+                    <field name="value"/>
+                    <field name="quantity"/>
+                    <field name="amount_total"/>
+                </group>
+                <newline/>
+                <group expand="0" string="Extended Filters...">
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_contract_grosswage_line_overview">
+        <field name="name">hr.contract.grosswage.line.tree</field>
+        <field name="model">hr.payslip.grosswage.line</field>
+        <field name="arch" type="xml">
+            <tree string="Contract Grosswage Lines" delete="0" create="0">
+                <field name="employee_id"/>
+                <field name="category_adc_id"/>
+                <field name="name"/>
+                <field name="account_id"/>
+                <field name="value"/>
+                <field name="quantity"/>
+                <field name="uom_id"/>
+                <field name="amount_total"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_contract_grosswage_line_overview">
+        <field name="name">Contract Grosswage Lines</field>
+        <field name="res_model">hr.payslip.grosswage.line</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('slip_id', '=', False)]</field>
+        <field name="view_id" eval="hr_contract_grosswage_line_overview"/>
+        <field name="search_view_id" ref="view_hr_contract_grosswage_line_filter"/>
+    </record>
+
+    <menuitem
+        name="Contract Grosswage Lines"
+        id="menu_hr_contract_grosswage_line_overview_tree"
+        action="action_hr_contract_grosswage_line_overview"
+        parent="hr.menu_hr_employee_payroll"
+        groups="hr.group_hr_manager"
+        sequence="9"/>
+
+    <!-- show bvg lines -->
+    <record id="view_hr_employee_calculationparameter_bvg_filter" model="ir.ui.view">
+        <field name="name">hr.employee.calculationparameter.bvg.filter</field>
+        <field name="model">hr.employee.calculationparameter.bvg</field>
+        <field name="arch" type="xml">
+            <search string="Search Employee BVG Lines">
+                <group col='8' colspan='4'>
+                    <field name="employee_id"/>
+                    <field name="not_bvg"/>
+                    <field name="bvg_id"/>
+                    <field name="bvg_code_id"/>
+                    <field name="bvg_beitrag_an"/>
+                    <field name="bvg_beitrag_ag"/>
+                    <field name="bvg_beitrag_dritte"/>
+                    <filter string="Current Year"
+                            name="current_year"
+                            domain="[('year_id.name','=',(context_today()).year)]"/>
+                    <filter string="Future Years"
+                            name="future_years"
+                            domain="[('year_id.name','&gt;',(context_today()).year)]"/>
+                    <filter string="Past Years"
+                            name="past_years"
+                            domain="[('year_id.name','&lt;',(context_today()).year)]"/>
+                </group>
+                <newline/>
+                <group expand="0" string="Extended Filters...">
+                    <field name="valid_from"/>
+                    <field name="valid_to"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_employee_bvg_overview">
+        <field name="name">Employee BVG Lines</field>
+        <field name="res_model">hr.employee.calculationparameter.bvg</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{"search_default_current_year":1}</field>
+        <field name="view_id" eval="view_hr_allowance_calculationparameter_bvg_tree_menu"/>
+        <field name="search_view_id" ref="view_hr_employee_calculationparameter_bvg_filter"/>
+    </record>
+
+    <menuitem
+        name="Employee BVG Lines"
+        id="menu_hr_employee_bvg_overview_tree"
+        action="action_hr_employee_bvg_overview"
+        parent="hr.menu_hr_employee_payroll"
+        groups="bt_swissdec.user_swissdec"
+        sequence="10"/>
+</odoo>
+

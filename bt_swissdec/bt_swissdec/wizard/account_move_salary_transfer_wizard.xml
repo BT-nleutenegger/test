@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="account_move_salary_transfer_wizard_view" model="ir.ui.view">
+            <field name="name">Transfer Account Move Salary Entries</field>
+            <field name="model">account.move.salary.transfer.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Transfer Salary Entries">
+                    <sheet>
+                        <group>
+                            <div id="description">
+                                <p>Please select the period for which you would like to transfer the consolidated salary and the date you want to post it.</p>
+                            </div>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="date_posting"/>
+                        </group>
+                    </sheet>
+					<footer>
+                        <button string="Transfer" name="transfer_account_move" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_transfer_salary" model="ir.actions.act_window">
+            <field name="name">Transfer Salary Entries</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move.salary.transfer.wizard</field>
+            <field name="view_mode">form</field>
+			<field name="view_id" ref="account_move_salary_transfer_wizard_view" />
+            <field name="target">new</field>
+        </record>
+
+		<menuitem action="" id="transfer_salary_menu_action"
+				parent="menu_hr_root_payroll" />
+	</data>
+</openerp>

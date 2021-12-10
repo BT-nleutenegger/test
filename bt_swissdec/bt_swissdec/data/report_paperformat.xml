@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="paperformat_swissdec_reports" model="report.paperformat">
+            <field name="name">Swissdec Reports</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field> <!-- Size from top which will be used for the header -->
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field> <!-- Size to go up from margin_top until header starts -->
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_swissdec_reports_portrait" model="report.paperformat">
+            <field name="name">Swissdec Reports Portrait</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field> <!-- Size from top which will be used for the header -->
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field> <!-- Size to go up from margin_top until header starts -->
+            <field name="dpi">90</field>
+        </record>
+    </data>
+</odoo>

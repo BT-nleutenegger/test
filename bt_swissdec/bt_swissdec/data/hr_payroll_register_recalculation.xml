@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Update hr.payroll.register correctly in the database.
+             For this we need to recalculate all the existing payslips. -->
+        <function model="hr.payroll.register" name="_recalculate_hr_payroll_register"/>
+    </data>
+</odoo>

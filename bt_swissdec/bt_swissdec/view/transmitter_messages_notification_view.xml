@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- =================================================== Tree views for 
+			swissdec notification message line =================================================== -->
+		<record id="transmitter_messages_notification_tree_view" model="ir.ui.view">
+			<field name="name">transmitter_messages_notification_tree_view</field>
+			<field name="model">bt_swissdec.transmitter_messages_notification</field>
+			<field name="arch" type="xml">
+				<tree string="Transmitter Messages Notification">
+					<field name="type" invisible="1" />
+					<field name="quality_level" />
+					<field name="description_code" />
+					<field name="description" />
+
+				</tree>
+			</field>
+		</record>
+
+		<!-- Form view for a swissdec notification xml -->
+		<record id="transmitter_messages_notification_form" model="ir.ui.view">
+			<field name="name">transmitter_messages_notification_form</field>
+			<field name="model">bt_swissdec.transmitter_messages_notification</field>
+			<field name="arch" type="xml">
+				<form string="Swissdec Response Line">
+					<sheet>
+						<group colspan="4" col="2">
+						<field name="type" invisible="1" />
+							<field name="quality_level" />
+							<field name="description_code" />
+							<field name="description" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

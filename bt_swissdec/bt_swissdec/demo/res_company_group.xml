@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- create res_company_group entries-->
+        <record id="res_company_group1" model="res.company.group">
+            <field name="name">Bosshard Peter BVG</field>
+            <field name="company_id" ref="base.main_company" />
+        </record>
+
+        <!-- create hr_allowance_deduction_other_category entries -->
+        <!-- Bosshard Peter -->
+        <record id="hr_allowance_deduction_other_category2" model="hr.allowance.deduction.other.category">
+            <field name="category_adc_id" ref="hr_allounce_deduction_categoty_137"/>
+            <field name="group_id" ref="res_company_group1"/>
+            <field name="only_for_report" eval="False"/>
+            <field name="amount_type">fix</field>
+            <field name="amount">10000</field>
+            <field name="type">deduction</field>
+            <field name="valid_from">2013-02-01</field>
+            <field name="valid_to">2013-02-28</field>
+            <field name="is_for_bruttolohn" eval="False"/>
+            <field name="line_type">an</field>
+            <field name="company_id" ref="base.main_company" />
+        </record>
+    </data>
+</odoo>

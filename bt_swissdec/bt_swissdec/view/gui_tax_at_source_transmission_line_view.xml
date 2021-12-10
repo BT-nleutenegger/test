@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="gui_tax_at_source_transmission_line_form_view"
+                model="ir.ui.view">
+            <field name="name">gui_tax_at_source_transmission_line_form_view
+            </field>
+            <field name="model">gui_tax_at_source_transmission_line</field>
+            <field name="arch" type="xml">
+                <form string="Tax at source declaration line">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <notebook>
+                            <page string="STD Values">
+                                <group>
+                                <group>
+                                    <field name="id"/>
+                                    <field name="current_time"/>
+                                    <field name="employee_year_id"/>
+                                    <field name="EmployeeNumber"/>
+                                    <field name="Lastname"/>
+                                    <field name="Firstname"/>
+                                    <field name="Sex"/>
+                                    <field name="LanguageCode" />
+                                    <field name="MunicipalityID"/>
+                                    <field name="ResidenceCategory"/>
+                                    <field name="TaxAtSourceCanton"/>
+                                    <field name="TaxAtSourceMunicipalityID"/>
+                                    <field name="log_information" />
+                                    <field name="Denomination"/>
+                                    <field name="Employment"/>
+                                    <field name="ActivityRate"/>
+                                    <field name="City" />
+                                    <field name="qst_id" />
+                                </group>
+                                <group>
+                                    <field name="ResidenceCanton"/>
+                                    <field name="CivilStatusStatus"/>
+                                    <field name="CivilStatusValidAsOf"/>
+                                    <field name="DateOfBirth"/>
+                                    <field name="Street"/>
+                                    <field name="ZIP_Code"/>
+                                    <field name="Country"/>
+                                    <field name="Nationality"/>
+                                    <field name="has_church_deduction"/>
+                                    <field name="current_institutionIDRef_id" />
+                                    <field name="current_institutionIDRef_ids" invisible="1"/>
+                                    <field name="qst_state_id" />
+                                    <field name="qst_code_id" />
+                                    <field name="CategoryPredefined" />
+                                    <field name="CategoryOpen" />
+                                </group>
+                                </group>
+                            </page>
+                            <page string="NEW STD Values">
+                                <group>
+                                <group>
+                                    <field name="new_Firstname"/>
+                                    <field name="new_Sex"/>
+                                    <field name="new_MunicipalityID"/>
+                                    <field name="new_ResidenceCategory"/>
+                                    <field name="new_LanguageCode" />
+                                    <field name="new_TaxAtSourceCanton"/>
+                                    <field name="new_TaxAtSourceMunicipalityID"/>
+                                    <field name="new_Denomination"/>
+                                    <field name="new_Employment"/>
+                                    <field name="new_ActivityRate"/>
+                                    <field name="new_City" />
+                                </group>
+                                <group>
+                                    <field name="new_ResidenceCanton"/>
+                                    <field name="new_CivilStatusStatus"/>
+                                    <field name="new_CivilStatusValidAsOf"/>
+                                    <field name="new_DateOfBirth"/>
+                                    <field name="new_Street"/>
+                                    <field name="new_ZIP_Code"/>
+                                    <field name="new_Country"/>
+                                    <field name="new_Nationality"/>
+                                    <field name="new_has_church_deduction"/>
+                                    <field name="new_current_institutionIDRef_id" />
+                                    <field name="new_qst_state_id" />
+                                    <field name="new_qst_code_id" />
+                                    <field name="new_qst_code_id_changed" />
+                                    <field name="new_CategoryPredefined" />
+                                    <field name="new_CategoryOpen" />
+                                </group>
+                                </group>
+                            </page>
+                            <page string="Partner Information">
+                                <field name="gui_tax_at_source_additional_particulars_ids"/>
+
+                            </page>
+                            <page string="History">
+                                <group>
+                                    <field name="gui_tax_at_source_tl_history_ids" colspan="4"/>
+                                    <button name="action_print_history" type="object"
+                                            string="Recalculate History" class="oe_stat_button"/>
+
+                                    <field name="history_note"/>
+                                </group>
+                            </page>
+                            <page string="History Original">
+                                <group>
+                                    <field name="gui_tax_at_source_tl_history_original_ids" colspan="4"/>
+                                </group>
+                            </page>
+                            <page string="Recapitulation">
+                                <group>
+                                    <field name="gui_tax_at_source_tl_recapitulation_ids"
+                                           colspan="4"/>
+                                </group>
+                            </page>
+                            <page string="Recapitulation Original">
+                                <group>
+                                    <field name="gui_tax_at_source_tl_recapitulation_original_ids" colspan="4"/>
+                                </group>
+                            </page>
+                            <page string="Transmitted Months">
+                                <group>
+                                    <field name="gui_tax_at_source_tl_current_ids" colspan="4"/>
+                                </group>
+                            </page>
+                            <page string="Transmitted Months Original">
+                                <group>
+                                    <field name="gui_tax_at_source_tl_current_original_ids" colspan="4"/>
+                                </group>
+                            </page>
+                            <page string="Children">
+                                <field name="gui_tax_at_source_transmission_line_children_ids"/>
+                                <field name="actual_count_children_deduction"/>
+                                <field name="new_actual_count_children_deduction"/>
+                                <field name="change_actual_count_children_deduction" />
+                            </page>
+                            <page string="Corrections">
+                                <group>
+                                    <field name="qst_correction_ids"
+                                           context="{'default_gui_tax_at_source_transmission_line_id': active_id}"/>
+                                </group>
+                            </page>
+                            <page string="Admin">
+                                <group>
+                                    <field name="gui_tax_at_source_transmission_id"/>
+                                    <field name="gui_tax_at_source_transmission_payroll_id"/>
+                                    <field name="gui_tax_at_source_transmission_recompute_id"/>
+                                </group>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="gui_tax_at_source_transmission_line_tree_view"
+                model="ir.ui.view">
+            <field name="name">gui_tax_at_source_transmission_line_tree_view
+            </field>
+            <field name="model">gui_tax_at_source_transmission_line</field>
+            <field name="arch" type="xml">
+                <tree string="Tax at source declaration line"
+                      decoration-success="state=='new'"
+                      decoration-warning="state in ('correction','old_value')"
+                      decoration-info="state=='current_value'">
+                    <field name="employee_year_id"/>
+                    <field name="qst_month_id"/>
+                    <field name="current_time"/>
+                    <field name="Lastname"/>
+                    <field name="Firstname"/>
+                    <field name="MunicipalityID"/>
+                    <field name="ResidenceCategory"/>
+                    <field name="has_church_deduction"/>
+                    <field name="state"/>
+                    <field name="write_date"/>
+                    <field name="come_from"/>
+                    <field name="Denomination"/>
+                    <field name="Employment"/>
+                    <field name="ActivityRate"/>
+                    <button name="action_print_correction" string="Print Correction" type="object"
+                            groups="bt_swissdec.bt_swissdec_admin"/>
+                </tree>
+            </field>
+        </record>
+        <record id="gui_tax_at_source_transmission_line_search_view"
+                model="ir.ui.view">
+            <field name="name">gui_tax_at_source_transmission_line_search_view
+            </field>
+            <field name="model">gui_tax_at_source_transmission_line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="current_time"/>
+                    <field name="Lastname"/>
+                    <field name="Firstname"/>
+                    <field name="qst_month_id"/>
+                    <field name="MunicipalityID"/>
+                    <field name="ResidenceCategory"/>
+                    <field name="has_church_deduction"/>
+                    <field name="state"/>
+                    <field name="write_date"/>
+                    <filter name="group_by_state" context="{'group_by': 'state'}" string="State"/>
+                    <filter name="group_by_employee_year_id" context="{'group_by': 'employee_year_id'}"
+                            string="Employee Year"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Come From" name="come_from" context="{'group_by':'come_from'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</openerp>

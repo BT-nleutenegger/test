@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- this method was used for importing data -> if used at some point the whole method needs to be rechecked -->
+        <function model="hr.employee.year" name="_check_qst_entries_after_migration"/>
+    </data>
+</odoo>

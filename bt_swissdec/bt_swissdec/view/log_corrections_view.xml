@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="log_corrections_form_view" model="ir.ui.view">
+            <field name="name">log_corrections_form_view</field>
+            <field name="model">log_corrections</field>
+            <field name="arch" type="xml">
+                <form string="Log corrections">
+                    <sheet>
+                        <group>
+                            <field name="gui_tax_at_source_transmission_id" readonly="1"/>
+                            <field name="workplaceIDRef"/>
+                            <field name="institutionIDRef"/>
+                            <field name="TaxableEarning"/>
+                            <field name="AscertainedTaxableEarning"/>
+                            <field name="TaxAtSource"/>
+                            <field name="to_use_in_monthly_report"/>
+                            <field name="employee_year_id"/>
+                            <field name="WorkDaysCH" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="log_corrections_tree_view" model="ir.ui.view">
+            <field name="name">log_corrections_tree_view</field>
+            <field name="model">log_corrections</field>
+            <field name="arch" type="xml">
+                <tree string="Log corrections">
+                    <field name="workplaceIDRef"/>
+                    <field name="institutionIDRef"/>
+                    <field name="TaxableEarning" sum="Total Sum" />
+                    <field name="AscertainedTaxableEarning" sum="Total Sum" />
+                    <field name="TaxAtSource" sum="Total Sum" />
+                    <field name="WorkDaysCH" sum="Total Sum" />
+                    <field name="to_use_in_monthly_report"/>
+                    <field name="employee_year_id"/>
+                    <field name="test_case"/>
+                    <field name="test_scenario_id"/>
+                    <field name="employee_year_id" />
+                </tree>
+            </field>
+        </record>
+        <record id="log_corrections_search_view" model="ir.ui.view">
+            <field name="name">log_corrections_tree_view</field>
+            <field name="model">log_corrections</field>
+            <field name="arch" type="xml">
+                <search string="Log corrections">
+                    <field name="workplaceIDRef"/>
+                    <field name="institutionIDRef"/>
+                    <field name="TaxableEarning" sum="Total Sum" />
+                    <field name="AscertainedTaxableEarning" sum="Total Sum" />
+                    <field name="TaxAtSource" sum="Total Sum" />
+                    <field name="WorkDaysCH" />
+                    <field name="to_use_in_monthly_report"/>
+                    <field name="employee_year_id"/>
+                    <field name="test_case"/>
+                    <field name="test_scenario_id"/>
+                    <field name="employee_year_id" />
+                    <group expand="0" string="Group By">
+                        <filter string="Transmission" name="transmission" context="{'group_by':'gui_tax_at_source_transmission_id'}"/>
+                        <filter string="Institution" name="institution" context="{'group_by':'institutionIDRef'}"/>
+                        <filter string="Workplace" name="workplace" context="{'group_by':'workplaceIDRef'}"/>
+
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</openerp>

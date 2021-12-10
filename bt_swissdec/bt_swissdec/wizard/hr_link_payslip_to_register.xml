@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_hr_link_payslip_to_register" model="ir.ui.view">
+            <field name="name">hr.link.payslip.to.register.form</field>
+            <field name="model">hr.link.payslip.to.register</field>
+            <field name="arch" type="xml">
+                <form string="Link payslips with register">
+                    <label string="Shows all payslip's which are in the same state as the register."
+                           colspan="2" for="not_linked_line_ids" class="o_form_label"/>
+                    <field name="not_linked_line_ids" colspan="4" nolabel="1">
+                        <tree string="Link Payslip">
+                            <field name="payslip_id" force_save="1"/>
+                        </tree>
+                        <form>
+                            <field name="payslip_id" options='{"no_open": True, "no_create": True}'/>
+                        </form>
+                    </field>
+                    <footer>
+                        <button string="Link payslips with register" name="add_not_linked_line_ids" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_hr_link_payslip_to_register" model="ir.actions.act_window">
+            <field name="name">Link payslips with register</field>
+            <field name="res_model">hr.link.payslip.to.register</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_hr_payroll_register" />
+            <field name="binding_type">action</field>
+        </record>
+
+    </data>
+</openerp>

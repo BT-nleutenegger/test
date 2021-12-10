@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_payslip_voucher_document">
+    <!--t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o"-->
+            <t t-call="web.internal_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.env['res.users'].browse(o._uid).lang or 'de_DE'})" />
+<div class="page">
+                    <section class="oe_mt64 oe_mb32">
+                        <p t-if="not called_from_register">
+                            <h4><strong>Accounting voucher - <span t-esc="o.name"/></strong></h4>
+                        </p>
+                        <p t-else="">
+                            <h4><strong>Accounting voucher - <span t-esc="get_month_year(o)"/></strong></h4>
+                        </p>
+                    </section>
+
+                    <table class="table table-condensed oe_mt32">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-1">Account</th>
+                                <p t-if="show_kst">
+                                    <th class="col-xs-6">Account Name</th>
+                                    <th class="col-xs-1">Analytic Account</th>
+                                </p>
+                                <p t-else="">
+                                    <th class="col-xs-7">Account Name</th>
+                                </p>
+                                <th class="col-xs-2" style="text-align: right">Debit</th>
+                                <th class="col-xs-2" style="text-align: right">Credit</th>
+                            </tr>
+                        </thead>
+                        <t t-set="result_get_lines" t-value="get_lines(o)"/>
+                        <tbody>
+                            <t t-set="count_bold" t-value="0"/>
+                            <tr t-foreach="result_get_lines[0]" t-as="line">
+                                <t t-set="style" t-value="'border-top: 1; padding-top: 0; padding-bottom:0; font-size: 75%;'"/>
+                                <p t-if="count_bold%2 == 0">
+                                    <t t-set="style" t-value="style + ' background-color: #eeeeee;'"/>
+                                </p>
+                                <t t-set="style_right" t-value="style + ' text-align: right;'"/>
+                                <td t-att-style="style"><span t-esc="line['account_code']"/></td>
+                                <p t-if="show_kst">
+                                    <td t-att-style="style"><span t-esc="line['account_name']"/></td>
+                                    <td t-att-style="style"><span t-esc="line['analytic_code']"/></td>
+                                </p>
+                                <p t-else="">
+                                    <td t-att-style="style"><span t-esc="line['account_name']"/></td>
+                                </p>
+                                <td t-att-style="style_right"><span t-esc="line['total_d']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                <td t-att-style="style_right"><span t-esc="line['total_c']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                <t t-set="count_bold" t-value="count_bold+1"/>
+                            </tr>
+                        </tbody>
+
+                        <t t-set="style" t-value="'border-top: 1; padding-top: 0; padding-bottom:0; font-size: 75%;'"/>
+                        <t t-set="style_right" t-value="style + ' text-align: right;'"/>
+                        <tbody>
+                            <td t-att-style="style"></td>
+                            <p t-if="show_kst">
+                                <td t-att-style="style"><strong>Total</strong></td>
+                                <td t-att-style="style"></td>
+                            </p>
+                            <p t-else="">
+                                <td t-att-style="style"><strong>Total</strong></td>
+                            </p>
+                            <td t-att-style="style_right"><strong><span t-esc="result_get_lines[1]" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></strong></td>
+                            <td t-att-style="style_right"><strong><span t-esc="result_get_lines[2]" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></strong></td>
+                        </tbody>
+
+                    </table>
+                </div>
+            </t>
+        <!--/t>
+    </t-->
+</template>
+
+<template id="report_payslip_voucher">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_payslip_voucher_document" t-lang="o.env['res.users'].browse(o._uid).lang or 'de_DE'"/>
+        </t>
+    </t>
+</template>
+
+<template id="report_payslip_voucher_kst">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_payslip_voucher_document" t-lang="o.env['res.users'].browse(o._uid).lang or 'de_DE'"/>
+        </t>
+    </t>
+</template>
+
+<template id="report_payslip_voucher_register">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_payslip_voucher_document" t-lang="o.env['res.users'].browse(o._uid).lang or 'de_DE'"/>
+        </t>
+    </t>
+</template>
+
+<template id="report_payslip_voucher_kst_register">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_payslip_voucher_document" t-lang="o.env['res.users'].browse(o._uid).lang or 'de_DE'"/>
+        </t>
+    </t>
+</template>
+
+</odoo>

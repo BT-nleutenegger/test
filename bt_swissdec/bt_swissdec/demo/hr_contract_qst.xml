@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- RESOURCE RESOURCE -->
+        <record id="resource_resource1_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Rinaldi</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource2_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Andrey</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource3_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Koller</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource4_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Lehmann</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource5_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Blanc</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource6_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Meier</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource7_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Müller</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource8_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Armanini</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource9_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Maldini</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource10_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Utzinger</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource11_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Uhlmann</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource12_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Oberli</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource13_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Bolletto</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource14_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Rast</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource15_qst" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Saner</field>
+            <field name="company_id" ref="second_company"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <!-- RES PARTNER BANK -->
+        <record id="res_partner_bank1_qst" model="res.partner.bank">
+            <field name="acc_number">CH3908704016075473007</field>
+            <field name="acc_type">iban</field>
+            <field name="bank_name">Bank</field>
+            <field name="bank_id" ref="base.res_bank_1"/>
+            <field name="partner_id" ref="base.main_partner"/>
+        </record>
+        <!-- HR EMPLOYEE -->
+        <record id="hr_employee1_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource1_qst" />
+            <field name="color">0</field>
+            <field name="name">Rinaldi</field>
+            <field name="firstname">Massimo</field>
+            <field name="birthday">1967-04-11</field>
+            <field name="identification_id_bt">0001</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee2_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource2_qst" />
+            <field name="color">0</field>
+            <field name="name">Andrey</field>
+            <field name="firstname">René</field>
+            <field name="birthday">1962-05-16</field>
+            <field name="identification_id_bt">0002</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="True"/>
+        </record>
+        <record id="hr_employee_children1_qst" model="hr.employee.children">
+            <field name="name">Andrey</field>
+            <field name="firstname">Marc</field>
+            <field name="birthday">1996-01-15</field>
+            <field name="ahvnr">756.3737.8737.03</field>
+            <field name="gender">male</field>
+            <field name="status">responsible</field>
+            <field name="right_until">2012-01-31</field>
+            <field name="right_extended_until">2014-01-31</field>
+            <field name="parent_id" ref="hr_employee2_qst" />
+            <field name="children_deduction_from">1996-02-01</field>
+            <field name="children_deduction_until">2014-01-31</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_employee_children2_qst" model="hr.employee.children">
+            <field name="name">Andrey</field>
+            <field name="firstname">Florence</field>
+            <field name="birthday">1997-11-18</field>
+            <field name="ahvnr">756.1973.6173.41</field>
+            <field name="gender">female</field>
+            <field name="status">responsible</field>
+            <field name="right_until">2013-11-30</field>
+            <field name="right_extended_until">2015-11-30</field>
+            <field name="parent_id" ref="hr_employee2_qst" />
+            <field name="children_deduction_from">1997-12-01</field>
+            <field name="children_deduction_until">2015-11-30</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_employee2_qst" model="hr.employee">
+            <field name="children_ids" eval="[(4, ref('hr_employee_children1_qst')),(4, ref('hr_employee_children2_qst'))]"/> 
+        </record>
+        <record id="hr_employee3_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource3_qst" />
+            <field name="color">0</field>
+            <field name="name">Koller</field>
+            <field name="firstname">Ludwig</field>
+            <field name="birthday">1989-01-10</field>
+            <field name="identification_id_bt">0003</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="True"/>
+        </record>
+        <record id="hr_employee_children3_qst" model="hr.employee.children">
+            <field name="name">Koller</field>
+            <field name="firstname">Sven</field>
+            <field name="birthday">2014-04-29</field>
+            <field name="ahvnr">756.1972.7771.90</field>
+            <field name="gender">male</field>
+            <field name="status">responsible</field>
+            <field name="right_until">2030-01-31</field>
+            <field name="right_extended_until">2032-01-31</field>
+            <field name="parent_id" ref="hr_employee3_qst" />
+            <field name="children_deduction_from">2014-05-01</field>
+            <field name="children_deduction_until">2032-01-31</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_employee3_qst" model="hr.employee">
+            <field name="children_ids" eval="[(4, ref('hr_employee_children3_qst'))]"/> 
+        </record>
+        <record id="hr_employee4_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource4_qst" />
+            <field name="color">0</field>
+            <field name="name">Lehmann</field>
+            <field name="firstname">Nadine</field>
+            <field name="birthday">1992-07-28</field>
+            <field name="identification_id_bt">0004</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">female</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee5_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource5_qst" />
+            <field name="color">0</field>
+            <field name="name">Blanc</field>
+            <field name="firstname">Pierre</field>
+            <field name="birthday">1977-12-11</field>
+            <field name="identification_id_bt">0005</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee6_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource6_qst" />
+            <field name="color">0</field>
+            <field name="name">Meier</field>
+            <field name="firstname">Christian</field>
+            <field name="birthday">1967-01-01</field>
+            <field name="identification_id_bt">0006</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee7_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource7_qst" />
+            <field name="color">0</field>
+            <field name="name">Müller</field>
+            <field name="firstname">Heinrich</field>
+            <field name="birthday">1969-07-13</field>
+            <field name="identification_id_bt">0007</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee8_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource8_qst" />
+            <field name="color">0</field>
+            <field name="name">Armanini</field>
+            <field name="firstname">Laura</field>
+            <field name="birthday">1977-10-04</field>
+            <field name="identification_id_bt">0008</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">female</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee9_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource9_qst" />
+            <field name="color">0</field>
+            <field name="name">Maldini</field>
+            <field name="firstname">Fabio</field>
+            <field name="birthday">1988-06-17</field>
+            <field name="identification_id_bt">0009</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="children">2</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee10_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource10_qst" />
+            <field name="color">0</field>
+            <field name="name">Utzinger</field>
+            <field name="firstname">Jan</field>
+            <field name="birthday">1980-06-23</field>
+            <field name="identification_id_bt">0010</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee11_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource11_qst" />
+            <field name="color">0</field>
+            <field name="name">Uhlmann</field>
+            <field name="firstname">Rita</field>
+            <field name="birthday">1982-09-05</field>
+            <field name="identification_id_bt">0011</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">female</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee12_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource12_qst" />
+            <field name="color">0</field>
+            <field name="name">Oberli</field>
+            <field name="firstname">Christine</field>
+            <field name="birthday">1996-10-15</field>
+            <field name="identification_id_bt">0012</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">female</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee13_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource13_qst" />
+            <field name="color">0</field>
+            <field name="name">Bolletto</field>
+            <field name="firstname">Franca</field>
+            <field name="birthday">1992-06-06</field>
+            <field name="identification_id_bt">0013</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">female</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee14_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource14_qst" />
+            <field name="color">0</field>
+            <field name="name">Rast</field>
+            <field name="firstname">Eva</field>
+            <field name="birthday">1983-11-01</field>
+            <field name="identification_id_bt">0014</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">female</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee15_qst" model="hr.employee">
+            <field name="resource_id" ref="resource_resource15_qst" />
+            <field name="color">0</field>
+            <field name="name">Saner</field>
+            <field name="firstname">Renate</field>
+            <field name="birthday">1991-10-19</field>
+            <field name="identification_id_bt">0015</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst" />
+            <field name="gender">female</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company" />
+            <field name="receives_child_allowance" eval="False"/>
+            
+        </record>
+
+        <!-- create ir_property entries for property_bank_account for each employee -->
+        <record forcecreate="True" id="property_bank_account_hr_employee1_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee1_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee2_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee2_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee3_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee3_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee4_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee4_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee5_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee5_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee6_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee6_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee7_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee7_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee8_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee8_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee9_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee9_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee10_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee10_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee11_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee11_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee12_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee12_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee13_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee13_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee14_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee14_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee15_qst" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee15_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        
+        <!-- create ir_property entries for employee_account for each employee -->
+        <record forcecreate="True" id="employee_account_hr_employee1_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee1_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee2_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee2_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee3_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee3_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee4_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee4_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee5_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee5_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee6_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee6_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee7_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee7_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee8_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee8_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee9_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee9_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee10_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee10_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee11_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee11_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee12_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee12_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee13_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee13_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee14_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee14_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee15_qst" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee15_qst'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company"/>
+        </record>
+    </data>
+
+    <!-- create hr.contract entries -->
+    <data>
+        <record id="hr_contract_1" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+            <field name="employee_id" ref="hr_employee1_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Rinaldi Massimo</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn0_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_1"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_uebrigepauschalspesen0_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Uebrige Pauschalspesen</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u&quot;Indemnit\xe9s forfaitaires pour le conseil d'adm.&quot;), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="150.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_152"/>
+            <field name="contract_id" ref="hr_contract_1"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_2" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Andrey</field>-->
+            <field name="employee_id" ref="hr_employee2_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Andrey René</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn1_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_2"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_pauschalereprsentationsspesen0_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Pauschale Repräsentationsspesen</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Indemnit\xe9s forfaitaires pour les cadres'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="300.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_149"/>
+            <field name="contract_id" ref="hr_contract_2"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_3" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Koller</field>-->
+            <field name="employee_id" ref="hr_employee3_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Koller Ludwig</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn2_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_3"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_reisespesen0_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Reisespesen</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Frais de voyages'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="300.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_143"/>
+            <field name="contract_id" ref="hr_contract_3"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_korrektur_kinderzulage0_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Korrektur Kinderzulage Februar</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Autres charges du personnel'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-04-01</field>
+            <field eval="200.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-04-30</field>
+            <field model="hr.employee.children" name="child_id" search="[('name', '=', u'Koller'),('firstname', '=', u'Sven')]"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_182"/>
+            <field name="contract_id" ref="hr_contract_3"/>
+            <field eval="2" name="child_correction_month_id"/>
+            <field eval="1" name="related_child_link_id"/>
+            <field eval="1" name="related_child_correction_link_id"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_korrektur_kinderzulage1_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Korrektur Kinderzulage März</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Autres charges du personnel'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-04-01</field>
+            <field eval="200.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-04-30</field>
+            <field model="hr.employee.children" name="child_id" search="[('name', '=', u'Koller'),('firstname', '=', u'Sven')]"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_182"/>
+            <field name="contract_id" ref="hr_contract_3"/>
+            <field eval="3" name="child_correction_month_id"/>
+            <field eval="1" name="related_child_link_id"/>
+            <field eval="1" name="related_child_correction_link_id"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_4" model="hr.contract">
+            <field name="date_start">2014-02-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Lehmann</field>-->
+            <field name="employee_id" ref="hr_employee4_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Lehmann Nadine</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn3_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-02-01</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-03-31</field>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_4"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn4_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-04-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="4000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_4"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_bonuszahlung0_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Bonuszahlung</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Mise \xe0 disposition de personnel'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-04-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="1000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_47"/>
+            <field name="contract_id" ref="hr_contract_4"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_5" model="hr.contract">
+            <field name="date_start">2013-05-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Blanc</field>-->
+            <field name="employee_id" ref="hr_employee5_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Blanc Pierre</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn5_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_pauschale_autospesen0_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Pauschale Autospesen</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Indemnités forfaitaires pour la direction'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="300.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_150"/>
+            <field name="contract_id" ref="hr_contract_5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_6" model="hr.contract">
+            <field name="date_start">2013-06-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Meier</field>-->
+            <field name="employee_id" ref="hr_employee6_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Meier Christian</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_verwaltungsratshonorar0_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Verwaltungsratshonorar</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Suppl\xe9ments'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field eval="10000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-01-31</field>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_76"/>
+            <field name="contract_id" ref="hr_contract_6"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_7" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Müller</field>-->
+            <field name="employee_id" ref="hr_employee7_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Müller Heinrich</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_mitarbeiteroptionen0_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Mitarbeiteroptionen</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Autres charges du personnel'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field eval="10000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-01-31</field>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_90"/>
+            <field name="contract_id" ref="hr_contract_7"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn17_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-05-01</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-05-31</field>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_7"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_8" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Armanini</field>-->
+            <field name="employee_id" ref="hr_employee8_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Armanini Laura</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn6_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_8"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_9" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Maldini</field>-->
+            <field name="employee_id" ref="hr_employee9_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Maldini Fabio</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn7_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_9"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_10" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Utzinger</field>-->
+            <field name="employee_id" ref="hr_employee10_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Utzinger Jan</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn8_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_10"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_11" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Uhlmann</field>-->
+            <field name="employee_id" ref="hr_employee11_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Uhlmann Rita</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn9_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-03-31</field>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_11"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+            <record id="hr_payslip_grosswage_line_monatslohn10_qst" model="hr.payslip.grosswage.line">
+                <field name="code">Monatslohn</field>
+                <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+                <field name="date_from">2014-04-01</field>
+                <field eval="2500.0" name="value"/>
+                <field eval="0" name="is_special_grosswage"/>
+                <field name="date_to">2014-05-31</field>
+                <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+                <field name="contract_id" ref="hr_contract_11"/>
+                <field eval="1.0" name="quantity"/>
+            </record>
+    </data>
+    <data>
+        <record id="hr_contract_12a" model="hr.contract">
+            <field name="date_start">2014-01-16</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Oberli</field>-->
+            <field name="employee_id" ref="hr_employee12_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Oberli Christine 1</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn11_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field eval="2500.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-01-31</field>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_12a"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn12_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-02-01</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-02-28</field>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_12a"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_13" model="hr.contract">
+            <field name="date_start">2013-10-01</field>
+            <field name="type_id" ref="hr_contract_type_unbmlj"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Bolletto</field>-->
+            <field name="employee_id" ref="hr_employee13_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Bolletto Franca</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn14_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_13"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_14" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_bml"/>
+            <field name="date_end">2013-10-31</field>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Rast</field>-->
+            <field name="employee_id" ref="hr_employee14_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Rast Eva</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn15_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2013-10-01</field>
+            <field eval="80000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2013-10-31</field>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_14"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_bonuszahlung1_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Bonuszahlung</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Mise \xe0 disposition de personnel'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field eval="10000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="date_to">2014-01-31</field>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_47"/>
+            <field name="contract_id" ref="hr_contract_14"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_15" model="hr.contract">
+            <field name="date_start">2013-01-01</field>
+            <field name="type_id" ref="hr_contract_type_bml"/>
+            <field name="company_id" ref="second_company"/>
+<!--            <field name="employee_name_sort">Saner</field>-->
+            <field name="employee_id" ref="hr_employee15_qst"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Saner Renate</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn16_qst" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="date_from">2014-01-01</field>
+            <field name="date_to">2015-12-31</field>
+            <field eval="5000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_15"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+
+</odoo>

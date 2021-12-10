@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="0">
+		<record id="hr_work_entry_contract.menu_hr_payroll_root" model="ir.ui.menu">
+    	    <field eval="[(6, 0,  [ref('bt_swissdec.bt_swissdec_admin')])]" name="groups_id"/>
+	    </record>
+    	<record id="hr_payroll.menu_hr_payroll_structure_view" model="ir.ui.menu">
+    	    <field eval="[(6, 0,  [ref('bt_swissdec.bt_swissdec_admin')])]" name="groups_id"/>
+	    </record>
+	    <record id="hr_payroll.menu_hr_salary_rule_category" model="ir.ui.menu">
+    	    <field eval="[(6, 0,  [ref('bt_swissdec.bt_swissdec_admin')])]" name="groups_id"/>
+	    </record>
+<!--	    <record id="hr_payroll.menu_action_hr_contribution_register_form" model="ir.ui.menu">-->
+<!--    	    <field eval="[(6, 0,  [ref('bt_swissdec.bt_swissdec_admin')])]" name="groups_id"/>-->
+<!--	    </record>-->
+	    <record id="hr_payroll.menu_action_hr_salary_rule_form" model="ir.ui.menu">
+    	    <field eval="[(6, 0,  [ref('bt_swissdec.bt_swissdec_admin')])]" name="groups_id"/>
+	    </record>
+	    <record id="hr_payroll.menu_hr_payslip_run" model="ir.ui.menu">
+    	    <field eval="[(6, 0,  [ref('bt_swissdec.bt_swissdec_admin')])]" name="groups_id"/>
+	    </record>
+<!--	    <record id="hr_payroll.menu_department_tree" model="ir.ui.menu">-->
+<!--    	    <field eval="[(6, 0,  [ref('bt_swissdec.bt_swissdec_admin')])]" name="groups_id"/>-->
+<!--	    </record>-->
+	</data>
+    <data noupdate="1">
+    	<delete model="ir.translation" search="[('name','=','resource.resource,name'),('lang','=','de_DE')]" />
+
+        <!-- Contract Types -->
+        <!-- 
+        Mögliche Werte: 
+        indefiniteSalaryMth = unbefristeter Vertrag mit Monatslohn (indefinite duration with salary per month) 
+        indefiniteSalaryMthAWT = unbefristeter Vertrag mit Monatslohn und Jahresarbeitszeit (indefinite duration with salary per month and annual working time model) 
+        indefiniteSalaryHrs = unbefristeter Vertrag mit Stundenlohn (indefinite duration with salary per month) 
+        indefiniteSalaryNoTimeConstraint = unbefristeter Vertrag mit Provision, Pauschale, Akkordlohn (indefinite duration with commission, lump sum, piece rate) 
+        fixedSalaryMth = befristeter Vertrag mit Monatslohn (fixed/temporary duration salary per month) 
+        fixedSalaryHrs = befristeter Vertrag mit Stundenlohn (fixed/temporary duration salary per hour) 
+        fixedSalaryNoTimeConstraint = befristeter Vertrag mit Provision, Pauschale, Akkordlohn (fixed/temporary duration with commission, lump sum, piece rate) 
+        apprentice = Lehrvertrag 
+        internshipContract = Praktikumsvertrag
+        -->
+        <record id="hr_contract_type_unbml" model="hr.contract.type">
+            <field name="name">Unbefristeter Vertrag mit Monatslohn</field>
+            <field name="code">indefiniteSalaryMth</field>
+            <field name="salary_type">0</field>
+        </record>
+        
+        <record id="hr_contract_type_unbmlj" model="hr.contract.type">
+            <field name="name">Unbefristeter Vertrag mit Monatslohn und Jahresarbeitszeit</field>
+            <field name="code">indefiniteSalaryMthAWT</field>
+            <field name="salary_type">0</field>
+        </record>
+        
+        <record id="hr_contract_type_unbsl" model="hr.contract.type">
+            <field name="name">Unbefristeter Vertrag mit Stundenlohn</field>
+            <field name="code">indefiniteSalaryHrs</field>
+            <field name="salary_type">1</field>
+        </record>
+        
+        <record id="hr_contract_type_unbpr" model="hr.contract.type">
+            <field name="name">Unbefristeter Vertrag mit Provision, Pauschale, Akkordlohn</field>
+            <field name="code">indefiniteSalaryNoTimeConstraint</field>
+            <field name="salary_type">1</field>
+        </record>
+        
+        <record id="hr_contract_type_bml" model="hr.contract.type">
+            <field name="name">Befristeter Vertrag mit Monatslohn</field>
+            <field name="code">fixedSalaryMth</field>
+            <field name="salary_type">0</field>
+        </record>
+        
+        <record id="hr_contract_type_bsl" model="hr.contract.type">
+            <field name="name">Befristeter Vertrag mit Stundenlohn</field>
+            <field name="code">fixedSalaryHrs</field>
+            <field name="salary_type">1</field>
+        </record>
+        
+        <record id="hr_contract_type_bpr" model="hr.contract.type">
+            <field name="name">Befristeter Vertrag mit Provision, Pauschale, Akkordlohn</field>
+            <field name="code">fixedSalaryNoTimeConstraint</field>
+            <field name="salary_type">1</field>
+        </record>
+        
+        <record id="hr_contract_type_l" model="hr.contract.type">
+            <field name="name">Lehrvertrag</field>
+            <field name="code">apprentice</field>
+            <field name="salary_type">0</field>
+        </record>
+        
+        <record id="hr_contract_type_p" model="hr.contract.type">
+            <field name="name">Praktikumsvertrag</field>
+            <field name="code">internshipContract</field>
+            <field name="salary_type">0</field>
+        </record>
+        
+        
+		<!-- Swissdec Versicherungen -->
+		<record id="S14_BVG-LPP_v3" model="res.company.swissdec.vers">
+		    <field name="code">S14</field>
+		    <field name="name">AXA Winterthur BVG</field>
+		    <field name="domain">BVG-LPP  (nur Version 3)</field>
+		    <field name="support_email">swissdec@axa-winterthur.ch</field>
+		</record>
+		<record id="S14_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S14</field>
+		    <field name="name">AXA Winterthur KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@axa-winterthur.ch</field>
+		</record>
+		<record id="S14_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S14</field>
+		    <field name="name">AXA Winterthur UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@axa-winterthur.ch</field>
+		</record>
+		<record id="S14_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S14</field>
+		    <field name="name">AXA Winterthur UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@axa-winterthur.ch</field>
+		</record>
+		<record id="S22_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S22</field>
+		    <field name="name">Allianz Suisse KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@allianz-suisse.ch</field>
+		</record>
+		<record id="S22_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S22</field>
+		    <field name="name">Allianz Suisse UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@allianz-suisse.ch</field>
+		</record>
+		<record id="S22_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S22</field>
+		    <field name="name">Allianz Suisse UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@allianz-suisse.ch</field>
+		</record>
+		<record id="S6_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S6</field>
+		    <field name="name">Basler Versicherungs-Gesellschaft KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@baloise.ch</field>
+		</record>
+		<record id="S6_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S6</field>
+		    <field name="name">Basler Versicherungs-Gesellschaft UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@baloise.ch</field>
+		</record>
+		<record id="S6_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S6</field>
+		    <field name="name">Basler Versicherungs-Gesellschaft UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@baloise.ch</field>
+		</record>
+		<record id="S190_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S190</field>
+		    <field name="name">Concordia KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@concordia.ch</field>
+		</record>
+		<record id="S190_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S190</field>
+		    <field name="name">Concordia UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@concordia.ch</field>
+		</record>
+		<record id="S190_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S190</field>
+		    <field name="name">Concordia UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@concordia.ch</field>
+		</record>
+		<record id="S124_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S124</field>
+		    <field name="name">CSS Versicherungen AG KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@css.ch</field>
+		</record>
+		<record id="S124_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S124</field>
+		    <field name="name">CSS Versicherungen AG UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@css.ch</field>
+		</record>
+		<record id="S124_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S124</field>
+		    <field name="name">CSS Versicherungen AG UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@css.ch</field>
+		</record>
+		<record id="S21_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S21</field>
+		    <field name="name">GENERALI Versicherungen KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@generali.ch</field>
+		</record>
+		<record id="S21_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S21</field>
+		    <field name="name">GENERALI Versicherungen UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@generali.ch</field>
+		</record>
+		<record id="S21_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S21</field>
+		    <field name="name">GENERALI Versicherungen UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@generali.ch</field>
+		</record>
+		<record id="S264_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S264</field>
+		    <field name="name">Helsana Versicherungen AG KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@helsana.ch</field>
+		</record>
+		<record id="S264_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S264</field>
+		    <field name="name">Helsana Versicherungen AG UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@helsana.ch</field>
+		</record>
+		<record id="S264_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S264</field>
+		    <field name="name">Helsana Versicherungen AG UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@helsana.ch</field>
+		</record>
+		<record id="S23_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S23</field>
+		    <field name="name">NationaleSuisse KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@nationalesuisse.ch</field>
+		</record>
+		<record id="S23_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S23</field>
+		    <field name="name">NationaleSuisse UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@nationalesuisse.ch</field>
+		</record>
+		<record id="S23_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S23</field>
+		    <field name="name">NationaleSuisse UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@nationalesuisse.ch</field>
+		</record>
+		<record id="S1_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S1</field>
+		    <field name="name">Schweizerische Mobiliar Versicherungsgesellschaft AG KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@mobi.ch</field>
+		</record>
+		<record id="S1_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S1</field>
+		    <field name="name">Schweizerische Mobiliar Versicherungsgesellschaft AG UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@mobi.ch</field>
+		</record>
+		<record id="S1_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S1</field>
+		    <field name="name">Schweizerische Mobiliar Versicherungsgesellschaft AG UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@mobi.ch</field>
+		</record>
+		<record id="Suva_UVG-LAA_v3" model="res.company.swissdec.vers">
+		    <field name="code">Suva</field>
+		    <field name="name">Suva UVG</field>
+		    <field name="domain">UVG-LAA   (bis Version 3)</field>
+		    <field name="support_email">swissdec@suva.ch</field>
+		</record>
+		<record id="S999_UVG-LAA_v4" model="res.company.swissdec.vers">
+		    <field name="code">S999</field>
+		    <field name="name">Suva UVG</field>
+		    <field name="domain">UVG-LAA   (ab Version 4)</field>
+		    <field name="support_email">swissdec@suva.ch</field>
+		</record>
+		<record id="L2_BVG-LPP_v3" model="res.company.swissdec.vers">
+		    <field name="code">L2</field>
+		    <field name="name">SwissLife BVG</field>
+		    <field name="domain">BVG-LPP (nur Version 3)</field>
+		    <field name="support_email">swissdec@swisslife.ch</field>
+		</record>
+		<record id="S94_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S94</field>
+		    <field name="name">Visana Versicherungen AG KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@visana.ch</field>
+		</record>
+		<record id="S94_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S94</field>
+		    <field name="name">Visana Versicherungen AG UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@visana.ch</field>
+		</record>
+		<record id="S94_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S94</field>
+		    <field name="name">Visana Versicherungen AG UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@visana.ch</field>
+		</record>
+		<record id="S12_KTG-AMC" model="res.company.swissdec.vers">
+		    <field name="code">S12</field>
+		    <field name="name">Zurich Versicherung KTG</field>
+		    <field name="domain">KTG-AMC</field>
+		    <field name="support_email">swissdec@zurich.ch</field>
+		</record>
+		<record id="S12_UVG-LAA" model="res.company.swissdec.vers">
+		    <field name="code">S12</field>
+		    <field name="name">Zurich Versicherung UVG</field>
+		    <field name="domain">UVG-LAA</field>
+		    <field name="support_email">swissdec@zurich.ch</field>
+		</record>
+		<record id="S12_UVGZ-LAAC" model="res.company.swissdec.vers">
+		    <field name="code">S12</field>
+		    <field name="name">Zurich Versicherung UVGZ</field>
+		    <field name="domain">UVGZ-LAAC</field>
+		    <field name="support_email">swissdec@zurich.ch</field>
+		</record>
+		<record id="SwissFederal_StatisticalOffice_SwissFederalStatisticalOffice" model="res.company.swissdec.vers">
+		    <field name="code">SwissFederal_StatisticalOffice</field>
+		    <field name="name">SwissFederalStatisticalOffice / BFS</field>
+		    <field name="domain">SwissFederalStatisticalOffice</field>
+		    <field name="support_email">swissdec@bfs.admin.ch</field>
+		</record>
+		<record id="BE_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">BE</field>
+		    <field name="name">Steuerverwaltung BE</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">swissdec@fin.be.ch</field>
+		</record>
+		<record id="BL_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">BL</field>
+		    <field name="name">Steuerverwaltung BL Tax</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">fainest@bl.ch</field>
+		</record>
+		<record id="BS_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">BS</field>
+		    <field name="name">Steuerverwaltung des Kt. BS TAX</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">stv.meldungen@bs.ch</field>
+		</record>
+		<record id="LU_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">LU</field>
+		    <field name="name">Steuerverwaltung des Kt. LU TAX</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">dst.hotline@lu.ch</field>
+		</record>
+		<record id="NE_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">NE</field>
+		    <field name="name">Steuerverwaltung des Kt. NE TAX</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">swissdec.support@ne.ch</field>
+		</record>
+		<record id="VS_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">VS</field>
+		    <field name="name">Steuerverwaltung des Kt. Wallis Tax</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">sci-expl-java@admin.vs.ch</field>
+		</record>
+		<record id="FR_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">FR</field>
+		    <field name="name">Steuerverwaltung Freiburg TAX</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">sitel_webservices_contact@fr.ch</field>
+		</record>
+		<record id="JU_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">JU</field>
+		    <field name="name">Steuerverwaltung Kt. Jura TAX</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">support.swissdec@jura.ch</field>
+		</record>
+		<record id="SO_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">SO</field>
+		    <field name="name">Steuerverwaltung Solothurn TAX</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">anwendungen@aio.so.ch</field>
+		</record>
+		<record id="VD_CantonalTaxAdministration" model="res.company.swissdec.vers">
+		    <field name="code">VD</field>
+		    <field name="name">Steuerverwaltung VD</field>
+		    <field name="domain">CantonalTaxAdministration</field>
+		    <field name="support_email">swissdec@vd.ch</field>
+		</record>
+		<record id="AG_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">AG</field>
+		    <field name="name">Steuerverwaltung Aargau TAS</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">ab-sys@ag.ch</field>
+		</record>
+		<record id="BE_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">BE</field>
+		    <field name="name">Steuerverwaltung BE TAS</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">swissdec@fin.be.ch</field>
+		</record>
+		<record id="BL_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">BL</field>
+		    <field name="name">Steuerverwaltung BL Tas</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">fainest@bl.ch</field>
+		</record>
+		<record id="AI_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">AI</field>
+		    <field name="name">Steuerverwaltung des Kt. AI</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">swissdec@ai.ch</field>
+		</record>
+		<record id="AR_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">AR</field>
+		    <field name="name">Steuerverwaltung des Kt. AR</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">servicedesk@ari-ag.ch</field>
+		</record>
+		<record id="BS_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">BS</field>
+		    <field name="name">Steuerverwaltung des Kt. BS TAS</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">stv.meldungen@bs.ch</field>
+		</record>
+		<record id="GE_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">GE</field>
+		    <field name="name">Steuerverwaltung des Kt. GE</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">LST-DS-DGSI-AEL-INT@etat.ge.ch</field>
+		</record>
+		<record id="GL_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">GL</field>
+		    <field name="name">Steuerverwaltung des Kt. GL</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">support@gl.ch</field>
+		</record>
+		<record id="GR_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">GR</field>
+		    <field name="name">Steuerverwaltung des Kt. Graubünden</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">afi.mssql@gr.ch</field>
+		</record>
+		<record id="LU_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">LU</field>
+		    <field name="name">Steuerverwaltung des Kt. LU TAS</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">dst.hotline@lu.ch</field>
+		</record>
+		<record id="NE_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">NE</field>
+		    <field name="name">Steuerverwaltung des Kt. NE TAS</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">swissdec.support@ne.ch</field>
+		</record>
+		<record id="NW_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">NW</field>
+		    <field name="name">Steuerverwaltung des Kt. NW</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">awnotify@ilz.info</field>
+		</record>
+		<record id="OW_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">OW</field>
+		    <field name="name">Steuerverwaltung des Kt. OW</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">awnotify@ilz.info</field>
+		</record>
+		<record id="SH_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">SH</field>
+		    <field name="name">Steuerverwaltung des Kt. Schaffhausen</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">as@ksd.ch</field>
+		</record>
+		<record id="SZ_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">SZ</field>
+		    <field name="name">Steuerverwaltung des Kt. Schwyz</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">it-collector@sz.ch</field>
+		</record>
+		<record id="SG_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">SG</field>
+		    <field name="name">Steuerverwaltung des Kt. SG TAS</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">applications@abraxas.ch</field>
+		</record>
+		<record id="TG_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">TG</field>
+		    <field name="name">Steuerverwaltung des Kt. TG</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">quest.sv@tg.ch</field>
+		</record>
+		<record id="TI_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">TI</field>
+		    <field name="name">Steuerverwaltung des Kt. TI</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">csi.supporto@ti.ch</field>
+		</record>
+		<record id="UR_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">UR</field>
+		    <field name="name">Steuerverwaltung des Kt. Uri</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">helpdesk@ur.ch</field>
+		</record>
+		<record id="VS_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">VS</field>
+		    <field name="name">Steuerverwaltung des Kt. Wallis Tas</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">sci-expl-java@admin.vs.ch</field>
+		</record>
+		<record id="ZG_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">ZG</field>
+		    <field name="name">Steuerverwaltung des Kt. ZG</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">fehler.chm@zg.ch</field>
+		</record>
+		<record id="ZH_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">ZH</field>
+		    <field name="name">Steuerverwaltung des Kt. ZH</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">sekretariatdaqu@ksta.zh.ch</field>
+		</record>
+		<record id="FR_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">FR</field>
+		    <field name="name">Steuerverwaltung Freiburg TAS</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">sitel_webservices_contact@fr.ch</field>
+		</record>
+		<record id="JU_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">JU</field>
+		    <field name="name">Steuerverwaltung Kt. Jura</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">support.swissdec@jura.ch</field>
+		</record>
+		<record id="SO_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">SO</field>
+		    <field name="name">Steuerverwaltung Solothurn TAS</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">anwendungen@aio.so.ch</field>
+		</record>
+		<record id="VD_TaxAtSource" model="res.company.swissdec.vers">
+		    <field name="code">VD</field>
+		    <field name="name">Steuerverwaltung Waadt TAS</field>
+		    <field name="domain">TaxAtSource</field>
+		    <field name="support_email">swissdec@vd.ch</field>
+		</record>
+		<record id="048_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">048.000</field>
+		    <field name="name">AK Aargauer Arbeitgeber</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@ahv-aihk.ch</field>
+		</record>
+		<record id="048_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">048.000</field>
+		    <field name="name">AK Aargauer Arbeitgeber</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@ahv-aihk.ch</field>
+		</record>
+		<record id="103_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">103.000</field>
+		    <field name="name">AK agrapi</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">ak103@agrapi.ch</field>
+		</record>
+		<record id="103_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">103.000</field>
+		    <field name="name">AK agrapi</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">ak103@agrapi.ch</field>
+		</record>
+		<record id="074_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">074.000</field>
+		    <field name="name">AK ALBICOLAC</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@albicolac.ch</field>
+		</record>
+		<record id="074_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">074.000</field>
+		    <field name="name">AK ALBICOLAC</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@albicolac.ch</field>
+		</record>
+		<record id="015_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">015.000</field>
+		    <field name="name">AK Appenzell A.Rh.</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@ahv-iv-ar.ch</field>
+		</record>
+		<record id="015_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">015.000</field>
+		    <field name="name">AK Appenzell A.Rh.</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@ahv-iv-ar.ch</field>
+		</record>
+		<record id="016_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">016.000</field>
+		    <field name="name">AK Appenzell I.Rh.</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@akai.ch</field>
+		</record>
+		<record id="016_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">016.000</field>
+		    <field name="name">AK Appenzell I.Rh.</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@akai.ch</field>
+		</record>
+		<record id="040_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">040.000</field>
+		    <field name="name">AK Arbeitgeber Basel</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">it@ak40.ch</field>
+		</record>
+		<record id="040_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">040.000</field>
+		    <field name="name">AK Arbeitgeber Basel</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">it@ak40.ch</field>
+		</record>
+		<record id="089_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">089.000</field>
+		    <field name="name">AK Banken</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">swissdec@insite.ch</field>
+		</record>
+		<record id="012_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">012.000</field>
+		    <field name="name">AK Basel Stadt</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">ak012vledv@ak-bs.ch</field>
+		</record>
+		<record id="012_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">012.000</field>
+		    <field name="name">AK Basel Stadt</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">ak012vledv@ak-bs.ch</field>
+		</record>
+		<record id="066_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">066.000</field>
+		    <field name="name">AK Baumeister</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">itsupport@baumeister.ch</field>
+		</record>
+		<record id="066_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">066.000</field>
+		    <field name="name">AK Baumeister</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">itsupport@baumeister.ch</field>
+		</record>
+		<record id="063_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">063.000</field>
+		    <field name="name">AK Berner Arbeitgeber</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@akba.ch</field>
+		</record>
+		<record id="063_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">063.000</field>
+		    <field name="name">AK Berner Arbeitgeber</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@akba.ch</field>
+		</record>
+		<record id="087_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">087.000</field>
+		    <field name="name">AK Bündner Gewerbe</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@ak87.ch</field>
+		</record>
+		<record id="087_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">087.000</field>
+		    <field name="name">AK Bündner Gewerbe</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@ak87.ch</field>
+		</record>
+		<record id="106_007_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">106.007</field>
+		    <field name="name">AK Caisse de compensation FER VALAIS SION</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">cc1067@fer-valais-avs.ch</field>
+		</record>
+		<record id="106_007_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">106.007</field>
+		    <field name="name">AK Caisse de compensation FER VALAIS SION</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">cc1067@fer-valais-avs.ch</field>
+		</record>
+		<record id="035_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">035.000</field>
+		    <field name="name">AK scienceindustries </field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">it@ak40.ch</field>
+		</record>
+		<record id="035_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">035.000</field>
+		    <field name="name">AK scienceindustries </field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">it@ak40.ch</field>
+		</record>
+		<record id="113_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">113.000</field>
+		    <field name="name">AK Coiffure und Esthétique</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">it@ak34.ch</field>
+		</record>
+		<record id="113_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">113.000</field>
+		    <field name="name">AK Coiffure und Esthétique</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">it@ak34.ch</field>
+		</record>
+		<record id="114_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">114.000</field>
+		    <field name="name">AK der Wirtschaftskammer Baselland</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">it@ak40.ch</field>
+		</record>
+		<record id="114_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">114.000</field>
+		    <field name="name">AK der Wirtschaftskammer Baselland</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">it@ak40.ch</field>
+		</record>
+		<record id="026_001_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">026.001</field>
+		    <field name="name">AK Eidg. Ausgleichskasse</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">infoeak@zas.admin.ch</field>
+		</record>
+		<record id="026_001_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">026.001</field>
+		    <field name="name">AK Eidg. Ausgleichskasse</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">infoeak@zas.admin.ch</field>
+		</record>
+		<record id="037_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">037.000</field>
+		    <field name="name">AK Elektrizitätswerke</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">gua@akew.ch</field>
+		</record>
+		<record id="037_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">037.000</field>
+		    <field name="name">AK Elektrizitätswerke</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">gua@akew.ch</field>
+		</record>
+		<record id="095_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">095.000</field>
+		    <field name="name">AK Ex Four</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@exfour.ch</field>
+		</record>
+		<record id="095_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">095.000</field>
+		    <field name="name">AK Ex Four</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@exfour.ch</field>
+		</record>
+		<record id="106_001_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">106.001</field>
+		    <field name="name">AK FER CIAM</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">helpdesk@fer-ge.ch</field>
+		</record>
+		<record id="106_001_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">106.001</field>
+		    <field name="name">AK FER CIAM</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">helpdesk@fer-ge.ch</field>
+		</record>
+		<record id="106_002_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">106.002</field>
+		    <field name="name">AK FER CIFA</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">helpdesk@fer-ge.ch</field>
+		</record>
+		<record id="106_002_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">106.002</field>
+		    <field name="name">AK FER CIFA</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">helpdesk@fer-ge.ch</field>
+		</record>
+		<record id="098_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">098.000</field>
+		    <field name="name">AK Gärtner &amp; Floristen</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">helpdesk@ahv-gf.ch</field>
+		</record>
+		<record id="098_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">098.000</field>
+		    <field name="name">AK Gärtner &amp; Floristen</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">helpdesk@ahv-gf.ch</field>
+		</record>
+		<record id="046_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">046.000</field>
+		    <field name="name">AK GastroSocial</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">VLSupport@gastrosocial.ch</field>
+		</record>
+		<record id="046_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">046.000</field>
+		    <field name="name">AK GastroSocial</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">VLSupport@gastrosocial.ch</field>
+		</record>
+		<record id="107_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">107.000</field>
+		    <field name="name">AK Geschäftsinhaber Bern </field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">ak107@imorek.ch</field>
+		</record>
+		<record id="107_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">107.000</field>
+		    <field name="name">AK Geschäftsinhaber Bern </field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">ak107@imorek.ch</field>
+		</record>
+		<record id="112_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">112.000</field>
+		    <field name="name">AK Gewerbe St. Gallen</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">informatik@ahv-ostschweiz.ch</field>
+		</record>
+		<record id="112_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">112.000</field>
+		    <field name="name">AK Gewerbe St. Gallen</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">informatik@ahv-ostschweiz.ch</field>
+		</record>
+		<record id="030_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">030.000</field>
+		    <field name="name">AK IMOREK</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">ak030@imorek.ch</field>
+		</record>
+		<record id="030_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">030.000</field>
+		    <field name="name">AK IMOREK</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">ak030@imorek.ch</field>
+		</record>
+		<record id="003_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">003.000</field>
+		    <field name="name">AK Luzern</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">swissdec@ahvluzern.ch</field>
+		</record>
+		<record id="003_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">003.000</field>
+		    <field name="name">AK Luzern</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">swissdec@ahvluzern.ch</field>
+		</record>
+		<record id="028_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">028.000</field>
+		    <field name="name">AK Medisuisse</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">elm@medisuisse.ch</field>
+		</record>
+		<record id="028_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">028.000</field>
+		    <field name="name">AK Medisuisse</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">elm@medisuisse.ch</field>
+		</record>
+		<record id="034_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">034.000</field>
+		    <field name="name">AK Metzger</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">it@ak34.ch</field>
+		</record>
+		<record id="034_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">034.000</field>
+		    <field name="name">AK Metzger</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">it@ak34.ch</field>
+		</record>
+		<record id="078_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">078.000</field>
+		    <field name="name">AK Milch</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">ahvmilch@imorek.ch</field>
+		</record>
+		<record id="078_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">078.000</field>
+		    <field name="name">AK Milch</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">ahvmilch@imorek.ch</field>
+		</record>
+		<record id="033_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">033.000</field>
+		    <field name="name">AK MOBIL</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@ak-autogewerbe.ch</field>
+		</record>
+		<record id="033_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">033.000</field>
+		    <field name="name">AK MOBIL</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@ak-autogewerbe.ch</field>
+		</record>
+		<record id="007_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">007.000</field>
+		    <field name="name">AK Nidwalden</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">elm@aknw.ch</field>
+		</record>
+		<record id="007_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">007.000</field>
+		    <field name="name">AK Nidwalden</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">elm@aknw.ch</field>
+		</record>
+		<record id="006_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">006.000</field>
+		    <field name="name">AK Obwalden</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@akow.ch</field>
+		</record>
+		<record id="006_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">006.000</field>
+		    <field name="name">AK Obwalden</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@akow.ch</field>
+		</record>
+		<record id="032_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">032.000</field>
+		    <field name="name">AK Ostschweizerischer Handel</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">informatik@ahv-ostschweiz.ch</field>
+		</record>
+		<record id="032_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">032.000</field>
+		    <field name="name">AK Ostschweizerischer Handel</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">informatik@ahv-ostschweiz.ch</field>
+		</record>
+		<record id="038_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">038.000</field>
+		    <field name="name">AK Panvica</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">support@panvica.ch</field>
+		</record>
+		<record id="038_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">038.000</field>
+		    <field name="name">AK Panvica</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">support@panvica.ch</field>
+		</record>
+		<record id="115_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">115.000</field>
+		    <field name="name">AK Privatkliniken</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@akba.ch</field>
+		</record>
+		<record id="115_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">115.000</field>
+		    <field name="name">AK Privatkliniken</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@akba.ch</field>
+		</record>
+		<record id="099_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">099.000</field>
+		    <field name="name">AK PROMEA</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">elm@promea.ch</field>
+		</record>
+		<record id="099_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">099.000</field>
+		    <field name="name">AK PROMEA</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">elm@promea.ch</field>
+		</record>
+		<record id="104_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">104.000</field>
+		    <field name="name">AK Schreiner</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">helpdesk@akschreiner.ch</field>
+		</record>
+		<record id="104_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">104.000</field>
+		    <field name="name">AK Schreiner</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">helpdesk@akschreiner.ch</field>
+		</record>
+		<record id="088_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">088.000</field>
+		    <field name="name">AK Schulesta</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">it@ak34.ch</field>
+		</record>
+		<record id="088_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">088.000</field>
+		    <field name="name">AK Schulesta</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">it@ak34.ch</field>
+		</record>
+		<record id="105_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">105.000</field>
+		    <field name="name">AK Schweiz. Gewerbe</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">support@ak105.ch</field>
+		</record>
+		<record id="105_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">105.000</field>
+		    <field name="name">AK Schweiz. Gewerbe</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">support@ak105.ch</field>
+		</record>
+		<record id="005_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">005.000</field>
+		    <field name="name">AK Schwyz</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">elm@aksz.ch</field>
+		</record>
+		<record id="005_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">005.000</field>
+		    <field name="name">AK Schwyz</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">elm@aksz.ch</field>
+		</record>
+		<record id="011_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">011.000</field>
+		    <field name="name">AK Solothurn</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">elm-info@akso.ch</field>
+		</record>
+		<record id="011_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">011.000</field>
+		    <field name="name">AK Solothurn</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">elm-info@akso.ch</field>
+		</record>
+		<record id="079_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">079.000</field>
+		    <field name="name">AK Spida</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">PartnerWeb@spida.ch</field>
+		</record>
+		<record id="079_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">079.000</field>
+		    <field name="name">AK Spida</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">PartnerWeb@spida.ch</field>
+		</record>
+		<record id="045_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">045.000</field>
+		    <field name="name">AK Spirituosen</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">ak45@imorek.ch</field>
+		</record>
+		<record id="045_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">045.000</field>
+		    <field name="name">AK Spirituosen</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">ak45@imorek.ch</field>
+		</record>
+		<record id="013_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">013.000</field>
+		    <field name="name">AK SVA Basel Land</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">partnerweb@sva-bl.ch</field>
+		</record>
+		<record id="013_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">013.000</field>
+		    <field name="name">AK SVA Basel Land</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">partnerweb@sva-bl.ch</field>
+		</record>
+		<record id="017_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">017.000</field>
+		    <field name="name">AK svasg</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">elm@svasg.ch</field>
+		</record>
+		<record id="017_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">017.000</field>
+		    <field name="name">AK svasg</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">elm@svasg.ch</field>
+		</record>
+		<record id="060_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">060.000</field>
+		    <field name="name">AK Swissmem</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">support@ak60.ch</field>
+		</record>
+		<record id="060_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">060.000</field>
+		    <field name="name">AK Swissmem</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">support@ak60.ch</field>
+		</record>
+		<record id="117_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">117.000</field>
+		    <field name="name">AK Swisstempcomp</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">itsupport@consimo.ch</field>
+		</record>
+		<record id="117_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">117.000</field>
+		    <field name="name">AK Swisstempcomp</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">itsupport@consimo.ch</field>
+		</record>
+		<record id="020_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">020.000</field>
+		    <field name="name">AK Thurgau</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">partnerweb@aai-tg.ch</field>
+		</record>
+		<record id="020_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">020.000</field>
+		    <field name="name">AK Thurgau</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">partnerweb@aai-tg.ch</field>
+		</record>
+		<record id="055_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">055.000</field>
+		    <field name="name">AK Thurgauer Gewerbe</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">IT@ahv55tgv.ch</field>
+		</record>
+		<record id="055_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">055.000</field>
+		    <field name="name">AK Thurgauer Gewerbe</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">IT@ahv55tgv.ch</field>
+		</record>
+		<record id="069_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">069.000</field>
+		    <field name="name">AK Transport</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@ak-autogewerbe.ch</field>
+		</record>
+		<record id="069_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">069.000</field>
+		    <field name="name">AK Transport</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@ak-autogewerbe.ch</field>
+		</record>
+		<record id="004_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">004.000</field>
+		    <field name="name">AK Uri</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@akuri.ch </field>
+		</record>
+		<record id="004_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">004.000</field>
+		    <field name="name">AK Uri</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@akuri.ch </field>
+		</record>
+		<record id="022_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">022.000</field>
+		    <field name="name">AK Vaud</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">SI_HEBERGES@globaz.ch</field>
+		</record>
+		<record id="022_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">022.000</field>
+		    <field name="name">AK Vaud</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">SI_HEBERGES@globaz.ch</field>
+		</record>
+		<record id="043_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">043.000</field>
+		    <field name="name">AK Verom</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">support.ak043@verom.ch</field>
+		</record>
+		<record id="043_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">043.000</field>
+		    <field name="name">AK Verom</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">support.ak043@verom.ch</field>
+		</record>
+		<record id="081_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">081.000</field>
+		    <field name="name">AK Versicherung</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">swissdec@insite.ch</field>
+		</record>
+		<record id="009_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">009.000</field>
+		    <field name="name">AK Zug</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">partnerweb@akzug.ch</field>
+		</record>
+		<record id="009_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">009.000</field>
+		    <field name="name">AK Zug</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">partnerweb@akzug.ch</field>
+		</record>
+		<record id="065_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">065.000</field>
+		    <field name="name">AK Zürcher Arbeitgeber</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">support.pw@aza.ch</field>
+		</record>
+		<record id="065_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">065.000</field>
+		    <field name="name">AK Zürcher Arbeitgeber</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">support.pw@aza.ch</field>
+		</record>
+		<record id="110_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">110.000</field>
+		    <field name="name">Caisse AVS de la Fédération patronale vaudoise</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">SI_HEBERGES@globaz.ch</field>
+		</record>
+		<record id="110_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">110.000</field>
+		    <field name="name">Caisse AVS de la Fédération patronale vaudoise</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">SI_HEBERGES@globaz.ch</field>
+		</record>
+		<record id="010_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">010.000</field>
+		    <field name="name">Caisse AVS Fribourg</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">partnerweb@fr.ch</field>
+		</record>
+		<record id="010_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">010.000</field>
+		    <field name="name">Caisse AVS Fribourg</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">partnerweb@fr.ch</field>
+		</record>
+		<record id="021_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">021.000</field>
+		    <field name="name">Cassa cantonale di compensazione AVS</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">partnerweb@ias.ti.ch</field>
+		</record>
+		<record id="021_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">021.000</field>
+		    <field name="name">Cassa cantonale di compensazione AVS</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">partnerweb@ias.ti.ch</field>
+		</record>
+		<record id="071_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">071.000</field>
+		    <field name="name">Handel Schweiz</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">info@AK71.ch   </field>
+		</record>
+		<record id="071_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">071.000</field>
+		    <field name="name">Handel Schweiz</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">info@AK71.ch   </field>
+		</record>
+		<record id="008_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">008.000</field>
+		    <field name="name">Sozialversicherungen Glarus</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">elm@svgl.ch</field>
+		</record>
+		<record id="008_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">008.000</field>
+		    <field name="name">Sozialversicherungen Glarus</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">elm@svgl.ch</field>
+		</record>
+		<record id="019_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">019.000</field>
+		    <field name="name">SVA Aargau</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">partnerweb@sva-ag.ch</field>
+		</record>
+		<record id="019_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">019.000</field>
+		    <field name="name">SVA Aargau</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">partnerweb@sva-ag.ch</field>
+		</record>
+		<record id="018_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">018.000</field>
+		    <field name="name">SVA Graubünden</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">partnerweb@sva.gr.ch</field>
+		</record>
+		<record id="018_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">018.000</field>
+		    <field name="name">SVA Graubünden</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">partnerweb@sva.gr.ch</field>
+		</record>
+		<record id="014_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">014.000</field>
+		    <field name="name">SVA Schaffhausen</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">support-partnerweb@svash.ch</field>
+		</record>
+		<record id="014_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">014.000</field>
+		    <field name="name">SVA Schaffhausen</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">support-partnerweb@svash.ch</field>
+		</record>
+		<record id="001_000_AHV-AVS" model="res.company.swissdec.vers">
+		    <field name="code">001.000</field>
+		    <field name="name">SVA Zürich</field>
+		    <field name="domain">AHV-AVS</field>
+		    <field name="support_email">support-partnerweb@svazurich.ch</field>
+		</record>
+		<record id="001_000_FAK-CAF" model="res.company.swissdec.vers">
+		    <field name="code">001.000</field>
+		    <field name="name">SVA Zürich</field>
+		    <field name="domain">FAK-CAF</field>
+		    <field name="support_email">support-partnerweb@svazurich.ch</field>
+		</record>
+
+    </data>
+</openerp>

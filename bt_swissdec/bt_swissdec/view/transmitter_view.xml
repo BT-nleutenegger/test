@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- ========Form, Tree and Search views for Swissdec Operations -->
+		<record id="transmitter_tree" model="ir.ui.view">
+			<field name="name">transmitter_tree</field>
+			<field name="model">bt_swissdec.transmitter</field>
+			<field name="arch" type="xml">
+				<tree string="SwissDec Operation">
+					<field name="name" />
+					<field name="state" />
+					<field name="working_offline" />
+					<field name="test_case" />
+					<field name="automatic_create_using_test" groups="bt_swissdec.bt_swissdec_admin" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="transmitter_form" model="ir.ui.view">
+			<field name="name">transmitter_form</field>
+			<field name="model">bt_swissdec.transmitter</field>
+			<field name="arch" type="xml">
+				<form string="SwissDec Operation">
+					<header>
+						<button string="Ping" name="activity_ping" states="draft,ping,ping_error"
+							type="object" class="oe_highlight" />
+						<button string="Check Interoperability" name="button_do_interoperability"
+							states="draft,interoperability,interoperability_error" type="object"
+							class="oe_highlight" />
+						<button string="Declare Salary" name="button_declare_salary"
+							states="draft,prepare_declare_salary,declare_salary,get_status_from_declare_salary,declare_salary_error,get_status_from_declare_salary_error"
+							type="object" class="oe_highlight" />
+
+
+						<button string="Synchronize Contract" name="button_synchronize_contract"
+							states="draft,prepare_synchronize_contract,synchronize_contract,get_status_from_synchronize_contract,synchronize_contract_error,get_status_from_synchronize_contract_error"
+							type="object" class="oe_highlight" />
+
+					</header>
+					<sheet>
+
+						<button string="Get status Declare Salary"
+							states="declare_salary,get_status_from_declare_salary,get_status_from_declare_salary_error" name="activitiy_get_status_from_declare_salary"
+							type="object" class="oe_highlight" />
+
+						<button string="Get status Synchronize Contract"
+							states="synchronize_contract,get_status_from_synchronize_contract,get_status_from_synchronize_contract_error"
+							name="button_get_status_from_synchronize_contract" type="object" class="oe_highlight" />
+
+						<group attrs="{'invisible': [('validity_plausibility_checking','=', False)]}">
+							<field name="validity_plausibility_checking" invisible="1"/>
+							<h1>Validity Plausibility Checking. Try again in few minutes...</h1>
+						</group>
+						<group colspan="4" col="4">
+
+							<field name="name" />
+							<field name="comment_for_all_institutions"
+								attrs="{'readonly': [('state', 'in', ['generate_pdf', 'incorrect', 'done'])],}" />
+							<field name="working_offline" />
+							<field name="test_case" />
+							<field name="state" readonly="1" />
+							<field name="transmitter_configuration_id" required="1"
+								attrs="{'readonly':[('state', 'not in', ['draft'])]}" />
+							<field name="prop_job_key"
+								attrs="{'invisible':[('state', 'in', ['draft', 'ping', 'ping_error', 'interoperability', 'interoperability_error', 'prepare_declare_salary' ])]}" />
+
+							<field name="prop_responseid"
+								attrs="{'invisible':[('state', 'in', ['draft', 'ping', 'ping_error', 'interoperability', 'interoperability_error', 'prepare_declare_salary' ])]}" />
+							<field name="prop_requestid"
+								attrs="{'invisible':[('state', 'in', ['draft', 'ping', 'ping_error', 'interoperability', 'interoperability_error', 'prepare_declare_salary' ])]}" />
+							<field name="prop_declarationid"
+								attrs="{'invisible':[('state', 'in', ['draft', 'ping', 'ping_error', 'interoperability', 'interoperability_error', 'prepare_declare_salary' ])]}" />
+							<field name="last_mail_id"
+								attrs="{'invisible':[('state', 'in', ['draft', 'ping', 'ping_error', 'interoperability', 'interoperability_error', 'prepare_declare_salary' ])]}" />
+						</group>
+
+
+
+						<notebook colspan="4">
+
+							<page string="Interoperability" states="interoperability,interoperability_error">
+								<group colspan="4">
+									<field name="first_operand" readonly="1" />
+									<field name="second_operand" />
+									<field name="umlaut_string" readonly="1" />
+
+									<separator string="Interoperability Results" colspan="4" />
+									<field name="interoperability_umlautStringIsCorrect" />
+									<field name="interoperability_firstOperandIsCorrect" />
+									<field name="interoperability_umlautString" />
+									<field name="interoperability_additionResult" />
+									<field name="interoperability_substractionResult" />
+									<field name="interoperability_systemDateTime" />
+								</group>
+							</page>
+							<page string="Get Status"
+								attrs="{'invisible':[('state', 'not in', ['get_status_from_declare_salary', 'get_status_from_synchronize_contract'])]}">
+								<group colspan="4">
+									<field name="transmitter_get_status_ids" readonly="1"
+										options="{'reload_on_button': True}" nolabel="1" />
+								</group>
+							</page>
+
+							<page string="Error" groups="bt_swissdec.bt_swissdec_admin" >
+								<group name="group_errors" colspan="4" >
+									<field name="error_enable_signature" />
+									<field name="error_tamper_signature" />
+									<field name="error_token" />
+									<field name="error_message" />
+									<field name="error_verification_signature" />
+								</group>
+							</page>
+							<page string="Notifications" attrs="{'invisible': [('has_notifications_ids','=', False)]}">
+								<group colspan="4">
+									<field name="has_notifications_ids" invisible="1" />
+									<field name="notifications_ids"  nolabel="1" />
+								</group>
+							</page>
+							<page string="Setup"
+								attrs="{'invisible':[('state', 'in', ['draft', 'ping', 'ping_error', 'interoperability', 'interoperability_error' ])]}">
+								<group colspan="4" col="6">
+									<field name="initial_xml"
+										attrs="{'required':[('state', 'not in', ['draft', 'ping', 'ping_error', 'interoperability', 'interoperability_error'])],
+												'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="xml_data" filename="xml_name"
+										attrs="{'required':[('initial_xml', '=', 'use_my_xml')],
+															 'readonly':['|', ('initial_xml', '!=', 'use_my_xml'), ('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="xml_name" invisible="1" />
+
+									<field name="report_id" options='{"no_open": True, "no_create": True}'
+										attrs="{'required':[('initial_xml', '=', 'from_report')],
+													'invisible':[('initial_xml', '!=', 'from_report')],
+													'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]
+													}" />
+
+									<field name="year_id" options='{"no_open": True, "no_create": True}'
+										attrs="{'required':[('initial_xml', '=', 'company_year')],
+													'invisible':[('initial_xml', '!=', 'company_year')],
+													'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="bvg_basis_id" options='{"no_open": True, "no_create": True}'
+										attrs="{'invisible':[('initial_xml', '!=', 'from_bvg')],
+													'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+								</group>
+
+								<group colspan="4" col="2">
+
+									<button icon="fa-check-square-o" string="All"
+										states="generate_pdf" name="change_flag_all" type="object" />
+									<button icon="fa-square-o" string="Disable" states="generate_pdf"
+										name="change_flag_none" type="object" />
+
+
+									<field name="option_ahv_avs"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+
+									<field name="option_cantonal_tax_administration"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="option_fak_caf"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="option_fak_report_with_detail"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="option_ktg_amc"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="option_uvg_laa"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="option_uvgz_laac"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+
+									<field name="option_qst"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="qst_month"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="option_bvg_lpp"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="option_sync_contract"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="option_swiss_federal_statistical_office"
+										attrs="{'readonly':[('state', 'not in', ['prepare_declare_salary', 'prepare_synchronize_contract'])]}" />
+									<field name="option_get_send_corrections"
+										attrs="{'readonly':[('state', 'not in', [ 'declare_salary', 'synchronize_contract'])]}" />
+								</group>
+
+								<separator string="Variables to make the XML" colspan="4" />
+								<field name="employee_ids" colspan="4"
+									attrs="{'invisible':[('initial_xml', '!=', 'company_year')]}" />
+
+								<group string="Institutions"
+									attrs="{'invisible':[('state', 'in', ['draft', 'ping','ping_error', 'interoperability', 'interoperability_error'])]}"
+									colspan="4" name="group_institutions">
+									<field name="transmitter_institution_ids" />
+								</group>
+
+							</page>
+
+						</notebook>
+						<group colspan="4" attrs="{'invisible':[('state', 'in', ['draft'])]}">
+							<field name="execution_ids" colspan="4" readonly="1" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</openerp>
+

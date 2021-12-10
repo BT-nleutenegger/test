@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns3:GetResultFromDeclareSalaryResponse
+        xmlns:ns3="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationServiceTypes"
+        xmlns="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationContainer"
+        xmlns:ns2="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclaration"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!-- state of standardisation: DRAFT
+                Lohnstandard-CH V4.0 Ausgabe 20130514
+                Referenzdaten AVH 2013-07-01 
+                business-view  = OK 
+                technical-view =
+                
+                **************************************************************************************
+                Lohnmeldung(Declare) mit Einzelmeldung(Single) AHV Antwort (Result)
+                **************************************************************************************
+            -->
+    <ResponseContext>
+        <UserAgent>
+            <Producer>swissdec</Producer>
+            <Name>swissdec distributor</Name>
+            <Version>Draft</Version>
+            <Certificate>swissdec</Certificate>
+            <ELM-SalaryStandardVersion>4.0</ELM-SalaryStandardVersion>
+        </UserAgent>
+        <InstitutionName>swissdec</InstitutionName>
+        <TransmissionDate>2014-01-27T15:27:14.060+02:00</TransmissionDate>
+        <DeclarationID>12a6ba03a7e3ca</DeclarationID>
+        <ResponseID>12a6ba200d63da</ResponseID>
+        <RequestID>B1A45FB90BE91F875209</RequestID>
+    </ResponseContext>
+    <SalaryResult>
+        <AHV-AVS xsi:type="AHV-AVS-ReducedSalaryResultType">
+            <Info>
+                <Notification>
+                    <QualityLevel>Acceptance</QualityLevel>
+                    <DescriptionCode>3204</DescriptionCode>
+                    <Description>Resultat mit Personen aus einer Einzelmeldung</Description>
+                </Notification>
+            </Info>
+            <Success>
+                <AddresseeContext>
+                    <UserAgent>
+                        <Producer>swissdec</Producer>
+                        <Name>Roncaglioni</Name>
+                        <Version>Draft</Version>
+                        <Certificate>none</Certificate>
+                        <ELM-SalaryStandardVersion>4.0</ELM-SalaryStandardVersion>
+                    </UserAgent>
+                    <InstitutionName>Ausgleichskasse</InstitutionName>
+                    <TransmissionDate>2014-01-27T15:27:13.901+02:00</TransmissionDate>
+                    <ResponseID>R12a6ba202ed366</ResponseID>
+                    <RequestID>B1A45FB90BE91F875209</RequestID>
+                </AddresseeContext>
+                <Institution>
+                    <ns2:AK-CC-BranchNumber>003.000</ns2:AK-CC-BranchNumber>
+                    <ns2:AK-CC-CustomerNumber>100-9976.9</ns2:AK-CC-CustomerNumber>
+                </Institution>
+                <ChangesConsideredUpTo>2013-12-31</ChangesConsideredUpTo>
+                <Staff>
+                    <ns2:Person>
+                        <ns2:Process>reject</ns2:Process>
+                        <ns2:DeclarationCategory>
+                            <ns2:Entry>
+                                <ns2:ValidAsOf>2014-01-01</ns2:ValidAsOf>
+                            </ns2:Entry>
+                        </ns2:DeclarationCategory>
+                        <ns2:Social-InsuranceIdentification>
+                            <ns2:SV-AS-Number>756.3426.3448.04</ns2:SV-AS-Number>
+                        </ns2:Social-InsuranceIdentification>
+                        <ns2:EmployeeNumber>1</ns2:EmployeeNumber>
+                        <ns2:Lastname>Bosshard</ns2:Lastname>
+                        <ns2:Firstname>Peter</ns2:Firstname>
+                        <ns2:Sex>M</ns2:Sex>
+                        <ns2:Nationality>CH</ns2:Nationality>
+                        <ns2:DateOfBirth>1969-04-11</ns2:DateOfBirth>
+                        <ns2:ProofOfInsurance>
+                            <ns2:Link>
+                                <ns2:row>www.ahv-iv.info</ns2:row>
+                                <ns2:row>www.avs-ai.info</ns2:row>
+                            </ns2:Link>
+                            <ns2:CompensationOffice>
+                                <ns2:row>Schweizerische Ausgleichskasse</ns2:row>
+                                <ns2:row>Avenue Edmond-Vaucher 18</ns2:row>
+                                <ns2:row>Case postale 3100</ns2:row>
+                                <ns2:row>1211 Genève 2</ns2:row>
+                                <ns2:row>Telefon 022 795 91 11</ns2:row>
+                                <ns2:row>Fax 022 795 97 05</ns2:row>
+                                <ns2:row>cc27@zas.admin.ch</ns2:row>
+                                <ns2:row>www.caisse-suisse.ch</ns2:row>
+                            </ns2:CompensationOffice>
+                            <ns2:Company>
+                                <ns2:row>Muster AG</ns2:row>
+                                <ns2:row>z.H. Herr Peter Muster</ns2:row>
+                                <ns2:row>Bahnhofstrasse 1</ns2:row>
+                                <ns2:row>6002 Luzern</ns2:row>
+                            </ns2:Company>
+                            <ns2:Date>03. Januar 2014</ns2:Date>
+                            <ns2:Subject>Versicherungsnachweis der AHV</ns2:Subject>
+                            <ns2:StartingSalutation>
+                                Sehr geehrte Damen und Herren
+                            </ns2:StartingSalutation>
+                            <ns2:Text>
+                                <ns2:row>Dieser Versicherungsnachweis belegt, dass folgende Personen ordnungsgemäss bei
+                                    unserer
+                                </ns2:row>
+                                <ns2:row>AHV-Ausgleichskasse angemeldet ist:</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Name: Bosshard</ns2:row>
+                                <ns2:row>Vorname: Peter</ns2:row>
+                                <ns2:row>Geburtsdatum: 11.4.1969</ns2:row>
+                                <ns2:row>Versichertennummer: 756.3426.3448.04</ns2:row>
+                                <ns2:row>Datum Stellenantritt bzw. Beginn Beitragspflicht: 01.01.2000</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Arbeitgeber/Mitglied unserer Ausgleichskasse:</ns2:row>
+                                <ns2:row>Muster AG, Bahnhofstrasse 1, 6002 Luzern</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Abrechnungsnummer: 100-9976.9</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Bitte leiten Sie diesen Nachweis Ihrer Mitarbeiterin / Ihrem Mitarbeiter
+                                    weiter.
+                                </ns2:row>
+                                <ns2:row>Vielen Dank!</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Bei Rückfragen sind wir gerne für Sie da</ns2:row>
+                            </ns2:Text>
+                            <ns2:EndingSalutation>
+                                <ns2:row>Mit freundlichen Grüssen</ns2:row>
+                                <ns2:row>Schweizerische Ausgleichskasse</ns2:row>
+                                <ns2:row/>
+                                <ns2:row/>
+                                <ns2:row>Petra Hauser</ns2:row>
+                            </ns2:EndingSalutation>
+                        </ns2:ProofOfInsurance>
+
+                    </ns2:Person>
+                    <ns2:Person>
+                        <ns2:Process>finished</ns2:Process>
+                        <ns2:DeclarationCategory>
+                            <ns2:Withdrawal>
+                                <ns2:ValidAsOf>2014-01-08</ns2:ValidAsOf>
+                            </ns2:Withdrawal>
+                        </ns2:DeclarationCategory>
+                        <ns2:Social-InsuranceIdentification>
+                            <ns2:SV-AS-Number>756.3431.9824.73</ns2:SV-AS-Number>
+                        </ns2:Social-InsuranceIdentification>
+                        <ns2:EmployeeNumber>3</ns2:EmployeeNumber>
+                        <ns2:Lastname>Casanova</ns2:Lastname>
+                        <ns2:Firstname>Renato</ns2:Firstname>
+                        <ns2:Sex>M</ns2:Sex>
+                        <ns2:Nationality>CH</ns2:Nationality>
+                        <ns2:DateOfBirth>1995-01-01</ns2:DateOfBirth>
+                        <ns2:ProofOfInsurance>
+                            <ns2:Link>
+                                <ns2:row>www.ahv-iv.info</ns2:row>
+                                <ns2:row>www.avs-ai.info</ns2:row>
+                            </ns2:Link>
+                            <ns2:CompensationOffice>
+                                <ns2:row>Caisse de compensation suisse</ns2:row>
+                                <ns2:row>Avenue Edmond-Vaucher 18</ns2:row>
+                                <ns2:row>Case postale 3100</ns2:row>
+                                <ns2:row>1211 Genève 2</ns2:row>
+                                <ns2:row>Téléphone 022 795 91 11</ns2:row>
+                                <ns2:row>Fax 022 795 97 05</ns2:row>
+                                <ns2:row>cc27@zas.admin.ch</ns2:row>
+                                <ns2:row>www.caisse-suisse.ch</ns2:row>
+                            </ns2:CompensationOffice>
+                            <ns2:Company>
+                                <ns2:row>Muster AG</ns2:row>
+                                <ns2:row>M. Peter Muster</ns2:row>
+                                <ns2:row>Bahnhofstrasse 1</ns2:row>
+                                <ns2:row>6002 Luzern</ns2:row>
+                            </ns2:Company>
+                            <ns2:Date>03. janvier 2014</ns2:Date>
+                            <ns2:Subject>Certificat d'assurance AVS</ns2:Subject>
+                            <ns2:StartingSalutation>
+                                Mesdames, Messieurs,
+                            </ns2:StartingSalutation>
+                            <ns2:Text>
+                                <ns2:row>Ce certificat d'assurance fait preuve que les personnes suivants sont régulièrement inscrit
+                                </ns2:row>
+                                <ns2:row>à notre caisse de compensation AVS:</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Nom: Casanova</ns2:row>
+                                <ns2:row>Prénom: Renato</ns2:row>
+                                <ns2:row>Né: 01.01.1995</ns2:row>
+                                <ns2:row>Numéro d'assurance: 756.3431.9824.73</ns2:row>
+                                <ns2:row>Date de début resp. d'assujettissement à la cotisation: 01.05.2012</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Employeur/membre de notre caisse de compensation:</ns2:row>
+                                <ns2:row>Muster AG, Bahnhofstrasse 1, 6002 Luzern</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Numéro de décompte: 100-9976.9</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Acheminez ce certificat à votre collaboratrice/collaborateur, s.v.p.</ns2:row>
+                                <ns2:row>Merci!</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Nous sommes à votre disposition pour des demandes de précisions.</ns2:row>
+                            </ns2:Text>
+                            <ns2:EndingSalutation>
+                                <ns2:row>Meilleures salutations</ns2:row>
+                                <ns2:row>Caisse de compensation suisse</ns2:row>
+                                <ns2:row/>
+                                <ns2:row/>
+                                <ns2:row>Petra Hauser</ns2:row>
+                            </ns2:EndingSalutation>
+                        </ns2:ProofOfInsurance>
+                    </ns2:Person>
+                    <ns2:Person>
+                        <ns2:Process>finished</ns2:Process>
+                        <ns2:DeclarationCategory>
+                            <ns2:Entry>
+                                <ns2:ValidAsOf>2014-01-03</ns2:ValidAsOf>
+                            </ns2:Entry>
+                        </ns2:DeclarationCategory>
+                        <ns2:Social-InsuranceIdentification>
+                            <ns2:SV-AS-Number>756.6328.7099.17</ns2:SV-AS-Number>
+                        </ns2:Social-InsuranceIdentification>
+                        <ns2:EmployeeNumber>5</ns2:EmployeeNumber>
+                        <ns2:Lastname>Duss</ns2:Lastname>
+                        <ns2:Firstname>Regula</ns2:Firstname>
+                        <ns2:Sex>F</ns2:Sex>
+                        <ns2:Nationality>CH</ns2:Nationality>
+                        <ns2:DateOfBirth>1976-12-11</ns2:DateOfBirth>
+                        <ns2:ProofOfInsurance>
+                            <ns2:Link>
+                                <ns2:row>www.ahv-iv.info</ns2:row>
+                                <ns2:row>www.avs-ai.info</ns2:row>
+                            </ns2:Link>
+                            <ns2:CompensationOffice>
+                                <ns2:row>Schweizerische Ausgleichskasse</ns2:row>
+                                <ns2:row>Avenue Edmond-Vaucher 18</ns2:row>
+                                <ns2:row>Case postale 3100</ns2:row>
+                                <ns2:row>1211 Genève 2</ns2:row>
+                                <ns2:row>Telefon 022 795 91 11</ns2:row>
+                                <ns2:row>Fax 022 795 97 05</ns2:row>
+                                <ns2:row>cc27@zas.admin.ch</ns2:row>
+                                <ns2:row>www.caisse-suisse.ch</ns2:row>
+                            </ns2:CompensationOffice>
+                            <ns2:Company>
+                                <ns2:row>Muster AG</ns2:row>
+                                <ns2:row>z.H. Herr Peter Muster</ns2:row>
+                                <ns2:row>Bahnhofstrasse 1</ns2:row>
+                                <ns2:row>6002 Luzern</ns2:row>
+                            </ns2:Company>
+                            <ns2:Date>03. Januar 2014</ns2:Date>
+                            <ns2:Subject>Versicherungsnachweis der AHV</ns2:Subject>
+                            <ns2:StartingSalutation>
+                                Sehr geehrte Damen und Herren
+                            </ns2:StartingSalutation>
+                            <ns2:Text>
+                                <ns2:row>Dieser Versicherungsnachweis belegt, dass folgende Personen ordnungsgemäss bei
+                                    unserer
+                                </ns2:row>
+                                <ns2:row>AHV-Ausgleichskasse angemeldet ist:</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Name: Duss</ns2:row>
+                                <ns2:row>Vorname: Regula</ns2:row>
+                                <ns2:row>Geburtsdatum: 11.12.1976</ns2:row>
+                                <ns2:row>Versichertennummer: 756.6328.7099.17</ns2:row>
+                                <ns2:row>Datum Stellenantritt bzw. Beginn Beitragspflicht: 03.01.2014</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Arbeitgeber/Mitglied unserer Ausgleichskasse:</ns2:row>
+                                <ns2:row>Muster AG, Bahnhofstrasse 1, 6002 Luzern</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Abrechnungsnummer: 100-9976.9</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Bitte leiten Sie diesen Nachweis Ihrer Mitarbeiterin / Ihrem Mitarbeiter
+                                    weiter.
+                                </ns2:row>
+                                <ns2:row>Vielen Dank!</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Bei Rückfragen sind wir gerne für Sie da</ns2:row>
+                            </ns2:Text>
+                            <ns2:EndingSalutation>
+                                <ns2:row>Mit freundlichen Grüssen</ns2:row>
+                                <ns2:row>Schweizerische Ausgleichskasse</ns2:row>
+                                <ns2:row/>
+                                <ns2:row/>
+                                <ns2:row>Petra Hauser</ns2:row>
+                            </ns2:EndingSalutation>
+                        </ns2:ProofOfInsurance>
+                    </ns2:Person>
+                    <ns2:Person>
+                        <ns2:Process>manual</ns2:Process>
+                        <ns2:DeclarationCategory>
+                            <ns2:Entry>
+                                <ns2:ValidAsOf>2014-01-01</ns2:ValidAsOf>
+                            </ns2:Entry>
+                        </ns2:DeclarationCategory>
+                        <ns2:Social-InsuranceIdentification>
+                            <ns2:unknown/>
+                        </ns2:Social-InsuranceIdentification>
+                        <ns2:EmployeeNumber>36</ns2:EmployeeNumber>
+                        <ns2:Lastname>Reichen</ns2:Lastname>
+                        <ns2:Firstname>Peter</ns2:Firstname>
+                        <ns2:Sex>M</ns2:Sex>
+                        <ns2:Nationality>CH</ns2:Nationality>
+                        <ns2:DateOfBirth>1991-01-07</ns2:DateOfBirth>
+                        <ns2:ProofOfInsurance>
+                            <ns2:Link>
+                                <ns2:row>www.ahv-iv.info</ns2:row>
+                                <ns2:row>www.avs-ai.info</ns2:row>
+                            </ns2:Link>
+                            <ns2:CompensationOffice>
+                                <ns2:row>Schweizerische Ausgleichskasse</ns2:row>
+                                <ns2:row>Avenue Edmond-Vaucher 18</ns2:row>
+                                <ns2:row>Case postale 3100</ns2:row>
+                                <ns2:row>1211 Genève 2</ns2:row>
+                                <ns2:row>Telefon 022 795 91 11</ns2:row>
+                                <ns2:row>Fax 022 795 97 05</ns2:row>
+                                <ns2:row>cc27@zas.admin.ch</ns2:row>
+                                <ns2:row>www.caisse-suisse.ch</ns2:row>
+                            </ns2:CompensationOffice>
+                            <ns2:Company>
+                                <ns2:row>Muster AG</ns2:row>
+                                <ns2:row>z.H. Herr Peter Muster</ns2:row>
+                                <ns2:row>Bahnhofstrasse 1</ns2:row>
+                                <ns2:row>6002 Luzern</ns2:row>
+                            </ns2:Company>
+                            <ns2:Date>03. Januar 2014</ns2:Date>
+                            <ns2:Subject>Versicherungsnachweis der AHV</ns2:Subject>
+                            <ns2:StartingSalutation>
+                                Sehr geehrte Damen und Herren
+                            </ns2:StartingSalutation>
+                            <ns2:Text>
+                                <ns2:row>Dieser Versicherungsnachweis belegt, dass folgende Personen ordnungsgemäss bei
+                                    unserer
+                                </ns2:row>
+                                <ns2:row>AHV-Ausgleichskasse angemeldet ist:</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Name: Reichen</ns2:row>
+                                <ns2:row>Vorname: Peter</ns2:row>
+                                <ns2:row>Geburtsdatum: 07.01.1991</ns2:row>
+                                <ns2:row>Versichertennummer: unbekannt</ns2:row>
+                                <ns2:row>Datum Stellenantritt bzw. Beginn Beitragspflicht: 01.12.2013</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Arbeitgeber/Mitglied unserer Ausgleichskasse:</ns2:row>
+                                <ns2:row>Muster AG, Bahnhofstrasse 1, 6002 Luzern</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Abrechnungsnummer: 100-9976.9</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Bitte leiten Sie diesen Nachweis Ihrer Mitarbeiterin / Ihrem Mitarbeiter
+                                    weiter.
+                                </ns2:row>
+                                <ns2:row>Vielen Dank!</ns2:row>
+                                <ns2:row/>
+                                <ns2:row>Bei Rückfragen sind wir gerne für Sie da</ns2:row>
+                            </ns2:Text>
+                            <ns2:EndingSalutation>
+                                <ns2:row>Mit freundlichen Grüssen</ns2:row>
+                                <ns2:row>Schweizerische Ausgleichskasse</ns2:row>
+                                <ns2:row/>
+                                <ns2:row/>
+                                <ns2:row>Peter Hauser</ns2:row>
+                            </ns2:EndingSalutation>
+                        </ns2:ProofOfInsurance>
+                        <ns2:Info>
+                            <ns2:Notification>
+                                <ns2:QualityLevel>Acceptance</ns2:QualityLevel>
+                                <ns2:DescriptionCode>9999</ns2:DescriptionCode>
+                                <ns2:Description>
+                                    Der Versicherungsnachweis wird Ihnen auf dem Postweg zugestellt.
+                                </ns2:Description>
+                            </ns2:Notification>
+                        </ns2:Info>
+                    </ns2:Person>
+                </Staff>
+                <Summary>
+                    <ns2:NumberOf-Person-Tags>4</ns2:NumberOf-Person-Tags>
+                </Summary>
+            </Success>
+        </AHV-AVS>
+    </SalaryResult>
+</ns3:GetResultFromDeclareSalaryResponse>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- ========== Calculation paramter QST ========== -->
+
+        <record id="view_hr_allowance_calculationparameter_qst_form"
+                model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.qst.form</field>
+            <field name="model">hr.employee.calculationparameter.qst</field>
+            <field name="arch" type="xml">
+                <form string="QST / Arbeitsort / Adresse / Aufenthaltsbewilligung" delete="0" create="0">
+                    <header>
+                        <field name="state" readonly="1" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_right oe_button_box" style="text-align:left"
+							name="buttons">
+							<button class="oe_inline oe_stat_button" type="action" string="Show History"
+								name="%(action_qst_history_recapitulation_per_month)d" help="Show History"
+								icon="fa-cube">
+							</button>
+                            <button class="oe_inline oe_stat_button" type="action" string="Show History (TEST)"
+								name="%(action_qst_history_recapitulation_per_month_test)d" help="Show History (TEST)"
+								icon="fa-cube">
+							</button>
+						</div>
+
+                        <group col="4" colspan="4">
+                            <span style="color:red;font-weight:bold" invisible="not context.get('modified_entry_set_readonly_qst_ids')">
+                                <field name="show_warning_qst_entry_edited"/>
+                            </span>
+                            <group colspan="4" col="4">
+                                <newline/>
+                                <field name="do_modification"
+                                   attrs="{'invisible':['|', ('state','=','closed'), ('set_readonly','=',False)]}"/>
+                                <newline/>
+                                <field name="valid_from" readonly="1"/>
+                                <newline/>
+                                <field name="address_home_id" colspan="4"
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)], 'invisible':[('valid_from','=',False)]}"
+                                       context="{'set_salary_relevant': True, 'show_address': 1, 'show_address_m2o': 1, 'valid_from': valid_from, 'set_readonly': set_readonly, 'default_type': 'other', 'active_id': id, 'tree_view_ref': 'bt_swissdec.view_partner_tree_ext'}"
+                                       options="{'always_reload': True, 'no_quick_create': True}"
+                                       domain="[('salary_relevant','=',True), ('valid_from_related_emp_id', '=', False), '|', ('active', '=', False), ('active', '=', True)]"/>
+                                <newline/>
+                                <field name="nationality_country_id" options='{"no_open": True, "no_create": True}'
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)], 'invisible':[('valid_from','=',False)]}"/>
+                                <field name="residence_category" options='{"no_open": True, "no_create": True}'
+                                       domain="[('swiss_payroll_is_switzerland','=',country_id_swiss_payroll_is_switzerland)]"
+                                       attrs="{'invisible':['|',('nationality_country_id','=',False), ('valid_from','=',False)],
+                                        'readonly':[('set_readonly','!=',False),('do_modification','=',False)],
+                                        'required':[('nationality_country_id','!=',False)]}"/>
+                                <newline/>
+                                <field name="marital_code"
+                                       options='{"no_open": True, "no_create": True}'
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)], 'invisible':[('valid_from','=',False)]}"/>
+                                <field name="marital_validasof" colspan="2"
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)], 'invisible':[('valid_from','=',False)]}"/>
+                            </group>
+                            <group string="Beschäftigung" colspan="4" col="4"
+                                   attrs="{'invisible':[('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}">
+                                <field name="bur_id" options='{"no_open": True, "no_create": True}'
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)], 'invisible':[('valid_from','=',False)]}"/>
+                                <newline/>
+                                <field name="degree"
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)], 'invisible':[('valid_from','=',False)]}"/>
+                                <field name="unsteady_working_hourslessons"
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)], 'invisible':[('valid_from','=',False)]}"/>
+                                <newline/>
+                                <div colspan="4">
+                                    <p class="oe_grey"><strong>INFO</strong>: Der <strong><em>Beschäftigungsgrad in %</em></strong> hat keine Auswirkungen auf den Lohn. Die Angabe ist rein deklaratorisch und wird für die Meldung an das Bundesamt für Statistik verwendet. Wird das Flag beim Feld <strong>
+      <em>Unregelmässig gearbeitete Stunden/Lektionen</em></strong> gesetzt, kann beim Beschäftigungsgrad auch der Wert 0 eingegeben werden.</p>
+                                </div>
+                                <newline/>
+                                <field name="weeklyhours_or_lessons"
+                                       attrs="{'invisible':['|',('parent_weeklyhours_or_lessons_company','!=','has_weeklyhoursandlessons'),('valid_from','=',False)],
+										'required':[('parent_weeklyhours_or_lessons_company','=','has_weeklyhoursandlessons')],
+										'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="weeklyhours_e"
+                                       attrs="{'invisible':['|','|',('weeklyhours_or_lessons','=','has_weeklylessons'),('parent_weeklyhours_or_lessons_company','=','has_weeklylessons'),('valid_from','=',False)]}"/>
+                                <field name="weeklyhours_besch"
+                                       attrs="{'invisible':['|','|',('weeklyhours_or_lessons','=','has_weeklylessons'),('parent_weeklyhours_or_lessons_company','=','has_weeklylessons'),('valid_from','=',False)]}"/>
+                                <newline/>
+                                <field name="weeklylessons_e"
+                                       attrs="{'invisible':['|','|',('weeklyhours_or_lessons','=','has_weeklyhours'),('parent_weeklyhours_or_lessons_company','=','has_weeklyhours'),('valid_from','=',False)]}"/>
+                                <field name="weeklylessons_besch"
+                                       attrs="{'invisible':['|','|',('weeklyhours_or_lessons','=','has_weeklyhours'),('parent_weeklyhours_or_lessons_company','=','has_weeklyhours'),('valid_from','=',False)]}"/>
+                                <field name="sent_in_xml_qst_code" invisible="1" force_save="1"/>
+                                <field name="sent_in_xml_category_predefined" invisible="1" force_save="1"/>
+                                <field name="sent_in_xml_category_open" invisible="1" force_save="1"/>
+                                <field name="year_id_company_id" groups="bt_swissdec.bt_swissdec_admin"/>
+                                <field name="year_id_name" groups="bt_swissdec.bt_swissdec_admin"/>
+                                <field name="parent_weeklyhours_or_lessons_company" groups="bt_swissdec.bt_swissdec_admin"/>
+                                <field name="id" groups="bt_swissdec.bt_swissdec_admin"/>
+                            </group>
+                            <group string="QST Code" colspan="4" col="4"
+                                   attrs="{'invisible':['|', '|', ('code','=','0'), ('valid_from','=',False), ('grenzgaenger_type','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}">
+                                <field name="qst_code" colspan="4" options='{"no_open": True, "no_create": True}'
+                                       attrs="{'required':[('code','!=','0'),('has_specialcode','=',False),('category_predefined','=','none'),('category_open','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="qst_code_validation_bool" readonly="1"
+                                       attrs="{'invisible':['|', '|', '|', ('code','=','0'), ('valid_from','=',False), ('qst_code','=',False), ('qst_code_validation_function','=','OK')]}"/>
+                                <field name="qst_code_validation_bool_ignore"
+                                       attrs="{'invisible':['|','|', '|', ('code','=','0'), ('valid_from','=',False), ('qst_code','=',False), ('qst_code_validation_function','=','OK')], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <label colspan="6" string="" for="qst_code_validation_bool_ignore" class="o_form_label"/>
+                                <newline/>
+                                <label colspan="1" string="" for="qst_code_warning_message" class="o_form_label"/>
+                                <span style="color:red;font-weight:bold" colspan="3">
+                                    <field name="qst_code_warning_message" nolabel="1"
+                                           readonly="1"
+                                           attrs="{'invisible':['|', '|', '|', ('code','=','0'), ('valid_from','=',False), ('qst_code','=',False), ('qst_code_validation_function','=','OK')]}"/>
+                                </span>
+                                <newline/>
+                                <field name="qst_code_validation_function"
+                                       attrs="{'required':[('code','!=','0'), ('valid_from','!=',False)]}"
+                                       invisible="1"/>
+                                <newline/>
+                                <field name="has_specialcode"
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="category_open"
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="category_predefined" required="1"
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                            </group>
+                            <group colspan="4" col="4">
+                                <separator string="QST Details" colspan="4"/>
+                                <field name="code"
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)], 'invisible':[('valid_from','=',False)]}"/>
+                                <field name="country_id_swiss_payroll_is_switzerland"
+                                       invisible="1"/>
+                                <newline/>
+                                <!-- workdays_ch cannot be changed when salary is done, also not when
+                                    do_modification flag is set -->
+                                <label for="workdays_ch"
+                                       attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <div
+                                        attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}">
+                                    <field name="workdays_ch" class="oe_inline"
+                                           attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                    <span class="oe_form_field oe_form_field_float oe_inline">/20</span>
+                                </div>
+                                <field name="denomination_type"
+                                       attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="employment_type"
+                                       attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="otheractivities_type"
+                                       attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="degree_all_other_employments"
+                                       attrs="{'required':[('code','!=','0')], 'invisible':['|', '|', ('code','=','0'), ('valid_from','=',False), ('otheractivities_type','=','noOther')], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="degree_all_other_employments_unknown"
+                                       attrs="{'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="rente"
+                                       attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="konkubinat"
+                                       attrs="{'required':[('code','!=','0'), ('marital_code','in',(%(hr_employee_marital_status_single)d,%(hr_employee_marital_status_married)d,%(hr_employee_marital_status_divorced)d,%(hr_employee_marital_status_widower)d)), ('actual_count_children_deduction_end_of_month','>','0')], 'invisible':['|', '|', ('code','=','0'), ('valid_from','=',False), ('marital_code','not in',(%(hr_employee_marital_status_single)d,%(hr_employee_marital_status_married)d,%(hr_employee_marital_status_divorced)d,%(hr_employee_marital_status_widower)d))], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="grenzgaenger_type"
+                                       attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <newline/>
+                                <field name="qst_address_id" colspan="4"
+                                       context="{'set_salary_relevant': True, 'show_address': 1, 'show_address_m2o': 1, 'valid_from': valid_from, 'set_country_ch': True, 'default_type': 'other', 'tree_view_ref': 'bt_swissdec.view_partner_tree_ext'}"
+                                       options="{'always_reload': True, 'no_quick_create': True}"
+                                       attrs="{'required':[('code','!=','0'),('grenzgaenger_type','=','abroadAndCH')], 'invisible':['|', '|', ('code','=','0'), ('valid_from','=',False), ('grenzgaenger_type','!=','abroadAndCH')], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"
+                                       domain="[('salary_relevant','=',True)]"/>
+                                <newline/>
+                                <field name="qst_state_id" options='{"no_open": True, "no_create": True}'
+                                       groups="bt_swissdec.bt_swissdec_admin"
+                                       attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="qst_municipality" invisible="0" groups="bt_swissdec.bt_swissdec_admin"
+                                       attrs="{'required':[('code','!=','0')], 'invisible':['|', ('code','=','0'), ('valid_from','=',False)]}"/>
+                                <field name="qst_country_id" options='{"no_open": True, "no_create": True}'
+                                       groups="bt_swissdec.bt_swissdec_admin"
+                                       attrs="{'required':[('grenzgaenger_type','=','abroadAndCH')]}"/>
+                                <newline/>
+                                <field name="marital_qst_partner_data_required_related"
+                                       groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+                                <newline/>
+                                <field name="actual_count_children_deduction_end_of_month"
+                                       groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+                            </group>
+                            <group string="Angaben zum Partner" colspan="4" col="4"
+                                   attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}">
+                                <field name="partner_lastname"
+                                       attrs="{'required':[('marital_qst_partner_data_required_related','=',True)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="partner_firstname"
+                                       attrs="{'required':[('marital_qst_partner_data_required_related','=',True)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="partner_ssnid"
+                                       attrs="{'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="partner_birthday"
+                                       attrs="{'required':[('marital_qst_partner_data_required_related','=',True)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="partner_other_address_id"
+                                       context="{'set_salary_relevant': True, 'show_address': 1, 'tree_view_ref': 'bt_swissdec.view_partner_tree_ext'}"
+                                       options="{'always_reload': True, 'no_quick_create': True}"
+                                       attrs="{'invisible':['|', ('code','=','0'), ('valid_from','=',False)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"
+                                       domain="[('salary_relevant','=',True)]"/>
+                                <field name="partner_payment_type"
+                                       attrs="{'required':[('marital_qst_partner_data_required_related','=',True)], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="partner_employment_type"
+                                       attrs="{'required':[('marital_qst_partner_data_required_related','=',True),('partner_payment_type','!=',False),('partner_payment_type','not in',('noOther','annuity'))], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="partner_working_state_id"
+                                       options='{"no_open": True, "no_create": True}'
+                                       attrs="{'required':[('marital_qst_partner_data_required_related','=',True),('partner_payment_type','!=',False),('partner_payment_type','not in',('noOther','annuity'))], 'invisible':['|',('partner_payment_type','=',False),('partner_payment_type','in',('noOther','annuity'))], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="partner_working_start_date"
+                                       attrs="{'required':[('marital_qst_partner_data_required_related','=',True),('partner_payment_type','!=',False),('partner_payment_type','not in',('noOther','annuity'))], 'invisible':['|',('partner_payment_type','=',False),('partner_payment_type','in',('noOther','annuity'))], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="partner_working_end_date"
+                                       attrs="{'invisible':['|',('partner_payment_type','=',False),('partner_payment_type','in',('noOther','annuity'))], 'readonly':[('set_readonly','!=',False),('do_modification','=',False)]}"/>
+                                <field name="partner_working_country_id"
+                                       invisible="1"/>
+                                <field name="year_id_int" invisible="1"/>
+                            </group>
+                        </group>
+                        <span style="color:red;font-weight:bold">
+                            <field name="set_readonly" attrs="{'invisible':[('do_modification','!=',False)]}"/>
+                        </span>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_allowance_calculationparameter_qst_form_change_address"
+                model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.qst.form.change.address</field>
+            <field name="model">hr.employee.calculationparameter.qst</field>
+            <field eval="8" name="priority"/>
+            <field name="inherit_id" ref="bt_swissdec.view_hr_allowance_calculationparameter_qst_form"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]" position="attributes">
+                    <attribute name="attrs">{'invisible':[('set_new_address_home_id','=',False)]}</attribute>
+                </xpath>
+                <xpath expr="//sheet/div[1]" position="after">
+                    <group colspan="4" col="5" name="group_new_address_home_id" attrs="{'invisible':[('set_new_address_home_id','!=',False)]}">
+                        <field name="set_new_address_home_id" colspan="4"/>
+                    </group>
+                </xpath>
+                <xpath expr="//sheet" position="after">
+                    <footer attrs="{'invisible':[('set_new_address_home_id','=',False)]}">
+                        <button name="do_write" type="object" string="Save"/> or <button name="cancel" string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_hr_allowance_calculationparameter_qst_tree"
+                model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.qst.tree</field>
+            <field name="model">hr.employee.calculationparameter.qst</field>
+            <field name="arch" type="xml">
+                <tree string="QST" create="false" delete="false"
+                      decoration-success="state=='open'"
+                      decoration-info="state=='existing_payslip'"
+                      decoration-danger="state=='transmitted'">
+                    <field name="qst_month_id" groups="bt_swissdec.bt_swissdec_admin"/>
+                    <field name="valid_from"/>
+                    <field name="address_home_id_tree"/>
+                    <field name="bur_id_tree"/>
+                    <field name="nationality_country_id"/>
+                    <field name="residence_category"/>
+                    <field name="marital_code"/>
+                    <field name="code"/>
+                    <field name="qst_code"/>
+                    <field name="sent_in_xml_date"/>
+                    <field name="state" invisible="1"/>
+                    <button name="action_record_history" string="Calculate History" groups="bt_swissdec.bt_swissdec_admin" type="object" />
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

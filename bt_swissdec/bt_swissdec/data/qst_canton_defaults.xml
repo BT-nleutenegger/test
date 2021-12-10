@@ -1,0 +1,134 @@
+<openerp>
+	<data noupdate="1">
+		<record id="qst_canton_defaults_AG" model="hr.qst.canton.calculation.default.values">
+			<field name="name">AG</field>
+			<field name="description">Kanton Aargau</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_AI" model="hr.qst.canton.calculation.default.values">
+			<field name="name">AI</field>
+			<field name="description">Kanton Appenzell Innerrhoden</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_AR" model="hr.qst.canton.calculation.default.values">
+			<field name="name">AR</field>
+			<field name="description">Kanton Appenzell Ausserrhoden</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_BE" model="hr.qst.canton.calculation.default.values">
+			<field name="name">BE</field>
+			<field name="description">Kanton Bern</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_BL" model="hr.qst.canton.calculation.default.values">
+			<field name="name">BL</field>
+			<field name="description">Kanton Basel-Land</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_BS" model="hr.qst.canton.calculation.default.values">
+			<field name="name">BS</field>
+			<field name="description">Kanton Basel-Stadt</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_FR" model="hr.qst.canton.calculation.default.values">
+			<field name="name">FR</field>
+			<field name="description">Kanton Freiburg</field>
+			<field name="qst_compensation">yearly</field>
+		</record>
+		<record id="qst_canton_defaults_GE" model="hr.qst.canton.calculation.default.values">
+			<field name="name">GE</field>
+			<field name="description">Kanton Genf</field>
+			<field name="qst_compensation">yearly</field>
+		</record>
+		<record id="qst_canton_defaults_GL" model="hr.qst.canton.calculation.default.values">
+			<field name="name">GL</field>
+			<field name="description">Kanton Glarus</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_GR" model="hr.qst.canton.calculation.default.values">
+			<field name="name">GR</field>
+			<field name="description">Kanton Graubünden</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_JU" model="hr.qst.canton.calculation.default.values">
+			<field name="name">JU</field>
+			<field name="description">Kanton Jura</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_LU" model="hr.qst.canton.calculation.default.values">
+			<field name="name">LU</field>
+			<field name="description">Kanton Luzern</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_NE" model="hr.qst.canton.calculation.default.values">
+			<field name="name">NE</field>
+			<field name="description">Kanton Neuenburg</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_NW" model="hr.qst.canton.calculation.default.values">
+			<field name="name">NW</field>
+			<field name="description">Kanton Nidwalden</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_OW" model="hr.qst.canton.calculation.default.values">
+			<field name="name">OW</field>
+			<field name="description">Kanton Obwalden</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_SG" model="hr.qst.canton.calculation.default.values">
+			<field name="name">SG</field>
+			<field name="description">Kanton St. Gallen</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_SH" model="hr.qst.canton.calculation.default.values">
+			<field name="name">SH</field>
+			<field name="description">Kanton Schaffhausen</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_SO" model="hr.qst.canton.calculation.default.values">
+			<field name="name">SO</field>
+			<field name="description">Kanton Solothurn</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_SZ" model="hr.qst.canton.calculation.default.values">
+			<field name="name">SZ</field>
+			<field name="description">Kanton Schwyz</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_TG" model="hr.qst.canton.calculation.default.values">
+			<field name="name">TG</field>
+			<field name="description">Kanton Thurgau</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_TI" model="hr.qst.canton.calculation.default.values">
+			<field name="name">TI</field>
+			<field name="description">Kanton Tessin</field>
+			<field name="qst_compensation">yearly</field>
+		</record>
+		<record id="qst_canton_defaults_UR" model="hr.qst.canton.calculation.default.values">
+			<field name="name">UR</field>
+			<field name="description">Kanton Uri</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_VD" model="hr.qst.canton.calculation.default.values">
+			<field name="name">VD</field>
+			<field name="description">Kanton Waadt</field>
+			<field name="qst_compensation">yearly</field>
+		</record>
+		<record id="qst_canton_defaults_VS" model="hr.qst.canton.calculation.default.values">
+			<field name="name">VS</field>
+			<field name="description">Kanton Wallis</field>
+			<field name="qst_compensation">yearly</field>
+		</record>
+		<record id="qst_canton_defaults_ZG" model="hr.qst.canton.calculation.default.values">
+			<field name="name">ZG</field>
+			<field name="description">Kanton Zug</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+		<record id="qst_canton_defaults_ZH" model="hr.qst.canton.calculation.default.values">
+			<field name="name">ZH</field>
+			<field name="description">Kanton Zürich</field>
+			<field name="qst_compensation">monthly</field>
+		</record>
+	</data>
+</openerp>

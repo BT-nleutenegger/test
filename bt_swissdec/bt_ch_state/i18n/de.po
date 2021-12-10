@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bt_ch_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-01 05:39+0000\n"
+"PO-Revision-Date: 2020-05-01 05:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_AI
+msgid "Appenzell Inner Rhodes"
+msgstr "Appenzell Innerrhoden"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_AR
+msgid "Appenzell Outher Rhodes"
+msgstr "Appenzell Ausserrhoden"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_AG
+msgid "Argovia"
+msgstr "Aargau"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_BS
+msgid "Basel-City"
+msgstr "Basel-Stadt"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_BL
+msgid "Basel-Country"
+msgstr "Basel-Land"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_BE
+msgid "Bern"
+msgstr "Bern"
+
+#. module: bt_ch_state
+#: model:ir.model,name:bt_ch_state.model_res_country_state
+msgid "Country state"
+msgstr "Kanton"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_FR
+msgid "Fribourg"
+msgstr "Freiburg"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_GE
+msgid "Geneva"
+msgstr "Genf"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_DE
+msgid "Germany"
+msgstr "Deutschland"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_GL
+msgid "Glarus"
+msgstr "Glarus"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_GR
+msgid "Grisons"
+msgstr "Graubünden"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_IT
+msgid "Italy"
+msgstr "Italien"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_JU
+msgid "Jura"
+msgstr "Jura"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_LU
+msgid "Luzern"
+msgstr "Luzern"
+
+#. module: bt_ch_state
+#: model:ir.model.fields,help:bt_ch_state.field_res_country_state__name
+msgid "Name of canton"
+msgstr "Name des Kantons"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_NE
+msgid "Neuchâtel"
+msgstr "Neuenburg"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_NW
+msgid "Nidwald"
+msgstr "Nidwalden"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_OW
+msgid "Obwald"
+msgstr "Obwalden"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_FL
+msgid "Principality of Liechtenstein"
+msgstr "Fürstentum Liechtenstein"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_SH
+msgid "Schaffhausen"
+msgstr "Schaffhausen"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_SZ
+msgid "Schwyz"
+msgstr "Schwyz"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_SO
+msgid "Solothurn"
+msgstr "Solothurn"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_SG
+msgid "St. Gallen"
+msgstr "St. Gallen"
+
+#. module: bt_ch_state
+#: model:ir.model.fields,field_description:bt_ch_state.field_res_country_state__name
+msgid "State Name"
+msgstr "Kanton"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_TG
+msgid "Thurgovia"
+msgstr "Thurgau"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_TI
+msgid "Ticino"
+msgstr "Tessin"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_UR
+msgid "Uri"
+msgstr "Uri"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_VS
+msgid "Valais"
+msgstr "Wallis"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_VD
+msgid "Vaud"
+msgstr "Waadt"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_ZG
+msgid "Zug"
+msgstr "Zug"
+
+#. module: bt_ch_state
+#: model:res.country.state,name:bt_ch_state.state_ZH
+msgid "Zurich"
+msgstr "Zürich"
+

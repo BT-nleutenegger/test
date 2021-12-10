@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record id="gts_transmission_line_current_form_view" model="ir.ui.view">
+			<field name="name">gts_transmission_line_current_form_view</field>
+			<field name="model">gui_tax_at_source_transmission_line_current</field>
+			<field name="arch" type="xml">
+				<form string="Tax at source declaration line canton" >
+					<header>
+						<field name="state" widget="statusbar" />
+					</header>
+					<sheet>
+						<group colspan="4" col="4">
+							<field name="gui_tax_at_source_transmission_line_id" colspan="4" options="{'no_open': True}"/>
+							<field name="institutionIDRef" colspan="4"/>
+							<field name="workplaceIDRef" colspan="4"/>
+							<field name="id" colspan="4" groups="bt_swissdec.bt_swissdec_admin"/>
+							<group string="Old" colspan="2" col="2">
+								<field name="TaxAtSourceCode" colspan="2"/>
+								<field name="TaxableEarning" colspan="2"/>
+								<field name="AscertainedTaxableEarning" colspan="2"/>
+								<field name="TaxAtSource" colspan="2"/>
+								<field name="CategoryPredefined" colspan="2"/>
+								<field name="CategoryOpen" colspan="2"/>
+							</group>
+
+							<group string="New" colspan="2" col="2">
+								<field name="new_TaxAtSourceCode" colspan="2"/>
+								<field name="new_TaxableEarning" colspan="2"/>
+								<field name="new_AscertainedTaxableEarning" colspan="2"/>
+								<field name="new_TaxAtSource" colspan="2"/>
+								<field name="new_CategoryPredefined" colspan="2"/>
+								<field name="new_CategoryOpen" colspan="2"/>
+							</group>
+
+							<field name="log_description" groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+							<field name="sent_as_current_line" groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+
+							<field name="qst_mutation_table_ids" widget="many2many_tags" colspan="4"/>
+							<field name="correction_confirmed" colspan="2"/>
+							<button name="perform_confirmation" type="object" string="Confirm corrections" colspan="2"
+									confirm="Is this really a change that was done already by the KSTV and can therefore be send as confirmed? Are you sure you want to do this? " />
+							<newline/>
+							<field name="qst_correction_ids" groups="bt_swissdec.bt_swissdec_admin" colspan="4">
+								<tree string="QST Correction">
+									<field name="month" />
+									<field name="year" />
+									<field name="state" />
+									<field name="correction_confirmed" />
+								</tree>
+							</field>
+							<group string="Differences" colspan="4" col="4">
+								<field name="new_TaxableEarning_difference" colspan="4"/>
+								<field name="new_AscertainedTaxableEarning_difference" colspan="4"/>
+								<field name="new_TaxAtSource_difference" colspan="4"/>
+							</group>
+						</group>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+		<record id="gts_transmission_line_current_tree_view" model="ir.ui.view">
+			<field name="name">gts_transmission_line_current_tree_view</field>
+			<field name="model">gui_tax_at_source_transmission_line_current</field>
+			<field name="arch" type="xml">
+				<tree string="Tax at source declaration line canton"
+					  decoration-success="state=='new'"
+					  decoration-info="state=='current_value'"
+					  decoration-warning="state in ('correction','old_value')">
+					<field name="institutionIDRef" />
+					<field name="workplaceIDRef" />
+					<field name="TaxAtSourceCode" />
+					<field name="CategoryPredefined" />
+					<field name="CategoryOpen" />
+					<field name="state"  />
+					<field name="keep_only_for_historic_reasons" />
+					<field name="sent_as_current_line" />
+					<button name="action_create_modification_line" string="Create modification line" type="object"  groups="bt_swissdec.bt_swissdec_admin" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="gts_transmission_line_demo_tree_view" model="ir.ui.view">
+			<field name="name">gui_tax_at_source_transmission_line_current_tree_view</field>
+			<field name="model">gui_tax_at_source_transmission_line_current</field>
+			<field name="arch" type="xml">
+				<tree string="Tax at source declaration line canton"
+					  decoration-success="state=='new'"
+					  decoration-info="state=='current_value'"
+					  decoration-warning="state in ('correction','old_value')">
+					<field name="gui_tax_at_source_transmission_line_id" />
+					<field name="institutionIDRef" />
+					<field name="workplaceIDRef" />
+					<field name="state"  invisible="1" />
+					<field name="qst_mutation_table_ids" invisible="1" domain="[('state', '=', 'to_send'),('contains_corrections', '=', True)]"/>
+					<field name="correction_confirmed"/>
+					<button name="action_create_modification_line" string="Create modification line" type="object"  groups="bt_swissdec.bt_swissdec_admin" />
+<!--					<button name="to_print" string="To Print" type="object"  groups="bt_swissdec.bt_swissdec_admin" />-->
+					<button name="perform_confirmation" type="object" string="Confirm corrections"
+							confirm="Is this really a change that was done already by the KSTV and can therefore be send as confirmed? Are you sure you want to do this? "/>
+				</tree>
+			</field>
+		</record>
+
+
+	</data>
+</openerp>

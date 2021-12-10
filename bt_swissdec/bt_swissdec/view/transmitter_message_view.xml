@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!--  -->
+		<record id="transmitter_message_tree_view" model="ir.ui.view">
+			<field name="name">transmitter_message_tree_view</field>
+			<field name="model">bt_swissdec.transmitter_message</field>
+			<field name="arch" type="xml">
+				<tree string="Transmitter Output Messages">
+					<field name="name" />
+					<field name="due_date" />
+
+				</tree>
+			</field>
+		</record>
+
+		<!-- Form view for a swissdec output xml -->
+		<record id="transmitter_message_form" model="ir.ui.view">
+			<field name="name">transmitter_message_form</field>
+			<field name="model">bt_swissdec.transmitter_message</field>
+			<field name="arch" type="xml">
+				<form string="Swissdec Response Line">
+					<sheet>
+						<group colspan="4" col="2">
+							<field name="name" invisible="1" />
+							<newline />
+							<field name="xml_data" readonly="1" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>
+	

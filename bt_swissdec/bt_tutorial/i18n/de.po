@@ -1,0 +1,292 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bt_tutorial
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-09 07:08+0000\n"
+"PO-Revision-Date: 2020-06-09 07:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.open_url_form
+msgid "Close"
+msgstr "Schliessen"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag__color
+msgid "Color Index"
+msgstr "Farbkennzeichnung"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_open_url__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_open_url__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__description
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_open_url__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.tutorial_link_form_filter
+msgid "Group By"
+msgstr "Gruppieren nach"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_open_url__id
+msgid "ID"
+msgstr "ID"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__id
+msgid "ID"
+msgstr "ID"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag__id
+msgid "ID"
+msgstr "ID"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_open_url____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_open_url__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_open_url__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_open_url__url
+msgid "Link"
+msgstr "Link"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__model_id
+msgid "Model"
+msgstr "Modell"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.tutorial_link_form_filter
+msgid "Model"
+msgstr "Modell"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__name
+msgid "Name"
+msgstr "Name"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag__name
+msgid "Name"
+msgstr "Name"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.open_url_form
+msgid "Open Url"
+msgstr "Öffne Link"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.tutorial_link_form
+msgid "Open"
+msgstr "Öffnen"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.tutorial_link_tree
+msgid "Open"
+msgstr "Öffnen"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.tutorial_link_form_filter
+msgid "Search Tutorial Links"
+msgstr "Tutorial Links Suche"
+
+#. module: bt_tutorial
+#: model:ir.model.constraint,message:bt_tutorial.constraint_tutorial_link_tag_name_uniq
+msgid "Tag name already exists !"
+msgstr "Schlagwort existiert bereits!"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.tutorial_link_form_filter
+msgid "Tag"
+msgstr "Tag"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__tag_ids
+msgid "Tags"
+msgstr "Stichwörter"
+
+#. module: bt_tutorial
+#: model:ir.model,name:bt_tutorial.model_tutorial_link_tag
+msgid "Tutorial Link Tag"
+msgstr "Tutorial Link Tag"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.view_tutorial_link_tag_form
+msgid "Tutorial Link Tag"
+msgstr "Tutorial Link Tag"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.view_tutorial_link_tag_tree
+msgid "Tutorial Link Tag"
+msgstr "Tutorial Link Tag"
+
+#. module: bt_tutorial
+#: model:ir.actions.act_window,name:bt_tutorial.action_tutorial_link_tag
+msgid "Tutorial Link Tags"
+msgstr "Tutorial Link Tags"
+
+#. module: bt_tutorial
+#: model:ir.ui.menu,name:bt_tutorial.menu_tutorial_link_tag
+msgid "Tutorial Link Tags"
+msgstr "Tutorial Link Tags"
+
+#. module: bt_tutorial
+#: model:ir.model,name:bt_tutorial.model_tutorial_link
+msgid "Tutorial Link"
+msgstr "Tutorial Link"
+
+#. module: bt_tutorial
+#: model:ir.actions.act_window,name:bt_tutorial.action_tutorial_link
+msgid "Tutorial Links"
+msgstr "Tutorial Links"
+
+#. module: bt_tutorial
+#: model:ir.actions.act_window,name:bt_tutorial.action_tutorial_link_to_use_in_other_modules
+msgid "Tutorial Links"
+msgstr "Tutorial Links"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link_tag__tutorial_link_ids
+msgid "Tutorial Links"
+msgstr "Tutorial Links"
+
+#. module: bt_tutorial
+#: model:ir.ui.menu,name:bt_tutorial.menu_tutorial_link
+msgid "Tutorial Links"
+msgstr "Tutorial Links"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.tutorial_link_form
+msgid "Tutorial Links"
+msgstr "Tutorial Links"
+
+#. module: bt_tutorial
+#: model_terms:ir.ui.view,arch_db:bt_tutorial.tutorial_link_tree
+msgid "Tutorial Links"
+msgstr "Tutorial Links"
+
+#. module: bt_tutorial
+#: model:ir.ui.menu,name:bt_tutorial.main_menu_tutorial_link
+msgid "Tutorials"
+msgstr "Tutorials"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__type
+msgid "Type"
+msgstr "Typ"
+
+#. module: bt_tutorial
+#: model:ir.model.fields,field_description:bt_tutorial.field_tutorial_link__url
+msgid "Url"
+msgstr "URL"
+
+#. module: bt_tutorial
+#: model:ir.model.fields.selection,name:bt_tutorial.selection__tutorial_link__type__url
+msgid "Url"
+msgstr "URL"
+
+#. module: bt_tutorial
+#: model:ir.model.fields.selection,name:bt_tutorial.selection__tutorial_link__type__video
+msgid "Video"
+msgstr "Video"
+
+#. module: bt_tutorial
+#: model:ir.model,name:bt_tutorial.model_open_url
+msgid "open.url"
+msgstr "open.url"
+

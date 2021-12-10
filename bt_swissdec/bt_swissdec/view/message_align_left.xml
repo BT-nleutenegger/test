@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="message_align_left assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/bt_swissdec/static/src/css/message_align_left.css"/>
+            </xpath>
+        </template>
+    </data>     
+</openerp>

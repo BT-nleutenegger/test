@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DeclareSalary
+        xmlns:sd="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclaration"
+        xmlns:ct="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationContainer"
+        xmlns="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationServiceTypes">
+
+    <!-- state of standardisation: FINAL
+         publication: 2005-12-27
+         a. boehm; itServe
+
+         business-view  = OK    (20050830;ero+ab)
+         technical-view = OK    (20051020;ifl)
+    -->
+
+    <ct:RequestContext>
+        <ct:UserAgent>
+            <ct:Producer>itServe AG</ct:Producer>
+            <ct:Name>Test</ct:Name>
+            <ct:Version>0.1</ct:Version>
+            <ct:Certificate>None</ct:Certificate>
+            <ct:ELM-SalaryStandardVersion>4.0</ct:ELM-SalaryStandardVersion>
+        </ct:UserAgent>
+        <ct:CompanyName>
+            <sd:HR-RC-Name>String</sd:HR-RC-Name>
+        </ct:CompanyName>
+        <ct:TransmissionDate>2020-12-27T09:30:47.0Z</ct:TransmissionDate>
+        <ct:RequestID>reqId</ct:RequestID>
+        <ct:LanguageCode>de</ct:LanguageCode>
+        <ct:MonitoringID>testsuite</ct:MonitoringID>
+    </ct:RequestContext>
+    <ct:Job>
+        <ct:Addressees>
+            <ct:AHV-AVS institutionIDRef="#003.000">
+                <ct:ProcessByDistributor>false</ct:ProcessByDistributor>
+            </ct:AHV-AVS>
+            <ct:UVG-LAA institutionIDRef="#Suva">
+                <ct:ProcessByDistributor>true</ct:ProcessByDistributor>
+            </ct:UVG-LAA>
+            <ct:UVGZ-LAAC institutionIDRef="#Backwork">
+                <ct:ProcessByDistributor>true</ct:ProcessByDistributor>
+            </ct:UVGZ-LAAC>
+            <ct:KTG-AMC institutionIDRef="#Backwork">
+                <ct:ProcessByDistributor>true</ct:ProcessByDistributor>
+            </ct:KTG-AMC>
+            <ct:BVG-LPP institutionIDRef="#Oldsoft">
+                <ct:ProcessByDistributor>true</ct:ProcessByDistributor>
+            </ct:BVG-LPP>
+            <ct:FAK-CAF institutionIDRef="#005.000">
+                <ct:ProcessByDistributor>false</ct:ProcessByDistributor>
+            </ct:FAK-CAF>
+            <ct:Tax>
+                <ct:ProcessByDistributor>true</ct:ProcessByDistributor>
+            </ct:Tax>
+            <ct:Statistic>
+                <ct:ProcessByDistributor>true</ct:ProcessByDistributor>
+            </ct:Statistic>
+            <ct:TaxAtSource institutionIDRef="#taxAtSource">
+                <ct:ProcessByDistributor>true</ct:ProcessByDistributor>
+            </ct:TaxAtSource>
+        </ct:Addressees>
+    </ct:Job>
+    <ct:Substitution>
+        <ct:PredecessorDeclarationIDWithAcceptedState>654321</ct:PredecessorDeclarationIDWithAcceptedState>
+    </ct:Substitution>
+    <ct:SalaryDeclaration schemaVersion="0.0"
+                          xmlns="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclaration"
+                          xmlns:ct="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationContainer">
+        <!--
+            not direct necessary in version 2
+            xmlns:iso3166="http://www.unece.org/etrades/unedocs/repository/codelists/xml/CountryCode.xsd">
+        -->
+        <Company>
+            <CompanyDescription>
+                <Name>
+                    <HR-RC-Name>ICHAG</HR-RC-Name>
+                </Name>
+                <Address>
+                    <Street>Länggassstrasse 26</Street>
+                    <Postbox>690</Postbox>
+                    <ZIP-Code>3000</ZIP-Code>
+                    <City>Bern 9</City>
+                </Address>
+                <UID-EHRA>CH-645.1.234.567-3</UID-EHRA>
+                <UID-BFS>CHE-123.456.789</UID-BFS>
+                <Workplace workplaceID="#statistic1">
+                    <AddressExtended>
+                        <ZIP-Code>3012</ZIP-Code>
+                        <City>Bern</City>
+                    </AddressExtended>
+                    <CompanyWorkingTime>
+                        <WeeklyHours>42.00</WeeklyHours>
+                    </CompanyWorkingTime>
+                </Workplace>
+            </CompanyDescription>
+            <!-- ===================================== -->
+            <!-- staffs -->
+            <!-- ===================================== -->
+            <Staff>
+                <Person>
+                    <Particulars>
+                        <Social-InsuranceIdentification>
+                            <SV-AS-Number>123.4517.8128.11</SV-AS-Number>
+                        </Social-InsuranceIdentification>
+                        <EmployeeNumber>0100</EmployeeNumber>
+                        <Lastname>Balmer</Lastname>
+                        <Firstname>Fredi</Firstname>
+                        <Sex>M</Sex>
+                        <DateOfBirth>1945-03-16</DateOfBirth>
+                        <Nationality>CH</Nationality>
+                        <CivilStatus>
+                            <Status>married</Status>
+                        </CivilStatus>
+                        <!-- new tax -->
+                        <Address>
+                            <Street>Länggassstrasse 26</Street>
+                            <Postbox>690</Postbox>
+                            <Locality>Länggassquartier</Locality>
+                            <ZIP-Code>3000</ZIP-Code>
+                            <City>Bern 9</City>
+                            <Country>CH</Country>
+                        </Address>
+                        <EmailAddress>fredi.balmer@ichag.ch</EmailAddress>
+                        <ResidenceCanton>ZG</ResidenceCanton>
+                    </Particulars>
+                    <Work>
+                        <ActivityRate>99</ActivityRate>
+                        <EntryDate>1980-01-01</EntryDate>
+                    </Work>
+                    <AHV-AVS-Salaries>
+                        <AHV-AVS-Salary institutionIDRef="#003.000">
+                            <AccountingTime>
+                                <from>2020-01-01</from>
+                                <until>2020-12-31</until>
+                            </AccountingTime>
+                            <AHV-AVS-Income>65000.00</AHV-AVS-Income>
+                            <ALV-AC-Income>65000.00</ALV-AC-Income>
+                        </AHV-AVS-Salary>
+                    </AHV-AVS-Salaries>
+                    <UVG-LAA-Salaries>
+                        <UVG-LAA-Salary institutionIDRef="#Suva">
+                            <AccountingTime>
+                                <from>2020-01-01</from>
+                                <until>2020-12-31</until>
+                            </AccountingTime>
+                            <UVG-LAA-Code>A1</UVG-LAA-Code>
+                            <UVG-LAA-GrossSalary>71960.00</UVG-LAA-GrossSalary>
+                            <UVG-LAA-BaseSalary>65000.00</UVG-LAA-BaseSalary>
+                            <UVG-LAA-ContributorySalary>65000.00</UVG-LAA-ContributorySalary>
+                        </UVG-LAA-Salary>
+                    </UVG-LAA-Salaries>
+                    <UVGZ-LAAC-Salaries>
+                        <UVGZ-LAAC-Salary institutionIDRef="#Backwork">
+                            <AccountingTime>
+                                <from>2020-01-01</from>
+                                <until>2020-12-31</until>
+                            </AccountingTime>
+                            <UVGZ-LAAC-Code>9Z</UVGZ-LAAC-Code>
+                            <UVGZ-LAAC-BaseSalary>65000.00</UVGZ-LAAC-BaseSalary>
+                            <UVGZ-LAAC-ContributorySalary>65000.00</UVGZ-LAAC-ContributorySalary>
+                        </UVGZ-LAAC-Salary>
+                    </UVGZ-LAAC-Salaries>
+                    <KTG-AMC-Salaries>
+                        <KTG-AMC-Salary institutionIDRef="#Backwork">
+                            <AccountingTime>
+                                <from>2020-01-01</from>
+                                <until>2020-12-31</until>
+                            </AccountingTime>
+                            <KTG-AMC-Code>X7</KTG-AMC-Code>
+                            <Reference-AHV-AVS-Salary>65000.00</Reference-AHV-AVS-Salary>
+                            <KTG-AMC-ContributorySalary>65000.00</KTG-AMC-ContributorySalary>
+                        </KTG-AMC-Salary>
+                    </KTG-AMC-Salaries>
+                    <BVG-LPP-Salaries>
+                        <BVG-LPP-Salary institutionIDRef="#Oldsoft">
+                            <BVG-LPP-AnnualBasis>10.00</BVG-LPP-AnnualBasis>
+                        </BVG-LPP-Salary>
+                    </BVG-LPP-Salaries>
+                    <FAK-CAF-Salaries>
+                        <FAK-CAF-Salary institutionIDRef="#005.000">
+                            <FAK-CAF-Period>
+                                <from>2020-01-01</from>
+                                <until>2020-12-31</until>
+                            </FAK-CAF-Period>
+                            <FAK-CAF-ContributorySalary>65000.00</FAK-CAF-ContributorySalary>
+                            <FAK-CAF-FamilyIncomeSupplement>
+                                <FAK-CAF-FamilyIncomeSupplementPerPerson>1800.00
+                                </FAK-CAF-FamilyIncomeSupplementPerPerson>
+                            </FAK-CAF-FamilyIncomeSupplement>
+                            <FAK-CAF-WorkplaceCanton>BE</FAK-CAF-WorkplaceCanton>
+                        </FAK-CAF-Salary>
+                    </FAK-CAF-Salaries>
+                    <TaxSalaries>
+                        <TaxSalary>
+                            <Period>
+                                <from>2020-01-01</from>
+                                <until>2020-12-31</until>
+                            </Period>
+                            <FreeTransport/>
+                            <CanteenLunchCheck/>
+                            <Income>48118.70</Income>
+                            <FringeBenefits>
+                                <FoodLodging>1000.00</FoodLodging>
+                                <CompanyCar>5160.00</CompanyCar>
+                                <Other>
+                                    <Text>Verbilligung Mietwohnung, Geldwerter Vorteil</Text>
+                                    <Sum>2400.00</Sum>
+                                </Other>
+                            </FringeBenefits>
+                            <SporadicBenefits>
+                                <Text>Gratifikation, Gewinnbeteiligung</Text>
+                                <Sum>5000.00</Sum>
+                            </SporadicBenefits>
+                            <CapitalPayment>
+                                <Text>Abgangsentschädigung</Text>
+                                <Sum>3000.00</Sum>
+                            </CapitalPayment>
+                            <OwnershipRight>300.00</OwnershipRight>
+                            <BoardOfDirectorsRemuneration>2000.00</BoardOfDirectorsRemuneration>
+                            <OtherBenefits>
+                                <Text>Arbeitgeberanteil AHV/IV/EO/ALV</Text>
+                                <Sum>1021.30</Sum>
+                            </OtherBenefits>
+                            <GrossIncome>68000.00</GrossIncome>
+                            <AHV-ALV-NBUV-AVS-AC-AANP-Contribution>3657.00</AHV-ALV-NBUV-AVS-AC-AANP-Contribution>
+                            <BVG-LPP-Contribution>
+                                <Regular>6500.00</Regular>
+                                <Purchase>1500.00</Purchase>
+                            </BVG-LPP-Contribution>
+                            <NetIncome>56343.00</NetIncome>
+                            <DeductionAtSource>3647.55</DeductionAtSource>
+                            <ChargesRule>
+                                <WithRegulation>
+                                    <Allowed>2005-01-01</Allowed>
+                                    <Canton>BE</Canton>
+                                </WithRegulation>
+                            </ChargesRule>
+                            <Charges>
+                                <Effective>
+                                    <Other>
+                                        <!-- variante mit Spesenreglement und ohne Betrag -->
+                                        <Text>effektive Spesen Expatriate</Text>
+                                        <!-- <Sum>7500.00</Sum> -->
+                                    </Other>
+                                </Effective>
+                                <LumpSum>
+                                    <Representation>3000.00</Representation>
+                                    <Car>500.00</Car>
+                                    <Other>
+                                        <Text>Übrige Pauschalspesen</Text>
+                                        <Sum>1500.00</Sum>
+                                    </Other>
+                                </LumpSum>
+                                <Education>12001.00</Education>
+                            </Charges>
+                            <OtherFringeBenefits>Übermässige Vergünstigung auf
+                                Versicherungsprämien
+                            </OtherFringeBenefits>
+                            <StandardRemark>
+                                <StaffShareThirdCompany>IKEA und H+M</StaffShareThirdCompany>
+                                <ChildAllowancePerAHV-AVS/>
+                                <RelocationCosts>5000.00</RelocationCosts>
+                                <StaffShareMarketValue>
+                                    <Allowed>2005-01-01</Allowed>
+                                    <Canton>ZG</Canton>
+                                </StaffShareMarketValue>
+                                <StaffShareWithoutTaxableIncome>diverse Gründe!!</StaffShareWithoutTaxableIncome>
+                            </StandardRemark>
+                            <Remark>
+                                Ein erster Testfall (noch kontrollieren)!!
+                            </Remark>
+                        </TaxSalary>
+                    </TaxSalaries>
+                    <StatisticSalaries>
+                        <StatisticSalary workplaceIDRef="#statistic1">
+                            <Period>
+                                <from>2020-01-01</from>
+                                <until>2020-12-31</until>
+                            </Period>
+                            <TotalHoursOfWork>42.00</TotalHoursOfWork>
+                            <GrossEarnings>48160.00</GrossEarnings>
+                            <SocialContributions>11657.00</SocialContributions>
+                            <Allowances>2850.00</Allowances>
+                            <Overtime>2368.70</Overtime>
+                            <Earnings13th>3300.00</Earnings13th>
+                            <SporadicBenefits>5000.00</SporadicBenefits>
+                            <PaymentsByThird>2160.00</PaymentsByThird>
+                            <!--<LaborCost>4800.00</LaborCost>-->
+                            <!--<ExtendedBenefits>1321.30</ExtendedBenefits>-->
+                            <Education>enterpriseEducation</Education>
+                            <!--<Skill>qualified</Skill>-->
+                            <Position>highestCadre</Position>
+                            <!--<Activity>21</Activity>
+                            <WageForm>timeWages</WageForm>-->
+                            <Contract>indefiniteSalaryHrs</Contract>
+                            <JobTitle>Arbeiter</JobTitle>
+                        </StatisticSalary>
+                    </StatisticSalaries>
+                    <TaxAtSourceSalaries>
+                        <TaxAtSourceSalary institutionIDRef="#taxAtSource">
+                            <TaxAtSourceCanton>BE</TaxAtSourceCanton>
+                            <TaxAtSourceMunicipalityID>361</TaxAtSourceMunicipalityID>
+                            <CurrentMonth>2015-04</CurrentMonth>
+                            <History>
+                                <Period>
+                                    <from>2020-01-01</from>
+                                    <until>2020-12-31</until>
+                                </Period>
+                                <TaxAtSourceCategory>
+                                    <!--                                    <OLD-TaxAtSourceCode>ab</OLD-TaxAtSourceCode>-->
+                                    <TaxAtSourceCode>A2Y</TaxAtSourceCode>
+                                    <!--                                    <CategoryPredefined>specialAgreement</CategoryPredefined>
+                                                                        <CategoryOpen>Kategorie</CategoryOpen>-->
+                                </TaxAtSourceCategory>
+                            </History>
+                            <Recapitulation lastWorkplaceIDRef="#lwpidr">
+                                <Period>
+                                    <from>2010-01-01</from>
+                                    <until>2010-12-31</until>
+                                </Period>
+                                <LastTax>20.00</LastTax>
+                                <TaxableEarningCumulative>50000.00</TaxableEarningCumulative>
+                                <TaxAtSourceCumulative>5000.00</TaxAtSourceCumulative>
+                            </Recapitulation>
+                        </TaxAtSourceSalary>
+                    </TaxAtSourceSalaries>
+                </Person>
+            </Staff>
+            <!-- ===================================== -->
+            <!-- Insurances -->
+            <!-- ===================================== -->
+            <Institutions>
+                <AHV-AVS institutionID="#003.000">
+                    <AK-CC-BranchNumber>003.000</AK-CC-BranchNumber>
+                    <AK-CC-CustomerNumber>100-9976.9</AK-CC-CustomerNumber>
+                </AHV-AVS>
+                <UVG-LAA institutionID="#Suva">
+                    <InsuranceID>302-15096.6</InsuranceID>
+                    <InsuranceCompanyName>Suva</InsuranceCompanyName>
+                    <CustomerIdentity>01</CustomerIdentity>
+                    <ContractIdentity>123</ContractIdentity>
+                    <Comment>
+                        <Notification>
+                            <QualityLevel>Comment</QualityLevel>
+                            <DescriptionCode>1</DescriptionCode>
+                            <Description>Spezielle Abmachung gemäss Vertrag XYZ</Description>
+                        </Notification>
+                    </Comment>
+                </UVG-LAA>
+                <UVG-LAA institutionID="#uvg-institution">
+                    <InsuranceID>3456.789</InsuranceID>
+                    <InsuranceCompanyName>UVG-Company</InsuranceCompanyName>
+                    <CustomerIdentity>7651-873.1</CustomerIdentity>
+                    <ContractIdentity>4566-4</ContractIdentity>
+                </UVG-LAA>
+                <UVGZ-LAAC institutionID="#Backwork">
+                    <InsuranceID>2345.88 1</InsuranceID>
+                    <InsuranceCompanyName>Backwork Versicherungen</InsuranceCompanyName>
+                    <CustomerIdentity>7651-873.1</CustomerIdentity>
+                    <ContractIdentity>4566-4</ContractIdentity>
+                </UVGZ-LAAC>
+                <KTG-AMC institutionID="#Backwork">
+                    <InsuranceID>2345.88 1</InsuranceID>
+                    <InsuranceCompanyName>Backwork Versicherungen</InsuranceCompanyName>
+                    <CustomerIdentity>7651-873.1</CustomerIdentity>
+                    <ContractIdentity>4567-4</ContractIdentity>
+                </KTG-AMC>
+                <BVG-LPP institutionID="#Oldsoft">
+                    <InsuranceID>2600.88 1</InsuranceID>
+                    <InsuranceCompanyName>Pensionskasse Oldsoft</InsuranceCompanyName>
+                    <CustomerIdentity>1099-8777.1</CustomerIdentity>
+                    <ContractIdentity>4500-0</ContractIdentity>
+                    <GeneralValidAsOf>2012-09-04</GeneralValidAsOf>
+                </BVG-LPP>
+                <FAK-CAF institutionID="#005.000">
+                    <FAK-CAF-BranchNumber>005.000</FAK-CAF-BranchNumber>
+                    <FAK-CAF-CustomerNumber>100-9934.8</FAK-CAF-CustomerNumber>
+                </FAK-CAF>
+                <TaxAtSource institutionID="#taxAtSource">
+                    <CantonID>BE</CantonID>
+                    <CustomerIdentity>123</CustomerIdentity>
+                </TaxAtSource>
+            </Institutions>
+            <!-- ===================================== -->
+            <!-- SalaryTotals -->
+            <!-- ===================================== -->
+            <SalaryTotals>
+                <AHV-AVS-Totals institutionIDRef="#003.000">
+                    <Total-AHV-AVS-Incomes>65000.00</Total-AHV-AVS-Incomes>
+                    <Total-AHV-AVS-Open>0.00</Total-AHV-AVS-Open>
+                    <Total-ALV-AC-Incomes>65000.00</Total-ALV-AC-Incomes>
+                    <Total-ALVZ-ACS-Incomes>0.00</Total-ALVZ-ACS-Incomes>
+                    <Total-ALV-AC-Open>0.00</Total-ALV-AC-Open>
+                </AHV-AVS-Totals>
+                <UVG-LAA-Totals institutionIDRef="#Suva">
+                    <UVG-LAA-BranchTotals>
+                        <UVG-LAA-BranchTotal>
+                            <BranchIdentifier>A</BranchIdentifier>
+                            <Female-Totals>
+                                <NBU-BU-ANP-AP-Total>65000.00</NBU-BU-ANP-AP-Total>
+                                <BU-AP-Total>0.00</BU-AP-Total>
+                            </Female-Totals>
+                            <Male-Totals>
+                                <NBU-BU-ANP-AP-Total>65000.00</NBU-BU-ANP-AP-Total>
+                                <BU-AP-Total>0.00</BU-AP-Total>
+                            </Male-Totals>
+                        </UVG-LAA-BranchTotal>
+                    </UVG-LAA-BranchTotals>
+                    <UVG-LAA-MasterTotal>65000.00</UVG-LAA-MasterTotal>
+                    <NumberOfFemalePersons>0</NumberOfFemalePersons>
+                    <NumberOfMalePersons>1</NumberOfMalePersons>
+                </UVG-LAA-Totals>
+                <UVGZ-LAAC-Totals institutionIDRef="#Backwork">
+                    <UVGZ-LAAC-CategoryTotals>
+                        <UVGZ-LAAC-CategoryTotal>
+                            <CategoryCode>01</CategoryCode>
+                            <Female-Total>0.00</Female-Total>
+                            <Male-Total>65000.00</Male-Total>
+                        </UVGZ-LAAC-CategoryTotal>
+                    </UVGZ-LAAC-CategoryTotals>
+                    <UVGZ-LAAC-MasterTotal>65000.00</UVGZ-LAAC-MasterTotal>
+                </UVGZ-LAAC-Totals>
+                <KTG-AMC-Totals institutionIDRef="#Backwork">
+                    <KTG-AMC-CategoryTotals>
+                        <KTG-AMC-CategoryTotal>
+                            <CategoryCode>02</CategoryCode>
+                            <Female-Total>0.00</Female-Total>
+                            <Male-Total>65000.00</Male-Total>
+                        </KTG-AMC-CategoryTotal>
+                    </KTG-AMC-CategoryTotals>
+                    <KTG-AMC-MasterTotal>65000.00</KTG-AMC-MasterTotal>
+                </KTG-AMC-Totals>
+                <FAK-CAF-Totals institutionIDRef="#005.000">
+                    <Total-FAK-CAF-PerCanton>
+                        <Total-FAK-CAF-ContributorySalary>65000.00</Total-FAK-CAF-ContributorySalary>
+                        <Canton>BE</Canton>
+                    </Total-FAK-CAF-PerCanton>
+                </FAK-CAF-Totals>
+                <TaxAtSourceTotals institutionIDRef="#taxAtSource">
+                    <TotalMonth>
+                        <CurrentMonth>2015-06</CurrentMonth>
+                        <TotalTaxableEarning>50000.00</TotalTaxableEarning>
+                        <TotalTaxAtSource>4000.00</TotalTaxAtSource>
+                        <TotalCommission>300.00</TotalCommission>
+                    </TotalMonth>
+                    <TotalYear>
+                        <Period>
+                            <from>2020-01-01</from>
+                            <until>2020-12-31</until>
+                        </Period>
+                        <TotalTaxableEarning>50000.00</TotalTaxableEarning>
+                        <TotalTaxAtSource>4000.00</TotalTaxAtSource>
+                        <TotalCommission>300.00</TotalCommission>
+                    </TotalYear>
+                </TaxAtSourceTotals>
+            </SalaryTotals>
+            <SalaryCounters>
+                <NumberOf-AHV-AVS-Salary-Tags>1</NumberOf-AHV-AVS-Salary-Tags>
+                <NumberOf-UVG-LAA-Salary-Tags>1</NumberOf-UVG-LAA-Salary-Tags>
+                <NumberOf-UVGZ-LAAC-Salary-Tags>1</NumberOf-UVGZ-LAAC-Salary-Tags>
+                <NumberOf-KTG-AMC-Salary-Tags>1</NumberOf-KTG-AMC-Salary-Tags>
+                <NumberOf-BVG-LPP-Salary-Tags>1</NumberOf-BVG-LPP-Salary-Tags>
+                <NumberOf-FAK-CAF-Salary-Tags>1</NumberOf-FAK-CAF-Salary-Tags>
+                <NumberOf-TaxAnnuity-Tags>0</NumberOf-TaxAnnuity-Tags>
+                <NumberOf-TaxSalary-Tags>1</NumberOf-TaxSalary-Tags>
+                <NumberOf-StatisticSalary-Tags>1</NumberOf-StatisticSalary-Tags>
+                <NumberOf-TaxAtSourceSalary-Tags>1</NumberOf-TaxAtSourceSalary-Tags>
+            </SalaryCounters>
+            <Statistic>
+                <PayAgreement>individualContract</PayAgreement>
+            </Statistic>
+        </Company>
+        <GeneralSalaryDeclarationDescription>
+            <CreationDate>2020-09-04T14:14:00</CreationDate>
+            <AccountingPeriod>2020</AccountingPeriod>
+            <ContactPerson>
+                <Name>Marcel René Müller</Name>
+                <EmailAddress>ichag@xxxxx.ch</EmailAddress>
+                <PhoneNumber>031 345 23 87</PhoneNumber>
+            </ContactPerson>
+            <Comment>
+                <Notification>
+                    <QualityLevel>Comment</QualityLevel>
+                    <DescriptionCode>1</DescriptionCode>
+                    <Description>Bitte senden Sie eine Suva-Apotheke an hôtel-garçon in genève</Description>
+                </Notification>
+            </Comment>
+        </GeneralSalaryDeclarationDescription>
+    </ct:SalaryDeclaration>
+</DeclareSalary>

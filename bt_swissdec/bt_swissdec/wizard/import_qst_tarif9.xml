@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="act_qst_import_view_form" model="ir.ui.view">
+            <field name="name">qst_import.form</field>
+            <field name="model">qst.import</field>
+            <field name="arch" type="xml">
+                <form string="QST Import">
+                    <group>
+                        <field name="company_id"/>
+                    </group>
+                    <button name="%(bt_tutorial.action_tutorial_link_to_use_in_other_modules)d" class="oe_stat_button" icon="fa-youtube" string="Tutorials" type="action" context="{'model_name': 'qst.import'}"/>
+                    <group colspan="4" fill="0" states="draft">
+                        <div colspan="2">
+                            Die aktuellen Quellensteuertarife können von dieser <a target="_blank" href="https://www.estv.admin.ch/estv/de/home/direkte-bundessteuer/quellensteuer/dienstleistungen/tarife-herunterladen.html">Seite</a> heruntergeladen werden.
+                        </div>
+                        <newline/>
+                        <field name="file" filename="name" colspan="2"/>
+                        <field name="name" invisible="1"/>
+                    </group>
+                    <group states="info">
+                        <field name="qst_file_ids" options="{'no_create': True}" widget="many2many_tags"/>
+                    </group>
+                    <group colspan="4" states="done" expand="1">
+                        <separator string="Import Info" colspan="4"/>
+                        <field name="info" nolabel="1" width="320" height="200"/>
+                        <separator colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="import_qst" string="Import"
+                            type="object" default_focus="1" class="btn-primary" states="draft"
+                            attrs="{'invisible':['|',('file','=',False),('info','!=',False)]}"
+                            context="{'is_in_import':True}"
+                            />
+                        <button string="Close" class="btn-default" special="cancel"/>
+                    </footer>
+                    <field name="state" invisible="1"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_qst_import_wizard" model="ir.actions.act_window">
+            <field name="name">QST Import</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">qst.import</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_qst_import_wizard" id="menu_qst_import_xml" parent="payroll_configure" sequence="20"/>
+
+    </data>
+</openerp>

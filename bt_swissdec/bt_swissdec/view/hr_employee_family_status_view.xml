@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="hr_hr_employee_family_status_tree" model="ir.ui.view">
+			<field name="name">hr.hr.employee.family.status.tree</field>
+			<field name="model">hr.employee.family.status</field>
+			<field name="arch" type="xml">
+				<tree string="Family Status">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="hr_hr_employee_family_status_form" model="ir.ui.view">
+			<field name="name">hr.hr.employee.family.status</field>
+			<field name="model">hr.employee.family.status</field>
+			<field name="arch" type="xml">
+				<form string="family Status">
+					<sheet>
+						<group colspan="4">
+							<field name="name" />
+							<separator string="Description" />
+							<field name="description" nolabel="1" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_hr_family_status" model="ir.actions.act_window">
+			<field name="name">Family Status</field>
+			<field name="res_model">hr.employee.family.status</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="hr_hr_employee_family_status_tree" />
+		</record>
+	</data>
+</openerp>

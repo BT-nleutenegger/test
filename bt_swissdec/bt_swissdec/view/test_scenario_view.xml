@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="test_scenario_form_view"
+                model="ir.ui.view">
+            <field name="name">test_scenario_form</field>
+            <field name="model">test_scenario</field>
+            <field name="arch" type="xml">
+                <form string='Test scenario'>
+                    <header>
+                        <button string="Set as default" name="action_state_default"
+							type="object" invisible="1" />
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="test_scenario_tree_view"
+                model="ir.ui.view">
+            <field name="name">test_scenario_tree</field>
+            <field name="model">test_scenario</field>
+            <field name="arch" type="xml">
+                <tree string='Test scenario'>
+                    <field name="name"/>
+                    <field name="create_date"/>
+                    <field name="create_uid"/>
+                    <field name="state" />
+                    <field name="employee_ids" />
+                    <button string="Set as default" name="action_state_default"
+							type="object" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="test_scenario_search_view"
+                model="ir.ui.view">
+            <field name="name">test_scenario_search</field>
+            <field name="model">test_scenario</field>
+            <field name="arch" type="xml">
+                <search string='Test scenario'>
+                    <field name="name"/>
+                    <field name="state" />
+                    <group expand="0" string="Group By...">
+						<filter string="Default"
+							domain="[('state','=', 'default')]" name="groupby_state_default"
+							context="{}" />
+					</group>
+                </search>
+            </field>
+        </record>
+        <record id="action_test_scenario"
+			model="ir.actions.act_window">
+			<field name="name">Configuration</field>
+			<field name="res_model">test_scenario</field>
+			<field name="view_mode">tree,form</field>
+			<field name="target" />
+			<field name="context">{"search_default_groupby_state_default" :True}
+			</field>
+		</record>
+    </data>
+</openerp>

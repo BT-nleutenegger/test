@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- =========== Actions =========== -->
+        <!-- Action operation swissdec -->
+
+
+        <record id="bt_swissdec_transmitter_action" model="ir.actions.act_window">
+            <field name="name">Transmit</field>
+            <field name="res_model">bt_swissdec.transmitter</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="domain" />
+        </record>
+
+        <!-- Action ping operation swissdec -->
+
+
+
+
+        <record id="bt_swissdec_res_company_ext" model="ir.actions.act_window">
+            <field name="name">Companies</field>
+            <field name="res_model">res.company</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain" >[('company_used_for_bt_swissdec', '=', True)]</field>
+        </record>
+
+        <record id="action_hr_contract_type" model="ir.actions.act_window">
+            <field name="name">Contract Types</field>
+            <field name="res_model">hr.contract.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="hr_contract_type_view_search"/>
+        </record>
+
+        <!-- =========== Menu Items =========== -->
+        <menuitem id="transmitter_configure" parent="hr.menu_human_resources_configuration"
+            name="Transmitter" />
+
+        <menuitem id="bt_swissdec_companies_menu" parent="payroll_configure"
+            action="bt_swissdec_res_company_ext" groups="hr.group_hr_manager"
+            sequence="8" />
+
+        <menuitem id="bt_swissdec_contract_types_menu" parent="payroll_configure_admin"
+            action="action_hr_contract_type" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="30" />
+         <menuitem action="action_country_state_ch_admin" id="menu_country_state_ch_admin"
+            parent="payroll_configure_admin" sequence="10" groups="bt_swissdec.bt_swissdec_admin"/>
+
+        <menuitem action="action_country_state_ch_user" id="menu_country_state_ch_user"
+            parent="payroll_configure" sequence="21"/>
+
+        <menuitem action="hr_payroll.action_view_hr_payslip_form" id="menu_department_tree"
+            parent="menu_hr_root_payroll" />
+
+        <menuitem id="menu_hr_allounce_deduction_tree" action="hr_allounce_deduction_tree"
+            parent="payroll_configure" sequence="11" />
+
+        <menuitem id="menu_hr_company_contribution_tree" action="action_hr_company_contribution_tree"
+            parent="payroll_configure" sequence="10" />
+
+        <menuitem action="action_view_hr_payroll_register_form" id="hr_menu_payroll_register"
+            parent="menu_hr_root_payroll" />
+
+        <menuitem id="bt_swissdec_cancel_paid_payslips_wizard_menu"
+            parent="payroll_configure_admin" action="bt_swissdec_cancel_paid_payslips_wizard"
+            groups="bt_swissdec.bt_swissdec_admin" sequence="9" />
+
+        <!-- menu Personal/BVG Basis -->
+        <menuitem id="menu_comunication_menu" name="Communication"
+            parent="hr.menu_hr_root" sequence="15" groups="hr.group_hr_manager" />
+
+        <menuitem id="menu_comunication_menu_test" name="Communication (TEST)"
+            parent="hr.menu_hr_root" sequence="16" groups="bt_swissdec.bt_swissdec_admin" />
+
+
+        <record id="gui_salary_declaration_action" model="ir.actions.act_window">
+            <field name="name">Salary Declaration</field>
+            <field name="res_model">gui_salary_declaration</field>
+            <field name="domain" />
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_group_by_year':1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new salary declaration
+              </p>
+            </field>
+        </record>
+
+
+
+        <record id="gui_bvg_sc_action" model="ir.actions.act_window">
+            <field name="name">Salary Declaration</field>
+            <field name="res_model">bt_swissdec.gui_bvg_sc</field>
+            <field name="context">{}</field>
+            <field name="domain" />
+            <field name="view_mode">tree,form</field>
+
+        </record>
+        <record id="gui_ahv_mutation_action" model="ir.actions.act_window">
+            <field name="name">AHV Mutation</field>
+            <field name="res_model">bt_swissdec.gui_ahv_mutations</field>
+            <field name="context">{}</field>
+            <field name="domain" />
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+
+
+        <record id="gui_bvg_ds_action" model="ir.actions.act_window">
+            <field name="name">Salary Declaration</field>
+            <field name="res_model">bt_swissdec.gui_bvg_ds</field>
+            <field name="context">{}</field>
+            <field name="domain" />
+            <field name="view_mode">tree,form</field>
+
+        </record>
+        <record id="gui_tax_at_source_transmission_action" model="ir.actions.act_window">
+            <field name="name">Tax at Source Transmission</field>
+            <field name="res_model">gui_tax_at_source_transmission</field>
+            <field name="context">{'default_test_case': False, 'search_default_group_by_year':1}</field>
+            <field name="domain" >[('test_case', '=', False)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new tax at source transmission
+              </p>
+            </field>
+        </record>
+        <record id="gui_tax_at_source_transmission_action_test" model="ir.actions.act_window">
+            <field name="name">Tax at Source Transmission</field>
+            <field name="res_model">gui_tax_at_source_transmission</field>
+            <field name="context">{'default_test_case': True, 'search_default_group_by_year':1}</field>
+            <field name="domain" >[('test_case', '=', True), ('test_scenario_id.employee_ids', '=', False)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="gui_tax_at_source_transmission_action_test_employee_ids" model="ir.actions.act_window">
+			<field name="name">Tax at Source Transmission Employees</field>
+			<field name="res_model">gui_tax_at_source_transmission</field>
+			<field name="context">{'default_test_case': True, 'only_employee_ids': True, 'search_default_group_by_year':1}</field>
+			<field name="domain" >[('test_case', '=', True), ('test_scenario_id.employee_ids', '!=', False), ('test_scenario_id.state', '=', 'default')]</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+        <menuitem id="bt_swissdec_create_test_scenario" parent="menu_comunication_menu_test"
+            name="Create Test Scenario" groups="hr.group_hr_manager" sequence="10" action="action_create_test_scenario_form_view"/>
+
+        <menuitem id="bt_swissdec_list_test_scenario" parent="menu_comunication_menu_test"
+            name="List of scenarios" groups="hr.group_hr_manager" sequence="15" action="action_test_scenario"/>
+
+
+        <menuitem id="bt_swissdec_annual_transmission_menu" parent="menu_comunication_menu"
+            name="Annual Transmission" groups="hr.group_hr_manager" sequence="20" />
+
+
+
+
+        <menuitem id="bt_swissdec_salary_declaration_submenu" parent="bt_swissdec_annual_transmission_menu"
+            action="gui_salary_declaration_action" name="Salary Declaration"
+            groups="hr.group_hr_manager" sequence="101" />
+
+
+
+        <!-- 20180817 as discussed with Silvan we set group bt_swissdec.bt_swissdec_admin instead of "hr.group_hr_manager" all BVG menuitems - se we could come from a previous version we set the new groups via groups_id -->
+        <menuitem id="bt_swissdec_bvg_basis_sc" parent="bt_swissdec_annual_transmission_menu"
+            action="action_bvg_basis_list_sc" name="BVG Synchronize Contract"
+            groups="hr.group_hr_manager" sequence="131" />
+        <record model="ir.ui.menu" id="bt_swissdec_bvg_basis_sc">
+            <field name="groups_id" eval="[(6,0,[ref('bt_swissdec.bt_swissdec_admin')])]"/>
+        </record>
+
+        <!-- 20180817 as discussed with Silvan we set group bt_swissdec.bt_swissdec_admin instead of "hr.group_hr_manager" all BVG menuitems - se we could come from a previous version we set the new groups via groups_id -->
+        <menuitem id="bt_swissdec_bvg_basis_ds" parent="bt_swissdec_annual_transmission_menu"
+            action="action_bvg_basis_list_ds" name="BVG Declare Salary" groups="hr.group_hr_manager"
+            sequence="141" />
+        <record model="ir.ui.menu" id="bt_swissdec_bvg_basis_ds">
+            <field name="groups_id" eval="[(6,0,[ref('bt_swissdec.bt_swissdec_admin')])]"/>
+        </record>
+
+
+
+        <menuitem id="bt_swissdec_monthly_transmission_menu" parent="menu_comunication_menu"
+            name="Monthly Transmission" groups="hr.group_hr_manager" sequence="20" />
+
+        <menuitem id="bt_swissdec_monthly_transmission_menu_test" parent="menu_comunication_menu_test"
+            name="Monthly Transmission" groups="hr.group_hr_manager" sequence="20" />
+
+
+
+        <menuitem id="bt_swissdec_tax_at_source_transmission_submenu"
+            parent="bt_swissdec_monthly_transmission_menu" action="gui_tax_at_source_transmission_action"
+            name="Tax at Source Transmission" groups="hr.group_hr_manager"
+            sequence="201" />
+
+        <menuitem id="bt_swissdec_tax_at_source_transmission_submenu_test"
+            parent="bt_swissdec_monthly_transmission_menu_test" action="gui_tax_at_source_transmission_action_test"
+            name="Tax at Source Transmission" groups="hr.group_hr_manager"
+            sequence="201" />
+
+		<menuitem id="bt_swissdec_tax_at_source_transmission_submenu_test_employee_ids"
+			parent="bt_swissdec_monthly_transmission_menu_test" action="gui_tax_at_source_transmission_action_test_employee_ids"
+			name="Tax at Source Transmission (Employees)" groups="hr.group_hr_manager"
+			sequence="202" />
+
+
+
+        <record id="s_gui_ahv_mutation_action" model="ir.actions.act_window">
+            <field name="name">Edit AHV Mutation</field>
+            <field name="res_model">single_gui_ahv_mutation</field>
+            <field name="context">{}</field>
+            <field name="domain" />
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="bt_swissdec_single_ahv" parent="bt_swissdec_monthly_transmission_menu"
+            action="s_gui_ahv_mutation_action" name="Edit AHV mutations" groups="hr.group_hr_manager"
+            sequence="221" />
+
+
+        <menuitem id="bt_swissdec_anual_reports_menu" parent="hr.hr_menu_hr_reports"
+            action="action_swissdec_reports_view_gen" name="Swissdec Reports"
+            groups="hr.group_hr_manager" sequence="30" />
+
+
+
+
+        <menuitem id="bt_swissdec_configuration_menu" parent="payroll_configure"
+            action="action_transmitter_configuration" name="Transmitter Configuration"
+            groups="hr.group_hr_manager" sequence="9" />
+
+
+        <menuitem id="bt_swissdec_transmitter_admin" parent="menu_comunication_menu"
+            name="Admin" groups="bt_swissdec.bt_swissdec_admin" sequence="20" />
+
+        <menuitem id="bt_swissdec_transmitter_admin_test" parent="menu_comunication_menu_test"
+            name="Admin" groups="bt_swissdec.bt_swissdec_admin" sequence="20" />
+
+
+        <menuitem id="bt_swissdec_transmitter_menu" parent="bt_swissdec_transmitter_admin"
+            action="bt_swissdec_transmitter_action" name="Transmit" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="80" />
+
+        <menuitem id="bt_swissdec_bvg_synchronize_contract_s" parent="bt_swissdec_transmitter_admin"
+            action="gui_bvg_sc_action" name="BVG Synchronize Contract" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="111" />
+
+        <menuitem id="bt_swissdec_bvg_bvg_transmission_s" parent="bt_swissdec_transmitter_admin"
+            action="gui_bvg_ds_action" name="BVG Declare Salary" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="121" />
+
+        <menuitem id="bt_swissdec_ahv_mutations_submenu" parent="bt_swissdec_transmitter_admin"
+            action="gui_ahv_mutation_action" name="AHV mutations" groups="hr.group_hr_manager"
+            sequence="211" />
+
+        <menuitem id="bt_swissdec_ahv_mm" parent="bt_swissdec_transmitter_admin"
+            action="bt_swissdec_amt_admin" name="AHV Mutation table" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="221" />
+
+        <menuitem id="bt_swissdec_bvg_import" parent="bt_swissdec_transmitter_admin"
+            action="action_import_tree_admin" name="BVG Import Data" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="231" />
+
+        <menuitem id="menu_bt_swissdec_qst_mm" parent="bt_swissdec_transmitter_admin"
+            action="bt_swissdec_qst_admin" name="QST Mutation table" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="300" />
+
+        <menuitem id="menu_bt_swissdec_qst_tl" parent="bt_swissdec_transmitter_admin"
+            action="action_gta_source_transmission_line" name="QST Transmission Line" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="320" />
+
+
+
+        <menuitem id="menu_bt_swissdec_qst_mm_test" parent="bt_swissdec_transmitter_admin_test"
+            action="bt_swissdec_qst_admin_test" name="QST Mutation table" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="300" />
+
+        <menuitem id="menu_bt_swissdec_qst_tl_test" parent="bt_swissdec_transmitter_admin_test"
+            action="action_gta_source_transmission_line_test" name="QST Transmission Line" groups="bt_swissdec.bt_swissdec_admin"
+            sequence="320" />
+
+
+        <!-- Added Doku brain-tec Menu -->
+        <record id="external_link_doku_braintec" model="ir.actions.act_url">
+                <field name="name">Doku brain-tec</field>
+                <field name="type">ir.actions.act_url</field>
+                <field name="target">new</field>
+                <field name="url">https://odoo.braintec-group.com/slides/slide/odoo-12-lohnbuchhaltung-19</field>
+        </record>
+
+        <menuitem action="external_link_doku_braintec"
+                  name="Doku brain-tec"
+                  id="menu_external_link_doku_braintec"
+                  sequence="210"
+                  parent="payroll_configure"/>
+
+        <!-- Added Link to tutorial.link Menu -->
+        <record id="action_tutorial_link_swissdec" model="ir.actions.act_window">
+            <field name="name">Tutorial Links</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tutorial.link</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" eval="False"/>
+        </record>
+
+        <menuitem id="menu_tutorial_link_swissdec" action="action_tutorial_link_swissdec"
+            parent="payroll_configure" sequence="220" />
+
+    </data>
+</openerp>

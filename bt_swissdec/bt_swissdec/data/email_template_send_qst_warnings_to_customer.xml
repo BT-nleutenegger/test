@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+
+        <!--Email template-->
+        <record id="email_template_send_qst_warnings_to_customer" model="mail.template">
+            <field name="name">Send auto email to customer with QST warnings of actual month</field>
+            <field name="email_from">swissdec@braintec-group.com</field>
+            <field name="subject">Warnings concerning QST in employee ${ctx.get('employee_name')} (DB ${ctx.get('dbname')})</field>
+            <field name="email_to">${ctx.get('email_to')}</field>
+            <field name="model_id" ref="bt_swissdec.model_hr_employee_calculationparameter_qst"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">
+    There are warnings in QST data for the employee <span style="font-weight: bold;">${ctx.get('employee_name')}</span> concerning the month <span style="font-weight: bold;">${ctx.get('month')}</span> in <span style="font-weight: bold;">${ctx.get('year')}</span>:<br>
+    <ul>
+    ${ctx.get('warning')}
+    </ul>
+</div>
+            ]]></field>
+        </record>
+  
+  </data>
+</openerp>

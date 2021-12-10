@@ -1,0 +1,149 @@
+<openerp>
+	<data noupdate="1">
+        <!-- Create BFS Residence Category's -->
+        
+		<record id="residence_category_shortTerm" model="res.company.bfs.residence.category">
+			<field name="code">shortTerm-L</field>
+            <field name="name">Kurzaufenthalter (Kat. L)</field>
+            <field name="swiss_payroll_is_switzerland" eval="False"/>
+        </record>
+		<record id="residence_category_annual" model="res.company.bfs.residence.category">
+			<field name="code">annual-B</field>
+            <field name="name">Jahresaufenthalter (Kat. B)</field>
+            <field name="swiss_payroll_is_switzerland" eval="False"/>
+        </record>
+		<record id="residence_category_settled" model="res.company.bfs.residence.category">
+			<field name="code">settled-C</field>
+            <field name="name">Niedergelassene (Kat. C)</field>
+            <field name="swiss_payroll_is_switzerland" eval="False"/>
+        </record>
+		<record id="residence_category_crossBorder" model="res.company.bfs.residence.category">
+			<field name="code">crossBorder-G</field>
+            <field name="name">Grenzgänger (Kat. G)</field>
+            <field name="swiss_payroll_is_switzerland" eval="False"/>
+        </record>
+        <record id="residence_category_asylumSeeker" model="res.company.bfs.residence.category">
+            <field name="code">asylumSeeker-N</field>
+            <field name="name">Asylsuchender (Kat. N)</field>
+            <field name="swiss_payroll_is_switzerland" eval="False"/>
+        </record>
+        <record id="residence_category_needForProtection" model="res.company.bfs.residence.category">
+            <field name="code">needForProtection-S</field>
+            <field name="name">Schutzbedürftige (Kat. S)</field>
+            <field name="swiss_payroll_is_switzerland" eval="False"/>
+        </record>
+		<record id="residence_category_othersNotSwiss" model="res.company.bfs.residence.category">
+			<field name="code">othersNotSwiss</field>
+            <field name="name">Andere (nicht Schweizer)</field>
+            <field name="swiss_payroll_is_switzerland" eval="False"/>
+        </record>
+        <record id="residence_category_swiss" model="res.company.bfs.residence.category">
+			<field name="code">Swiss</field>
+            <field name="name">Schweizer</field>
+            <field name="swiss_payroll_is_switzerland" eval="True"/>
+        </record>
+		
+		<!-- Delete old BFS Educations's from v3 -->
+		<delete model="res.company.bfs.education" search="[('code','=','university')]"/>
+		<delete model="res.company.bfs.education" search="[('code','=','higherEducation')]"/>
+		
+		<!-- Create BFS Educations's -->
+		<record id="education_doctorate" model="res.company.bfs.education">
+			<field name="code">doctorate</field>
+            <field name="name">Doktorat</field>
+			<field name="note"> </field>
+        </record>
+        <record id="education_universityMaster" model="res.company.bfs.education">
+			<field name="code">universityMaster</field>
+            <field name="name">Uni, ETH, Master</field>
+			<field name="note"> </field>
+        </record>
+        <record id="education_universityBachelor" model="res.company.bfs.education">
+            <field name="code">universityBachelor</field>
+            <field name="name">Uni, ETH, Bachelor</field>
+            <field name="note"> </field>
+        </record>
+		<record id="education_higherEducationMaster" model="res.company.bfs.education">
+			<field name="code">higherEducationMaster</field>
+            <field name="name">Fachhochschule (FH), Pädagogische (PH), Master</field>
+			<field name="note"> </field>
+        </record>
+        <record id="education_higherEducationBachelor" model="res.company.bfs.education">
+            <field name="code">higherEducationBachelor</field>
+            <field name="name">Fachhochschule (FH), Pädagogische (PH), Bachelor</field>
+            <field name="note"> </field>
+        </record>
+		<record id="education_higherVocEducation" model="res.company.bfs.education">
+			<field name="code">higherVocEducation</field>
+            <field name="name">Höhere Berufsausbildung, höhere Fachschule</field>
+			<field name="note">Höhere Berufsausbildung mit eidgenössischem Fachausweis, Diplom oder höherer Fachprüfung/Meisterdiplom, Techniker/in TS, Höhere Fachschule, HTL, HWV, HFG, IES oder gleichwertige Ausbildung.</field>
+        </record>
+		<record id="education_teacherCertificate" model="res.company.bfs.education">
+			<field name="code">teacherCertificate</field>
+            <field name="name">Lehrerpatent</field>
+			<field name="note">Auf verschiedenen Stufen: Primarlehrerseminar (für den Unterricht auf Stufe Kindergarten, Primarschule, Handarbeit und Werken, Hauswirtschaft) oder gleichwertige Ausbildung.</field>
+        </record>
+		<record id="education_universityEntranceCertificate" model="res.company.bfs.education">
+			<field name="code">universityEntranceCertificate</field>
+            <field name="name">Matura</field>
+			<field name="note">Gymnasiale Maturität, Berufsmaturität, Fachmaturität oder gleichwertige Ausbildung.</field>
+        </record>
+		<record id="education_vocEducationCompl" model="res.company.bfs.education">
+			<field name="code">vocEducationCompl</field>
+            <field name="name">Abgeschlossene Berufsausbildung</field>
+			<field name="note">Diese führt in der Regel zum Erwerb eines eidgenössischen Fähigkeitszeugnisses (EFZ), Vollzeit-Berufsschule, Diplom- oder Fachmittelschule, berufliche Grundbildung (eidgenössisches Berufsattest – EBA) oder gleichwertige Ausbildung.</field>
+        </record>
+		<record id="education_enterpriseEducation" model="res.company.bfs.education">
+			<field name="code">enterpriseEducation</field>
+            <field name="name">Ausschliesslich unternehmensintern</field>
+			<field name="note">Ausschliesslich unternehmensinterne, durch das Bundesamt für Berufsbildung und Technologie (BBT) nicht anerkannte Berufsausbildung.</field>
+        </record>
+		<record id="education_mandatorySchoolonly" model="res.company.bfs.education">
+			<field name="code">mandatorySchoolOnly</field>
+            <field name="name">Obligatorische Schule, ohne abgeschlossene Berufsausbildung</field>
+			<field name="note"> </field>
+        </record>
+		
+		<!-- Create BFS Position's -->
+		
+		<record id="position_highestCadre" model="res.company.bfs.position">
+			<field name="code">highestCadre</field>
+            <field name="name">Oberes Kader</field>
+			<field name="note">Leitung oder Mitwirkung in der Geschäftsleitung (Gestaltung oder Mitgestaltung der Politik auf der Ebene Gesamtunternehmen, Verantwortung oder Mitverantwortung für die Realisierung der Unternehmensziele, Koordination der verschiedenen Leitungsfunktionen, Zuständigkeit für Politik und Zielerfüllung in einem bestimmten Verantwortungsbereich).</field>
+        </record>
+		<record id="position_middleCadre" model="res.company.bfs.position">
+			<field name="code">middleCadre</field>
+            <field name="name">Mittleres Kader</field>
+			<field name="note">Bereichsleitung, hohe Stabsfunktionen (Verantwortung für Planung und Organisation in einem bestimmten Geschäftsbereich, Mitwirkung bei der Entwicklung von langfristigen Massnahmenplänen).</field>
+        </record>
+		<record id="position_lowerCadre" model="res.company.bfs.position">
+			<field name="code">lowerCadre</field>
+            <field name="name">Unteres Kader</field>
+			<field name="note">Ausführungsorientierte Leitung eines Teilbereichs, qualifizierte Stabsfunktionen (Verantwortung für die Realisierung von Aufträgen im eigenen Tätigkeitsbereich, Beteiligung an Planung und Organisation).</field>
+        </record>
+		<record id="position_lowestCadre" model="res.company.bfs.position">
+			<field name="code">lowestCadre</field>
+            <field name="name">Unterstes Kader</field>
+			<field name="note">Überwachung von Arbeiten gemäss genauer Anleitung (Beaufsichtigen der laufenden Arbeiten, fallweise Beteiligung an Planung und Organisation).</field>
+        </record>
+		<record id="position_noCadre" model="res.company.bfs.position">
+			<field name="code">noCadre</field>
+            <field name="name">Ohne Kaderfunktion</field>
+			<field name="note"> </field>
+        </record>
+		
+        <!-- Create BFS Job Title's -->
+        <record id="jobtitle_informatiker" model="res.company.bfs.jobtitle">
+            <field name="name">Informatiker</field>
+        </record>
+        <record id="jobtitle_informatikerin" model="res.company.bfs.jobtitle">
+            <field name="name">Informatikerin</field>
+        </record>
+        <record id="jobtitle_bueroangestellte" model="res.company.bfs.jobtitle">
+            <field name="name">Büroangestellte</field>
+        </record>
+        <record id="jobtitle_kaufmlehrling" model="res.company.bfs.jobtitle">
+            <field name="name">Kaufmännischer Lehrling</field>
+        </record>
+    </data>
+</openerp>

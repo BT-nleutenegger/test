@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_journal_form_bt" model="ir.ui.view">
+        <field name="name">account.journal.form.bt</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[child::field[@name='type_control_ids']]" position="before">
+                <group name="debit_advice_control" string="Debit Advice Control" groups="account.group_account_user">
+                    <field name="debtor_account_type"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

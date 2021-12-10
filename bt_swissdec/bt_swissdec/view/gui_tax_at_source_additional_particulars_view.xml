@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="gui_tax_at_source_additional_particulars_form_view"
+            model="ir.ui.view">
+        <field name="name">gui_tax_at_source_additional_particulars_form_view</field>
+        <field name="model">gui_tax_at_source_additional_particulars</field>
+        <field name="arch" type="xml">
+            <form string="Additional Particulars">
+                <notebook>
+                    <page string="Current">
+                <group>
+                    <field name="institutionIDRef"/>
+                    <field name="Denomination"/>
+                    <field name="Employment"/>
+                    <field name="MarriagePartner_SV_AS_NUMBER"/>
+                    <field name="MarriagePartner_Lastname"/>
+                    <field name="MarriagePartner_Firstname"/>
+                    <field name="MarriagePartner_DateOfBirth"/>
+                    <field name="MarriagePartner_Street"/>
+                    <field name="MarriagePartner_ZIP"/>
+                    <field name="MarriagePartner_City"/>
+                    <field name="MarriagePartner_Country"/>
+                    <field name="MarriagePartner_Employment"/>
+                    <field name="MarriagePartner_Workplace"/>
+                    <field name="MarriagePartner_Start"/>
+                </group>
+                    </page>
+                    <page string="New Values">
+                        <group>
+                            <field name="new_MarriagePartner_SV_AS_NUMBER"/>
+                            <field name="new_MarriagePartner_Lastname"/>
+                            <field name="new_MarriagePartner_Firstname"/>
+                            <field name="new_MarriagePartner_DateOfBirth"/>
+                            <field name="new_MarriagePartner_Street"/>
+                            <field name="new_MarriagePartner_ZIP"/>
+                            <field name="new_MarriagePartner_City"/>
+                            <field name="new_MarriagePartner_Country"/>
+                            <field name="new_MarriagePartner_Employment"/>
+                            <field name="new_MarriagePartner_Workplace"/>
+                            <field name="new_MarriagePartner_Start"/>
+                        </group>
+
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="gui_tax_at_source_additional_particulars_tree_view"
+            model="ir.ui.view">
+        <field name="name">gui_tax_at_source_additional_particulars_tree_view</field>
+        <field name="model">gui_tax_at_source_additional_particulars</field>
+        <field name="arch" type="xml">
+            <tree string="Additional Particulars">
+                <field name="institutionIDRef"/>
+                <field name="Denomination"/>
+                <field name="Employment"/>
+                <field name="MarriagePartner_SV_AS_NUMBER"/>
+                <field name="MarriagePartner_Lastname"/>
+                <field name="MarriagePartner_Firstname"/>
+                <field name="MarriagePartner_DateOfBirth"/>
+                <field name="MarriagePartner_Street"/>
+                <field name="MarriagePartner_ZIP"/>
+                <field name="MarriagePartner_City"/>
+                <field name="MarriagePartner_Country"/>
+                <field name="MarriagePartner_Employment"/>
+                <field name="MarriagePartner_Workplace"/>
+                <field name="MarriagePartner_Start"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

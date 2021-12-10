@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_hr_adc_duplicate" model="ir.ui.view">
+            <field name="name">hr.adc.duplicate.form</field>
+            <field name="model">hr.adc.duplicate</field>
+            <field name="arch" type="xml">
+                <form string="Duplicate Category">
+                    <group colspan="4">
+                        <field name="valid_from_new" options="{'showInitDate': False, 'useCurrent': False}"/>
+                        <field name="matrix_nr"/>
+                        <newline/>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="matrix_buchhaltung_account" domain="[('company_id','=',company_id)]"/>
+                        <newline/>
+                        <field name="company_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="Duplicate Category" name="data_save" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_hr_adc_duplicate" model="ir.actions.act_window">
+            <field name="name">Duplicate Category</field>
+            <field name="res_model">hr.adc.duplicate</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_hr_allounce_deduction_categoty" />
+            <field name="binding_type">action</field>
+        </record>
+
+    </data>
+</openerp>

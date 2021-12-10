@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- RES PARTNER -->
+    <data>
+        <record id="res_partner_19_1M_qst5" model="res.partner">
+            <field name="name">Rinaldi_19_1M_qst5 Massimo</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3011</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company5" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+        <record id="res_partner_19_1Y_qst5" model="res.partner">
+            <field name="name">Rinaldi_19_1Y_qst5 Massimo</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bellinzona</field>
+            <field name="zip">6500</field>
+            <field name="state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]" />
+            <field name="municipality">5002</field>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="company_id" ref="second_company5" />
+            <field name="salary_relevant" eval="True"/>
+        </record>
+    </data>
+    <!-- RESOURCE RESOURCE -->
+    <data>
+        <record id="resource_resource_19_1M_qst5" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Rinaldi_19_1M_qst5</field>
+            <field name="company_id" ref="second_company5"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+        <record id="resource_resource_19_1Y_qst5" model="resource.resource">
+            <field name="time_efficiency">1</field>
+            <field name="name">Rinaldi_19_1Y_qst5</field>
+            <field name="company_id" ref="second_company5"/>
+            <field name="active">t</field>
+            <field name="resource_type">user</field>
+        </record>
+    </data>
+    <!-- RES PARTNER BANK -->
+    <data>
+        <record id="res_partner_bank1_qst5" model="res.partner.bank">
+            <field name="acc_number">CH0204835000626882001</field>
+            <field name="acc_type">iban</field>
+            <field name="bank_name">Bank</field>
+            <field name="bank_id" ref="base.res_bank_1"/>
+            <field name="partner_id" ref="base.main_partner"/>
+        </record>
+    </data>
+    <!-- HR EMPLOYEE -->
+    <data>
+        <record id="hr_employee_19_1M_qst5" model="hr.employee">
+            <field name="resource_id" ref="resource_resource_19_1M_qst5" />
+            <field name="color">0</field>
+            <field name="name">Rinaldi</field>
+            <field name="job_title">_19_1M_qst5</field>
+            <field name="firstname">Massimo</field>
+            <field name="birthday">1967-04-11</field>
+            <field name="identification_id_bt">0096</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst5" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company5" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+        <record id="hr_employee_19_1Y_qst5" model="hr.employee">
+            <field name="resource_id" ref="resource_resource_19_1Y_qst5" />
+            <field name="color">0</field>
+            <field name="name">Rinaldi</field>
+            <field name="job_title">_19_1Y_qst5</field>
+            <field name="firstname">Massimo</field>
+            <field name="birthday">1967-04-11</field>
+            <field name="identification_id_bt">0097</field>
+            <field name="bank_account_id" ref="res_partner_bank1_qst5" />
+            <field name="gender">male</field>
+            <field name="lang">de_CH</field>
+            <field name="vehicle_distance">0</field>
+            <field name="company_id" ref="second_company5" />
+            <field name="receives_child_allowance" eval="False"/>
+        </record>
+    </data>
+    <!-- create ir_property entries for property_bank_account for each employee -->
+    <data>
+        <record forcecreate="True" id="property_bank_account_hr_employee_19_1M_qst5" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee_19_1M_qst5'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company5"/>
+        </record>
+        <record forcecreate="True" id="property_bank_account_hr_employee_19_1Y_qst5" model="ir.property">
+            <field name="name">property_bank_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','property_bank_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_1060'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee_19_1Y_qst5'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company5"/>
+        </record>
+    </data>
+    <!-- create ir_property entries for employee_account for each employee -->
+    <data>
+        <record forcecreate="True" id="employee_account_hr_employee_19_1M_qst5" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee_19_1M_qst5'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company5"/>
+        </record>
+        <record forcecreate="True" id="employee_account_hr_employee_19_1Y_qst5" model="ir.property">
+            <field name="name">employee_account</field>
+            <field name="fields_id" search="[('model','=','hr.employee'),('name','=','employee_account')]"/>
+            <field eval="'account.account,'+str(ref('l10n_ch.ch_coa_5900'))" model="account.account" name="value"/>
+            <field eval="'hr.employee,'+str(ref('hr_employee_19_1Y_qst5'))" model="hr.employee" name="res_id"/>
+            <field name="company_id" ref="second_company5"/>
+        </record>
+    </data>
+
+    <!-- create hr.contract entries -->
+    <data>
+        <record id="hr_contract_19_1M_qst5" model="hr.contract">
+            <field name="date_start">2021-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company5"/>
+            <field name="employee_id" ref="hr_employee_19_1M_qst5"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Rinaldi_19_1M_qst5 Massimo</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn0_19_1M_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-01-01</field>
+            <field name="date_to">2021-12-31</field>
+            <field eval="6000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_19_1M_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_13ml0_19_1M_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">13. Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-03-01</field>
+            <field name="date_to">2021-03-31</field>
+            <field eval="1500.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_44"/>
+            <field name="contract_id" ref="hr_contract_19_1M_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_13ml1_19_1M_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">13. Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-06-01</field>
+            <field name="date_to">2021-06-30</field>
+            <field eval="1500.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_44"/>
+            <field name="contract_id" ref="hr_contract_19_1M_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_13ml2_19_1M_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">13. Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-09-01</field>
+            <field name="date_to">2021-09-30</field>
+            <field eval="1500.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_44"/>
+            <field name="contract_id" ref="hr_contract_19_1M_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_13ml3_19_1M_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">13. Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-12-01</field>
+            <field name="date_to">2021-12-31</field>
+            <field eval="1500.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_44"/>
+            <field name="contract_id" ref="hr_contract_19_1M_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_contract_19_1Y_qst5" model="hr.contract">
+            <field name="date_start">2021-01-01</field>
+            <field name="type_id" ref="hr_contract_type_unbml"/>
+            <field name="company_id" ref="second_company5"/>
+            <field name="employee_id" ref="hr_employee_19_1Y_qst5"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="schedule_pay">monthly</field>
+            <field name="name">Rinaldi_19_1Y_qst5 Massimo</field>
+        </record>
+        <record id="hr_payslip_grosswage_line_monatslohn0_19_1Y_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-01-01</field>
+            <field name="date_to">2021-12-31</field>
+            <field eval="6000.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_1"/>
+            <field name="contract_id" ref="hr_contract_19_1Y_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_13ml0_19_1Y_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">13. Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-03-01</field>
+            <field name="date_to">2021-03-31</field>
+            <field eval="1500.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_44"/>
+            <field name="contract_id" ref="hr_contract_19_1Y_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_13ml1_19_1Y_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">13. Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-06-01</field>
+            <field name="date_to">2021-06-30</field>
+            <field eval="1500.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_44"/>
+            <field name="contract_id" ref="hr_contract_19_1Y_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_13ml2_19_1Y_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">13. Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-09-01</field>
+            <field name="date_to">2021-09-30</field>
+            <field eval="1500.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_44"/>
+            <field name="contract_id" ref="hr_contract_19_1Y_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+        <record id="hr_payslip_grosswage_line_13ml3_19_1Y_qst5" model="hr.payslip.grosswage.line">
+            <field name="code">13. Monatslohn</field>
+            <field model="account.account" name="account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS_5 AG')]"/>
+            <field name="date_from">2021-12-01</field>
+            <field name="date_to">2021-12-31</field>
+            <field eval="1500.0" name="value"/>
+            <field eval="0" name="is_special_grosswage"/>
+            <field name="category_adc_id" ref="qst5_hr_allounce_deduction_categoty_44"/>
+            <field name="contract_id" ref="hr_contract_19_1Y_qst5"/>
+            <field eval="1.0" name="quantity"/>
+        </record>
+    </data>
+    <!-- create hr.employee.entry.withdrawal entries -->
+    <data>
+        <record id="hr_entry_withdrawal_rinaldi0_19_1M_qst5" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2021-01-01</field>
+            <field name="employee_id" ref="hr_employee_19_1M_qst5"/>
+        </record>
+        <record id="hr_entry_withdrawal_rinaldi0_19_1Y_qst5" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2021-01-01</field>
+            <field name="employee_id" ref="hr_employee_19_1Y_qst5"/>
+        </record>
+    </data>
+    <data>
+        <record id="hr_employee_year_19_1M_qst5" model="hr.employee.year">
+            <field eval="0" name="umzug_bezahlt_ag"/>
+            <field name="bedingungen_rz52">no</field>
+            <field eval="0" name="kantine"/>
+            <field name="position_id" ref="position_noCadre"/>
+            <field eval="0" name="effektive_spesen"/>
+            <field name="privat_fz">no</field>
+            <field eval="0" name="verausserungssperre"/>
+            <field eval="0" name="manager"/>
+            <field name="identification_id_bt">0035</field>
+            <field ref="hr_employee_19_1M_qst5" name="employee_id"/>
+            <field name="company_id" ref="second_company5"/>
+            <field eval="0" name="year_closed"/>
+            <field eval="0" name="ma_beteiligung_drittfirma"/>
+            <field name="verkehrswert_stv_ok">no</field>
+            <field name="jobtitle_id" ref="jobtitle_informatiker"/>
+            <field eval="0" name="anwartschaftliche_rechte"/>
+            <field eval="0" name="is_specialcase"/>
+            <field name="company_year_id" ref="year2021_qst5"/>
+            <field name="ma_beteiligung">no</field>
+            <field eval="0" name="lohnausweis_ohne_kz"/>
+            <field name="employee_name">Rinaldi</field>
+            <field name="privat_dienstauto">no</field>
+            <field eval="0" name="group_invisible"/>
+            <field name="education_id" ref="education_vocEducationCompl"/>
+            <field name="name">2021</field>
+            <field eval="0" name="unentgeltliche_befoerderung"/>
+            <field name="ssnid">756.1859.2584.53</field>
+            <field eval="0" name="gesperrte_ma_optionen"/>
+            <field eval="0" name="group_readonly"/>
+            <field eval="1" name="group_required"/>
+            <field name="spesen_stv">no</field>
+            <field name="lohnausweis_or_rentenbescheinigung">lohnausweis</field>
+            <field eval="0" name="lohnausweis_nl_ignore_company"/>
+            <field eval="1" name="at_least_one_entry_nettolohnausgleich_ids_ok"/>
+            <field eval="1" name="at_least_one_entry_zusatzmonatslohn_ids_ok"/>
+            <field eval="0" name="nicht_bewertbare_optionen"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_01_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-01-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_02_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-02-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_03_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-03-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_04_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-04-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="0" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_05_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-05-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="0" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_06_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-06-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="0" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_07_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-07-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_08_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-08-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_09_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-09-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_10_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-10-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_11_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-11-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_12_19_1M_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2021-12-01</field>
+            <field name="qst_state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">351</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','BE')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1M_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_bvg_19_1M_qst5" model="hr.employee.calculationparameter.bvg">
+            <field eval="1" name="not_bvg"/>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_employee_calculationparameter_ktg_19_1M_qst5" model="hr.employee.calculationparameter.ktg">
+            <field name="code" ref="res_company_ktg_code_0_2014_qst5"/>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+            <field name="group" ref="res_company_ktg_1_2014_qst5"/>
+        </record>
+        <record id="hr_employee_calculationparameter_uvg_19_1M_qst5" model="hr.employee.calculationparameter.uvg">
+            <field name="valid_from">2013-01-01</field>
+            <field name="code_versicherung">0</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="uvg_id" ref="res_company_uvg_2014_qst5"/>
+            <field name="code_betriebsteil" ref="res_company_uvg_part_a_2014_qst5"/>
+        </record>
+        <record id="hr_employee_calculationparameter_uvgz_19_1M_qst5" model="hr.employee.calculationparameter.uvgz">
+            <field name="code" ref="res_company_uvgz_code_0_2014_qst5"/>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+            <field name="group" ref="res_company_uvgz_1_2014_qst5"/>
+        </record>
+        <record id="hr_employee_calculationparameter_zusatzmonatslohn_19_1M_qst5" model="hr.employee.calculationparameter.zusatzmonatslohn">
+            <field name="code">0</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+        </record>
+        <record id="hr_employee_calculationparameter_nettolohnausgleich_19_1M_qst5" model="hr.employee.calculationparameter.nettolohnausgleich">
+            <field name="code">0</field>
+            <field name="year_id" ref="hr_employee_year_19_1M_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+        </record>
+    </data>
+    <data>
+        <record id="hr_employee_year_19_1Y_qst5" model="hr.employee.year">
+            <field eval="0" name="umzug_bezahlt_ag"/>
+            <field name="bedingungen_rz52">no</field>
+            <field eval="0" name="kantine"/>
+            <field name="position_id" ref="position_noCadre"/>
+            <field eval="0" name="effektive_spesen"/>
+            <field name="privat_fz">no</field>
+            <field eval="0" name="verausserungssperre"/>
+            <field eval="0" name="manager"/>
+            <field name="identification_id_bt">0036</field>
+            <field ref="hr_employee_19_1Y_qst5" name="employee_id"/>
+            <field name="company_id" ref="second_company5"/>
+            <field eval="0" name="year_closed"/>
+            <field eval="0" name="ma_beteiligung_drittfirma"/>
+            <field name="verkehrswert_stv_ok">no</field>
+            <field name="jobtitle_id" ref="jobtitle_informatiker"/>
+            <field eval="0" name="anwartschaftliche_rechte"/>
+            <field eval="0" name="is_specialcase"/>
+            <field name="company_year_id" ref="year2021_qst5"/>
+            <field name="ma_beteiligung">no</field>
+            <field eval="0" name="lohnausweis_ohne_kz"/>
+            <field name="employee_name">Rinaldi</field>
+            <field name="privat_dienstauto">no</field>
+            <field eval="0" name="group_invisible"/>
+            <field name="education_id" ref="education_vocEducationCompl"/>
+            <field name="name">2021</field>
+            <field eval="0" name="unentgeltliche_befoerderung"/>
+            <field name="ssnid">756.1859.2584.53</field>
+            <field eval="0" name="gesperrte_ma_optionen"/>
+            <field eval="0" name="group_readonly"/>
+            <field eval="1" name="group_required"/>
+            <field name="spesen_stv">no</field>
+            <field name="lohnausweis_or_rentenbescheinigung">lohnausweis</field>
+            <field eval="0" name="lohnausweis_nl_ignore_company"/>
+            <field eval="1" name="at_least_one_entry_nettolohnausgleich_ids_ok"/>
+            <field eval="1" name="at_least_one_entry_zusatzmonatslohn_ids_ok"/>
+            <field eval="0" name="nicht_bewertbare_optionen"/>
+        </record>
+
+        <record id="hr_employee_calculationparameter_qst_01_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-01-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_02_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-02-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_03_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-03-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_04_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-04-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="0" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_05_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-05-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="0" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_06_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-06-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="0" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_07_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-07-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_08_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-08-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_09_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-09-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_10_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-10-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_11_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-11-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_qst_12_19_1Y_qst5" model="hr.employee.calculationparameter.qst">
+            <field name="code">1</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2021-12-01</field>
+            <field name="qst_state_id" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="qst_municipality">5002</field>
+            <field name="qst_country_id" ref="base.ch"/>
+            <field name="qst_code" search="[('company_id.name', '=', 'PROCESS_5 AG'), ('name', '=', u'A0N'), ('kanton.code','=','TI')]"/>
+            <field eval="0" name="has_specialcode"/>
+            <field name="employment_type">mainJob</field>
+            <field name="otheractivities_type">noOther</field>
+            <field name="rente">0</field>
+            <field name="grenzgaenger_type">abroad</field>
+            <field name="marital_code" ref="hr_employee_marital_status_single"/>
+            <field name="marital_qst_partner_data_required_related" eval="0"/>
+            <field name="marital_validasof">1967-04-11</field>
+            <field name="bur_id" ref="res_company_bur_be_2014_qst5"/>
+            <field name="address_home_id" ref="res_partner_19_1Y_qst5"/>
+            <field name="nationality_country_id" ref="base.it"/>
+            <field name="residence_category" ref="residence_category_swiss"/>
+            <field eval="100" name="degree"/>
+            <field name="weeklyhours_or_lessons">has_weeklyhours</field>
+            <field eval="10" name="workdays_ch"/>
+        </record>
+        <record id="hr_employee_calculationparameter_bvg_19_1Y_qst5" model="hr.employee.calculationparameter.bvg">
+            <field eval="1" name="not_bvg"/>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_employee_calculationparameter_ktg_19_1Y_qst5" model="hr.employee.calculationparameter.ktg">
+            <field name="code" ref="res_company_ktg_code_0_2014_qst5"/>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+            <field name="group" ref="res_company_ktg_1_2014_qst5"/>
+        </record>
+        <record id="hr_employee_calculationparameter_uvg_19_1Y_qst5" model="hr.employee.calculationparameter.uvg">
+            <field name="valid_from">2013-01-01</field>
+            <field name="code_versicherung">0</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="uvg_id" ref="res_company_uvg_2014_qst5"/>
+            <field name="code_betriebsteil" ref="res_company_uvg_part_a_2014_qst5"/>
+        </record>
+        <record id="hr_employee_calculationparameter_uvgz_19_1Y_qst5" model="hr.employee.calculationparameter.uvgz">
+            <field name="code" ref="res_company_uvgz_code_0_2014_qst5"/>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+            <field name="group" ref="res_company_uvgz_1_2014_qst5"/>
+        </record>
+        <record id="hr_employee_calculationparameter_zusatzmonatslohn_19_1Y_qst5" model="hr.employee.calculationparameter.zusatzmonatslohn">
+            <field name="code">0</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+        </record>
+        <record id="hr_employee_calculationparameter_nettolohnausgleich_19_1Y_qst5" model="hr.employee.calculationparameter.nettolohnausgleich">
+            <field name="code">0</field>
+            <field name="year_id" ref="hr_employee_year_19_1Y_qst5"/>
+            <field name="valid_from">2013-01-01</field>
+        </record>
+    </data>
+
+    <data>
+        <record model="hr.employee" id="hr_employee_19_1M_qst5">
+            <field name="year_ids" eval="[(4, ref('hr_employee_year_19_1M_qst5'))]"/>
+        </record>
+        <record model="hr.employee" id="hr_employee_19_1Y_qst5">
+            <field name="year_ids" eval="[(4, ref('hr_employee_year_19_1Y_qst5'))]"/>
+        </record>
+    </data>
+</odoo>

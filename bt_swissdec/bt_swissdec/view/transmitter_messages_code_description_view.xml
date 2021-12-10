@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- =================================================== Tree views for 
+			swissdec response line =================================================== -->
+		<record id="transmitter_messages_code_description_tree_view"
+			model="ir.ui.view">
+			<field name="name">transmitter_messages_code_description_tree_view</field>
+			<field name="model">bt_swissdec.transmitter_messages_code_description</field>
+			<field name="arch" type="xml">
+				<tree string="Transmitter Messages Code Description">
+					<field name="name" />
+					<field name="description" />
+					<field name="due_date" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Form view for a swissdec code_description xml -->
+		<record id="transmitter_messages_code_description_form" model="ir.ui.view">
+			<field name="name">transmitter_messages_code_description_form</field>
+			<field name="model">bt_swissdec.transmitter_messages_code_description</field>
+			<field name="arch" type="xml">
+				<form string="Swissdec Response Line">
+					<sheet>
+						<group colspan="4" col="2">
+							<field name="name" />
+							<field name="description" />
+							<field name="due_date" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>
+	

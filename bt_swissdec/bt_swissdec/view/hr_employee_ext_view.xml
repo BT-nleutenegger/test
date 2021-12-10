@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_hr_employee_view_form" model="ir.ui.view">
+        <field name="name">payroll.hr.employee.view.form.bt_swissdec</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_payroll.payroll_hr_employee_view_form" />
+        <field name="arch" type="xml">
+            <field name="registration_number" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+        <record id="view_bt_employee_form" model="ir.ui.view">
+            <field name="name">bt.hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="priority">15</field>
+            <field name="arch" type="xml">
+                <!-- BEGIN Special hack to show name and firstname in h1. No other solution was working -->
+                <xpath expr="//field[@name='name']" position="after">
+                    <label string=" " for="firstname" class="o_form_label"/><field name="firstname" placeholder="First Name"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="placeholder">Last Name</attribute>
+                </xpath>
+                <!-- END Special hack to show name and firstname in h1. No other solution was working -->
+                <xpath expr="//field[@name='category_ids']" position="before">
+                    <label for="category_ids" groups="hr.group_hr_user"/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="%(hr_contract.act_hr_employee_2_hr_contract)d"
+                        class="oe_stat_button"
+                        icon="fa-book"
+                        type="action"
+                        groups="hr.group_hr_manager">
+                        <field name="contracts_count" widget="statinfo" string="Contracts"/>
+                    </button>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="after">
+                    <div class="oe_button_box" name="button_box" groups="hr.group_hr_user">
+                        <button class="oe_stat_button"
+                                name="%(action_employee_configuration_progress_wizard)d" type="action"
+                                attrs="{'invisible':['|', '|', '|', '|', ('employee_configuration_progress', '=', 100), ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}"
+                                groups="hr.group_hr_user">
+                            <field name="employee_configuration_progress" widget="percentpie" string="Config"/>
+                        </button>
+                        <button name="%(action_change_address_wizard)d"
+                                class="oe_stat_button"
+                                icon="fa-list-alt"
+                                string="Change address"
+                                type="action"
+                                attrs="{'invisible':['|', '|', '|', '|', ('has_years','=',False), ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}"
+                                groups="bt_swissdec.user_swissdec"
+                        />
+                        <button name="open_actual_or_last_employee_id_year"
+                                class="oe_stat_button"
+                                icon="fa-calendar"
+                                string="Actual or last year"
+                                type="object"
+                                attrs="{'invisible':['|', '|', '|', '|', ('has_years','=',False), ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}"
+                                groups="bt_swissdec.user_swissdec"
+                        />
+                        <button name="open_previous_qst_month"
+                                class="oe_stat_button"
+                                icon="fa-arrow-circle-left"
+                                string="Previous month"
+                                type="object"
+                                attrs="{'invisible':['|', '|', '|', '|', ('has_years','=',False), ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}"
+                                groups="bt_swissdec.user_swissdec"
+                        />
+                        <button name="open_actual_qst_month"
+                                class="oe_stat_button"
+                                icon="fa-map-marker"
+                                string="Actual month"
+                                type="object"
+                                attrs="{'invisible':['|', '|', '|', '|', ('has_years','=',False), ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}"
+                                groups="bt_swissdec.user_swissdec"
+                        />
+                        <button name="open_next_qst_month"
+                                class="oe_stat_button"
+                                icon="fa-arrow-circle-right"
+                                string="Next month"
+                                type="object"
+                                attrs="{'invisible':['|', '|', '|', '|', ('has_years','=',False), ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}"
+                                groups="bt_swissdec.user_swissdec"
+                        />
+                        <button name="%(bt_tutorial.action_tutorial_link_to_use_in_other_modules)d" class="oe_stat_button" icon="fa-youtube" string="Tutorials" type="action" context="{'model_name': 'hr.employee'}"/>
+                    </div>
+                </xpath>
+                <!--xpath expr="//field[@name='image_medium']" position="replace" />
+                <xpath expr="/form/sheet/div[1]" position="replace">
+                    <div class="oe_title">
+                        <group string="Employee" colspan="4" col="4">
+                            <field name="image_medium" widget="image" class="oe_left oe_avatar"
+                                nolabel="1" />
+                        </group>
+                        <label for="category_ids" class="oe_edit_only" groups="hr.group_hr_user" />
+                        <field name="category_ids" widget="many2many_tags"
+                            placeholder="e.g. Part Time" groups="hr.group_hr_user" />
+                    </div>
+                </xpath-->
+
+                <!-- Remove fields that are inserted again in xpath expr="/form/sheet/div[2]" -->
+                <field name="company_id" position="replace" />
+                <field name="user_id" position="replace" />
+                <field name="department_id" position="replace" />
+                <field name="parent_id" position="replace" />
+
+                <notebook position="before">
+                    <group>
+                        <group colspan="4" col="4">
+                            <field name="entry_date_start"
+                                attrs="{'invisible':['|', '|', ('id','!=',False), ('company_id_company_used_for_bt_swissdec','=',False), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)],
+                                        'required':[('id','=',False), ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',False)]}" groups="bt_swissdec.user_swissdec"/>
+                            <newline />
+                            <field name="entry_date_start_company_change" options="{'showInitDate': False, 'useCurrent': False}"
+                                attrs="{'invisible':['|', ('id','=',False), ('show_entry_date_start_company_change','=',False)], 'required':[('id','!=',False), ('show_entry_date_start_company_change','=',True)]}"
+                                groups="bt_swissdec.user_swissdec"/>
+                            <field name="show_entry_date_start_company_change" invisible="1" />
+                            <newline />
+                            <!--field name="name" />
+                            <field name="firstname" /-->
+                            <field name="user_id" string="Related User"
+                                            context="{'default_groups_ref': ['base.group_user']}"/>
+                            <field name="company_id" options='{"no_open": True, "no_create": True}'
+                                   attrs="{'readonly': [('entry_withdrawal_ids', '!=', [])]}"
+                                groups="bt_swissdec.bt_swissdec_admin, base.group_multi_company" />
+                            <field name="company_id_company_used_for_bt_swissdec" invisible="1" />
+                            <!--field name="active" groups="hr.group_hr_manager"/ -->
+                            <field name="has_years" invisible="1" />
+                            <newline />
+                            <field name="department_id" options='{"no_open": True, "no_create": True}' />
+                            <field name="parent_id" />
+                            <newline />
+                            <field name="gender" attrs="{'required':[('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',False)]}"/>
+                            <field name="birthday" set_readonly="1"
+                                attrs="{'required':[('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',False)]}"/>
+                            <newline />
+                            <field name="identification_id_bt" groups="hr.group_hr_manager"
+                                attrs="{'required':[('id','!=',False), ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',False)], 'invisible':['|', '|', ('id','=',False), ('company_id_company_used_for_bt_swissdec','=',False), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}" />
+                            <field name="identification_id" groups="hr.group_hr_user" attrs="{'invisible':[('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',False)]}"/>
+                            <field name="id" invisible="1" />
+                            <newline />
+                            <field name="lang_fnct" groups="bt_swissdec.user_swissdec" />
+                            <field name="lang" groups="bt_swissdec.user_swissdec" />
+                            <newline />
+                            <field name="ssnid_swissdec"
+                                colspan="2" attrs="{'invisible':[('has_years', '=', True)]}" groups="bt_swissdec.user_swissdec" />
+                            <newline />
+                            <field name="is_freelancer" colspan="2"
+                                attrs="{'invisible':[('company_id_company_used_for_bt_swissdec','=',False)]}"
+                                groups="bt_swissdec.user_swissdec" />
+                        </group>
+                    </group>
+                </notebook>
+                <page name="personal_information" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', '|', '|', ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}</attribute>
+                </page>
+                <xpath
+                    expr="//notebook/page[2]/group/group[4]"
+                    position="replace" />
+                <xpath
+                    expr="//notebook/page[2]/group/group[3]"
+                    position="replace" />
+                <xpath
+                    expr="//notebook/page[2]/group/group[2]"
+                    position="replace" />
+                <xpath expr="//group[@name='active_group'][1]" position="before">
+                    <group name="private_address_group" string="Personal Information"  colspan="4">
+                        <group>
+                            <field name="private_address_id" context="{'show_address': 1}"
+                                   force_save="1"
+                                   attrs="{'readonly': [('company_id_company_used_for_bt_swissdec', '=', True), ('is_freelancer','=', False)]}"
+                                   options="{'always_reload': True, 'highlight_first_line': True}"
+                                   groups="bt_swissdec.user_swissdec"/>
+                        </group>
+                        <group col="4" colspan="4"
+                            attrs="{'invisible':['|', '|', '|', ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}">
+                            <field name="bank_account_id"
+                                   domain="['|', ('partner_id', '=', private_address_id), ('partner_id','=',False), '|', ('company_id', '=', False), ('company_id', '=', company_id)]"
+                                context="{'display_partner':True, 'default_partner_id': private_address_id}" />
+                            <div colspan="4">
+                                <p class="oe_grey"><strong><em>Bankverbindung</em></strong> ist die Bankverbindung des Mitarbeiters.</p>
+                            </div>
+                            <newline/>
+                            <label string="Special bank accounts" for="employee_special_bank_account_ids"
+                                   groups="bt_swissdec.user_swissdec"/>
+                            <field name="employee_special_bank_account_ids" nolabel="1" colspan="4" context="{'employee_id':id}"
+                                   groups="bt_swissdec.user_swissdec">
+                                <tree editable="top" string="Special bank accounts">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="sequence_readonly"/>
+                                    <field name="name"/>
+                                    <field name="bank_account_id" options="{'no_create': True}"/>
+                                    <field name="bank_account_partner_id"/>
+                                    <field name="amount"/>
+                                    <field name="valid_to"/>
+                                </tree>
+                            </field>
+                            <div colspan="4">
+                                <p class="oe_grey">Unter <strong><em>Spezialbankkonten</em></strong> kann die Lohnzahlung auf verschiedene Bankkonten aufgeteilt werden. Möchte man z.B. jeden Monat zuerst einen gewissen Betrag als Lohnpfändung an ein anderes Bankkonto überweisen, kann dies hier konfiguriert werden (Sortierung nach <em>Reihenfolge</em> und dann <em>Gültig bis</em>). Der Restbetrag (falls es einen gibt) wird dann auf Bankkonto unter Bankverbindung überwiesen.</p>
+                            </div>
+                            <field name="property_bank_account" string="Employee Bank Account"
+                                   options='{"no_open": True, "no_create": True}'
+                                   domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('user_type_id.type', '=', 'liquidity')]"
+                                   groups="bt_swissdec.user_swissdec"/>
+                            <field name="years_of_service" groups="bt_swissdec.user_swissdec" />
+                            <field name="employee_account" options='{"no_open": True, "no_create": True}'
+                                   domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('user_type_id.type', 'in', ('other', 'payable'))]"
+                                   groups="bt_swissdec.user_swissdec"/>
+                            <!--<field name="analytic_account" groups="analytic.group_analytic_accounting" />-->
+                            <div colspan="4">
+                                <p class="oe_grey">Vom <strong><em>Finanzkonto Angestellter</em></strong> wird die Vergütung bezahlt. Ist dieses Feld nicht gesetzt, wird standardmässig der Wert <strong><em>Standard Sollkonto</em></strong> / <strong><em>Standard Habenkonto</em></strong> aus dem <strong><em>Bank Journal</em></strong> bei der Mitarbeiterabrechnung verwendet.</p><p class="oe_grey">Das <strong><em>Mitarbeiter Konto</em></strong> ist das Kreditorenkonto auf welches der Lohn verbucht werden soll.</p><p class="oe_grey">Anzahl Dienstjahre sind die vollen Dienstjahre berechnet aus den erfassten Arbeitsverträgen.</p>
+                            </div>
+                            <newline/>
+                            <field name="show_analytic_account_line" invisible="1"/>
+                            <field name="analytic_account_line_ids" colspan="4"
+                                   attrs="{'invisible':[('show_analytic_account_line', '=', False)]}">
+                                <tree editable="top" string="Analytic Accounts">
+                                    <field name="name"/>
+                                    <field name="date_start"/>
+                                </tree>
+                                <form string="Analytic Account">
+                                    <group col="4">
+                                        <field name="name"/>
+                                        <field name="date_start"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//group[@name='active_group']" position="after">
+                    <group string="Text employee payslip" name="text_employee_payslip">
+                        <label for="text_payslip"/>
+                        <div>
+                            <field name="text_payslip"/>
+                        </div>
+                    </group>
+                </xpath>
+                <xpath
+                    expr="//notebook/page[2]/group/group[1]"
+                    position="replace">
+                    <separator string="Years" colspan="4" />
+                    <group attrs="{'invisible': [('has_years', '=', False)]}">
+                        <button string="Create new year (makes a copy of last year)"
+                            name="%(action_create_year_employee)d" icon="fa-plus"
+                            type="action"
+                            context="{'employee_id':id, 'button_click': True, 'has_years': True}"
+                            groups="bt_swissdec.user_swissdec"/>
+                    </group>
+                    <group attrs="{'invisible': [('has_years', '=', True)]}">
+                        <button string="Create new year" name="%(action_create_year_employee)d"
+                            icon="fa-plus" type="action"
+                            context="{'employee_id':id, 'button_click': True, 'has_years': False}"
+                            groups="bt_swissdec.user_swissdec"/>
+                    </group>
+                    <field name="reset_year_ids" groups="bt_swissdec.bt_swissdec_admin" />
+                    <field name="year_ids_to_set" groups="bt_swissdec.bt_swissdec_admin" />
+                    <group col="4" colspan="4">
+                        <div attrs="{'invisible':[('reset_year_ids','=',False)]}"
+                            colspan="4">
+                            <h2 style="color:red">This entry cannot be deleted, because it relates to a
+                                payslip or it needs at least one entry. You need to click on the
+                                flag 'RESET' in order to refresh the page.</h2>
+                        </div>
+                        <field name="do_reset_year_ids"
+                            context="{'employee_id': id, 'year_ids': year_ids, 'year_ids_to_set': year_ids_to_set}"
+                            attrs="{'invisible':[('reset_year_ids','=',False)]}" colspan="4"
+                            groups="bt_swissdec.user_swissdec" />
+                    </group>
+                    <field colspan="2" name="year_ids" nolabel="1"
+                        options='{"no_create": True}'
+                        domain="[('employee_id', '=', id)]" attrs="{'readonly':[('reset_year_ids','=',True)]}"
+                        context="{'employee_id':id, 'year_ids': year_ids}" groups="bt_swissdec.user_swissdec"/>
+                </xpath>
+                <xpath expr="//notebook/page[2]" position="attributes">
+                    <attribute name="string">Configuration salary</attribute>
+                    <attribute name="name">configuration_salary</attribute>
+                </xpath>
+                <xpath expr="//notebook[1]" position="inside">
+                    <page string="Children" groups="hr.group_hr_user"
+                          attrs="{'invisible':['|', '|', '|', ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}">
+                        <group col="4" colspan="4">
+                            <group col="4" colspan="4">
+                                <separator string="Family Information" colspan="4" />
+                                <group colspan="4" col="6">
+                                    <field name="is_single_parent" groups="bt_swissdec.user_swissdec" />
+                                    <newline />
+                                    <field name="receives_child_allowance" groups="bt_swissdec.user_swissdec" />
+                                    <newline />
+                                    <field name="receives_child_allowance_supplementary" groups="bt_swissdec.user_swissdec" />
+                                    <newline />
+                                    <field name="children" groups="bt_swissdec.user_swissdec"/>
+                                    <newline />
+                                    <field name="actual_count_children_deduction" groups="bt_swissdec.user_swissdec" />
+                                    <field name="partner_name" invisible="1" groups="bt_swissdec.user_swissdec"/>
+                                </group>
+                                <field name="children_ids" colspan="4" nolabel="1" height="150"
+                                    context="{'employee_name':name, 'default_parent_id': id}" groups="bt_swissdec.user_swissdec">
+                                    <form string="Children">
+                                        <group col="2" colspan="2">
+                                            <field name="name"/>
+                                            <field name="firstname"/>
+                                            <field name="birthday"/>
+                                            <field name="ahvnr"/>
+                                            <field name="gender"/>
+                                            <field name="family_status" options='{"no_open": True, "no_create": True}' />
+                                            <field name="status"/>
+                                            <field name="right_until" required="1"/>
+                                            <field name="right_extended_until" required="1"/>
+                                            <field name="children_deduction_from" required="1"/>
+                                            <field name="children_deduction_until" required="1"/>
+                                            <field name="child_receives_allowance"/>
+                                            <field name="child_receives_allowance_supplementary"/>
+                                        </group>
+                                    </form>
+                                    <tree string="Children">
+                                        <field name="name" />
+                                        <field name="firstname" />
+                                        <field name="birthday" />
+                                        <field name="ahvnr" />
+                                        <field name="gender" />
+                                        <field name="family_status" />
+                                        <field name="status" />
+                                        <field name="right_until" />
+                                        <field name="right_extended_until" />
+                                        <field name="children_deduction_from" />
+                                        <field name="children_deduction_until" />
+                                        <field name="child_receives_allowance"/>
+                                        <field name="child_receives_allowance_supplementary"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                        <div>
+                            <p>Das Feld <strong><em>Alleinerziehend</em></strong> hat keinen Einfluss auf die Berechnung des Lohnes. Wenn der Mitarbeiter Kinderzulagen erhält<strong><em>,</em></strong> ist das Feld <strong><em>Erhält Kinderzulagen/Ausbildungszulagen</em></strong> anzucklicken und es sind die Kinder zu erfassen. Basierend auf den erfassten Kindern, werden die Felder <strong><em>Anzahl Kinder</em></strong> und <em><strong>Aktuelle Anzahl Kinder mit Kinderabzug</strong></em> (dieses Feld dient der Berechnung des Quellensteuercodes) berechnet. Zusätzlich kann dies dann auch noch pro Kind noch ausgeschlossen werden.</p><p>Mittels dem Flag <em><strong>Erhält überobligatorische Kinderzulagen/Ausbildungszulagen</strong></em> kann generell definiert werden, ob der überobligatorische Teil welcher im Tab &quot;FAK&quot; vorgenommen wurde für diesen Mitarbeiter Gültigkeit hat. Zusätzlich kann dies dann auch noch pro Kind noch ausgeschlossen werden.</p><p>Der Status auf dem Kind beeinflusst lediglich die Berechnung der <em><strong>Kinderzulage bis</strong></em> und<em><strong> Ausbildungszulage bis</strong></em> Datum:</p>
+<table class="table table-condensed table-striped table-bordered">
+  <tbody>
+    <tr>
+      <th>
+        <p>Status</p>
+      </th>
+      <th>
+        <p>Kinderzulage bis</p>
+      </th>
+      <th>
+        <p>Ausbildungszulage bis</p>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <p>unterhaltspflichtiges Kind</p>
+      </td>
+      <td>
+        <p>berechnet (normal)</p>
+      </td>
+      <td>
+        <p>berechnet (normal)</p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1">
+        <p>nicht unterhaltspflichtiges Kind</p>
+      </td>
+      <td colspan="1">
+        <p>berechnet (normal)</p>
+      </td>
+      <td colspan="1">
+        <p>nicht berechnet</p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1">
+        <p>Nicht unabhängiges Kind (erwerbsunfähig)</p>
+      </td>
+      <td colspan="1">
+        <p>berechnet (+ Zusatzjahre)</p>
+      </td>
+      <td colspan="1">
+        <p>berechnet (normal)</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+                        </div>
+                    </page>
+                </xpath>
+                <xpath expr="//notebook[1]" position="inside">
+                    <page string="Entry/Withdrawal company" groups="hr.group_hr_user"
+                          attrs="{'invisible':['|', '|', '|', ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}">
+                        <group col="4" colspan="4">
+                            <group col="4" colspan="4">
+                                <div attrs="{'invisible':['|', ('reset_entry_withdrawal_ids','=',False), ('show_entry_date_start_company_change','=',True)]}" colspan="4">
+                                    <h2 style="color:red">This entry cannot be deleted, because it needs at
+                                        least one entry. You need to click on the flag 'RESET' in order
+                                        to refresh the page.</h2>
+                                </div>
+                                <field name="do_reset_entry_withdrawal_ids"
+                                    context="{'year_id': id, 'entry_withdrawal_ids': entry_withdrawal_ids}"
+                                    attrs="{'invisible':[('reset_entry_withdrawal_ids','=',False)]}"
+                                    colspan="2" groups="bt_swissdec.user_swissdec"/>
+                                <field name="has_empty_date_end" groups="bt_swissdec.bt_swissdec_admin"/>
+                            </group>
+                            <group col="12" colspan="4"
+                                attrs="{'invisible':[('has_empty_date_end','=',True), ('reset_entry_withdrawal_ids', '=', True)]}">
+                                <field name="new_entry_date_start" options="{'showInitDate': False, 'useCurrent': False}"
+									   colspan="2" attrs="{'invisible':['|', ('reset_entry_withdrawal_ids','=',True), ('has_empty_date_end','=',True)]}"
+                                       groups="bt_swissdec.user_swissdec"/>
+                                <button icon="fa-arrow-right" string="Entry/Re-entry"
+                                    name="create_new_entry" type="object" colspan="2"
+                                    context="{'employee_id':id, 'new_entry_date_start': new_entry_date_start}"
+                                    attrs="{'invisible':['|', ('reset_entry_withdrawal_ids','!=',False), ('has_empty_date_end','=',True)]}"
+                                    groups="bt_swissdec.user_swissdec"/>
+                                <label colspan="8" string="" for="create_new_entry" class="o_form_label"/>
+                            </group>
+                            <group col="4" colspan="4">
+                                <field name="entry_withdrawal_ids" nolabel="1" colspan="4"
+                                    context="{'employee_id':id, 'entry_withdrawal_ids': entry_withdrawal_ids}"
+                                    attrs="{'readonly':[('reset_entry_withdrawal_ids','=',True)]}"
+                                    groups="bt_swissdec.user_swissdec">
+                                    <tree editable="top" string="Employees" create="false">
+                                        <field name="date_start" readonly="1"/>
+                                        <field name="date_end"/>
+                                        <field name="withdrawal_reason"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                        <group col="4" colspan="4">
+                            <field name="reset_entry_withdrawal_ids" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="at_least_one_entry_entry_withdrawal_ids_ok" groups="bt_swissdec.bt_swissdec_admin"/>
+                            <field name="help_field_save_entry_withdrawal_ids_not_allowed"
+                                attrs="{'required':['&amp;', ('id','!=',False), '|', ('reset_entry_withdrawal_ids','=',True), ('at_least_one_entry_entry_withdrawal_ids_ok','=',False)]}"
+                                invisible="1"/>
+                        </group>
+                        <div>
+                            <p class="oe_grey">Hier müssen Ein- und Austritte ins Unternehmen erfasst werden. Dies kann unterschiedlich zu den Start- und Enddaten in den Verträgen sein. Dies dient ebenfalls für die Meldung an die AHV (EMA).</p><p class="oe_grey">Das Eintrittsdatum wird automatisch beim Erstellen des Mitarbeiters gesetzt. Möchten Sie einen ausgetretenen Mitarbeiter wieder eintreten lassen, setzen Sie im Feld <strong><em>Neues Eintrittsdatum</em></strong> den gewünschten Wert und erstellen mittels dem Button <strong><em>Eintritt/Wiedereintritt</em></strong> den Eintrag.</p>
+                        </div>
+                    </page>
+                    <page string="Tax Accounting Reports" attrs="{'invisible':['|', '|', '|', ('id','=',False), ('company_id_company_used_for_bt_swissdec','!=',True), ('show_entry_date_start_company_change','=',True), '&amp;', ('company_id_company_used_for_bt_swissdec','=',True), ('is_freelancer','=',True)]}">
+                        <field name="tax_account_report_ids" nolabel="1" colspan="4" readonly="1" groups="bt_swissdec.user_swissdec">
+                            <form string="Tax Accounting Reports">
+                                <group col="2" colspan="2">
+                                    <field name="pdf_name" />
+                                    <field name="pdf_data" filename="pdf_name" />
+                                </group>
+                            </form>
+                            <tree string="Tax Accounting Reports" create="false">
+                                    <field name="year_name" />
+                                </tree>
+                        </field>
+                        <div>
+                            <p class="oe_grey">Der Mitarbeiter kann hier alle für ihn erstellten <strong><em>Lohnausweise</em></strong> herunterladen.</p>
+                        </div>
+                    </page>
+                    <page string="QST Data" groups="bt_swissdec.bt_swissdec_admin">
+                        <field name="qst_data_ids" nolabel="1" colspan="4" readonly="1">
+                            <tree string="QST Data">
+                                <field name="qst_year" />
+                                <field name="qst_data_detail_ids">
+                                    <tree string="QST Data Detail">
+                                        <field name="qst_date_from" />
+                                        <field name="qst_date_until" />
+                                        <field name="qst_code" />
+                                        <field name="qst_state_id" />
+                                        <field name="qst_days_count" />
+                                        <field name="qst_salary" />
+                                        <field name="qst_sb_salary" />
+                                        <field name="qst_steuer_prozent_satz" />
+                                        <field name="qst_mindestabzug_in_chf" />
+                                        <field name="qst_deduction" />
+                                    </tree>
+                                </field>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='work_email']" position="after">
+                    <field name="private_email" groups="bt_swissdec.user_swissdec"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Replaced Changed so that firstname and identification_id_bt is visible -->
+        <record model="ir.ui.view" id="hr_kanban_view_employees_ext">
+            <field name="name">HR - Employess Kanban Ext</field>
+            <field name="model">hr.employee</field>
+            <field name="type">kanban</field>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="id" position="after">
+                        <field name="identification_id_tree_view"/>
+                        <field name="employee_configuration_progress"/>
+                        <field name="max_percentage"/>
+                    </field>
+                    <field name="name" position="replace">
+                        <span t-if="record.employee_configuration_progress.raw_value" style="font-size: 100%"
+                              attrs="{'invisible': [('employee_configuration_progress', '=', 100)]}">
+                            <field name="employee_configuration_progress" widget="progressbar"
+                                   options="{'current_value': 'employee_configuration_progress', 'max_value': 'max_percentage', 'editable': false}"/>
+                        </span>
+                        <field name="firstname"/>
+                        <field name="name"/>
+                        <t t-if="record.login.raw_value"> (<field name="login"/>)</t>
+                    </field>
+                    <xpath expr="//li[@id='last_login']" position="inside">
+                        <span t-if="record.identification_id_tree_view.raw_value" style="font-size: 100%">
+                            Identification Id: <field name="identification_id_tree_view"/>
+                        </span>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+
+        <!-- Changed so that firstname is visibile -->
+        <record model="ir.ui.view" id="hr_employee_view_tree_extended">
+            <field name="name">employee.ext.tree</field>
+            <field name="model">hr.employee</field>
+            <field eval="20" name="priority" />
+            <field name="inherit_id" ref="hr.view_employee_tree" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="replace">
+                        <field name="identification_id_tree_view" />
+                        <field name="firstname" />
+                        <field name="name" />
+                        <field name="actual_degree_beschaeftigung" invisible="0" groups="bt_swissdec.user_swissdec"/>
+                        <field name="is_freelancer" groups="bt_swissdec.user_swissdec" />
+                        <field name="employee_configuration_progress" widget="progressbar"
+                               attrs="{'invisible': [('employee_configuration_progress', '=', 100)]}"
+                               groups="bt_swissdec.user_swissdec"/>
+                        <field name="has_active_contract" invisible="1"/>
+                        <field name="gender" invisible="1" />
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_employee_filter_extended">
+            <field name="name">Employees</field>
+            <field name="model">hr.employee</field>
+            <field eval="20" name="priority" />
+            <field name="inherit_id" ref="hr.view_employee_filter" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="replace">
+                        <field name="name" string="Employees" filter_domain="[('name_special','ilike',self)]"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </field>
+                    <xpath expr="/search/field[@name='name']" position="before">
+                        <filter string="Active Contract" name="active_contract" domain="[('has_active_contract','=',True)]"/>
+                    </xpath>
+                    <xpath expr="//filter[5]" position="after">
+                        <separator orientation="vertical" />
+                        <filter string="Gender" domain="[]" context="{'group_by':'gender'}" name="gender_filter" groups="hr.group_hr_user"/>
+                        <separator orientation="vertical" />
+                        <filter string="Actual or last degree" name="degree_filter"
+                            context="{'group_by' : 'actual_degree_beschaeftigung'}"/>
+                        <filter string="Actual or last degree 90-100%%" name="90_100_filter"
+                            domain="[('actual_degree_beschaeftigung','&gt;=',90),('actual_degree_beschaeftigung','&lt;=',100)]"/>
+                        <filter string="Actual or last degree 50-89%%" name="50_filter"
+                            domain="[('actual_degree_beschaeftigung','&gt;=',50),('actual_degree_beschaeftigung','&lt;=',89)]"/>
+                        <filter string="Actual or last degree 15-49%%" name="15_filter"
+                            domain="[('actual_degree_beschaeftigung','&gt;=',15),('actual_degree_beschaeftigung','&lt;=',49)]"/>
+                        <filter string="Actual or last degree 3-14%%" name="3_filter"
+                            domain="[('actual_degree_beschaeftigung','&gt;=',3),('actual_degree_beschaeftigung','&lt;=',14)]"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+</odoo>

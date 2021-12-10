@@ -1,0 +1,192 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data noupdate="0">
+
+        <record id="property_rule_payslip_manager" model="ir.rule">
+            <field name="name">Manager Payslip</field>
+            <field name="model_id" ref="model_hr_payslip"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_manager'))]"/>
+        </record>
+        <record id="property_rule_payslip_employee" model="ir.rule">
+            <field name="name">Employee Payslip</field>
+            <field name="model_id" ref="model_hr_payslip"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id), ('state','=','done')]</field>
+            <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+        <record id="hr_payslip_comp_rule" model="ir.rule">
+            <field name="name">Payslip multi company rule</field>
+            <field name="model_id" ref="model_hr_payslip"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record id="property_rule_employee_payslip" model="ir.rule">
+            <field name="name">Employee Payslip</field>
+            <field name="model_id" ref="model_hr_payslip"/>
+            <field name="domain_force">['|', ('employee_id.user_id', '=', user.id), ('employee_id.department_id.manager_id.user_id', '=', user.id), ('state','=','done')]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>
+        </record>
+
+        <!-- hr.contract -->
+        <record id="property_rule_contract_employee" model="ir.rule">
+            <field name="name">Employee Contract</field>
+            <field name="model_id" ref="model_hr_contract"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+        <record id="hr_contract_comp_rule" model="ir.rule">
+            <field name="name">Contract multi company rule</field>
+            <field name="model_id" ref="model_hr_contract"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record id="property_rule_employee_contract" model="ir.rule">
+            <field name="name">Employee Contract</field>
+            <field name="model_id" ref="model_hr_contract"/>
+            <field name="domain_force">['|', ('employee_id.user_id', '=', user.id), ('employee_id.department_id.manager_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>
+        </record>
+        <record id="property_rule_contract_manager" model="ir.rule">
+            <field name="name">Manager Contract</field>
+            <field name="model_id" ref="model_hr_contract"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_manager'))]"/>
+        </record>
+        
+        <!-- bt_swissdec.tax_account_report -->
+        <record id="property_rule_tax_account_report_employee" model="ir.rule">
+            <field name="name">Employee Tax Accounting Report</field>
+            <field name="model_id" ref="model_bt_swissdec_tax_account_report"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+        <record id="property_rule_employee_tax_account_report" model="ir.rule">
+            <field name="name">Employee Tax Accounting Report</field>
+            <field name="model_id" ref="model_bt_swissdec_tax_account_report"/>
+            <field name="domain_force">['|', ('employee_id.user_id', '=', user.id), ('employee_id.department_id.manager_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>
+        </record>
+        <record id="property_rule_tax_account_report_employee_manager" model="ir.rule">
+            <field name="name">Manager Employee Tax Accounting Report</field>
+            <field name="model_id" ref="model_bt_swissdec_tax_account_report"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_manager'))]"/>
+        </record>
+
+        <!-- hr.employee - this would work but as it is only needed for GoldenRace we needed to wait with this -->
+        <!--record model="ir.rule" id="employee_comp_rule">
+            <field name="name">Employee: multi-company</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id', '=', False),('company_id', 'child_of', [user.company_id.id])]</field>
+        </record-->
+
+        <!-- hr.employee.entry.withdrawal -->
+        <record id="property_rule_hr_employee_entry_withdrawal_employee" model="ir.rule">
+            <field name="name">Employee Entry Withdrawal</field>
+            <field name="model_id" ref="model_hr_employee_entry_withdrawal"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+        <record id="property_rule_hr_employee_entry_withdrawal" model="ir.rule">
+            <field name="name">Employee Entry Withdrawal</field>
+            <field name="model_id" ref="model_hr_employee_entry_withdrawal"/>
+            <field name="domain_force">['|', ('employee_id.user_id', '=', user.id), ('employee_id.department_id.manager_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>
+        </record>
+        <record id="property_rule_hr_employee_entry_withdrawal_manager" model="ir.rule">
+            <field name="name">Manager Employee Entry Withdrawal</field>
+            <field name="model_id" ref="model_hr_employee_entry_withdrawal"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_manager'))]"/>
+        </record>
+
+        <!-- hr.employee.special.bank.account -->
+        <record id="hr_emp_special_bank_acc_comp_rule" model="ir.rule">
+            <field name="name">Employee special bank account multi company rule</field>
+            <field name="model_id" ref="model_hr_employee_special_bank_account"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- bt_swissdec.employee_analytic_account_line -->
+        <record id="hr_emp_analytic_acc_line_comp_rule" model="ir.rule">
+            <field name="name">Employee analytic account line multi company rule</field>
+            <field name="model_id" ref="model_bt_swissdec_employee_analytic_account_line"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- hr.employee.children -->
+        <record id="hr_emp_children_comp_rule" model="ir.rule">
+            <field name="name">Employee children multi company rule</field>
+            <field name="model_id" ref="model_hr_employee_children"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- hr.employee.entry.withdrawal -->
+        <record id="hr_emp_entry_withdrawal_comp_rule" model="ir.rule">
+            <field name="name">Employee entry withdrawal multi company rule</field>
+            <field name="model_id" ref="model_hr_employee_entry_withdrawal"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- bt_swissdec.tax_account_report -->
+        <record id="swissdec_tax_report_comp_rule" model="ir.rule">
+            <field name="name">Swissdec tax report multi company rule</field>
+            <field name="model_id" ref="model_bt_swissdec_tax_account_report"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- hr.employee.calculationparameter.bvg -->
+        <record id="hr_employee_calculationparameter_bvg_emp_rule" model="ir.rule">
+            <field name="name">Swissdec employee own BVG lines</field>
+            <field name="model_id" ref="model_hr_employee_calculationparameter_bvg"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('bt_swissdec.user_swissdec'))]"/>
+        </record>
+        <record id="hr_employee_calculationparameter_bvg_man_rule" model="ir.rule">
+            <field name="name">Swissdec HR manager BVG lines</field>
+            <field name="model_id" ref="model_hr_employee_calculationparameter_bvg"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_manager'))]"/>
+        </record>
+        <record id="hr_employee_calculationparameter_bvg_comp_rule" model="ir.rule">
+            <field name="name">BVG lines multi company rule</field>
+            <field name="model_id" ref="model_hr_employee_calculationparameter_bvg"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+                <!-- hr.employee.year -->
+        <record id="hr_employee_year_emp_rule" model="ir.rule">
+            <field name="name">Swissdec employee own employee years</field>
+            <field name="model_id" ref="model_hr_employee_year"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('bt_swissdec.user_swissdec'))]"/>
+        </record>
+        <record id="hr_employee_year_man_rule" model="ir.rule">
+            <field name="name">Swissdec HR manager employee years</field>
+            <field name="model_id" ref="model_hr_employee_year"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_manager'))]"/>
+        </record>
+
+        <!-- hr.employee.children -->
+        <record id="hr_employee_children_emp_rule" model="ir.rule">
+            <field name="name">Swissdec employee own employee children</field>
+            <field name="model_id" ref="model_hr_employee_children"/>
+            <field name="domain_force">[('parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('bt_swissdec.user_swissdec'))]"/>
+        </record>
+        <record id="hr_employee_children_man_rule" model="ir.rule">
+            <field name="name">Swissdec HR manager employee children</field>
+            <field name="model_id" ref="model_hr_employee_children"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_manager'))]"/>
+        </record>
+    </data>
+</openerp>

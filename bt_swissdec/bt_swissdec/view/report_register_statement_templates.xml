@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_register_statement_document">
+    <t t-call="web.internal_layout">
+        <t t-set="o" t-value="o.with_context({'lang':o.env['res.users'].browse(o._uid).lang or 'de_DE'})" />
+<div class="page">
+            <div class="oe_structure"/>
+            <h4 style="text-align: center"><strong>Monthly payslips - <span t-esc="o.name"/></strong></h4>
+            <table class="table table-condensed oe_mt32">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Number</th>
+                        <th class="col-2">Payment details</th>
+                        <th style="text-align: right">Net Basic</th>
+                        <th style="text-align: right">Social security deductions</th>
+                        <th style="text-align: right">Other deductions/allowances</th>
+                        <th style="text-align: right">Net Salary</th>
+                        <th style="text-align: right">Deductions/allowances after net salary</th>
+                        <th style="text-align: right">Payment</th>
+                    </tr>
+                </thead>
+                <t t-set="counter" t-value="0"/>
+                <tbody>
+                    <tr t-foreach="o.line_ids" t-as="line">
+                        <t t-set="style" t-value="'border-top: 1; padding-top: 0; padding-bottom:0; font-size: 75%;'"/>
+                        <p t-if="counter%2 == 0">
+                            <t t-set="style" t-value="style + ' background-color: #eeeeee;'"/>
+                        </p>
+                        <t t-set="style_right" t-value="style + ' text-align: right;'"/>
+                        <t t-set="counter" t-value="counter+1"/>
+                        <td t-att-style="style"><span t-esc="counter"/></td>
+                        <td t-att-style="style"><span t-field="line.number"/></td>
+                        <p t-if="line.payment_details">
+                            <td t-att-style="style"><span t-field="line.payment_details"/></td>
+                        </p>
+                        <p t-else="">
+                            <td t-att-style="style"><span t-field="line.employee_id.name"/> <span t-field="line.employee_id.firstname"/> - <span t-field="line.employee_id.bank_account_id.acc_number"/></td>
+                        </p>
+                        <td t-att-style="style_right"><span t-field="line.basic" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                        <td t-att-style="style_right"><span t-field="line.total_sozialabzuege" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                        <td t-att-style="style_right"><span t-field="line.total_sonstigeabzuege_zulagen" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                        <td t-att-style="style_right"><span t-field="line.nettolohn" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                        <td t-att-style="style_right"><span t-field="line.total_abzuege_zulagen_nach_nettolohn" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                        <td t-att-style="style_right"><span t-field="line.auszahlung" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                    </tr>
+                </tbody>
+                <t t-set="style" t-value="'border-top: 1; padding-top: 0; padding-bottom:0; font-size: 75%;'"/>
+                <t t-set="style_right" t-value="style + ' text-align: right;'"/>
+                <tbody>
+                    <td t-att-style="style"><strong>Total</strong></td>
+                    <td t-att-style="style"></td>
+                    <td t-att-style="style"></td>
+                    <td t-att-style="style_right"><strong><span t-field="o.bruttolohn" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></strong></td>
+                    <td t-att-style="style_right"><strong><span t-field="o.total_sozialabzuege" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></strong></td>
+                    <td t-att-style="style_right"><strong><span t-field="o.total_sonstigeabzuege_zulagen" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></strong></td>
+                    <td t-att-style="style_right"><strong><span t-field="o.nettolohn" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></strong></td>
+                    <td t-att-style="style_right"><strong><span t-field="o.total_abzuege_zulagen_nach_nettolohn" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></strong></td>
+                    <td t-att-style="style_right"><strong><span t-field="o.auszahlung" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></strong></td>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</template>
+
+<template id="report_register_statement">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_register_statement_document" t-lang="o.env['res.users'].browse(o._uid).lang or 'de_DE'"/>
+        </t>
+    </t>
+</template>
+</odoo>

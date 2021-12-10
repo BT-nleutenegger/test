@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="view_bt_swissdec_installer" model="ir.ui.view">
+        <field name="name">Configure Company Year Defaults</field>
+        <field name="model">res.company.config.year</field>
+        <field name="inherit_id" ref="base.res_config_view_base"/>
+        <field name="arch" type="xml">
+            <form position="attributes">
+              <attribute name="string">Company Year Defaults Configuration</attribute>
+            </form>
+            <group name="res_config_contents" position="replace">
+                <group colspan="4" col="4">
+                    <field name="company_id" domain="[('year_ids', '=', False)]" options='{"no_open": True, "no_create": True}'/>
+                    <!--Companies do not appear. by adding a new field like the one below, somehow they do-->
+                    <!--<field name="company_id" string="Company2"/>-->
+                    <field name="year"/>
+                    <newline/>
+                    <field name="salary_contact_name"/>
+                    <newline/>
+                    <field name="salary_contact_email"/>
+                    <newline/>
+                    <field name="salary_contact_phone"/>
+                    <newline/>
+                    <field name="yearlyholidays_company"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+    <record id="action_bt_swissdec_installer" model="ir.actions.act_window">
+      <field name="name">Human Resources Application Configuration</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">res.company.config.year</field>
+      <field name="view_id" ref="view_bt_swissdec_installer"/>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+
+    <record id="hr_installer_todo" model="ir.actions.todo">
+      <field name="name">Configure Company Year Defaults</field>
+      <field name="action_id" ref="action_bt_swissdec_installer"/>
+      <field name="sequence">4</field>
+    </record>
+
+      <!--for testing purposes, added a menu item to be able to open the wizard without installing the module-->
+     <!--<menuitem action="action_bt_swissdec_installer" id="wizard_manual" parent="payroll_configure" sequence="20"/>-->
+
+  </data>
+</openerp>

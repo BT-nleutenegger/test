@@ -1,0 +1,461 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Viewgen 2021.02</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div lang="de" class="book"><div class="titlepage"><div><div><h1 class="title"><a name="d211e1"></a>Viewgen 2021.02</h1></div><div><h2 class="subtitle">Swissdec Lohnstandard</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="orgname">Swissdec</span><code class="email">&lt;<a class="email" href="mailto:swissdec@itserve.ch">swissdec@itserve.ch</a>&gt;</code></h3><code class="email">&lt;<a class="email" href="mailto:swissdec@itserve.ch">swissdec@itserve.ch</a>&gt;</code></div></div></div><div><p class="pubdate">2021-03-01</p></div><div><div class="revhistory"><table style="border-style:solid; width:100%;" summary="Versionsgeschichte"><tr><th align="left" valign="top" colspan="3"><b>Versionsgeschichte</b></th></tr><tr><td align="left">Version 1.0.0</td><td align="left">2017-06-26</td><td align="left">tko</td></tr><tr><td align="left" colspan="3">Changement du format de texte ASCII &agrave; DocBook</td></tr><tr><td align="left">Version 1.0.1</td><td align="left">2021-04-01</td><td align="left">tko</td></tr><tr><td align="left" colspan="3">Changements pour version 2021.02</td></tr></table></div></div></div><hr></div><div class="toc"><p><b>Inhaltsverzeichnis</b></p><dl class="toc"><dt><span class="chapter"><a href="#prescriptions">1. Conditions pr&eacute;alablees</a></span></dt><dt><span class="chapter"><a href="#installation">2. Installation</a></span></dt><dt><span class="chapter"><a href="#usage">3. Utilisation de l'archive JAR</a></span></dt><dd><dl><dt><span class="section"><a href="#paramCall">Param&egrave;tres reconnus par Viewgen</a></span></dt><dd><dl><dt><span class="section"><a href="#d211e59">G&eacute;n&eacute;ral</a></span></dt><dt><span class="section"><a href="#d211e189">Param&egrave;tres d&eacute;pendent des plugins</a></span></dt><dt><span class="section"><a href="#d211e1439">Remarques</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#viewgenAPI">4. Viewgen API</a></span></dt><dd><dl><dt><span class="section"><a href="#d211e1477">Pr&eacute;parations</a></span></dt><dt><span class="section"><a href="#d211e1504">Int&eacute;gration</a></span></dt><dt><span class="section"><a href="#d211e1527">Int&eacute;gration avec API</a></span></dt><dt><span class="section"><a href="#d211e1545">Adressage par commandline</a></span></dt></dl></dd><dt><span class="chapter"><a href="#LAversand">5. Certificat de salaire</a></span></dt><dd><dl><dt><span class="section"><a href="#d211e1566">Remarks</a></span></dt><dt><span class="section"><a href="#d211e1571">envoi</a></span></dt></dl></dd><dt><span class="chapter"><a href="#bigMacs">6. Adaptation pour Mac</a></span></dt></dl></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="prescriptions"></a>Kapitel 1. Conditions pr&eacute;alablees</h1></div></div></div><p>
+            </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Au moins jdk 11.0.6</p></li></ul></div><p>
+        </p></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="installation"></a>Kapitel 2. Installation</h1></div></div></div><p> Pour installer viewgen.jar il suffit de d&eacute;compresser l'archive viewgen.zip. Tous les fichiers contenus dans l'archive seront donc plac&eacute;s au bon endroit, pour que le programme puisse les trouver pendant son ex&eacute;cution.</p></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="usage"></a>Kapitel 3. Utilisation de l'archive JAR</h1></div></div></div><div class="toc"><p><b>Inhaltsverzeichnis</b></p><dl class="toc"><dt><span class="section"><a href="#paramCall">Param&egrave;tres reconnus par Viewgen</a></span></dt><dd><dl><dt><span class="section"><a href="#d211e59">G&eacute;n&eacute;ral</a></span></dt><dt><span class="section"><a href="#d211e189">Param&egrave;tres d&eacute;pendent des plugins</a></span></dt><dt><span class="section"><a href="#d211e1439">Remarques</a></span></dt></dl></dd></dl></div><p>Viewgen est ex&eacute;cut&eacute; avec des donn&eacute;es fournis par l'utilisateur.
+Viewgen est un archive JAR ex&eacute;cutable, c'est-&agrave;-dire il peut &ecirc;tre ex&eacute;cut&eacute; directement depuis un shell Linux/Unix/Dos/etc.</p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="paramCall"></a>Param&egrave;tres reconnus par Viewgen</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d211e59"></a>G&eacute;n&eacute;ral</h3></div></div></div><p>Param&egrave;tres obligatoires, sauf si <code class="code">-help</code> est pr&eacute;sent dans l'appel:</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+                            <th align="left">Option courte</th>
+                            <th align="left">Option longue</th>
+                            <th align="left">Description</th>
+                        </tr></thead><tbody><tr>
+                            <td valign="top">-p</td>
+                            <td valign="top">--plugin</td>
+                            <td valign="top">AhvFreeReport, AhvReport, FakReport, KtgReport,
+                                Barcode, TaxAccountingReport, UvgReport, UvgzReport, Anonymizer,
+                                Validator, AhvProofOfInsuranceReport, StatisticReport, QstReport,
+                                QstResultReport.</td>
+                        </tr><tr>
+                            <td>-x</td>
+                            <td>--xml</td>
+                            <td>Param&egrave;tre obligatoire qui indique le document d'instance &agrave; utiliser.</td>
+                        </tr></tbody></table></div><p></p><p>Param&egrave;tres optionnels:</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+                            <th align="left">Option courte</th>
+                            <th align="left">Option longue</th>
+                            <th align="left">Description</th>
+                        </tr></thead><tbody><tr>
+                            <td>-a</td>
+                            <td>--anonymize</td>
+                            <td>Permet l'anonymisation d'un document d'instance.</td>
+                        </tr><tr>
+                            <td></td>
+                            <td valign="top">--log</td>
+                            <td valign="top">La restitution est redirig&eacute;e dans viewgen.log. Il est possible d'indiquer une
+					destination soi-m&ecirc;me.</td>
+                        </tr><tr>
+                            <td>-h</td>
+                            <td>--help</td>
+                            <td>Affiche cette aide.</td>
+                        </tr><tr>
+                            <td></td>
+                            <td>--version</td>
+                            <td>Affiche des informations concernant les versions.</td>
+                        </tr><tr>
+                            <td></td>
+                            <td>--exception</td>
+                            <td>Jete des exceptions s'il y a des erreurs.</td>
+                        </tr><tr>
+                            <td>-L</td>
+                            <td>--logLevel</td>
+                            <td>Met le niveau du logging ( OFF | INFO | ERROR ).</td>
+                        </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d211e189"></a>Param&egrave;tres d&eacute;pendent des plugins</h3></div></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e192"></a>Plugin AVS-libre rapport personnel (AhvFreeReport), version
+                        2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+            <th align="left">Option courte</th>
+            <th align="left">Option longue</th>
+            <th align="left">Description</th>
+        </tr></thead><tbody><tr>
+            <td>-l</td>
+            <td>--language</td>
+            <td>Langue DE|FR|IT (Default=DE)</td>
+        </tr><tr>
+            <td>-f</td>
+            <td>--outputFilename</td>
+            <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+        </tr><tr>
+            <td>-v</td>
+            <td>--viewer</td>
+            <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+        </tr><tr>
+            <td>-o</td>
+            <td>--outputDir</td>
+            <td> Le dossier cible (Default=le dossier actuel)</td>
+        </tr><tr>
+            <td>-w</td>
+            <td>--specimen</td>
+            <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+        </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e270"></a>Plugin rapport AVS (AhvReport), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+            <th align="left">Option courte</th>
+            <th align="left">Option longue</th>
+            <th align="left">Description</th>
+        </tr></thead><tbody><tr>
+            <td>-l</td>
+            <td>--language</td>
+            <td>Langue DE|FR|IT (Default=DE)</td>
+        </tr><tr>
+            <td>-f</td>
+            <td>--outputFilename</td>
+            <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+        </tr><tr>
+            <td>-v</td>
+            <td>--viewer</td>
+            <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+        </tr><tr>
+            <td>-o</td>
+            <td>--outputDir</td>
+            <td> Le dossier cible (Default=le dossier actuel)</td>
+        </tr><tr>
+            <td>-w</td>
+            <td>--specimen</td>
+            <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+        </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e348"></a>Plugin rapport CAF (FakReport), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+            <th align="left">Option courte</th>
+            <th align="left">Option longue</th>
+            <th align="left">Description</th>
+        </tr></thead><tbody><tr>
+            <td>-l</td>
+            <td>--language</td>
+            <td>Langue DE|FR|IT (Default=DE)</td>
+        </tr><tr>
+            <td>-f</td>
+            <td>--outputFilename</td>
+            <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+        </tr><tr>
+            <td>-v</td>
+            <td>--viewer</td>
+            <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+        </tr><tr>
+            <td>-o</td>
+            <td>--outputDir</td>
+            <td> Le dossier cible (Default=le dossier actuel)</td>
+        </tr><tr>
+            <td>-w</td>
+            <td>--specimen</td>
+            <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+        </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e426"></a>Plugin rapport CAF d&eacute;tail&eacute; (FakDetailedReport), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+            <th align="left">Option courte</th>
+            <th align="left">Option longue</th>
+            <th align="left">Description</th>
+        </tr></thead><tbody><tr>
+            <td>-l</td>
+            <td>--language</td>
+            <td>Langue DE|FR|IT (Default=DE)</td>
+        </tr><tr>
+            <td>-f</td>
+            <td>--outputFilename</td>
+            <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+        </tr><tr>
+            <td>-v</td>
+            <td>--viewer</td>
+            <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+        </tr><tr>
+            <td>-o</td>
+            <td>--outputDir</td>
+            <td> Le dossier cible (Default=le dossier actuel)</td>
+        </tr><tr>
+            <td>-w</td>
+            <td>--specimen</td>
+            <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+        </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e504"></a>Plugin rapport IJM (KtgReport), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+            <th align="left">Option courte</th>
+            <th align="left">Option longue</th>
+            <th align="left">Description</th>
+        </tr></thead><tbody><tr>
+            <td>-l</td>
+            <td>--language</td>
+            <td>Langue DE|FR|IT (Default=DE)</td>
+        </tr><tr>
+            <td>-f</td>
+            <td>--outputFilename</td>
+            <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+        </tr><tr>
+            <td>-v</td>
+            <td>--viewer</td>
+            <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+        </tr><tr>
+            <td>-o</td>
+            <td>--outputDir</td>
+            <td> Le dossier cible (Default=le dossier actuel)</td>
+        </tr><tr>
+            <td>-w</td>
+            <td>--specimen</td>
+            <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+        </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e582"></a>Plugin Barcode (Barcode), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+                                <th align="left">Option courte</th>
+                                <th align="left">Option longue</th>
+                                <th align="left">Description</th>
+                            </tr></thead><tbody><tr>
+                                <td>-P</td>
+                                <td>--prefix</td>
+                                <td>Nom-Pr&eacute;fix pour les documents g&eacute;n&eacute;r&eacute;s. p.ex. bcd devient bcd-1.png (Default=bcd)</td>
+                            </tr><tr>
+                                <td>-F</td>
+                                <td>--format</td>
+                                <td>Le format de l'image BMP|EMF|EXIF|GIF|JPEG|PNG|TIFF|WMF (Default=PNG)</td>
+                            </tr><tr>
+                                <td valign="top">-s</td>
+                                <td valign="top">--startIndex</td>
+                                <td valign="top">La personne affect&eacute;e (1-basierter Index). Si ce n'est pas donn&eacute;, tous les personnes sont affect&eacute;es.</td>
+                            </tr><tr>
+                                <td valign="top">-e</td>
+                                <td valign="top">--endIndex</td>
+                                <td valign="top">G&eacute;n&eacute;rer le code barre jusqu'&agrave; quelle personne(d&eacute;faut: la derni&egrave;re personne du document).</td>
+                            </tr><tr>
+                                <td>-o</td>
+                                <td>--outputDir</td>
+                                <td>Le dossier cible (Default=le dossier actuel)</td>
+                            </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e659"></a>Plugin Tax Accounting Report (TaxAccountingReport), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+                                <th align="left">Option courte</th>
+                                <th align="left">Option longue</th>
+                                <th align="left">Description</th>
+                            </tr></thead><tbody><tr>
+                                <td valign="top">-l</td>
+                                <td valign="top">--language</td>
+                                <td valign="top"><p>DEPRECATED.</p>
+                                    <p>ELM v4.0: La langue pour les Standard Remarks d&eacute;pend de la langue de la personne.</p>
+
+                                </td>
+                            </tr><tr>
+                                <td>-f</td>
+                                <td>--outputFilename</td>
+                                <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+                            </tr><tr>
+                                <td>-o</td>
+                                <td>--outputDir</td>
+                                <td>Le dossier cible (Default=le dossier actuel)</td>
+                            </tr><tr>
+                                <td>-v</td>
+                                <td>--viewer</td>
+                                <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+                            </tr><tr>
+                                <td valign="top">-i</td>
+                                <td valign="top">--alignment [LEFT|RIGHT]</td>
+                                <td valign="top">Adresse &agrave; gauche ou &agrave; droite, d&eacute;pendant des enveloppes &agrave; fen&ecirc;tre qu'on d&eacute;sire utiliser LEFT ou RIGHT (Default=RIGHT).</td>
+                            </tr><tr>
+                                <td valign="top">-e</td>
+                                <td valign="top">--endIndex</td>
+                                <td valign="top">G&eacute;n&eacute;rer le document jusqu'&agrave; quelle personne(d&eacute;faut: la derni&egrave;re personne du document).</td>
+                            </tr><tr>
+                                <td>-g</td>
+                                <td>--lastPage</td>
+                                <td>Ajoute une page	r&eacute;sum&eacute; au document g&eacute;n&eacute;r&eacute;.</td>
+                            </tr><tr>
+                                <td>-s</td>
+                                <td>--startIndex</td>
+                                <td>G&eacute;n&eacute;rer le document &agrave; partir de quelle personne   (d&eacute;faut: 1)</td>
+                            </tr><tr>
+                                <td valign="top">-t</td>
+                                <td valign="top">--tempDir <code class="code">&lt;directoy&gt;</code></td>
+                                <td valign="top">Indique l'emplacement des fichiers temporaires (d&eacute;faut: <code class="code">./temp</code>)</td>
+                            </tr><tr>
+                                <td>-r</td>
+                                <td>--verbose</td>
+                                <td>Plus d'informations concernant le travail de Viewgen.</td>
+                            </tr><tr>
+                                <td>-m</td>
+                                <td>--multipleOutputFiles</td>
+                                <td>Au lieu d'un PDF avec toutes les personnes, un PDF par personne est g&eacute;n&eacute;r&eacute;.</td>
+                            </tr><tr>
+                                <td>-w</td>
+                                <td>--specimen</td>
+                                <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+                            </tr><tr>
+                                <td>-n</td>
+                                <td>--english</td>
+                                <td>Le document est g&eacute;n&eacute;r&eacute; avec les langues allemand, fran&ccedil;ais et anglais.</td>
+                            </tr><tr>
+                                <td valign="top">-C</td>
+                                <td valign="top">--CantonOnly</td>
+                                <td valign="top">Seulement les personnes avec r&eacute;sidence dans le canton sp&eacute;cifi&eacute; sont imprim&eacute;s. Exemple: <code class="code">-C BE</code> imprime seulement les personnes avec r&eacute;sidence en canton de Berne.</td>
+                            </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e850"></a>Plugin rapport LAA (UvgReport), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+            <th align="left">Option courte</th>
+            <th align="left">Option longue</th>
+            <th align="left">Description</th>
+        </tr></thead><tbody><tr>
+            <td>-l</td>
+            <td>--language</td>
+            <td>Langue DE|FR|IT (Default=DE)</td>
+        </tr><tr>
+            <td>-f</td>
+            <td>--outputFilename</td>
+            <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+        </tr><tr>
+            <td>-v</td>
+            <td>--viewer</td>
+            <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+        </tr><tr>
+            <td>-o</td>
+            <td>--outputDir</td>
+            <td> Le dossier cible (Default=le dossier actuel)</td>
+        </tr><tr>
+            <td>-w</td>
+            <td>--specimen</td>
+            <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+        </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e928"></a>Plugin rapport LAAC (UvgzReport), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+            <th align="left">Option courte</th>
+            <th align="left">Option longue</th>
+            <th align="left">Description</th>
+        </tr></thead><tbody><tr>
+            <td>-l</td>
+            <td>--language</td>
+            <td>Langue DE|FR|IT (Default=DE)</td>
+        </tr><tr>
+            <td>-f</td>
+            <td>--outputFilename</td>
+            <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+        </tr><tr>
+            <td>-v</td>
+            <td>--viewer</td>
+            <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+        </tr><tr>
+            <td>-o</td>
+            <td>--outputDir</td>
+            <td> Le dossier cible (Default=le dossier actuel)</td>
+        </tr><tr>
+            <td>-w</td>
+            <td>--specimen</td>
+            <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+        </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e1006"></a>Plugin rapport statistique (StatisticReport), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+            <th align="left">Option courte</th>
+            <th align="left">Option longue</th>
+            <th align="left">Description</th>
+        </tr></thead><tbody><tr>
+            <td>-l</td>
+            <td>--language</td>
+            <td>Langue DE|FR|IT (Default=DE)</td>
+        </tr><tr>
+            <td>-f</td>
+            <td>--outputFilename</td>
+            <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+        </tr><tr>
+            <td>-v</td>
+            <td>--viewer</td>
+            <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+        </tr><tr>
+            <td>-o</td>
+            <td>--outputDir</td>
+            <td> Le dossier cible (Default=le dossier actuel)</td>
+        </tr><tr>
+            <td>-w</td>
+            <td>--specimen</td>
+            <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+        </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e1084"></a>Plugin rapport plausibilit&eacute; (PlausibilityReport), version
+                        2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+                                <th align="left">Option courte</th>
+                                <th align="left">Option longue</th>
+                                <th align="left">Description</th>
+                            </tr></thead><tbody><tr>
+                                <td>-f</td>
+                                <td>--outputFilename</td>
+                                <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.xml)</td>
+                            </tr><tr>
+                                <td>-v</td>
+                                <td>--viewer</td>
+                                <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour XML.</td>
+                            </tr><tr>
+                                <td>-o</td>
+                                <td>--outputDir</td>
+                                <td>Le dossier cible (Default=le dossier actuel)</td>
+                            </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e1139"></a>Plugin Anonymizer (Anonymizer), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%" align="left"><col width="20%" align="left"><col width="60%" align="left"><thead><tr>
+                                <th align="left">Option courte</th>
+                                <th align="left">Option longue</th>
+                                <th align="left">Description</th>
+                            </tr></thead><tbody><tr>
+                                <td>-f</td>
+                                <td>--outputFilename</td>
+                                <td>Nom du document g&eacute;n&eacute;r&eacute;. (Default=.\{inputFilename}.xml)</td>
+                            </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e1172"></a>Plugin Validator (Validator), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+                                <th align="left">Option courte</th>
+                                <th align="left">Option longue</th>
+                                <th align="left">Description</th>
+                            </tr></thead><tbody><tr>
+                                <td>-l</td>
+                                <td>--list</td>
+                                <td>Montre le sch&eacute;ma soutenu.</td>
+                            </tr><tr>
+                                <td>-s</td>
+                                <td>--signature</td>
+                                <td>Examen additionnel pour la signature.</td>
+                            </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e1216"></a>Plugin AVS-Certificat d'assurance (AhvProofOfInsuranceReport), version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+                                <th align="left">Option courte</th>
+                                <th align="left">Option longue</th>
+                                <th align="left">Description</th>
+                            </tr></thead><tbody><tr>
+                                <td>-f</td>
+                                <td>--outputFilename</td>
+                                <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+                            </tr><tr>
+                                <td>-v</td>
+                                <td>--viewer</td>
+                                <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+                            </tr><tr>
+                                <td>-o</td>
+                                <td>--outputDir</td>
+                                <td>Le dossier cible (Default=le dossier actuel)</td>
+                            </tr><tr>
+                                <td>-w</td>
+                                <td>--specimen</td>
+                                <td>G&eacute;n&egrave;re le document avec un filigrane.</td>
+                            </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e1282"></a>Plugin rapport imp&ocirc;t &agrave; la source (QstReport), version 2021.02</h4></div></div></div><p>&gt;ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+                                <th align="left">Option courte</th>
+                                <th align="left">Option longue</th>
+                                <th align="left">Description</th>
+                            </tr></thead><tbody><tr>
+                                <td>-c</td>
+                                <td>--Canton</td>
+                                <td>G&eacute;n&egrave;re le rapport pour le canton sp&eacute;cifi&eacute; ( p.e.: <code class="code">-c
+                                        BE</code> g&eacute;n&egrave;re le rapport pour le canton Berne )</td>
+                            </tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d211e1318"></a>Plug-In rapport r&eacute;sultat imp&ocirc;t &agrave; la source, version 2021.02</h4></div></div></div><p>ELM-version: 4.0</p><div class="informaltable"><table frame="void"><col width="20%"><col width="20%"><col width="60%"><thead><tr>
+                                <th align="left">Option courte</th>
+                                <th align="left">Option longue</th>
+                                <th align="left">Description</th>
+                            </tr></thead><tbody><tr>
+                                <td>-f</td>
+                                <td>--outputFilename</td>
+                                <td>Nom du document g&eacute;n&eacute;r&eacute; (Default=.\{inputFilename}.pdf)</td>
+                            </tr><tr>
+                                <td>-v</td>
+                                <td>--viewer</td>
+                                <td>Le document g&eacute;n&eacute;r&eacute; est ouvert avec le programme standard pour PDF.</td>
+                            </tr><tr>
+                                <td>-o</td>
+                                <td>--outputDir</td>
+                                <td>Le dossier cible (Default=le dossier actuel)</td>
+                            </tr></tbody></table></div><p>L'XML &lt;GetResultFromDeclareSalaryResponse&gt; avec &lt;TaxAtSource&gt;
+                        doit contenir un &eacute;lement &lt;Success&gt;.</p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d211e1439"></a>Remarques</h3></div></div></div><p>
+                    </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Pendant la v&eacute;rification de la signature il y a aussi un contr&ocirc;le
+                                du timestamp. Comme celui-ci n'est valide que pour un court d&eacute;lais
+                                et que sa v&eacute;rification &eacute;choue dans la plupart des cas, un timestamp
+                                invalide &agrave; comme cons&eacute;quence un avertissement dans la console mais
+                                ne causera pas l'&eacute;chec de la v&eacute;rification de la signature.</p></li><li class="listitem"><p>L'exemple 'ICHAGCompanyTestSig.xml' contient les donn&eacute;es
+                                salariales d'une seule personne. Il est n&eacute;anmoins possible de
+                                transformer des fichiers XML compos&eacute;s de donn&eacute;es salariales de
+                                plusieurs personnes ( Exemple: <code class="code">COMPLEXCompany.xml</code>
+                                ).</p></li><li class="listitem"><p>Le param&egrave;tre <code class="code">-verbose</code> ajoute des informations dans le
+                                document PDF</p></li><li class="listitem"><p>Le keystore inclus dans Viewgen contient tous les CA n&eacute;cessaire
+                                pour l'environnement test et productif.</p></li><li class="listitem"><p>Les fichiers qui sont sign&eacute;s avec le certificat "Test" ne sont pas
+                                fiable. En cons&eacute;quence, cet icon est ajout&eacute; au document avec le
+                                texte TESTCERTICATE.</p></li><li class="listitem"><p><span class="bold"><strong><span class="underline">Attention:</span></strong></span> Entre autre sous Windows
+                                il faut assurer que le JVM marche avec le codage UTF-8. Sinon la
+                                v&eacute;rification de la signature ne peut pas fonctionner
+                                correctement.</p></li></ul></div><p>
+                </p></div></div></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="viewgenAPI"></a>Kapitel 4. Viewgen API</h1></div></div></div><div class="toc"><p><b>Inhaltsverzeichnis</b></p><dl class="toc"><dt><span class="section"><a href="#d211e1477">Pr&eacute;parations</a></span></dt><dt><span class="section"><a href="#d211e1504">Int&eacute;gration</a></span></dt><dt><span class="section"><a href="#d211e1527">Int&eacute;gration avec API</a></span></dt><dt><span class="section"><a href="#d211e1545">Adressage par commandline</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d211e1477"></a>Pr&eacute;parations</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Tous les fichiers .jar qui se trouvent dans le directoire lib doivent &ecirc;tre ajout&eacute;s au CLASSPATH du logiciel. En plus, Viewgen.jar doit &ecirc;tre ajout&eacute; au CLASSPATH.</p><p>Ainsi la propri&eacute;t&eacute; <code class="code">-Djava.endorsed.dirs=./lib/endorsed</code> doit &ecirc;tre appel&eacute;e en d&eacute;marrant la Java-VM.</p></li><li class="listitem"><p>Le Render-Engine FOP qui est utilis&eacute; dans Viewgen n&eacute;cessite beaucoup de m&eacute;moire vive.</p><p>Selon des tests, un document de 5000 pages demande environ 1Go de m&eacute;moire vive pour pouvoir g&eacute;n&eacute;rer le document PDF.
+      Ceci implique qu'il faut adapter les param&egrave;tres <code class="code">-Xms</code> et <code class="code">-Xmx</code> de la Java-VM.</p><p>Nous recommandons les valeurs suivantes: <code class="code">-Xms256m
+                        -Xmx1024m</code></p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d211e1504"></a>Int&eacute;gration</h2></div></div></div><p>Dans le dossier <code class="code">doc/javadoc</code> se trouve la documentation de l'API Viewgen.</p><p>Pour l'int&eacute;gration de Viewgen, c'est la classe <code class="code">ch.swissdec.elm.viewgen.Viewgen</code> qui est importante.</p><p>Un exemple simple pour la g&eacute;n&eacute;ration d'un certificat de salaire de toutes les personnes:</p><pre class="programlisting">
+import ch.swissdec.elm.viewgen.Viewgen;
+...
+.
+...
+String[] parameters = new String[]{"-p","TaxAccountingReport","-x","testdata/ICHAGCompanyTestSig.xml"};
+Viewgen.main(parameters);
+...
+.   
+                </pre><p>Un exemple simple pour la g&eacute;n&eacute;ration d'un certificat de salaire anonymis&eacute; avec l'adresse &agrave; gauche et que les personnes de 2 &agrave; 3:</p><pre class="programlisting">
+import ch.swissdec.elm.viewgen.Viewgen;
+...
+.
+...
+String[] parameters = new String[]{"-p","TaxAccountingReport","-x","testdata/COMPLEXCompanyMixedSalaries.xml",
+"-a","-i","LEFT","-s","2","-e","3"};
+Viewgen.main(parameters);
+...
+.                    
+                </pre><p>Les autres fonctionnalit&eacute;s de Viewgen sont expliqu&eacute;es dans le JavaDoc.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d211e1527"></a>Int&eacute;gration avec API</h2></div></div></div><p>L'int&eacute;gration devrait &ecirc;tre fait avec les classes "Facade" des Plugin. Pour l'exemple sup&eacute;rieur:</p><pre class="programlisting">
+TaxAccountingReportFacade tarf = new TaxAccountingReportFacade();
+String[] pluginArgs = new String[]{"-a","-i","LEFT","-s","2","-e","3"};
+tarf.invoke(viewgenDocument, pluginArgs);
+            </pre><p>D&egrave;s v4.1.0 il y a la possibilit&eacute; de rediriger le r&eacute;sultat dans un OutputStream. Mais pas tous les fonctionnalit&eacute;s peuvent &ecirc;tre utilis&eacute;.</p><p>Par exemple il n'est pas possible:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>d'utiliser l'option "-m" du plugin TaxAccountingReport</p></li><li class="listitem"><p>Barcode-Plugin: pas possible .</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d211e1545"></a>Adressage par commandline</h2></div></div></div><p>Pour un adressage par commandline on peut utiliser les fichiers script Viewgen.bat (Windows) et Viewgen.sh (Linux). Exemple:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>G&eacute;n&eacute;rer un certificat de salaire pour les personnes 4 &agrave; 23 avec une r&eacute;capitulation et montrer le pdf:</p><p><code class="code">Viewgen.bat -p taxaccountingreport -x
+                            "&lt;pathToXml&gt;/meinLohndaten.xml" -s 4 -e 23 -g -v</code></p></li><li class="listitem"><p>Un rapport LAA en fran&ccedil;ais, avec un filigrane et dossier/document cible &lt;myOutputPath&gt;/&lt;myUVGfilename.pdf&gt; :</p><p><code class="code">Viewgen.bat -p uvgreport -x "&lt;pathToXml&gt;/meinLohndaten.xml" -l FR
+                            -w -o &lt;myOutputPath&gt; -f &lt;myUVGfilename.pdf&gt;</code></p></li></ol></div></div></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="LAversand"></a>Kapitel 5. Certificat de salaire</h1></div></div></div><div class="toc"><p><b>Inhaltsverzeichnis</b></p><dl class="toc"><dt><span class="section"><a href="#d211e1566">Remarks</a></span></dt><dt><span class="section"><a href="#d211e1571">envoi</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d211e1566"></a>Remarks</h2></div></div></div><p>Pour une meilleure pr&eacute;sentation des Remarks sur la deuxi&egrave;me pas du certificat de
+                salaire on peut ajouter un # entre les Remarks. Ceci provoque une nouvelle ligne au
+                certificat de salaire.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d211e1571"></a>envoi</h2></div></div></div><p>La Poste Suisse a des demandes tr&egrave;s stricte concernant l'adressage, en particulier si on utilise des enveloppes &agrave; panneau transparent. Regardez sur:</p><p><a class="link" href="http://www.post.ch/post-startseite/post-privatkunden/post-versenden/post-briefe-international/post-richtig-adressieren-international-p.htm" target="_top">http://www.post.ch/post-startseite/post-privatkunden/post-versenden/post-briefe-international/post-richtig-adressieren-international-p.htm</a></p><p>Les certificats de salaire sont align&eacute;s pour les enveloppes C6/5. Pourque les demandes de la poste soient accomplis, vous devez plier les certificats de salaire &agrave; la suivante:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Fen&ecirc;tre/adresse &agrave; gauche:	1. plissure sur la hauteur du trait sous le point "2.1 Verpflegung"</p></li><li class="listitem"><p>Fen&ecirc;tre/adresse &agrave; droite:	1. plissure sur la hauteur du trait entre le point "1. Lohn/Rente" et "2. Gehaltsnebenleistungen"</p></li></ul></div></div></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="bigMacs"></a>Kapitel 6. Adaptation pour Mac</h1></div></div></div><p>Il existe un probl&egrave;me sous Mac OS X (etc.) si le chemin d'acc&egrave;s contient des espaces. Ceci peut &ecirc;tre corrig&eacute; par des guillemets dans le fichier "Viewgen.sh":</p><p>
+            <code class="code">java -Xms256m -Xmx1024m -Dfile.encoding=UTF8 -cp lib/20130514-2021.02.jar:lib/20200220-2021.02.jar:lib/activation-1.1.jar:lib/ant-1.8.2.jar:lib/ant-launcher-1.8.2.jar:lib/antlr-2.7.7.jar:lib/asm-5.0.4.jar:lib/batik-anim-1.8.jar:lib/batik-awt-util-1.8.jar:lib/batik-bridge-1.8.jar:lib/batik-css-1.8.jar:lib/batik-dom-1.8.jar:lib/batik-ext-1.8.jar:lib/batik-extension-1.8.jar:lib/batik-gvt-1.8.jar:lib/batik-parser-1.8.jar:lib/batik-script-1.8.jar:lib/batik-svg-dom-1.8.jar:lib/batik-svggen-1.8.jar:lib/batik-transcoder-1.8.jar:lib/batik-util-1.8.jar:lib/batik-xml-1.8.jar:lib/bcmail-jdk15on-1.65.jar:lib/bcpkix-jdk15on-1.63.jar:lib/bcprov-ext-jdk15on-1.63.jar:lib/bcprov-jdk15on-1.65.jar:lib/byte-buddy-1.9.16.jar:lib/camel-api-3.4.0.jar:lib/camel-barcode-3.4.0.jar:lib/camel-management-api-3.4.0.jar:lib/camel-pdf-3.4.0.jar:lib/camel-support-3.4.0.jar:lib/camel-util-3.4.0.jar:lib/classmate-1.4.0.jar:lib/commons-2021.02.jar:lib/commons-codec-1.11.jar:lib/commons-collections4-4.1.jar:lib/commons-io-2.6.jar:lib/commons-lang-2.6.jar:lib/commons-lang3-3.8.1.jar:lib/commons-logging-1.0.4.jar:lib/core-3.4.0.jar:lib/cryptacular-1.1.1.jar:lib/cxf-core-3.3.5.jar:lib/cxf-rt-bindings-soap-3.3.5.jar:lib/cxf-rt-databinding-jaxb-3.3.5.jar:lib/cxf-rt-frontend-simple-3.3.5.jar:lib/cxf-rt-transports-http-3.3.5.jar:lib/cxf-rt-wsdl-3.3.5.jar:lib/dom4j-2.1.1.jar:lib/ehcache-2.10.6.jar:lib/FastInfoset-1.2.15.jar:lib/fontbox-2.0.18.jar:lib/fop-2.4.jar:lib/fop-core-2.4.jar:lib/fop-events-2.4.jar:lib/fop-util-2.4.jar:lib/geronimo-javamail_1.4_mail-1.8.4.jar:lib/geronimo-jta_1.1_spec-1.1.1.jar:lib/geronimo-ws-metadata_2.0_spec-1.1.3.jar:lib/guava-19.0.jar:lib/hibernate-commons-annotations-5.0.4.Final.jar:lib/hibernate-core-5.3.15.Final.jar:lib/istack-commons-runtime-3.0.7.jar:lib/itextpdf-5.5.6.jar:lib/jacorb-omgapi-3.9.jar:lib/jai-codec-1.1.3.jar:lib/jai-core-1.1.3.jar:lib/jai-imageio-core-1.4.0.jar:lib/jakarta.activation-api-1.2.1.jar:lib/jakarta.xml.bind-api-2.3.2.jar:lib/jandex-2.0.5.Final.jar:lib/jasypt-1.9.2.jar:lib/java-support-7.3.0.jar:lib/javase-3.4.0.jar:lib/javassist-3.23.2-GA.jar:lib/javax.activation-1.2.0.jar:lib/javax.activation-api-1.2.0.jar:lib/javax.annotation-api-1.3.2.jar:lib/javax.persistence-api-2.2.jar:lib/javax.xml.soap-api-1.4.0.jar:lib/jaxb-api-2.3.1.jar:lib/jaxb-runtime-2.3.1.jar:lib/jboss-logging-3.3.3.Final.jar:lib/jboss-rmi-api_1.0_spec-1.0.6.Final.jar:lib/jboss-transaction-api_1.2_spec-1.1.1.Final.jar:lib/jcommander-1.72.jar:lib/jimi-1.0.jar:lib/joda-time-2.10.5.jar:lib/log4j-1.2.17.jar:lib/mail-1.4.7.jar:lib/metrics-core-4.0.7.jar:lib/mimepull-1.9.12.jar:lib/not-yet-commons-ssl-0.3.11.jar:lib/opensaml-core-3.3.0.jar:lib/opensaml-profile-api-3.3.0.jar:lib/opensaml-saml-api-3.3.0.jar:lib/opensaml-saml-impl-3.3.0.jar:lib/opensaml-security-api-3.3.0.jar:lib/opensaml-security-impl-3.3.0.jar:lib/opensaml-soap-api-3.3.0.jar:lib/opensaml-xacml-api-3.3.0.jar:lib/opensaml-xacml-impl-3.3.0.jar:lib/opensaml-xacml-saml-api-3.3.0.jar:lib/opensaml-xacml-saml-impl-3.3.0.jar:lib/opensaml-xmlsec-api-3.3.0.jar:lib/opensaml-xmlsec-impl-3.3.0.jar:lib/qdox-1.12.jar:lib/saaj-impl-1.5.0.jar:lib/servlet-api-2.2.jar:lib/shared-2021.02.jar:lib/shared-elm-2021.02.jar:lib/shared-kle-2021.02.jar:lib/slf4j-api-1.7.30.jar:lib/spring-aop-5.1.13.RELEASE.jar:lib/spring-beans-5.1.13.RELEASE.jar:lib/spring-boot-2.1.12.RELEASE.jar:lib/spring-context-5.1.13.RELEASE.jar:lib/spring-context-support-5.1.13.RELEASE.jar:lib/spring-core-5.1.13.RELEASE.jar:lib/spring-expression-5.1.13.RELEASE.jar:lib/spring-jcl-5.1.13.RELEASE.jar:lib/stax-ex-1.8.jar:lib/stax2-api-3.1.4.jar:lib/txw2-2.3.1.jar:lib/viewgen-java-2021.02.jar:lib/woodstox-core-5.0.3.jar:lib/wsdl4j-1.6.3.jar:lib/wss4j-ws-security-common-2.2.2.jar:lib/wss4j-ws-security-dom-2.2.2.jar:lib/xalan-2.7.0.jar:lib/xercesImpl-2.11.0.jar:lib/xml-apis-1.4.01.jar:lib/xml-apis-ext-1.3.04.jar:lib/xmlgraphics-commons-2.4.jar:lib/xmlschema-core-2.2.5.jar:lib/xmlsec-2.1.2.jar ch.swissdec.viewgen.Viewgen "$@"</code>
+        </p></div></div></body></html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_hr_year_close_state" model="ir.ui.view">
+            <field name="name">hr.year.close.state.form</field>
+            <field name="model">hr.year.close.state</field>
+            <field name="arch" type="xml">
+                <form string="Close hr year">
+                    <group>
+                        <separator string="Close hr year" colspan="2" />
+                        <label string ="If no additional changes should be done in any payslip on this year, you can close it from here. It will close this year that will make impossible any new payslip's for this year. Close a year when you need to finalize your end of year results definitive." colspan="2" for="company" class="o_form_label"/>
+                        <field name="company"/>
+                        <field name="year" options='{"no_open": True, "no_create": True}'/>
+                    </group>
+                    <footer>
+                        <button string="Close Year" name="data_save" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_hr_year_close_state" model="ir.actions.act_window">
+            <field name="name">Close a Year</field>
+            <field name="res_model">hr.year.close.state</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_hr_year_close_state"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_hr_year_close_state"
+            id="menu_wizard_hry_close_state"
+            sequence="200"
+            parent="payroll_configure"
+            groups="hr.group_hr_manager"/>
+
+    </data>
+</openerp>

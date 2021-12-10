@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="gui_tax_at_source_transmission_line_children_form_view"
+		model="ir.ui.view">
+		<field name="name">gui_tax_at_source_transmission_line_children_form_view</field>
+		<field name="model">gui_tax_at_source_transmission_line_children</field>
+		<field name="arch" type="xml">
+			<form string="Children">
+				<sheet>
+					<group>
+						<field name="Lastname" />
+						<field name="Firstname" />
+						<field name="DateOfBirth" />
+						<field name="Start" />
+						<field name="End" />
+
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" />
+					<field name="message_ids" widget="mail_thread" />
+				</div>
+			</form>
+		</field>
+	</record>
+	<record id="gts_transmission_line_children_tree_view" model="ir.ui.view">
+		<field name="name">gui_tax_at_source_transmission_tree_children</field>
+		<field name="model">gui_tax_at_source_transmission_line_children</field>
+		<field name="arch" type="xml">
+			<tree string="Children"
+				  decoration-success="state=='new'"
+				  decoration-warning="state in ('correction','old_value')"
+				  decoration-info="state=='current_value'">
+				<field name="Lastname" />
+				<field name="Firstname" />
+				<field name="DateOfBirth" />
+				<field name="Start" />
+				<field name="End" />
+				<field name="state" />
+			</tree>
+		</field>
+	</record>
+
+</odoo>

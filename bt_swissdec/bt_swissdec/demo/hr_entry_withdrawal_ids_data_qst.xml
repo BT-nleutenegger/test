@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- create hr.employee.entry.withdrawal entries -->
+    <data>
+        <record id="hr_entry_withdrawal_rinaldi0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="employee_id" ref="hr_employee1_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_andrey0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="employee_id" ref="hr_employee2_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_koller0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="employee_id" ref="hr_employee3_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_blanc0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-05-01</field>
+            <field name="employee_id" ref="hr_employee5_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_meier0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-06-01</field>
+            <field name="employee_id" ref="hr_employee6_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_mueller0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="employee_id" ref="hr_employee7_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_armanini0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="employee_id" ref="hr_employee8_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_maldini0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="employee_id" ref="hr_employee9_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_utzinger0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="employee_id" ref="hr_employee10_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_uhlmann0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="employee_id" ref="hr_employee11_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_bolletto0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-10-01</field>
+            <field name="employee_id" ref="hr_employee13_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_rast0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="date_end">2013-10-31</field>
+            <field name="employee_id" ref="hr_employee14_qst"/>
+        </record>
+        <record id="hr_entry_withdrawal_saner0" model="hr.employee.entry.withdrawal">
+            <field name="date_start">2013-01-01</field>
+            <field name="employee_id" ref="hr_employee15_qst"/>
+        </record>
+    </data>
+</odoo>

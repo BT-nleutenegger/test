@@ -1,0 +1,2871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+        attributeFormDefault="unqualified" version="0.0">
+
+    <!--
+         state of standardisation: FINAL
+          publication: 2013-05-21
+          a. boehm
+
+         filename:
+             20130514SalaryDeclaration_Tax_noNS.xsd
+
+         xsd without namespace (noNS)
+
+         attention:
+         **********
+         part-copy from
+             ns:http://www.swissdec.ch/schema/sd/20130514/SalaryDeclaration
+             SalaryDeclaration.xsd
+             state of standardisation: FINAL
+             publication: 2013-05-21
+             a. boehm
+
+
+     -->
+
+    <xs:complexType name="TaxAnnuityType">
+        <xs:sequence>
+            <xs:element name="Period" type="TimePeriodType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Rentenperiode (E)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Période de décompte des rentes (E)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Income" type="SalaryAmountType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Rente (z1)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Rente (z1)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="GrossIncome" type="SalaryAmountType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Bruttolohn STV (z8)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Salaire brut AFC (z8)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NetIncome" type="SalaryAmountType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Nettolohn STV (z11)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Salaire net AFC (z11)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TaxSalaryType">
+        <xs:sequence>
+            <xs:element name="Period" type="TimePeriodType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Lohnperiode (E)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Période de décompte des salaires (E)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FreeTransport" type="EmptyType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Unentgeltliche Beförderung (F)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Transport gratuit (F)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CanteenLunchCheck" type="EmptyType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Kantinenverpflegung / Lunch-Checks (G)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Repas à la cantine / Chèques-repas (G)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Income" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Lohn (z1)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Salaire (z1)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FringeBenefits" type="FringeBenefitsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Gehaltsnebenleistungen (z2)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Prestations salariales (z2)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SporadicBenefits" type="SortSumType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Unregelmässige Leistungen (z3)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Prestations non périodiques (z3)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CapitalPayment" type="SortSumType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Kapitalleistungen (z4)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Prestations en capital (z4)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OwnershipRight" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beteiligungsrechte (z5)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Droits de participation (z5)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BoardOfDirectorsRemuneration" type="SalaryAmountType"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Verwaltungsratsentschädigungen (z6)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Indemnités des membres de l'administration (z6)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OtherBenefits" type="SortSumType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Andere Leistungen (z7)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Autres prestations (z7)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="GrossIncome" type="SalaryAmountType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Bruttolohn STV (z8)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Salaire brut AFC (z8)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="AHV-ALV-NBUV-AVS-AC-AANP-Contribution" type="SalaryAmountType"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AHV-IV-EO-ALV-NBUV Beiträge (z9)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Cotisations AVS/AI/APG/AC/AANP (z9)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BVG-LPP-Contribution" type="Tax-BVG-LPP-ContributionType"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Berufliche Vorsorge (z10)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Prévoyance professionnelle (z10)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NetIncome" type="SalaryAmountType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Nettolohn STV (z11)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Salaire net AFC (z11)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DeductionAtSource" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Quellensteuerabzug (z12)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Retenue de l'impôt à la source (z12)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ChargesRule" type="ChargesRuleType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Spesenregelung</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Réglementation des frais</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Charges" type="ChargesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Spesenvergütung (z13)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Allocations pour frais (z13)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OtherFringeBenefits" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Weitere Gehaltsnebenleistungen (z14)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Autres prestations salariales accessoires (z14)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="StandardRemark" type="StandardRemarkType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Standard Bemerkungen (z15)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Observations standard (z15)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Remark" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Bemerkungen (z15)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Observations (z15)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OwnershipRightDetails" type="OwnershipRightDetailsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Details zu den Beteiligungsrechten (z5)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Détails droits de participation (z5)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Contact" type="ContactType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Unterschiedliche Kontakte (zI)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contacts différents (zI)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FringeBenefitsType">
+        <xs:sequence>
+            <xs:element name="FoodLodging" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Verpflegung Unterkunft (z2.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Pension, logement (z2.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CompanyCar" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Privatanteil Geschäftswagen (z2.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Part privée voiture de service (z2.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Other" type="SortSumType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Andere (z2.3)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Autres (z2.3)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tax-BVG-LPP-ContributionType">
+        <xs:sequence>
+            <xs:element name="Regular" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Ordentliche Beiträge (z10.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Cotisations ordinaires (z10.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Purchase" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beiträge für den Einkauf (z10.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Cotisations pour le rachat (z10.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ChargesRuleType">
+        <xs:choice>
+            <xs:element name="WithRegulation" type="GrantType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Spesenreglement(z15/rz55,56,65)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Réglement relatif aux frais(z15/rz55,56,65)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Guidance" type="EmptyType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Kreuz Spesenregelung gemäss (z13.1.1-X/rz52,56)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Case à cocher, réglement relatif aux frais (z13.1.1-X/rz52,56)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="ChargesType">
+        <xs:sequence>
+            <xs:element name="Effective" type="EffectiveType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Effektive Spesen (z13.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Frais effectifs (z13.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="LumpSum" type="LumpSumType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Pauschalspesen (z13.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Frais forfaitaires (z13.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Education" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beiträge an Weiterbildung (z13.3)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contributions au perfectionnement (z13.3)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EffectiveType">
+        <xs:sequence>
+            <xs:element name="TravelFoodAccommodation" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Reise, Verpflegung, Übernachtung (z13.1.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Voyage, repas, nuitées (z13.1.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Other" type="SortSumOptionalType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Andere (z13.1.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Autres (z13.1.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LumpSumType">
+        <xs:sequence>
+            <xs:element name="Representation" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Repräsentation (z13.2.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Représentation (z13.2.1)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Car" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Auto (z13.2.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Voiture (z13.2.2)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Other" type="SortSumType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Übrige (z13.2.3)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Autres (z13.2.3)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SortSumType">
+        <xs:sequence>
+            <xs:element name="Text" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Text (,-separiert)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Texte (séparé par des virgules)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Sum" type="SalaryAmountType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Summe</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Somme</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SortSumOptionalType">
+        <xs:sequence>
+            <xs:element name="Text" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Text (,-separiert)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Texte (séparé par des virgules)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Sum" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Summe</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Somme</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StandardRemarkType">
+        <xs:sequence>
+            <xs:element name="StaffShareThirdCompany" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Mitarbeiterbeteiligung durch Drittgesellschaft (z15/rz70)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Participation de collaborateur octroyée par une tierce entreprise
+                            (z15/rz70)
+                        </translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ChildAllowancePerAHV-AVS" type="ChildAllowancePerAHV-AVSType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Kinderzulagen durch die Ausgleichkasse bezahlt (z15/rz15)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>«Allocations pour enfants versés par la caisse de compensation
+                            (z15/rz15)
+                        </translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RelocationCosts" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Umzugskosten durch Arbeitgeber(z15/rz71)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Remboursement des frais de déménagement versées par l'employeur
+                            (z15/rz71)
+                        </translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="StaffShareMarketValue" type="GrantType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Mitarbeiterbeteilgung-Verkehrswert (rz68)</translation>
+                        <description>
+                            <short>
+                                Ein genehmigter Verkehrswert der Mitarbeiterbeteiligung
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Participations de collaborateurs, la valeur vénale (rz68)</translation>
+                        <description>
+                            <short>
+                                Valeur vénale des participations de collaborateurs agrée par l'autorité fiscale
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="StaffShareWithoutTaxableIncome" type="ReasonType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Mitarbeiterbeteilgung ohne steuerbares Einkommen (rz69)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Participation de collaborateur sans revenu imposable (rz69)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PrivatePartCompanyCar" type="GrantType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Privatanteil Geschäftswagen (rz21)</translation>
+                        <description>
+                            <short>
+                                Ein genehmigter Privatanteil für den Geschäftswagen
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Part privée voiture de service (rz21)</translation>
+                        <description>
+                            <short>
+                                Part privée pour voiture de service agréé par le canton
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CompanyCarClarify" type="EmptyType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Auto priv.anteil im Veranlagungsverfahren abklären (rz22)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Part privée pour voiture de service à vérifier par les autorités fiscales
+                            (rz22)
+                        </translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MinimalEmployeeCarPartPercentage" type="EmptyType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>
+                            Mitarbeiter bezahlt (mind.) 0.8% pro Monat Privatanteil Geschäftswagen (rz21)
+                        </translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>
+                            L'employé a une retenue de 0.8 % ou plus par mois pour la part privée voiture de service
+                            (rz21)
+                        </translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TaxAtSourcePeriodForObjection" type="EmptyType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Einsprachefrist für die Quellensteuer</translation>
+                        <description>
+                            <short>
+                                Die Quellenbesteuerten Personen erhalten hier Informationen bezüglich
+                                der gesetzlichen Einsprachefrist.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Délai d'opposition aux impôts à la source</translation>
+                        <description>
+                            <short>Ici les personnes soumit aux impôts à la source reçoivent des
+                                informations sur le délai d'opposition légal.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GrantType">
+        <xs:sequence>
+            <xs:element name="Allowed" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Genehmigt-Datum</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date de l'approbation</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Canton" type="CantonAndEXType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Genehmigungs-Kanton</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Canton d'approbation</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OwnershipRightDetailsType">
+        <xs:sequence>
+            <xs:element name="OwnershipRightDetail" type="OwnershipRightDetailType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Detail zu dem Beteiligungsrecht (z5)</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Détail droit de participation (z5)</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OwnershipRightDetailType">
+        <xs:sequence>
+            <xs:element name="TypeOfOwnership" type="TypeOfOwnershipType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Art der Mitarbeiterbeteiligung</translation>
+                        <description>
+                            <short>Art der Mitarbeiterbeteiligung</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Type participation collaborateur</translation>
+                        <description>
+                            <short>Type participation collaborateur</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ShareName" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Name der Aktie</translation>
+                        <description>
+                            <short>Name der Aktie und Valorennummer (wenn bekannt)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom de l’action</translation>
+                        <description>
+                            <short>Nom de l’action et code boursier si existant</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SharePlanDescription" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beschreibung des Mitarbeiterbeteiligungsplans</translation>
+                        <description>
+                            <short>Beschreibung des Mitarbeiterbeteiligungsplans</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Description des plans de participation de collaborateur</translation>
+                        <description>
+                            <short>Description des plans de participation de collaborateur</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Ruling" type="GrantType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Ruling</translation>
+                        <description>
+                            <short>Ruling</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>ruling</translation>
+                        <description>
+                            <short>ruling</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MoveToCH" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Datum des Zuzugs</translation>
+                        <description>
+                            <short>Datum des Zuzugs des Mitarbeitenden in die Schweiz (Ansässigkeit)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date d’arrivée</translation>
+                        <description>
+                            <short>Date d’arrivée en Suisse du collaborateur (domicile)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MoveFromCH" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Datum des Wegzugs</translation>
+                        <description>
+                            <short>Datum des Wegzugs des Mitarbeitenden aus der Schweiz (Ansässig-keit)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date de départ</translation>
+                        <description>
+                            <short>Date de départ de Suisse du collaborateur (domicile)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EntryConcern" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Eintritt in Konzern</translation>
+                        <description>
+                            <short>Beginn des Arbeitsverhältnisses (innerhalb Konzern)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Entrée dans le groupe</translation>
+                        <description>
+                            <short>Date de début d’activité lucrative pour le groupe</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="WithdrawalConcern" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Austritt aus Konzern</translation>
+                        <description>
+                            <short>Ende des Arbeitsverhältnisses (innerhalb Konzern)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Sortie du groupe</translation>
+                        <description>
+                            <short>Date de fin d’activité lucrative pour le groupe</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EntrySubcompany" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Eintritt in Tochtergesellschaft</translation>
+                        <description>
+                            <short>Beginn der Arbeitsverhältnisses mit Tochtergesellschaft in der Schweiz</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Entrée dans la société en Suisse</translation>
+                        <description>
+                            <short>Date de début d’activité lucrative pour la société en Suisse</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="WithdrawalSubcompany" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Austritt aus Tochtergesellschaft</translation>
+                        <description>
+                            <short>Ende des Arbeitsverhältnisses mit Tochtergesellschaft in der Schweiz</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Sortie de la société en Suisse</translation>
+                        <description>
+                            <short>Date de fin d’activité lucrative pour la société en Suisse</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CountryOfDestinationWorkplace" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Zielland Arbeit</translation>
+                        <description>
+                            <short>Zielland (Neuer Arbeitsort innerhalb Konzern)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Destination travail</translation>
+                        <description>
+                            <short>Destination (nouveau pays de travail pour le groupe)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CountryOfDestinationResidence" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Zielland Ansässigkeit</translation>
+                        <description>
+                            <short>Zielland (Neues Ansässigkeits Land)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Destination domicile</translation>
+                        <description>
+                            <short>Destination (nouveau pays de domicile)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="AppropriationBuyEmission" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Datum der Zuteilung / des Erwerbs / der Ausgabe</translation>
+                        <description>
+                            <short>Datum der Zuteilung / des Erwerbs / der Ausgabe</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date d’attribution / d’acquisition / d‘émission</translation>
+                        <description>
+                            <short>Date d’attribution / d’acquisition / d‘émission</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Expiry" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Datum des Verfalls der Mitarbeiterbeteiligung</translation>
+                        <description>
+                            <short>Datum des Verfalls der Mitarbeiterbeteiligung (Endverfall)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date d’échéance de la participation</translation>
+                        <description>
+                            <short>Date d’échéance de la participation (fin de vie)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Duration" type="FourDecimalPlacesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Dauer Mitarbeiterbeteiligung</translation>
+                        <description>
+                            <short>Dauer der Laufzeit der Mitarbeiterbeteiligung (in Jahren)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Durée participation</translation>
+                        <description>
+                            <short>Durée de vie de la participation (en années)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ExpiryVestingPeriod" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Ablauf der Sperrfrist</translation>
+                        <description>
+                            <short>Datum des ordentlichen Ablaufs der Sperrfrist)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>échéance du délai de blocage</translation>
+                        <description>
+                            <short>Date (originelle) d’échéance du délai de blocage</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ReductionIncomePercentage" type="FourDecimalPlacesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Einschlag Einkommen in %</translation>
+                        <description>
+                            <short>Einschlag nach Dauer der Sperrfrist in % (Einkommen)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Abattement revenu</translation>
+                        <description>
+                            <short>Abattement pour délai de blocage (revenu)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ReductionAssetPercentage" type="FourDecimalPlacesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Einschlag Vermögen in %</translation>
+                        <description>
+                            <short>Einschlag nach verbleibender Dauer der Sperrfrist in % (Vermögen)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Abattement fortune</translation>
+                        <description>
+                            <short>Escompte pour le temps restant jusqu’à la fin du délai de blocage (fortune)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ExpiryBeforeReleaseVestingPeriod" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Datum der Freigabe vor Ablauf der Sperrfrist</translation>
+                        <description>
+                            <short>Datum der Freigabe vor Ablauf der Sperrfrist</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date du déblocage anticipé</translation>
+                        <description>
+                            <short>Date du déblocage anticipé</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DurationVestingPeriod" type="FourDecimalPlacesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Dauer der verbleibenden Sperrfrist (in Jahren)</translation>
+                        <description>
+                            <short>Dauer der verbleibenden Sperrfrist (in Jahren)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Durée jusqu’à l’expiration du délai de blocage (en années)</translation>
+                        <description>
+                            <short>Durée jusqu’à l’expiration du délai de blocage (en années)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DurationObligationToReturn" type="FourDecimalPlacesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Dauer einer allfälligen Rückgabeverpflichtung</translation>
+                        <description>
+                            <short>Dauer einer allfälligen Rückgabeverpflichtung (in Jahren)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Durée de l’éventuelle obligation de restitution</translation>
+                        <description>
+                            <short>Durée de l’éventuelle obligation de restitution (en années)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Return" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Datum der Rückgabe</translation>
+                        <description>
+                            <short>Datum der Rückgabe</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date de restitution</translation>
+                        <description>
+                            <short>Date de restitution</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Realization" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Realisation</translation>
+                        <description>
+                            <short>Datum der Realisation (z. B. Ausübung von Optionen, Umwandlung von RSU’s in Aktien,
+                                Erhalt einer Geldleistung usw.)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Réalisation</translation>
+                        <description>
+                            <short>Date de réalisation (ex. : exercice des options, conversion des rsus en
+                                actions, versement en espèces, etc.)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="StartVestingPeriod" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beginn der Vesting Periode</translation>
+                        <description>
+                            <short>Datum des Beginns der Vesting Periode</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>début de la période de vesting</translation>
+                        <description>
+                            <short>Date de début de la période de vesting</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EndVestingPeriod" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Enddatum der Vesting Periode</translation>
+                        <description>
+                            <short>Enddatum der Vesting Periode</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date de fin de la période de vesting</translation>
+                        <description>
+                            <short>Date de fin de la période de vesting</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RemarkVestingPeriod" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Bemerkungen zur Vesting Periode</translation>
+                        <description>
+                            <short>Bemerkungen zur Vesting Periode</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Remarque concernant la période de vesting</translation>
+                        <description>
+                            <short>Remarque concernant la période de vesting</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumberToCalculateIncome" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Anzahl zur Berechnung des Einkommens</translation>
+                        <description>
+                            <short>Anzahl (Zugeteilt, Erworben, Ausgegeben, vor/nach Vestingzeitpunkt,
+                                realisiert, freigeworden, Rückgabe usw.) – zur Berechnung des Einkommens
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nombre pour le calcul du revenu</translation>
+                        <description>
+                            <short>Nombre (attribué / acquis / émis, ayant/devant vester, réalisé, débloqué,
+                                restitué, etc.) – pour le calcul du revenu
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NumberOfOwnerships" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Anzahl gehaltener Mitarbeiterbeteiligungen am Ende der Periode</translation>
+                        <description>
+                            <short>Anzahl gehaltener Mitarbeiterbeteiligungen am Ende der Periode (Vermögen)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nombre de participations détenues à la fin de la période</translation>
+                        <description>
+                            <short>Nombre de participations détenues à la fin de la période (fortune)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Currency" type="CurrencyType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Währung</translation>
+                        <description>
+                            <short>Währung</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Monnaie</translation>
+                        <description>
+                            <short>Monnaie</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CurrencyRate" type="FourDecimalPlacesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Wechselkurs</translation>
+                        <description>
+                            <short>Wechselkurs</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Taux de change</translation>
+                        <description>
+                            <short>Taux de change</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MarketValue" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Massgebender Verkehrswert</translation>
+                        <description>
+                            <short>Massgebender Verkehrswert
+                                (bei Zuteilung / Erwerb / Ausgabe, Vesting, Ausübung, Freigabe, Rückgabe usw.)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Valeur vénale déterminante</translation>
+                        <description>
+                            <short>Valeur vénale déterminante
+                                (lors de l’attribution / acquisition / émission, vesting, réalisation, déblocage,
+                                restitution, etc.)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MarketValueFormula" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Verkehrswert nach Formelwert berechnet</translation>
+                        <description>
+                            <short>Verkehrswert nach Formelwert berechnet (nicht kotierte Aktie) (bei Zuteilung
+                                / Erwerb / Ausgabe, Vesting, Ausübung, Freigabe, Rückgabe usw.)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Valeur établie selon une formule</translation>
+                        <description>
+                            <short>Valeur établie selon une formule (action non cotée) (lors de l’attribution
+                                / acquisition / émission, vesting, réalisation, déblocage, restitution, etc.))
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Formula" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Angewendete Berechnungsformel</translation>
+                        <description>
+                            <short>Angewendete Berechnungsformel</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Formule de calcul</translation>
+                        <description>
+                            <short>Formule de calcul</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ReducedMarketValue" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Reduzierter Verkehrswert</translation>
+                        <description>
+                            <short>Reduzierter Verkehrswert</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Valeur vénale escomptée</translation>
+                        <description>
+                            <short>Valeur vénale escomptée</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Price" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Preis</translation>
+                        <description>
+                            <short>Erwerbspreis, Ausübungspreis, Umwandlungspreis, Rückgabepreis usw.</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Prix</translation>
+                        <description>
+                            <short>Prix d’acquisition, d’exercice, de conversion, de restitution, etc.</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MonetaryValuesServicesPerShare" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Geldwerter Vorteil pro Titel</translation>
+                        <description>
+                            <short>Geldwerter Vorteil pro Titel</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Prestation appréciable en argent, par titre</translation>
+                        <description>
+                            <short>Prestation appréciable en argent, par titre</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MonetaryValuesServicesTotal" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Geldwerter Vorteil Gesamt</translation>
+                        <description>
+                            <short>Geldwerter Vorteil Gesamt</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Prestation appréciable en argent totale</translation>
+                        <description>
+                            <short>Prestation appréciable en argent totale</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ReductionCosts" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Gewinnungskostenabzug</translation>
+                        <description>
+                            <short>Gewinnungskostenabzug bei Rückgabe von Mitarbeiteraktien
+                                (Ziffer 15 des Lohnausweises)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Frais d’acquisition du revenu</translation>
+                        <description>
+                            <short>Frais d’acquisition du revenu
+                                (lors de la restitution des actions) (chiffre 15 du certificat de salaire)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Workplace" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Arbeitsort (Land) am Stichtag</translation>
+                        <description>
+                            <short>Arbeitsort (Land) am Stichtag</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Pays de travail à la date déterminante</translation>
+                        <description>
+                            <short>Pays de travail à la date déterminante</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="WorkingDaysInCH-Emission-Vesting" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Anzahl Arbeitstage in der Schweiz zwischen Zuteilung und Vesting</translation>
+                        <description>
+                            <short>Anzahl Arbeitstage in der Schweiz zwischen Zuteilung und Vesting
+                                (1 Jahr = 365 Tage)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Jours travaillés en Suisse entre l’octroi et le vesting</translation>
+                        <description>
+                            <short>Jours travaillés en Suisse entre l’octroi et le vesting
+                                (1 an = 365 jours)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DaysEmission-Vesting" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Total Tage zwischen Zuteilung Vesting</translation>
+                        <description>
+                            <short>Total Tage zwischen Zuteilung Vesting
+                                (maximal bis zur Beendigung des Arbeitsverhältnisses mit dem Konzern)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Total des jours entre l’octroi et le vesting</translation>
+                        <description>
+                            <short>Total des jours entre l’octroi et le vesting
+                                (mais au plus tard jusqu’à la fin des rapports de travail pour le groupe)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PartInCH-Percentage" type="FourDecimalPlacesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Auf die Schweiz entfallender Anteil in %</translation>
+                        <description>
+                            <short>Auf die Schweiz entfallender Anteil in %</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Pourcentage appartenant à la Suisse</translation>
+                        <description>
+                            <short>Pourcentage appartenant à la Suisse</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PartIncomeAbroad" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Anteil steuerbares Einkommen im Ausland</translation>
+                        <description>
+                            <short>Anteil steuerbares Einkommen im Ausland, für den Satz (CHF)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Part du revenu imposable à l’étranger</translation>
+                        <description>
+                            <short>Part du revenu imposable à l’étranger (à déclarer pour le taux d’imposition)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PartIncomeCH" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Anteil steuerbares Einkommen in der Schweiz</translation>
+                        <description>
+                            <short>Anteil steuerbares Einkommen in der Schweiz</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Part du revenu imposable en Suisse</translation>
+                        <description>
+                            <short>Part du revenu imposable en Suisse</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="WorkplaceTimeOfRealisation" type="Location3Type" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Arbeitsortim Zeitpunkt der Realisation der Mitarbeiterbeteiligung</translation>
+                        <description>
+                            <short>Arbeitsort (Land) im Zeitpunkt der Realisation der Mitarbeiterbeteiligung
+                                (Schweiz, Ausland oder arbeitet nicht mehr für den Konzern)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Pays de travail lors de la réalisation des participations</translation>
+                        <description>
+                            <short>Pays de travail lors de la réalisation des participations
+                                (Suisse ou Etran-ger ou ne travaille plus pour le groupe)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ResidenceTimeOfRealisation" type="Location2Type" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Ansässigkeit im Zeitpunkt der Realisation der Mitarbeiterbeteiligung</translation>
+                        <description>
+                            <short>Ansässigkeits Staat im Zeitpunkt der Realisation der Mitarbeiterbeteiligung
+                                (Schweiz oder Ausland)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Pays de domicile lors de la réalisation des participations</translation>
+                        <description>
+                            <short>Pays de domicile lors de la réalisation des participations
+                                (Suisse ou Etranger)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DiverseDeduction" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Diverse Abzüge</translation>
+                        <description>
+                            <short>Diverse Abzüge (Hypotax, Sozialabgaben, Hypothek usw.)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Déductions diverses</translation>
+                        <description>
+                            <short>Déductions diverses (Hypotax, charges sociales hypothétiques, etc.)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Operation" type="OperationOwnershipRightType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Vorgang</translation>
+                        <description>
+                            <short>Vorgang (Zuteilung / Erwerb /
+                                Ausgabe/ Vesting / Realisation / Freigabe / Rückgabe usw.)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Type d’opération</translation>
+                        <description>
+                            <short>Type d’opération (attribution / acquisition /
+                                émission/ vesting/ réalisation/ déblocage/ restitution etc.)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Confirmation" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Erstelldatum der Bescheinigung</translation>
+                        <description>
+                            <short>Erstelldatum der Bescheinigung</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date d’établissement de l’attestation</translation>
+                        <description>
+                            <short>Date d’établissement de l’attestation</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Company" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Name des Arbeitgebers</translation>
+                        <description>
+                            <short>Name des Arbeitgebers (oder der Name des ehemaligen Arbeitgebers)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom de l’employeur</translation>
+                        <description>
+                            <short>Nom de l’employeur (ou ex-employeur)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ConfirmationCompany" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Name der Gesellschaft, welche die Bescheinigung ausgestellt hat</translation>
+                        <description>
+                            <short>Name der Gesellschaft, welche die Bescheinigung ausgestellt hat</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom de la société qui a établi l’attestation</translation>
+                        <description>
+                            <short>Nom de la société qui a établi l’attestation</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ConfirmationConcern" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Name der Konzerngesellschaft</translation>
+                        <description>
+                            <short>Name der Konzerngesellschaft, welche die Mitarbeiterbeteiligung
+                                herausgegeben hat
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom du groupe</translation>
+                        <description>
+                            <short>Nom du groupe dont proviennent les participations de collaborateur</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Contact" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Kontaktperson</translation>
+                        <description>
+                            <short>Kontaktperson (Name, Vorname)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Personne de contact</translation>
+                        <description>
+                            <short>Personne de contact (nom, prémom)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Phone" type="NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Telefon</translation>
+                        <description>
+                            <short>Telefon</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>No de téléphone</translation>
+                        <description>
+                            <short>No de téléphone</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Email" type="EmailAddressType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Email</translation>
+                        <description>
+                            <short>Email</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Adresse email</translation>
+                        <description>
+                            <short>Adresse email</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Comment" type="NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Bemerkungen</translation>
+                        <description>
+                            <short>Bemerkungen</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Remarques</translation>
+                        <description>
+                            <short>Remarques</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfOwnershipType">
+        <xs:choice>
+            <xs:element name="CategoryPredefined" type="CategoryPredefinedTaxType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Kategorie der Mitarbeiterbeteiligung</translation>
+                        <description>
+                            <short>Kategorie der Mitarbeiterbeteiligung</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Catégorie de participation collaborateur</translation>
+                        <short>Catégorie de participation collaborateur</short>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CategoryOpen" type="IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Freitext der Mitarbeiterbeteiligung</translation>
+                        <description>
+                            <short>Freitext der Mitarbeiterbeteiligung</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Texte libre de participation collaborateur</translation>
+                        <short>Texte libre de participation collaborateur</short>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="ChildAllowancePerAHV-AVSType">
+        <xs:sequence>
+            <xs:element name="FamilyIncome" type="SalaryAmountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Familienzulagen</translation>
+                        <description>
+                            <short>
+                                Durch die Ausgleichkassen bekannt gegebene Familienzulagen.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Allocations familiales</translation>
+                        <description>
+                            <short>
+                                Allocations familiales publiées par les caisses de compensation.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ContactType">
+        <xs:sequence>
+            <xs:element name="HR-RC-Name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Name oder HR-Name</translation>
+                        <description>
+                            <short>
+                                Name oder HR-Name des Unternehmens
+                            </short>
+                            <domain>
+                                Falls eine eingetragener Handelsregisternamen vorhanden ist, muss dieser
+                                Name verwendet werden.
+                            </domain>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom ou nom RC</translation>
+                        <description>
+                            <short>
+                                Nom ou nom RC de l'entreprise.
+                            </short>
+                            <domain>
+                                S'il existe un nom inscrit au registre de commerce, il faut utiliser celui-ci.
+                            </domain>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Address" type="AddressType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Adresse</translation>
+                        <description>
+                            <short>
+                                Adresse des Sachbearbeiters
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>adresse</translation>
+                        <description>
+                            <short>
+                                L'adresse de la personne responsable du dossier.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Person" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Name</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PhoneNumber" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Telefonnummer</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Numéro de téléphone</translation>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>Tax</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="AddressType">
+        <xs:sequence>
+            <xs:element name="ComplementaryLine" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Zusatzzeile</translation>
+                        <description>
+                            <short>Zusatzzeile für Postadresse (2. Zeile)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Ligne complémentaire</translation>
+                        <description>
+                            <short>Ligne complémentaire pour l'adresse postale (2e ligne)</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Street" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Strasse</translation>
+                        <description>
+                            <short>Strasse und Hausnummer (3. Zeile)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Rue</translation>
+                        <description>
+                            <short>Rue et numéro (3e ligne)</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Postbox" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Postfach</translation>
+                        <description>
+                            <short>Postfach (4. Zeile)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>boîte postale</translation>
+                        <description>
+                            <short>Boîte postale (4e ligne)</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <!-- Postaddressee line 5 -->
+            <xs:element name="Locality" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Lokalität</translation>
+                        <description>
+                            <short>Lokalität wie Region, Provinz (4.1 Zeile)</short>
+                            <domain>
+                                Gelegentlich muss in ausländischen Adressen zusätzlich zu Ort und Land eine weitere
+                                geografische Angabe geführt werden, welche gemäss Weltpostvereins zwischen Strasse
+                                und Ort zu positionieren sind.
+                                z.B. Region, Provinz, Bundesstaat oder Ortsteil
+                            </domain>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Localité</translation>
+                        <description>
+                            <short>Localité, p.e. region, province (4.1e ligne)</short>
+                            <domain>
+                                Occasionellement il faut indiquer une localité en plus du lieu et du pays dans le cas
+                                d'adresses étrangères. Selon l'union postale universelle, cette information est
+                                placée entre Rue et Lieu. La localité peut être une région, une province, un état
+                                fédéral,
+                                un quartier, etc.
+                            </domain>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ZIP-Code" type="ZIP-CodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Postleitzahl (PLZ)</translation>
+                        <description>
+                            <short>Postleitzahl (5. Zeile)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Code postal (CP)</translation>
+                        <description>
+                            <short>Code postal (5e ligne)</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="City" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Ort</translation>
+                        <description>
+                            <short>Ort (5. Zeile)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Lieu</translation>
+                        <description>
+                            <short>Lieu (5e ligne)</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <!-- Postaddressee line 6 -->
+            <xs:element name="Country" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Land</translation>
+                        <description>
+                            <short>Land für Postversand (6. Zeile)</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Pays</translation>
+                        <description>
+                            <short>Pays pour l'expédition postale (6e ligne)</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EmptyType"/>
+    <xs:complexType name="TimePeriodType">
+        <xs:sequence>
+            <xs:element name="from" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>von</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>depuis</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="until" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>bis</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>jusqu'à</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!-- @@@@@@@@@@@@@@@@@@@@@ -->
+    <!-- @@@@ simpleTypes @@@@
+    
+        simpleTypes (arranged alphabetically)
+    -->
+
+    <xs:simpleType name="CantonAndEXType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>KantonsTyp</translation>
+                <description>
+                    <short>KantonsTyp der Schweiz (inkl. EX)</short>
+                    <domain>
+                        Der KantonsTyp der Schweiz inkl. EX (EXtern oder EXpatriates), die
+                        nicht in der Schweiz wohnen
+                    </domain>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Type de canton Suisse (EX inclu)</translation>
+                <description>
+                    <short>Type de canton Suisse, EX inclu (EXterne ou EXpatriates) qui
+                        n'habitent pas en Suisse
+                    </short>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="AG"/>
+            <xs:enumeration value="AI"/>
+            <xs:enumeration value="AR"/>
+            <xs:enumeration value="BE"/>
+            <xs:enumeration value="BL"/>
+            <xs:enumeration value="BS"/>
+            <xs:enumeration value="FR"/>
+            <xs:enumeration value="GE"/>
+            <xs:enumeration value="GL"/>
+            <xs:enumeration value="GR"/>
+            <xs:enumeration value="JU"/>
+            <xs:enumeration value="LU"/>
+            <xs:enumeration value="NE"/>
+            <xs:enumeration value="NW"/>
+            <xs:enumeration value="OW"/>
+            <xs:enumeration value="SG"/>
+            <xs:enumeration value="SH"/>
+            <xs:enumeration value="SO"/>
+            <xs:enumeration value="SZ"/>
+            <xs:enumeration value="TG"/>
+            <xs:enumeration value="TI"/>
+            <xs:enumeration value="UR"/>
+            <xs:enumeration value="VD"/>
+            <xs:enumeration value="VS"/>
+            <xs:enumeration value="ZG"/>
+            <xs:enumeration value="ZH"/>
+            <xs:enumeration value="EX"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CantonAddressType">
+        <!-- abTodo evtl. vereinfachen mittels extension abklären -->
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>KantonsTyp</translation>
+                <description>
+                    <short>KantonsTyp der Schweiz</short>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Type de canton</translation>
+                <description>
+                    <short>Type de canton Suisse</short>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CantonAndEXType">
+            <xs:enumeration value="AG"/>
+            <xs:enumeration value="AI"/>
+            <xs:enumeration value="AR"/>
+            <xs:enumeration value="BE"/>
+            <xs:enumeration value="BL"/>
+            <xs:enumeration value="BS"/>
+            <xs:enumeration value="FR"/>
+            <xs:enumeration value="GE"/>
+            <xs:enumeration value="GL"/>
+            <xs:enumeration value="GR"/>
+            <xs:enumeration value="JU"/>
+            <xs:enumeration value="LU"/>
+            <xs:enumeration value="NE"/>
+            <xs:enumeration value="NW"/>
+            <xs:enumeration value="OW"/>
+            <xs:enumeration value="SG"/>
+            <xs:enumeration value="SH"/>
+            <xs:enumeration value="SO"/>
+            <xs:enumeration value="SZ"/>
+            <xs:enumeration value="TG"/>
+            <xs:enumeration value="TI"/>
+            <xs:enumeration value="UR"/>
+            <xs:enumeration value="VD"/>
+            <xs:enumeration value="VS"/>
+            <xs:enumeration value="ZG"/>
+            <xs:enumeration value="ZH"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CategoryPredefinedTaxType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Kategorie der Mitarbeiterbeteiligung</translation>
+                <description>
+                    <short>Kategorie der Mitarbeiterbeteiligung</short>
+                    <domain>
+                        Mögliche Werte:
+                        staffShares = Mitarbeiteraktien;
+                        publiclyTradedOptions = Freie börsenkotierte Mitarbeiteroptionen;
+                        otherOptions = Übrige Mitarbeiteroptionen
+                        (Steuerbar im Zeitpunkt des Verkaufs oder der Ausübung);
+                        deferredBenefitsStaffShares = Anwartschaften auf Mitarbeiteraktien;
+                        fictitiousStaffShare = Unechte Mitarbeiterbeteiligungen (Geldleistung);
+                    </domain>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Catégorie de participation collaborateur</translation>
+                <description>
+                    <short>Catégorie de participation collaborateur</short>
+                    <domain>
+                        Mögliche Werte:
+                        staffShares = Actions de collaborateur;
+                        publiclyTradedOptions = Options de collaborateur cotées et librement négociables;
+                        otherOptions = Autres options de collaborateur (imposables lors de l’exercice);
+                        deferredBenefitsStaffShares = Expectatives sur actions de collaborateur;
+                        fictitiousStaffShare = Participations improprement dites (versement en espèces);
+                    </domain>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="staffShares"/>
+            <xs:enumeration value="publiclyTradedOptions"/>
+            <xs:enumeration value="otherOptions"/>
+            <xs:enumeration value="deferredBenefitsStaffShares"/>
+            <xs:enumeration value="fictitiousStaffShare"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CategoryPredefinedType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Kategorien ohne QST-Tarifcode</translation>
+                <description>
+                    <short>Kategorien ohne QST-Tarifcode</short>
+                    <domain>
+                        Mögliche Werte:
+                        specialAgreement = Sondervereinbarung
+                        honoraryBoardOfDirectorsResidingAbroad = VR Honorar Wohnsitz im Ausland
+                        monetaryValuesServicesResidingAbroad = Geldwerte Leistungen Wohnsitz im Ausland
+                    </domain>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Catégories sans code de tarif d'impôt à la source</translation>
+                <description>
+                    <short>Catégories sans code de tarif d'impôt à la source</short>
+                    <domain>
+                        Valeurs possibles:
+                        - specialAgreement: Accord spécial
+                        - honoraryBoardOfDirectorsResidingAbroad: Honoraire CA de personnes résidant à l'étranger
+                        - monetaryValuesServicesResidingAbroad: prestations appréciables en argent de personnes résidant
+                        à l'étranger
+                    </domain>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="specialAgreement"/>
+            <xs:enumeration value="honoraryBoardOfDirectorsResidingAbroad"/>
+            <xs:enumeration value="monetaryValuesServicesResidingAbroad"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CurrencyType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Währung</translation>
+                <description>
+                    <short>
+                        ISO 4217 ist die von der Internationalen Organisation für Normung publizierte
+                        Norm für Währungs-Abkürzungen basiert auf 3 Buchstaben.
+                    </short>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Monnaie</translation>
+                <description>
+                    <short>
+                        La norme ISO 4217 est une norme internationale définissant
+                        des codes de trois lettres pour les devises utilisées dans le monde
+                    </short>
+                    <technical>
+                        Extension
+                        11= inconnu
+                        22= apatride
+                        Dans le contrôle de qualité, niveau plausibilité, le document est testé contre les
+                        codes ISO 3166 et un avertissement est généré au cas d'un code inconnu.
+                        http://www.unece.org/etrades/unedocs/repository/codelists/xml/CountryCode.xsd
+                    </technical>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EmailAddressType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Email Adresse</translation>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Adresse mél</translation>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^@]+@[^\.]+\..+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FourDecimalPlacesType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Zahl</translation>
+                <description>
+                    <short>Zahl mit 4 Nachkommastellen</short>
+                    <technical/>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>nombre</translation>
+                <description>
+                    <short>nombre avec 4 décimales</short>
+                    <technical/>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:pattern value="[\-]?[0-9]+\.[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="IDType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Location2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Ort</translation>
+                <description>
+                    <short>Ort</short>
+                    <domain>
+                        Mögliche Werte:
+                        CH = Schweiz ;
+                        abroad = Ausland ;
+                    </domain>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Lieu</translation>
+                <description>
+                    <short>Lieu</short>
+                    <domain>
+                        Valeurs possibles:
+                        CH = Suisse ;
+                        abroad = Étranger ;
+                    </domain>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="Location3Type">
+            <xs:enumeration value="CH"/>
+            <xs:enumeration value="abroad"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Location3Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Ort</translation>
+                <description>
+                    <short>Ort</short>
+                    <domain>
+                        CH = Schweiz ;
+                        abroad = Ausland ;
+                        noWorksForCompany = arbeitet nicht mehr für den Konzern ;
+                    </domain>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Lieu</translation>
+                <description>
+                    <short>Lieu</short>
+                    <domain>
+                        Valeurs possibles:
+                        CH = Suisse ;
+                        abroad = Étranger ;
+                        noWorksForCompany = ne travaille plus pour l'entreprise;
+                    </domain>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="CH"/>
+            <xs:enumeration value="abroad"/>
+            <xs:enumeration value="noWorksForCompany"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NotEmptyStringType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OperationOwnershipRightType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Vorgang</translation>
+                <description>
+                    <short>Vorgang</short>
+                    <domain>
+                        Mögliche Werte:
+                        emission = Zuteilung ;
+                        purchase = Erwerb ;
+                        issue = Ausgabe ;
+                        vesting = Vesting ;
+                        realization = Realisation ;
+                        release = Freigabe ;
+                        returnEtc = Rückgabe usw.
+                    </domain>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Type d’opération</translation>
+                <description>
+                    <short>Type d’opération</short>
+                    <domain>
+                        Valeurs possibles:
+                        emission = attribution ;
+                        purchase = acquisition ;
+                        issue = émission ;
+                        vesting = vesting ;
+                        realization = réalisation ;
+                        release = déblocage ;
+                        returnEtc = restitution etc.
+                    </domain>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="emission"/>
+            <xs:enumeration value="purchase"/>
+            <xs:enumeration value="issue"/>
+            <xs:enumeration value="vesting"/>
+            <xs:enumeration value="realization"/>
+            <xs:enumeration value="release"/>
+            <xs:enumeration value="returnEtc"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ReasonType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Gründe</translation>
+                <description>
+                    <short>Gründe</short>
+                    <domain/>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Raisons</translation>
+                <description>
+                    <short>Raisons</short>
+                    <domain/>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SalaryAmountType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>LohnbetragsTyp</translation>
+                <description>
+                    <short>LohnbetragsTyp</short>
+                    <technical/>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Type de montant de salaire</translation>
+                <description>
+                    <short>Type de montant de salaire</short>
+                    <technical/>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:pattern value="[\-]?[0-9]+\.[0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SV-AS-NumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>SV-Nummer Typ</translation>
+                <description>
+                    <short>Sozialversicherungs Nummer Typ</short>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Type de numéro de client de la Suva</translation>
+                <description>
+                    <short>Type de numéro de client de la Suva</short>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:pattern value="[0-9]{3}\.[0-9]{4}\.[0-9]{4}\.[0-9]{2}"/>
+            <xs:maxLength value="16"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="UID-BFSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Unternehmensidentifikation Typ</translation>
+                <description>
+                    <short>Unternehmensidentifikation Typ</short>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Type d'identificateur d'entreprise</translation>
+                <description>
+                    <short>Type d'identificateur d'entreprise</short>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:pattern value="CHE-[0-9]{3}\.[0-9]{3}\.[0-9]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ZIP-CodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>PLZ Typ</translation>
+                <description>
+                    <short>Postleitzahl</short>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Code postal</translation>
+                <description>
+                    <short>Code postal</short>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!-- @@@@ Notifications @@@@
+
+        Notifications
+    -->
+    <xs:complexType name="NotificationsType">
+        <xs:sequence>
+            <xs:element name="Notification" type="NotificationType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Hinweise</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Remarques</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NotificationType">
+        <xs:sequence>
+            <xs:element name="QualityLevel" type="QualityLevelType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Qualitäts-Stufe</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Niveau de qualité</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DescriptionCode" type="DescriptionCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Code der Beschreibung</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Code de la description</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Description" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beschreibungstext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Description</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="DescriptionCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Beschreibungscode</translation>
+                <description>
+                    <technical>
+                        Severity: Information
+                        Code 9999 ist immer für Freitext reserviert.
+                        Die restlichen Code sind dynamisch in AcknowledgementNotification spezifiziert.
+                    </technical>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Code de la description</translation>
+                <description>
+                    <technical>
+                        Severity: Information
+                        Le code 9999 est toujours réservé pour un texte libre.
+                        Le reste des codes sont spécifiés dynamique dans AcknowledgementNotification.
+                    </technical>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:nonNegativeInteger">
+            <xs:totalDigits value="7"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="QualityLevelType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Qualitäts-Stufen</translation>
+                <description>
+                    <short>
+                        Qualtäts-Stufen der Übermittlung
+                    </short>
+                    <technical>
+                        Folgende Stufen gelten
+                        Validity: erste Stufe
+                        Plausibility: zweite Stufe
+                        Acceptance: dritte Stufe
+                        Comment: vierte Stufe
+                    </technical>
+                </description>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Niveaux de qualité</translation>
+                <description>
+                    <short>
+                        Niveaux de qualité de la transmission
+                    </short>
+                    <technical>
+                        Il existe les niveaux suivants:
+                        Validity: premier niveau
+                        Plausibility: deuxième niveau
+                        Acceptance: troisième niveau
+                        Comment: quatrième niveau
+                    </technical>
+                </description>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Validity"/>
+            <xs:enumeration value="Plausibility"/>
+            <xs:enumeration value="Acceptance"/>
+            <xs:enumeration value="Comment"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

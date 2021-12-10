@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record id="gui_salary_declaration_form_view" model="ir.ui.view">
+			<field name="name">gui_salary_declaration_form_view</field>
+			<field name="model">gui_salary_declaration</field>
+			<field name="arch" type="xml">
+				<form string="Salary Declaration">
+					<header>
+						<button name="action_send_salary_declaration" type="object"
+							string="Send Salary Declaration" class="oe_highlight" states="draft" />
+
+						<button name="action_get_status" type="object" string="Get Status"
+							class="oe_highlight" states="salary_declaration" />
+
+						<button name="action_get_status" type="object" string="Get Status"
+							class="oe_highlight" attrs="{'invisible': [('prop_expirationdate', '=', False)]}" />
+
+
+						<button string="Get Result" name="get_result" type="object"
+						 attrs="{'invisible': [('check_get_result', '=', False)]}"/>
+						
+						<button name="do_next" type="object" string="Next" class="oe_highlight"
+							states="get_result" />
+							
+						<field name="check_get_result" invisible="1" /> 
+						
+						<button name="action_unlink" type="object" string="Force unlink" confirm="Are you sure you want to do this?"
+							class="oe_highlight" groups="bt_swissdec.bt_swissdec_admin" />
+
+						<field name="state" widget="statusbar" />
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="%(bt_tutorial.action_tutorial_link_to_use_in_other_modules)d" class="oe_stat_button" icon="fa-youtube" string="Tutorials" type="action" context="{'model_name': 'gui_salary_declaration'}"/>
+						</div>
+						<field name="prop_expirationdate" invisible="1" />
+						<label for="name" />
+						<field name="name" />
+						<group attrs="{'invisible':[('error_in_declare_exists', '=', False)]}"
+							colspan="4">
+							<h1>There are some errors:</h1>
+							<br />
+							<field name="error_in_declare" colspan="4" nolabel="1" />
+							<field name="error_in_declare_exists" invisible="1" />
+							<button name="action_brain_tec_send" string="Report Error by Mail to brain-tec"
+								type="object" attrs="{'invisible':[('error_in_declare_exists', '=', False)]}"
+								class="oe_highlight" />
+							<field name="last_mail_id_text" colspan="4" nolabel="1" />
+						</group>
+
+						<group attrs="{'invisible':[('extra_information_exists', '=', False)]}"
+							colspan="4">
+							<h1>Information...</h1>
+							<br />
+							<field name="extra_information" colspan="4" />
+							<field name="extra_information_exists" invisible="1" />
+						</group>
+
+						<notebook>
+
+							<page string="Salary Declaration" states="salary_declaration,get_result,done"
+								tabindex="1">
+								<group colspan="4" col="2">
+									<field name="transmission_date" />
+									<field name="declaration_id" />
+									<field name="transmitter_id" invisible="1" />
+									<group colspan="4"
+										attrs="{'invisible':[('validity_plausibility_checking', '=', False)]}">
+										<ul>
+											<li>Validity plausibility checking.</li>
+											<li>Try again in few minutes.</li>
+										</ul>
+									</group>
+									<group colspan="4"
+										attrs="{'invisible':[('job_finished', '=', True)]}">
+										<ul>
+											<li>Just waiting to receive all the information from the
+												server.
+											</li>
+											<li>Try again in few minutes.</li>
+										</ul>
+									</group>
+									<field name="validity_plausibility_checking" invisible="1" />
+									<field name="job_finished" invisible="1" />
+
+								</group>
+
+
+								<group colspan="4" col="2" states="get_result,done">
+									<field name="transmitter_get_status_ids" readonly="1"
+										colspan="4" options="{'reload_on_button': True}" nolabel="1" />
+
+								</group>
+							</page>
+							<page string="Options" tabindex="2">
+								<group colspan="4" col="2" states="draft">
+									<button icon="fa-check-square-o" string="All" name="select_all"
+										type="object" />
+									<button icon="fa-square-o" string="Disable" name="unselect_all"
+										type="object" />
+
+								</group>
+								<group colspan="4" col="2" attrs="{'invisible':[('year_id', '=', False)]}">
+									<field name="ahv" />
+									<field name="fak" attrs="{'invisible': [('has_fak_ids', '=', False)]}"/>
+									<field name="fak_with_detail" attrs="{'invisible': [('has_fak_ids', '=', False)]}"/>
+									<field name="uvg" attrs="{'invisible': [('has_uvg_ids', '=', False)]}"/>
+									<field name="uvgz" attrs="{'invisible': [('has_uvgz_ids', '=', False)]}"/>
+									<field name="ktg" attrs="{'invisible': [('has_ktg_ids', '=', False)]}"/>
+									<field name="steuern" />
+									<field name="sfso" />
+								</group>
+
+								<separator string="General Options" colspan="4" />
+								<group colspan="4" col="2">
+									<field name="replace_message" groups="bt_swissdec.bt_swissdec_admin" />
+									<field name="to_correct_gui_salary_declaration_id"
+										groups="bt_swissdec.bt_swissdec_admin"
+										attrs="{'required':[('replace_message', '=', True)],
+											'invisible':[('replace_message', '=', False)]}"
+										options='{"no_open": True, "no_create": True}' domain="[('state', 'not in', ['corrected'])]" />
+
+									<field name="year_id" options='{"no_open": True, "no_create": True}' />
+									<field name="transmitter_configuration_id"
+										groups="bt_swissdec.bt_swissdec_admin"
+										options='{"no_open": True, "no_create": True}'
+									    readonly="1" required="1"
+									/>
+									<field name="test_case" />
+									<field name="working_offline" />
+									<field name="has_fak_ids" groups="bt_swissdec.bt_swissdec_admin"/>
+									<field name="has_ktg_ids" groups="bt_swissdec.bt_swissdec_admin"/>
+									<field name="has_uvg_ids" groups="bt_swissdec.bt_swissdec_admin"/>
+									<field name="has_uvgz_ids" groups="bt_swissdec.bt_swissdec_admin"/>
+								</group>
+							</page>
+							<page string="Employees" states="draft"
+								attrs="{'invisible': [('year_id', '=', False)]}">
+								<group colspan="4" col="2">
+									<button icon="fa-check-square-o" string="All"
+										name="change_report_line_ids_all" type="object"
+										attrs="{'invisible': [('state', '!=', 'draft')]}" />
+									<button icon="fa-square-o" string="Disable"
+										name="change_report_line_ids_none" type="object"
+										attrs="{'invisible': [('state', '!=', 'draft')]}" />
+
+									<field name="report_line_ids" colspan="4" nolabel="1" />
+								</group>
+							</page>
+							<page string="Advance Mode" attrs="{'invisible': [('advance_mode', '=', False)]}">
+								<group colspan="4" col="2">
+									<field name="execution_ids" readonly="1" nolabel="1" />
+								</group>
+							</page>
+
+						</notebook>
+
+					</sheet>
+					<footer>
+						<field name="advance_mode" invisible="1" />
+						<button name="action_technical_details" type="object"
+							string="Techn. Details" class="oe_stat_button" />
+
+					</footer>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"
+							groups="base.group_user" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+
+		<record id="gui_salary_declaration_tree_view" model="ir.ui.view">
+			<field name="name">gui_salary_declaration_tree_view</field>
+			<field name="model">gui_salary_declaration</field>
+			<field name="arch" type="xml">
+				<tree string="Salary Declaration"
+					  decoration-success="state=='done'"
+                      decoration-warning="state=='salary_declaration'"
+                      decoration-info="state=='draft'"
+                      decoration-muted="state=='corrected'">
+					<field name="name" />
+					<field name="year_id" />
+					<field name="ahv" />
+					<field name="fak" />
+					<field name="fak_with_detail" />
+					<field name="uvg" />
+					<field name="uvgz" />
+					<field name="ktg" />
+					<field name="steuern" />
+					<field name="sfso" />
+					<field name="to_correct_gui_salary_declaration_id" />
+					<field name="test_case" />
+					<field name="transmission_date" />
+					<field name="declaration_id" />
+					<field name="working_offline" />
+					<field name="state" />
+
+				</tree>
+			</field>
+		</record>
+
+		<record id="gui_salary_declaration_search_view" model="ir.ui.view">
+			<field name="name">gui_salary_declaration_search_view</field>
+			<field name="model">gui_salary_declaration</field>
+			<field name="arch" type="xml">
+				<search string="Salary Declaration">
+					<field name="year_id" />
+					<field name="state" />
+					<field name="ahv" />
+					<field name="fak" />
+					<field name="fak_with_detail" />
+					<field name="uvg" />
+					<field name="uvgz" />
+					<field name="ktg" />
+					<field name="steuern" />
+					<field name="sfso" />
+					<group expand="0" string="Group By...">
+						<filter string="Year" domain="[]"
+							name="group_by_year" context="{'group_by':'year_id'}" />
+						<filter string="State" domain="[]"
+							name="group_by_state" context="{'group_by':'state'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+
+
+	</data>
+</openerp>

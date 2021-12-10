@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_payroll_register,hr.payroll.register,model_hr_payroll_register,hr.group_hr_manager,1,1,1,1
+access_hr_allounce_deduction_categoty_user,hr.allounce.deduction.categoty,model_hr_allounce_deduction_categoty,base.group_user,1,0,0,0
+access_hr_allounce_deduction_categoty,hr.allounce.deduction.categoty,model_hr_allounce_deduction_categoty,hr.group_hr_manager,1,1,1,1
+access_hr_allowance_deduction_other_category,hr.allowance.deduction.other.category,model_hr_allowance_deduction_other_category,hr.group_hr_manager,1,1,1,1
+access_company_contribution,company.contribution,model_company_contribution,hr.group_hr_manager,1,1,1,1
+access_company_contribution_line,company.contribution.line,model_company_contribution_line,hr.group_hr_manager,1,1,1,1
+access_res_partner_payroll,res.partner.payroll,base.model_res_partner,hr.group_hr_manager,1,1,1,1
+access_res_company_group,res.company.group,model_res_company_group,hr.group_hr_manager,1,1,1,1
+access_hr_adc_history,hr.adc.history,model_hr_adc_history,hr.group_hr_manager,1,1,1,1

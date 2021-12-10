@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_employee_configuration_progress_wizard" model="ir.ui.view">
+            <field name="name">employee.configuration.progress.wizard.form</field>
+            <field name="model">employee.configuration.progress.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Employee Configuration Progress">
+                    <group col="4" colspan="4">
+                        <div colspan="4" class="text-info">
+                            <strong>Suggested steps:</strong><br/>
+                            1. Create employee and set required fields<br/>
+                            2. Decide if a related user can or should be set<br/>
+                            3. Create 'Employee Year' in the 'Configuration salary' tab via the button 'Create new year'<br/>
+                            4. Create a contract (if you use brain-tec's timesheets don't forget to create a 'Working time' in the contract via 'Working times' tab)<br/>
+                        </div>
+                    </group>
+                    <group col="4" colspan="4" string="Progress">
+                        <field name="emp_id" invisible="1"/>
+                        <field name="employee_user_id" invisible="1"/>
+                        <!-- 1a. CHECK address -->
+                        <field name="employee_address_ok" invisible="1"/>
+                        <div colspan="4" attrs="{'invisible':[('employee_address_ok','=',False)]}">
+                            <span style="color:green"><i class="fa fa-fw fa-check" style="color:green"/> Address is ok</span>
+                        </div>
+                        <div colspan="4" attrs="{'invisible':[('employee_address_ok','!=',False)]}">
+                            <span style="color:red"><i class="fa fa-fw fa-remove" style="color:red"/> There is no 'Private Address' set in employee</span>
+                        </div>
+                        <!-- 1b. CHECK address the same as related user's partner -->
+                        <div colspan="4" attrs="{'invisible':[('employee_user_id','=',False)]}">
+                            <field name="address_user_same_do_check" invisible="1"/>
+                            <field name="employee_address_user_same_ok" invisible="1"/>
+                            <div colspan="4" attrs="{'invisible':['|', ('address_user_same_do_check','=',False), ('employee_address_user_same_ok','=',False)]}">
+                                <span style="color:green"><i class="fa fa-fw fa-check" style="color:green"/> The partner set in the related user and 'Private Address' in employee are the same</span>
+                            </div>
+                            <div colspan="4" attrs="{'invisible':['|', ('address_user_same_do_check','=',False), ('employee_address_user_same_ok','!=',False)]}">
+                                <span style="color:red"><i class="fa fa-fw fa-remove" style="color:red"/> The partner set in the related user and 'Private Address' in employee aren't the same</span>
+                            </div>
+                        </div>
+
+                        <!-- 2a. CHECK contract -->
+                        <field name="employee_contract_ok" invisible="1"/>
+                        <div colspan="4" attrs="{'invisible':[('employee_contract_ok','=',False)]}">
+                            <span style="color:green"><i class="fa fa-fw fa-check" style="color:green"/> Contract exists</span>
+                        </div>
+                        <div colspan="4" attrs="{'invisible':[('employee_contract_ok','!=',False)]}">
+                            <span style="color:red"><i class="fa fa-fw fa-remove" style="color:red"/> There is no existing contract</span>
+                        </div>
+                        <!-- 3. CHECK years -->
+                        <field name="employee_year_ok" invisible="1"/>
+                        <div colspan="4" attrs="{'invisible':[('employee_year_ok','=',False)]}">
+                            <span style="color:green"><i class="fa fa-fw fa-check" style="color:green"/> Year exists</span>
+                        </div>
+                        <div colspan="4" attrs="{'invisible':[('employee_year_ok','!=',False)]}">
+                            <span style="color:red"><i class="fa fa-fw fa-remove" style="color:red"/> There is no existing year</span>
+                        </div>
+
+                        <!-- 4. CHECK bank_account_id -->
+                        <field name="employee_bank_account_id_ok" invisible="1"/>
+                        <div colspan="4" attrs="{'invisible':[('employee_bank_account_id_ok','=',False)]}">
+                            <span style="color:green"><i class="fa fa-fw fa-check" style="color:green"/> 'Bank Account Number' is set</span>
+                        </div>
+                        <div colspan="4" attrs="{'invisible':[('employee_bank_account_id_ok','!=',False)]}">
+                            <span style="color:red"><i class="fa fa-fw fa-remove" style="color:red"/> 'Bank Account Number' is not set</span>
+                        </div>
+
+                        <!-- 5. CHECK employee_account -->
+                        <field name="employee_employee_account_ok" invisible="1"/>
+                        <div colspan="4" attrs="{'invisible':[('employee_employee_account_ok','=',False)]}">
+                            <span style="color:green"><i class="fa fa-fw fa-check" style="color:green"/> 'Employee Account' is set</span>
+                        </div>
+                        <div colspan="4" attrs="{'invisible':[('employee_employee_account_ok','!=',False)]}">
+                            <span style="color:red"><i class="fa fa-fw fa-remove" style="color:red"/> 'Employee Account' is not set</span>
+                        </div>
+                    </group>
+                    <footer>
+                        <button string="Close" class="btn-default" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_employee_configuration_progress_wizard" model="ir.actions.act_window">
+            <field name="name">Employee Configuration Progress</field>
+            <field name="res_model">employee.configuration.progress.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,122 @@
+<odoo>
+
+    <menuitem id="main_menu_tutorial_link" name="Tutorials"
+              web_icon="bt_tutorial,static/description/icon.png"
+              sequence="1" groups="base.group_erp_manager"/>
+
+    <!-- Tutorial Links -->
+    <record id="tutorial_link_tree" model="ir.ui.view">
+        <field name="name">tutorial.link.tree</field>
+        <field name="model">tutorial.link</field>
+        <field name="arch" type="xml">
+            <tree string="Tutorial Links">
+                <field name="name"/>
+                <field name="url" invisible="1"/>
+                <field name="type"/>
+                <field name="model_id" invisible="1"/>
+                <button name="open_url" string="Open" type="object" class="btn-primary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tutorial_link_form" model="ir.ui.view">
+        <field name="name">tutorial.link.form</field>
+        <field name="model">tutorial.link</field>
+        <field name="arch" type="xml">
+            <form string="Tutorial Links">
+                <header>
+                    <button name="open_url" string="Open" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group colspan="8" col="4">
+                        <field name="name"/>
+                        <field name="url" widget="url"/>
+                        <field name="description"/>
+                        <field name="type"/>
+                        <field name="tag_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                        <field name="model_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tutorial_link_form_filter" model="ir.ui.view">
+        <field name="name">tutorial.link.filter</field>
+        <field name="model">tutorial.link</field>
+        <field name="arch" type="xml">
+            <search string="Search Tutorial Links">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="type"/>
+                <field name="model_id"/>
+                <field name="tag_ids" string="Tag" filter_domain="[('tag_ids', 'ilike', self)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="groupby_model_id" string="Model" domain="[]" context="{'group_by':'model_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_tutorial_link" model="ir.actions.act_window">
+        <field name="name">Tutorial Links</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tutorial.link</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="tutorial_link_form_filter"/>
+    </record>
+
+    <record id="action_tutorial_link_to_use_in_other_modules" model="ir.actions.act_window">
+        <field name="name">Tutorial Links</field>
+        <field name="res_model">tutorial.link</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="tutorial_link_tree"/>
+        <field name="domain">[('model_id.model', '=', context.get('model_name'))]</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_tutorial_link"
+              name="Tutorial Links"
+              action="action_tutorial_link"
+              parent="main_menu_tutorial_link"
+              sequence="1"
+    />
+
+    <!-- Tutorial Link Tags -->
+    <record model="ir.ui.view" id="view_tutorial_link_tag_form">
+        <field name="name">Tutorial Link Tags</field>
+        <field name="model">tutorial.link.tag</field>
+        <field name="arch" type="xml">
+            <form string="Tutorial Link Tag">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_tutorial_link_tag_tree">
+        <field name="name">Tutorial Link Tags</field>
+        <field name="model">tutorial.link.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Tutorial Link Tag">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_tutorial_link_tag">
+        <field name="name">Tutorial Link Tags</field>
+        <field name="res_model">tutorial.link.tag</field>
+    </record>
+
+    <menuitem id="menu_tutorial_link_tag"
+              name="Tutorial Link Tags"
+              action="action_tutorial_link_tag"
+              parent="main_menu_tutorial_link"
+              sequence="2"
+    />
+
+</odoo>

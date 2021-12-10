@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_hr_recap_employees_per_wagetypes_document">
+    <t t-call="web.internal_layout">
+        <t t-set="o" t-value="o.with_context({'lang':lang_set})"/>
+        <div class="page">
+            <section class="oe_mb32">
+                <h4><strong>Employees per wage type recapitulation - <span t-esc="get_month_year(report_values)"/></strong></h4>
+                <h4><strong>Wage type '<span t-esc="o.matrix_nr"/> - <span t-esc="o.name"/>'</strong></h4>
+            </section>
+            <table class="table table-condensed oe_mt32">
+                <thead>
+                    <tr>
+                        <th class="col-xs-1">Nr.</th>
+                        <th class="col-xs-9">Bezeichnung</th>
+                        <th class="col-xs-2" style="text-align: right">Betrag</th>
+                    </tr>
+                </thead>
+                <t t-set="sum_total" t-value="0"/>
+                <tbody>
+                    <t t-set="count_bold" t-value="0"/>
+                    <tr t-foreach="get_lines(o, report_values)" t-as="line">
+                        <t t-set="sum_total" t-value="sum_total + line['total']"/>
+                        <t t-set="style" t-value="'border-top: 1; padding-top: 0; padding-bottom:0; '"/>
+                        <p t-if="count_bold%2 == 0">
+                            <t t-set="style" t-value="style + ' background-color: #eeeeee;'"/>
+                        </p>
+                        <t t-set="style_right" t-value="style + ' text-align: right;'"/>
+                        <td t-att-style="style"><span t-esc="line['identification_id_bt']"/></td>
+                        <td t-att-style="style"><span t-esc="line['name_sort']"/></td>
+                        <td t-att-style="style_right"><span t-esc="line['total']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                        <t t-set="count_bold" t-value="count_bold+1"/>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <td style="border-top: 0; padding-top: 0;"><strong>Total</strong></td>
+                    <td style="border-top: 0; padding-top: 0;"></td>
+                    <td style="border-top: 0; padding-top: 0; text-align: right"><strong><span t-esc="sum_total" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></strong></td>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</template>
+
+<template id="report_hr_recap_employees_per_wagetypes">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_hr_recap_employees_per_wagetypes_document" t-lang="lang_set"/>
+        </t>
+    </t>
+</template>
+</odoo>

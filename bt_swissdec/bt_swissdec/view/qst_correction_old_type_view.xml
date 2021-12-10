@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="qst_correction_old_type_tree" model="ir.ui.view">
+            <field name="name">qst_correction_old_type_tree</field>
+            <field name="model">qst_correction_old_type</field>
+            <field name="arch" type="xml">
+                <tree string="QST Correction Old">
+                    <field name="TaxAtSourceCategory"/>
+                    <field name="TaxableEarning"/>
+                    <field name="AscertainedTaxableEarning"/>
+                    <field name="TaxAtSource"/>
+                </tree>
+            </field>
+        </record>
+        <record id="qst_correction_old_type_form" model="ir.ui.view">
+            <field name="name">qst_correction_old_type_form</field>
+            <field name="model">qst_correction_old_type</field>
+            <field name="arch" type="xml">
+                <form string="QST Correction Old">
+                    <sheet>
+                        <group>
+                            <field name="TaxAtSourceCategory"/>
+                            <field name="TaxableEarning"/>
+                            <field name="AscertainedTaxableEarning"/>
+                            <field name="TaxAtSource"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

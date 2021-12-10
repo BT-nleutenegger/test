@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Update hr.payslip.line correctly in the database.
+             Set field category_adc_id from category_id_bak -->
+        <function model="hr.payslip.line" name="_set_category_adc_id_in_hr_payslip_line"/>
+    </data>
+</odoo>

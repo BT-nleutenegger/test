@@ -1,0 +1,144 @@
+<ns3:GetResultFromDeclareSalaryResponse
+    xmlns:ns3="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationServiceTypes"
+    xmlns="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationContainer"
+    xmlns:ns2="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclaration"
+    xmlns:ns1="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationServiceTypes"
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    xmlns:xenc="http://www.w3.org/2001/04/xmlenc#" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <!-- state of standardisation: FINAL
+                Lohnstandard-CH V4.0 Version 20130514
+                Referenzdaten BVG DE Ausgabe 20141031 
+                business-view  = OK 
+                technical-view =
+                
+                **************************************************************************************
+                Lohnmeldung(Declare) mit Einzelmeldung(Single) BVG Antwort (Result) DE
+                **************************************************************************************
+            -->
+    <ResponseContext>
+        <UserAgent>
+            <Producer>swissdec</Producer>
+            <Name>swissdec distributor</Name>
+            <Version>FINAL</Version>
+            <Certificate>swissdec</Certificate>
+            <ELM-SalaryStandardVersion>4.0</ELM-SalaryStandardVersion>
+        </UserAgent>
+        <InstitutionName>swissdec</InstitutionName>
+        <TransmissionDate>2014-01-27T15:27:14.060+02:00</TransmissionDate>
+        <DeclarationID>12a6ba03a7e3ca</DeclarationID>
+        <ResponseID>12a6ba200d63da</ResponseID>
+        <RequestID>B1A45FB90BE91F875209</RequestID>
+    </ResponseContext>
+    <SalaryResult>
+        <BVG-LPP xsi:type="BVG-LPP-ReducedSalaryResultType">
+            <Info>
+                <Notification>
+                    <QualityLevel>Acceptance</QualityLevel>
+                    <DescriptionCode>3204</DescriptionCode>
+                    <Description>Resultat mit Personen aus einer Einzelmeldung</Description>
+                </Notification>
+            </Info>
+            <Success>
+                <AddresseeContext>
+                    <UserAgent>
+                        <Producer>swissdec</Producer>
+                        <Name>Roncaglioni</Name>
+                        <Version>FINAL</Version>
+                        <Certificate>none</Certificate>
+                        <ELM-SalaryStandardVersion>4.0</ELM-SalaryStandardVersion>
+                    </UserAgent>
+                    <InstitutionName>Pensionskasse Oldsoft</InstitutionName>
+                    <TransmissionDate>2014-01-27T15:27:13.901+02:00</TransmissionDate>
+                    <ResponseID>R12a6ba202ed366</ResponseID>
+                    <RequestID>B1A45FB90BE91F875209</RequestID>
+                </AddresseeContext>
+                <Institution institutionID="#66ed1753-3304-4201-9aab-48e709deed0c">
+                    <ns2:InsuranceID>L1200</ns2:InsuranceID>
+                    <ns2:InsuranceCompanyName>Pensionskasse Oldsoft</ns2:InsuranceCompanyName>
+                    <ns2:ContractIdentity>4500-0</ns2:ContractIdentity>
+                    <ns2:PayrollUnit>Filiale Bern</ns2:PayrollUnit>
+                    <ns2:GeneralValidAsOf>2014-01-01</ns2:GeneralValidAsOf>
+                </Institution>
+                <ChangesConsideredUpTo>2013-12-31</ChangesConsideredUpTo>
+                <CodeDescriptions>
+                    <ns2:CodeDescription>
+                        <ns2:BVG-LPP-Code>11</ns2:BVG-LPP-Code>
+                        <ns2:Description>Produktion</ns2:Description>
+                    </ns2:CodeDescription>
+                    <ns2:CodeDescription>
+                        <ns2:BVG-LPP-Code>21</ns2:BVG-LPP-Code>
+                        <ns2:Description>Verkauf</ns2:Description>
+                    </ns2:CodeDescription>
+                    <ns2:CodeDescription>
+                        <ns2:BVG-LPP-Code>22</ns2:BVG-LPP-Code>
+                        <ns2:Description>Administration</ns2:Description>
+                    </ns2:CodeDescription>
+                    <ns2:CodeDescription>
+                        <ns2:BVG-LPP-Code>K2010</ns2:BVG-LPP-Code>
+                        <ns2:Description>Kader überobligatorisch</ns2:Description>
+                    </ns2:CodeDescription>
+                </CodeDescriptions>
+                <Staff>
+                    <ns2:Identified>
+                        <ns2:Person>
+                            <ns2:Social-InsuranceIdentification>
+                                <ns2:SV-AS-Number>756.1940.8577.01</ns2:SV-AS-Number>
+                            </ns2:Social-InsuranceIdentification>
+                            <ns2:Lastname>Ott</ns2:Lastname>
+                            <ns2:Firstname>Hans</ns2:Firstname>
+                            <ns2:Sex>M</ns2:Sex>
+                            <ns2:DateOfBirth>1995-12-30</ns2:DateOfBirth>
+                            <ns2:CivilStatus>
+                                <ns2:Status>single</ns2:Status>
+                                <ns2:ValidAsOf>1995-12-30</ns2:ValidAsOf>
+                            </ns2:CivilStatus>
+                            <ns2:Contributions>
+                                <ns2:Contribution>
+                                    <ns2:BVG-LPP-Code mappingFrom="">11</ns2:BVG-LPP-Code>
+                                    <ns2:ValidAsOf>2014-01-01</ns2:ValidAsOf>
+                                    <ns2:EmployeeContribution>2724.00</ns2:EmployeeContribution>
+                                    <ns2:EmployerContribution>5448.00</ns2:EmployerContribution>
+                                </ns2:Contribution>
+                            </ns2:Contributions>
+                            <ns2:Info>
+                                <ns2:Notification>
+                                    <ns2:QualityLevel>Acceptance</ns2:QualityLevel>
+                                    <ns2:DescriptionCode>3252</ns2:DescriptionCode>
+                                    <ns2:Description>Eintritt korrekt verarbeitet</ns2:Description>
+                                </ns2:Notification>
+                            </ns2:Info>
+                        </ns2:Person>
+                    </ns2:Identified>
+                </Staff>
+                <Summary>
+                    <ns2:Persons>
+                        <ns2:Identified>
+                            <ns2:Total>1</ns2:Total>
+                            <ns2:DetailsAvailable>1</ns2:DetailsAvailable>
+                        </ns2:Identified>
+                        <ns2:Unknown>
+                            <ns2:Total>0</ns2:Total>
+                            <ns2:DetailsAvailable>0</ns2:DetailsAvailable>
+                        </ns2:Unknown>
+                        <ns2:Missing>
+                            <ns2:Total>0</ns2:Total>
+                            <ns2:DetailsAvailable>0</ns2:DetailsAvailable>
+                        </ns2:Missing>
+                    </ns2:Persons>
+                    <ns2:Contributions-BVG-LPP-Code>
+                        <ns2:Identical>0</ns2:Identical>
+                        <ns2:ManualMutationRequiredFrom>0</ns2:ManualMutationRequiredFrom>
+                        <ns2:AutomaticMutationPossibleFrom>0</ns2:AutomaticMutationPossibleFrom>
+                        <ns2:AutomaticMutationProcessedFrom>0</ns2:AutomaticMutationProcessedFrom>
+                        <ns2:MappedFrom>1</ns2:MappedFrom>
+                        <ns2:Unknown>0</ns2:Unknown>
+                        <ns2:Missing>0</ns2:Missing>
+                    </ns2:Contributions-BVG-LPP-Code>
+                </Summary>
+            </Success>
+        </BVG-LPP>
+    </SalaryResult>
+</ns3:GetResultFromDeclareSalaryResponse>

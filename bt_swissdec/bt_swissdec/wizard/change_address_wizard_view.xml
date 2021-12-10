@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_change_address_wizard" model="ir.ui.view">
+            <field name="name">change.address.wizard.form</field>
+            <field name="model">change.address.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Change Address">
+                    <group col="4" colspan="4">
+                        <field name="valid_from_new" colspan="2"
+                            attrs="{'readonly':[('new_address_home_id_to_set','!=',False)]}"
+                            options="{'showInitDate': False, 'useCurrent': False}"/>
+                        <field name="actual_qst_id" invisible="1"/>
+                        <newline/>
+                        <field name="address_home_id" readonly="1" colspan="2"
+                               context="{'show_address': 1}" options="{'always_reload': True}"
+                               force_save="1"
+                        />
+                        <newline/>
+                        <label colspan="1" string="" for="edit_address" class="o_form_label"/>
+                        <button type="object" string="Edit" colspan="2"
+                                name="edit_address" help="Show History"
+                                icon="fa-pencil-square-o"
+                                context="{'address_home_id': address_home_id}"
+                                attrs="{'invisible':[('new_address_home_id_to_set','!=',False)]}"
+                                />
+                        <newline/>
+                        <div attrs="{'invisible':[('new_address_home_id_to_set','=',False)]}" colspan="4">
+                            <h2 style="color:red">Open the address and do your changes</h2>
+                        </div>
+                        <field name="new_address_home_id_to_set" colspan="4"
+                               attrs="{'invisible':[('new_address_home_id_to_set','=',False)]}"
+                               context="{'set_salary_relevant': True, 'show_address': 1, 'show_address_m2o': 1,
+                                         'form_view_ref': 'bt_swissdec.view_partner_form_no_flag',
+                                    'valid_from': valid_from_new, 'default_type': 'other', 'from_change_address_wizard': True}"
+                               options="{'always_reload': True, 'no_quick_create': True, 'no_create': True}"
+                               domain="[('id','=',0)]"
+                        />
+                    </group>
+                    <footer>
+                        <button string="Change Address" name="change_address" type="object" class="btn-primary" attrs="{'invisible':[('new_address_home_id_to_set','=',False)]}"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_change_address_wizard" model="ir.actions.act_window">
+            <field name="name">Change Address</field>
+            <field name="res_model">change.address.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

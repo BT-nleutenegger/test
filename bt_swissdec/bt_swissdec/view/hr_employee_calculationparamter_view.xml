@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- ========== Calculation paramter UVG ========== -->
+
+        <record id="view_hr_allowance_calculationparameter_uvg_form"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.uvg.form</field>
+            <field name="model">hr.employee.calculationparameter.uvg</field>
+            <field name="arch" type="xml">
+                <form string="UVG">
+                    <group col="4" colspan="4">
+                        <field name="valid_from" options="{'showInitDate': False, 'useCurrent': False}"
+                            attrs="{'readonly':[('set_readonly','!=',False)]}" />
+                        <field name="uvg_id" options='{"no_open": True, "no_create": True}'
+                            attrs="{'readonly':[('set_readonly','!=',False)],
+                                    'invisible':[('valid_from','=',False)]}" />
+                        <field name="code_betriebsteil" options='{"no_open": True, "no_create": True}'
+                            attrs="{'required':[('uvg_id','!=',False)],
+                                    'invisible':[('uvg_id','=',False)],
+                                    'readonly':[('set_readonly','!=',False)]}" />
+                        <field name="code_versicherung"
+                            attrs="{'invisible':[('uvg_id','=',False)],
+                                    'readonly':[('set_readonly','!=',False)]}" />
+                        <newline/>
+                        <field name="year_id_int" invisible="1"/>
+                    </group>
+                    <span style="color:red;font-weight:bold">
+                        <field name="set_readonly" />
+                    </span>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_allowance_calculationparameter_uvg_tree"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.uvg.tree</field>
+            <field name="model">hr.employee.calculationparameter.uvg</field>
+            <field name="arch" type="xml">
+                <tree string="UVG">
+                    <field name="valid_from" />
+                    <field name="uvg_id" />
+                    <field name="code_betriebsteil" />
+                    <field name="code_versicherung" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- ========== Calculation paramter UVGZ ========== -->
+
+        <record id="view_hr_allowance_calculationparameter_uvgz_form"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.uvgz.form</field>
+            <field name="model">hr.employee.calculationparameter.uvgz</field>
+            <field name="arch" type="xml">
+                <form string="UVGZ">
+                    <group col="4" colspan="4">
+                        <field name="valid_from" options="{'showInitDate': False, 'useCurrent': False}"
+                            attrs="{'readonly':[('set_readonly','!=',False)]}" />
+                        <field name="valid_to" options="{'showInitDate': False, 'useCurrent': False}"
+                                    attrs="{'readonly':[('set_readonly_valid_to','!=',False)],
+                                    'invisible':[('valid_from','=',False)]}" />
+                        <field name="group" options='{"no_open": True, "no_create": True}'
+                            attrs="{'readonly':[('set_readonly','!=',False)],
+                                    'invisible':[('valid_from','=',False)]}" />
+                        <field name="code" options='{"no_open": True, "no_create": True}'
+                            attrs="{'readonly':[('set_readonly','!=',False)],
+                                    'invisible':[('group','=',False)]}" />
+                        <newline/>
+                        <field name="year_id_int" invisible="1"/>
+                    </group>
+                    <span style="color:red;font-weight:bold">
+                        <field name="set_readonly" />
+                    </span>
+                    <span style="color:red;font-weight:bold">
+                        <field name="set_readonly_valid_to" />
+                    </span>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_allowance_calculationparameter_uvgz_tree"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.uvgz.tree</field>
+            <field name="model">hr.employee.calculationparameter.uvgz</field>
+            <field name="arch" type="xml">
+                <tree string="UVGZ">
+                    <field name="valid_from" />
+                    <field name="valid_to" />
+                    <field name="group" />
+                    <field name="code" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- ========== Calculation paramter UVGZ ========== -->
+
+        <record id="view_hr_allowance_calculationparameter_ktg_form"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.ktg.form</field>
+            <field name="model">hr.employee.calculationparameter.ktg</field>
+            <field name="arch" type="xml">
+                <form string="KTG">
+                    <group col="4" colspan="4">
+                        <field name="valid_from" options="{'showInitDate': False, 'useCurrent': False}"
+                            attrs="{'readonly':[('set_readonly','!=',False)]}" />
+                        <field name="valid_to" options="{'showInitDate': False, 'useCurrent': False}"
+                               attrs="{'readonly':[('set_readonly_valid_to','!=',False)],
+                                    'invisible':[('valid_from','=',False)]}" />
+                        <field name="group" options='{"no_open": True, "no_create": True}'
+                            attrs="{'readonly':[('set_readonly','!=',False)],
+                                    'invisible':[('valid_from','=',False)]}" />
+                        <field name="code" options='{"no_open": True, "no_create": True}'
+                            attrs="{'readonly':[('set_readonly','!=',False)],
+                                    'invisible':[('group','=',False)]}" />
+                        <newline/>
+                        <field name="year_id_int" invisible="1"/>
+                    </group>
+                    <span style="color:red;font-weight:bold">
+                        <field name="set_readonly" />
+                    </span>
+                    <span style="color:red;font-weight:bold">
+                        <field name="set_readonly_valid_to" />
+                    </span>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_allowance_calculationparameter_ktg_tree"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.ktg.tree</field>
+            <field name="model">hr.employee.calculationparameter.ktg</field>
+            <field name="arch" type="xml">
+                <tree string="KTG">
+                    <field name="valid_from" />
+                    <field name="valid_to" />
+                    <field name="group" />
+                    <field name="code" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- ========== Calculation paramter zusatzmonatslohn ========== -->
+
+        <record id="view_hr_allowance_calculationparameter_zusatzmonatslohn_form"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.zusatzmonatslohn.form</field>
+            <field name="model">hr.employee.calculationparameter.zusatzmonatslohn</field>
+            <field name="arch" type="xml">
+                <form string="13. ML">
+                    <group col="4" colspan="4">
+                        <field name="valid_from" options="{'showInitDate': False, 'useCurrent': False}"
+                            attrs="{'readonly':[('set_readonly','!=',False)]}" />
+                        <field name="code"
+                            attrs="{'readonly':[('set_readonly','!=',False)],
+                                    'invisible':[('valid_from','=',False)]}" />
+                        <newline/>
+                        <field name="year_id_int" invisible="1"/>
+                    </group>
+                    <span style="color:red;font-weight:bold">
+                        <field name="set_readonly" />
+                    </span>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_allowance_calculationparameter_zusatzmonatslohn_tree" model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.zusatzmonatslohn.tree</field>
+            <field name="model">hr.employee.calculationparameter.zusatzmonatslohn</field>
+            <field name="arch" type="xml">
+                <tree string="13. ML">
+                    <field name="valid_from" />
+                    <field name="code" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- ========== Calculation paramter nettolohnausgleich ========== -->
+
+        <record
+            id="view_hr_allowance_calculationparameter_nettolohnausgleich_form"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.nettolohnausgleich.form</field>
+            <field name="model">hr.employee.calculationparameter.nettolohnausgleich</field>
+            <field name="arch" type="xml">
+                <form string="Nettolohnausgleich">
+                    <group col="4" colspan="4">
+                        <field name="valid_from" options="{'showInitDate': False, 'useCurrent': False}"
+                            attrs="{'readonly':[('set_readonly','!=',False)]}" />
+                        <field name="code" attrs="{'readonly':[('set_readonly','!=',False)],
+                                    'invisible':[('valid_from','=',False)]}" />
+                        <newline/>
+                        <field name="year_id_int" invisible="1"/>
+                    </group>
+                    <span style="color:red;font-weight:bold">
+                        <field name="set_readonly" />
+                    </span>
+                </form>
+            </field>
+        </record>
+
+        <record
+            id="view_hr_allowance_calculationparameter_nettolohnausgleich_tree"
+            model="ir.ui.view">
+            <field name="name">hr.employee.calculationparameter.nettolohnausgleich.tree</field>
+            <field name="model">hr.employee.calculationparameter.nettolohnausgleich</field>
+            <field name="arch" type="xml">
+                <tree string="Nettolohnausgleich">
+                    <field name="valid_from" />
+                    <field name="code" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <data>
+        <!-- RES PARTNER ADDRESS -->
+
+<!--        <record id="res_partner_address1_qst5" model="res.partner">-->
+<!--            <field name="name">AHV Adresse</field>-->
+<!--            <field name="street">AHV Adresse</field>-->
+<!--            <field name="active" eval="True"/>-->
+<!--            <field name="city">Naters</field>-->
+<!--            <field name="zip">3904</field>-->
+<!--            <field name="country_id" search="[('code','=','CH')]" />-->
+<!--            <field name="company_id" ref="second_company5" />-->
+<!--            <field name="state_id" search="[('code','=','VS'), ('country_id.code','=','CH')]" />-->
+<!--        </record>-->
+<!--        <record id="res_partner_address2_qst5" model="res.partner">-->
+<!--            <field name="name">UVG 1 Name</field>-->
+<!--            <field name="street">Adresse UVG</field>-->
+<!--            <field name="active" eval="True"/>-->
+<!--            <field name="city">Glis</field>-->
+<!--            <field name="zip">3902</field>-->
+<!--            <field name="company_id" ref="second_company" />-->
+<!--            <field name="state_id" search="[('code','=','VS'), ('country_id.code','=','CH')]" />-->
+<!--        </record>-->
+<!--        -->
+<!--        <record id="res_company_uvg_2014_qst5" model="res.company.uvg">-->
+<!--            <field name="address_id" ref="res_partner_address2_qst5" />-->
+<!--        </record>-->
+<!--        -->
+<!--        <record id="res_partner_address3_5" model="res.partner">-->
+<!--            <field name="name">Suva Name</field>-->
+<!--            <field name="street">Strasse Suva</field>-->
+<!--            <field name="active" eval="True"/>-->
+<!--            <field name="city">Brig</field>-->
+<!--            <field name="zip">3900</field>-->
+<!--            <field name="company_id" ref="second_company" />-->
+<!--            <field name="state_id" search="[('code','=','VS'), ('country_id.code','=','CH')]" />-->
+<!--        </record>-->
+<!--        <record id="res_partner_address4_5" model="res.partner">-->
+<!--            <field name="name">UVG 2 Name</field>-->
+<!--            <field name="street">Adresse UVG2</field>-->
+<!--            <field name="active" eval="True"/>-->
+<!--            <field name="city">Bern</field>-->
+<!--            <field name="zip">3000</field>-->
+<!--            <field name="company_id" ref="second_company" />-->
+<!--            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />-->
+<!--        </record>-->
+
+        <!-- RES USERS -->
+        <record model="res.users" id="base.user_admin">
+            <field name="company_ids" eval="[(4, ref('second_company5'))]"/>
+        </record>
+    </data>
+</odoo>

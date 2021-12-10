@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions name="SalaryDeclarationConsumerService"
+                  targetNamespace="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationConsumerService"
+                  xmlns:sdcs="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationConsumerService"
+                  xmlns:sdcst="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationConsumerServiceTypes"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <!-- state of standardisation: FINAL
+         publication: 2013-05-21
+         a. boehm
+    -->
+
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import
+                    namespace="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationConsumerServiceTypes"
+                    schemaLocation="SalaryDeclarationConsumerServiceTypes.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="SalaryDeclarationConsumerFault">
+        <wsdl:part name="parameters" element="sdcst:SalaryDeclarationConsumerFault"/>
+    </wsdl:message>
+
+    <wsdl:message name="DeclareSalaryConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:DeclareSalaryConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="DeclareSalaryConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:DeclareSalaryConsumerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SynchronizeContractConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:SynchronizeContractConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="SynchronizeContractConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:SynchronizeContractConsumerResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="GetResultFromDeclareSalaryConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:GetResultFromDeclareSalaryConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromDeclareSalaryConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:GetResultFromDeclareSalaryConsumerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromSynchronizeContractConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:GetResultFromSynchronizeContractConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromSynchronizeContractConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:GetResultFromSynchronizeContractConsumerResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="PingConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:PingConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="PingConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:PingConsumerResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="SalaryDeclarationConsumerPort">
+        <wsdl:operation name="DeclareSalaryConsumer">
+            <wsdl:input message="sdcs:DeclareSalaryConsumerRequest"/>
+            <wsdl:output message="sdcs:DeclareSalaryConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault"
+                        message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareSalaryConsumer">
+            <wsdl:input message="sdcs:GetResultFromDeclareSalaryConsumerRequest"/>
+            <wsdl:output message="sdcs:GetResultFromDeclareSalaryConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault" message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="SynchronizeContractConsumer">
+            <wsdl:input message="sdcs:SynchronizeContractConsumerRequest"/>
+            <wsdl:output message="sdcs:SynchronizeContractConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault" message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromSynchronizeContractConsumer">
+            <wsdl:input message="sdcs:GetResultFromSynchronizeContractConsumerRequest"/>
+            <wsdl:output message="sdcs:GetResultFromSynchronizeContractConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault" message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="PingConsumer">
+            <wsdl:input message="sdcs:PingConsumerRequest"/>
+            <wsdl:output message="sdcs:PingConsumerResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="SalaryDeclarationConsumerSOAPBinding"
+                  type="sdcs:SalaryDeclarationConsumerPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="DeclareSalaryConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareSalaryConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SynchronizeContractConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromSynchronizeContractConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="PingConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="SalaryDeclarationConsumerService">
+        <wsdl:port name="SalaryDeclarationConsumer"
+                   binding="sdcs:SalaryDeclarationConsumerSOAPBinding">
+            <soap:address
+                    location="http://tst.itserve.ch/itserve/lohnstandard/piv/receiver/channel001/services/SalaryDeclaration"
+                    />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_hr_yearlyrecap_qst_document">
+    <t t-call="web.internal_layout">
+        <t t-set="o" t-value="o.with_context({'lang':lang_set})"/>
+        <div class="page">
+            <div class="oe_structure"/>
+            <p t-if="not self.only_company" class="oe_mb64">
+                <t t-set="lines" t-value="get_lines(o)"/>
+                <p t-if="len(lines)&gt;0">
+                    <t t-set="total_01" t-value="0"/>
+                    <t t-set="total_02" t-value="0"/>
+                    <t t-set="total_03" t-value="0"/>
+                    <t t-set="total_04" t-value="0"/>
+                    <t t-set="total_05" t-value="0"/>
+                    <t t-set="total_06" t-value="0"/>
+                    <t t-set="total_07" t-value="0"/>
+                    <t t-set="total_08" t-value="0"/>
+                    <t t-set="total_09" t-value="0"/>
+                    <t t-set="total_10" t-value="0"/>
+                    <t t-set="total_11" t-value="0"/>
+                    <t t-set="total_12" t-value="0"/>
+                    <t t-set="total_year" t-value="0"/>
+                    <section class="oe_mt64 oe_mb32">
+                        <h4 style="text-align: center"><strong>Tax at source recapitulation - <span t-esc="self.year"/> - <span t-esc="o.state_id.name"/></strong></h4>
+                    </section>
+                    <p t-if="len(lines)&gt;0">
+                        <table class="table table-condensed oe_mt32">
+                            <thead style="font-size: 75%;">
+                                <tr>
+                                    <th>Lastname</th>
+                                    <th>Firstname</th>
+                                    <th style="text-align: right">January</th>
+                                    <th style="text-align: right">February</th>
+                                    <th style="text-align: right">March</th>
+                                    <th style="text-align: right">April</th>
+                                    <th style="text-align: right">May</th>
+                                    <th style="text-align: right">June</th>
+                                    <th style="text-align: right">July</th>
+                                    <th style="text-align: right">August</th>
+                                    <th style="text-align: right">September</th>
+                                    <th style="text-align: right">October</th>
+                                    <th style="text-align: right">November</th>
+                                    <th style="text-align: right">December</th>
+                                    <th style="text-align: right">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size: 75%;">
+                                <t t-set="count_bold" t-value="0"/>
+                                <tr t-foreach="lines" t-as="line">
+                                    <t t-set="total_01" t-value="total_01 + line['01']"/>
+                                    <t t-set="total_02" t-value="total_02 + line['02']"/>
+                                    <t t-set="total_03" t-value="total_03 + line['03']"/>
+                                    <t t-set="total_04" t-value="total_04 + line['04']"/>
+                                    <t t-set="total_05" t-value="total_05 + line['05']"/>
+                                    <t t-set="total_06" t-value="total_06 + line['06']"/>
+                                    <t t-set="total_07" t-value="total_07 + line['07']"/>
+                                    <t t-set="total_08" t-value="total_08 + line['08']"/>
+                                    <t t-set="total_09" t-value="total_09 + line['09']"/>
+                                    <t t-set="total_10" t-value="total_10 + line['10']"/>
+                                    <t t-set="total_11" t-value="total_11 + line['11']"/>
+                                    <t t-set="total_12" t-value="total_12 + line['12']"/>
+                                    <t t-set="total_year" t-value="total_year + line['year']"/>
+                                    <t t-set="style" t-value="'border-top: 0; padding-top: 2px; padding-bottom:2px; '"/>
+                                    <p t-if="count_bold%2 == 0">
+                                        <t t-set="style" t-value="style + ' background-color: #e0e0e0;'"/>
+                                    </p>
+                                    <t t-set="style_right" t-value="style + ' text-align: right;'"/>
+                                    <td t-att-style="style"><span t-esc="line['name_sort']"/></td>
+                                    <td t-att-style="style"><span t-esc="line['firstname']"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['01']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['02']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['03']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['04']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['05']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['06']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['07']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['08']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['09']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['10']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['11']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['12']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="line['year']" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <t t-set="count_bold" t-value="count_bold+1"/>
+                                </tr>
+                            </tbody>
+                            <tbody style="font-size: 75%;">
+                                <t t-set="style" t-value="'border-top: 0; padding-top: 2px; padding-bottom:2px; font-weight: bold;'"/>
+                                <t t-set="style_right" t-value="style + ' text-align: right;'"/>
+                                <tr>
+                                    <td t-att-style="style">Total</td>
+                                    <td t-att-style="style"></td>
+                                    <td t-att-style="style_right"><span t-esc="total_01" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_02" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_03" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_04" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_05" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_06" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_07" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_08" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_09" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_10" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_11" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_12" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                    <td t-att-style="style_right"><span t-esc="total_year" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                </tr>
+                            </tbody>
+                            <t t-set="abzug" t-value="get_abzug(total_year, o.qst_kommission)"/>
+                            <tbody>
+                                <t t-set="style" t-value="'border-top: 0; padding-top: 2px; padding-bottom:2px; font-weight: bold; '"/>
+                                <t t-set="style_right" t-value="style + ' text-align: right;'"/>
+                                <tr>
+                                    <td t-att-style="style" colspan="14">Abzüglich Bezugsprovision/Kommission <span t-esc="o.qst_kommission" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/> %</td>
+                                    <td t-att-style="style_right"><span t-esc="abzug" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                </tr>
+                                <tr>
+                                    <td t-att-style="style" colspan="14">Total</td>
+                                    <td t-att-style="style_right"><span t-esc="total_year-abzug" t-options="{'widget': 'float', 'decimal_precision': 'Payroll'}"/></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </p>
+                </p>
+            </p>
+        </div>
+    </t>
+</template>
+
+<template id="report_hr_yearlyrecap_qst">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_hr_yearlyrecap_qst_document" t-lang="lang_set"/>
+        </t>
+    </t>
+</template>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_res_company_bvg_code_form" model="ir.ui.view">
+			<field name="name">res.company.bvg.code.form</field>
+			<field name="model">res.company.bvg.code</field>
+			<field name="arch" type="xml">
+				<form string="BVG">
+					<sheet>
+						<group col="4" colspan="4">
+							<field name="code" />
+							<field name="name" />
+							<field name="group_invisible" invisible="1" />
+							<field name="group_required" invisible="1" />
+							<field name="group_readonly" invisible="1" />
+							<field name="group_bvg_id" options='{"no_open": True, "no_create": True}'
+								attrs="{'invisible':[('group_invisible','=',True)], 
+													'required':[('group_required','=',True)],
+													'readonly':[('group_readonly','=',True)]}"
+								force_save="1"/>
+							<field name="id" invisible="1" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_res_company_bvg_code_tree" model="ir.ui.view">
+			<field name="name">res.company.bvg.code.tree</field>
+			<field name="model">res.company.bvg.code</field>
+			<field name="arch" type="xml">
+				<tree string="BVG Codes">
+					<field name="code" readonly="1" />
+					<field name="name" readonly="1" />
+					<field name="group_bvg_id" readonly="1" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

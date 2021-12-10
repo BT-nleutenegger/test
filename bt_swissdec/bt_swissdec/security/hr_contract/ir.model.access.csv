@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_children_manager,hr.employee.children.manager,model_hr_employee_children,hr.group_hr_manager,1,1,1,1
+access_hr_employee_children_user,hr.employee.children.user,model_hr_employee_children,base.group_user,1,0,0,0
+access_hr_payslip_grosswage_line_manager,hr.payslip.grosswage.line.manager,model_hr_payslip_grosswage_line,hr.group_hr_manager,1,1,1,1
+access_hr_contract_employee,hr.contract.employee,model_hr_contract,base.group_user,1,0,0,0
+access_hr_contract_hr_user,hr.contract.hr.user,model_hr_contract,hr.group_hr_user,1,1,1,0
+access_hr_contract_type_user,hr.contract.type.user,model_hr_contract_type,base.group_user,1,0,0,0

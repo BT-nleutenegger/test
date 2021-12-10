@@ -1,0 +1,164 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bt_ch_city
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-26 12:56+0000\n"
+"PO-Revision-Date: 2020-10-26 12:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,help:bt_ch_city.field_res_city__zip_post_delivery
+msgid ""
+"6-digit postcode of the office concerned in post_delivery_through. Necessary"
+" to create the bundle label barcode."
+msgstr ""
+"NPA à six chiffres de l’office de distribution dans post_delivery_through. "
+"Est nécessaire pour la génération du code à barres sur les étiquettes de "
+"liasses."
+
+#. module: bt_ch_city
+#: model:ir.model.fields,help:bt_ch_city.field_res_city__sort
+msgid ""
+"Indicates if the postcode is included in the «sort file». (MAT[CH]sort): 0 ="
+" not included, 1 = included. Delivery information with addresses (only "
+"postcode and streets) are published in the sort file."
+msgstr ""
+"Indicates if the postcode is included in the «sort file». (MAT[CH]sort): 0 ="
+" not included, 1 = included. Delivery information with addresses (only "
+"postcode and streets) are published in the sort file."
+
+#. module: bt_ch_city
+#: model:ir.model.fields,help:bt_ch_city.field_res_city__lang
+msgid ""
+"Language or language majority in the postcode area: 1 = German, 2 = French, "
+"3 = Italian, 4 = Rhaeto-Romanic. In localities where several languages are "
+"spoken, the main language is indicated."
+msgstr ""
+"Langue ou majorité linguistique dans le secteur d’un numéro postal "
+"d’acheminement: 1 = allemand, 2 = français, 3 = italien, 4 = romanche. La "
+"langue principale est indiquée dans les localités plurilingues."
+
+#. module: bt_ch_city
+#: model:ir.model.fields,help:bt_ch_city.field_res_city__lang2
+msgid ""
+"Other languages within a postcode. One different language code can be "
+"specified per postcode: 1 = German, 2 = French, 3 = Italian, 4 = Rhaeto-"
+"Romanic"
+msgstr ""
+"Autre langue à l’intérieur d’un NPA. On peut avoir un code de langue "
+"différent par NPA."
+
+#. module: bt_ch_city
+#: model:ir.model.fields,help:bt_ch_city.field_res_city__post_delivery_through
+msgid ""
+"Refers to the organizational unit (ONRP) primarily responsible for "
+"delivering letters in the address postcode. If need be, this information can"
+" be used for bag addresses."
+msgstr ""
+"Renvoie au site d’exploitation (ONRP) qui distribue principalement les "
+"lettres dans le NPA d’adressage. Cette information peut éventuellement être "
+"utilisée pour les écriteaux de sac."
+
+#. module: bt_ch_city
+#: model:ir.model.fields,help:bt_ch_city.field_res_city__communitynumber_bfs
+msgid ""
+"The numbering used by the Swiss Federal Statistical Office (BFS) to "
+"designate political municipalities in Switzerland and the Principality of "
+"Liechtenstein."
+msgstr ""
+"Numérotation des communes politiques de Suisse et de la Principauté du "
+"Liechtenstein utilisée par l’Office fédéral de la statistique."
+
+#. module: bt_ch_city
+#: model:ir.model.constraint,message:bt_ch_city.constraint_res_city_zipcode_name_state_country_uniq
+msgid ""
+"You already have a city with that name and zipcode in the same state.The "
+"city must have a unique name and postcode within it's state and it's country"
+msgstr ""
+"Vous avez déjà une ville portant ce nom et ce code postal dans le même État."
+" La ville doit avoir un nom et un code postal uniques dans son État et son "
+"pays."
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__active
+msgid "Active"
+msgstr "Active"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__additional_digit
+msgid "Additional postcode number"
+msgstr "Chiffre complémentaire du numéro postal d’acheminement"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__g_zipcode
+msgid "Basic postcode"
+msgstr "Numéro postal d’acheminement de base"
+
+#. module: bt_ch_city
+#: model:ir.model,name:bt_ch_city.model_res_city
+msgid "City"
+msgstr "Ville"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__zip_post_delivery
+msgid "Delivery office postcode"
+msgstr "Numéro postal d’acheminement de l’office de distribution"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__post_delivery_through
+msgid "Delivery office"
+msgstr "Filiale de distribution"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__lang2
+msgid "Different language code"
+msgstr "Code linguistique différent"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__communitynumber_bfs
+msgid "FSO municipality number (BFSNR)"
+msgstr "Numéro OFS (BFSNR)"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__lang
+msgid "Language code"
+msgstr "Code de langue"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__name_short
+msgid "Name short"
+msgstr "Nom court"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__zip_type
+msgid "Postcode type"
+msgstr "Type de numéro postal d’acheminement"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__sort
+msgid "Present in sort file"
+msgstr "Présenter dans le fichier de tri"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,help:bt_ch_city.field_res_city__onrp
+msgid "Primary Key"
+msgstr "Clé primaire"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__onrp
+msgid "Swiss Post classification number (ONRP)"
+msgstr "Numéro d’ordre Poste (ONRP)"
+
+#. module: bt_ch_city
+#: model:ir.model.fields,field_description:bt_ch_city.field_res_city__valid_from
+msgid "Valid from"
+msgstr "Valable à partir de"

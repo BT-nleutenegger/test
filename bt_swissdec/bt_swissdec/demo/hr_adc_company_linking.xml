@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="linkaccount" model="hr.adc.linkaccount">
+            <field name="valid_from_new">2012-01-01</field>
+        </record>
+
+        <function model="hr.adc.linkaccount" name="link_account" eval="[[ref('linkaccount')]]"/>
+    </data>
+</odoo>

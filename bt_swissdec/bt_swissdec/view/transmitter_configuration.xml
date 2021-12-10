@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="transmitter_configuration_form_view"
+			model="ir.ui.view">
+			<field name="name">transmitter.configuration.form</field>
+			<field name="model">transmitter_configuration</field>
+			<field name="arch" type="xml">
+				<form string='Transmitter Configuration'>
+					<header>
+						<button string="Next" name="action_next_state" type="object"
+							class="oe_highlight"
+							states="draft,configure_reports,configure_security,configure_end_point" />
+						<button string="Finish" name="action_next_next_state" type="object"
+							class="oe_highlight"
+							states="draft,configure_reports,configure_security,configure_end_point" />
+
+						<button string="Set as default" name="action_state_default"
+							type="object" attrs="{'invisible': ['|', ('state','!=','done'), ('state_default','=','default')]}"/>
+
+						<button string="Ping" name="action_ping" type="object" class="oe_highlight"
+							states="done" />
+						<button string="Interoperability" name="action_interoperability" class="oe_highlight"
+							type="object" states="done" />
+						<field name="state_default" widget="statusbar" />
+					</header>
+					<sheet>
+						<group colspan="4">
+						    <field name="state" widget="statusbar" />
+						    <field name="state_ping" widget="statusbar" states="done" />
+						    <field name="state_interoperability" widget="statusbar"
+							states="done" />
+						</group>
+						<group attrs="{'invisible': [('state','not in',['draft', 'done'])]}">
+							<h1>
+								Transmitter options
+							</h1>
+							<br />
+						</group>
+						<group colspan="4" col="2" attrs="{'invisible': [('state','not in',['draft','done'])]}">
+							<field name="name" placeholder="To set up first we need a name" />
+							<field name="description" placeholder="and a Description" />
+                            <field name="company_id" groups="base.group_multi_company"/>
+						</group>
+						<group invisible="1" >
+							<h2>
+								Test information
+							</h2>
+							<br />
+							<field name="automatic_step" invisible="1" />
+						</group>
+						<group
+							attrs="{'invisible':
+								[('state','not in',['configure_reports', 'done'])]}">
+							<h2>
+								Reports variables
+							</h2>
+							<br />
+							<p>
+								These variables will be used to set up the reports.
+							</p>
+							<br />
+							<field name="group" widget="radio" />
+							<field name="water_mark" />
+							<field name="language" widget="radio" />
+							<field name="bildformat" widget="radio" />
+							<field name="anonymize" />
+							<field name="alignment" widget="radio" />
+							<field name="english" />
+							<field name="canton_only" options='{"no_open": True, "no_create": True}'/>
+							<field name="verbose" />
+
+						</group>
+						<group name="Security variables" groups="bt_swissdec.bt_swissdec_admin"
+							attrs="{'invisible':
+								[('state','not in',['configure_security', 'done'])]}">
+							<h2>
+								Security variables
+							</h2>
+							<br />
+							<p>
+								To set-up Java Key Store we need the following information
+							</p>
+							<br />
+							<group>
+								<field name="jks_state" widget="radio" />
+								<field name="data" filename="data_name"
+									attrs="{'required': [('jks_state', '=', 'use_own_jks')],
+											'invisible': [('jks_state', '!=', 'use_own_jks')]}" />
+								<field name="data_name" invisible="1" />
+								<field name="password"
+									attrs="{'invisible': [('jks_state', '!=', 'use_own_jks')]}" />
+								<field name="distributor_name" />
+							</group>
+
+						</group>
+						<group name="Transmission variables" groups="bt_swissdec.bt_swissdec_admin"
+							attrs="{'invisible':
+								[('state','not in',['configure_end_point', 'done'])]}">
+							<h2>
+								Transmission variables
+							</h2>
+							<group colspan="4">
+								<field name="monitoring_id" />
+								<field name="end_point" widget="url" />
+								<field name="socket" />
+								<field name="uaproducer" />
+								<field name="uaversion" />
+								<field name="elmstdversion" />
+								<field name="ping_time" />
+
+							</group>
+						</group>
+
+						<group colspan="4" col="2" states="done" groups="bt_swissdec.bt_swissdec_admin">
+							<field name="execution_ids" readonly="1" />
+						</group>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="transmitter_configuration_tree_view"
+			model="ir.ui.view">
+			<field name="name">transmitter.configuration.tree</field>
+			<field name="model">transmitter_configuration</field>
+			<field name="arch" type="xml">
+				<tree string='Transmitter Configuration'
+					  decoration-success="state=='done'"
+					  decoration-danger="state=='configure_security'"
+					  decoration-muted="state=='configure_end_point'"
+					  decoration-info="state=='draft'"
+					  decoration-warning="state=='configure_reports'">
+					<field name="name" />
+					<field name="description" />
+					<field name="state" />
+					<field name="state_default" />
+					<field name="state_ping" states="done" />
+					<field name="state_interoperability" states="done" />
+					<button string="Ping" name="action_ping" type="object" class="oe_highlight"
+						states="done" />
+					<button string="Interoperability" name="action_interoperability"
+						type="object" class="oe_highlight" states="done" />
+
+				</tree>
+			</field>
+		</record>
+		<record id="transmitter_configuration_search_view"
+			model="ir.ui.view">
+			<field name="name">transmitter.configuration.search</field>
+			<field name="model">transmitter_configuration</field>
+			<field name="arch" type="xml">
+				<search string='Transmitter Configuration'>
+					<field name="name" />
+					<field name="description" />
+					<field name="state" />
+					<field name="state_default" />
+					<field name="state_ping" states="done" />
+					<field name="state_interoperability" states="done" />
+					<group expand="0" string="Group By...">
+						<filter string="State" domain="[]"
+							name="groupby_state" context="{'group_by':'state'}" />
+						<filter string="Default"
+							domain="[('state_default','=', 'default')]" name="groupby_state_default"
+							context="{}" />
+
+					</group>
+
+				</search>
+			</field>
+		</record>
+
+		<record id="action_transmitter_configuration"
+			model="ir.actions.act_window">
+			<field name="name">Configuration</field>
+			<field name="res_model">transmitter_configuration</field>
+			<field name="view_mode">tree,form</field>
+			<field name="target" />
+			<field name="context">{"search_default_groupby_state_default" :True}
+			</field>
+		</record>
+	</data>
+</openerp>

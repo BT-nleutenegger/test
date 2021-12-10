@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+	   <!-- State Expatriates -->
+	    <record id="EX" model="res.country.state">
+            <field name="name">EXPATRIATE</field>
+            <field name="code">EX</field>
+	        <field name="country_id" search="[('code','=','CH')]"/>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="product_uom_lektion" model="uom.uom">
+            <field name="name">Lektion(en)</field>
+            <field ref="uom.uom_categ_wtime" name="category_id"/>
+            <field name="factor" eval="1.0"/>
+            <field name="uom_type">smaller</field>
+        </record>
+    </data>
+    
+    <data noupdate="1">
+        <!-- Employee Marital Statusses -->
+        <record id="hr_employee_marital_status_single" model="hr.employee.marital.status">
+            <field name="name">Single</field>
+            <field name="code">single</field>
+            <field eval="0" name="qst_partner_data_required"/>
+        </record>
+        <record id="hr_employee_marital_status_married" model="hr.employee.marital.status">
+            <field name="name">Married</field>
+            <field name="code">married</field>
+            <field eval="1" name="qst_partner_data_required"/>
+        </record>
+        <record id="hr_employee_marital_status_divorced" model="hr.employee.marital.status">
+            <field name="name">Divorced</field>
+            <field name="code">divorced</field>
+            <field eval="0" name="qst_partner_data_required"/>
+        </record>
+        <record id="hr_employee_marital_status_widower" model="hr.employee.marital.status">
+            <field name="name">Widowed</field>
+            <field name="code">widowed</field>
+            <field eval="0" name="qst_partner_data_required"/>
+        </record>
+		<record id="hr_employee_marital_status_unknown" model="hr.employee.marital.status">
+            <field name="name">Unknown</field>
+            <field name="code">unknown</field>
+            <field eval="0" name="qst_partner_data_required"/>
+        </record>
+		<record id="hr_employee_marital_status_separated" model="hr.employee.marital.status">
+            <field name="name">Separated</field>
+            <field name="code">separated</field>
+            <field eval="0" name="qst_partner_data_required"/>
+        </record>
+		<record id="hr_employee_marital_status_civilunion" model="hr.employee.marital.status">
+            <field name="name">Civil union</field>
+            <field name="code">registeredPartnership</field>
+            <field eval="1" name="qst_partner_data_required"/>
+        </record>
+		<record id="hr_employee_marital_status_dissolved" model="hr.employee.marital.status">
+            <field name="name">Partnership legally dissolved</field>
+            <field name="code">partnershipDissolvedByLaw</field>
+            <field eval="0" name="qst_partner_data_required"/>
+        </record>
+		<record id="hr_employee_marital_status_death" model="hr.employee.marital.status">
+            <field name="name">Partnership ended with the death of partner</field>
+            <field name="code">partnershipDissolvedByDeath</field>
+            <field eval="0" name="qst_partner_data_required"/>
+        </record>
+		<record id="hr_employee_marital_status_missing" model="hr.employee.marital.status">
+            <field name="name">Partnership ended because partner is missing</field>
+            <field name="code">partnershipDissolvedByDeclarationOfLost</field>
+            <field eval="0" name="qst_partner_data_required"/>
+        </record>
+
+		<!-- Employee Family Statusses -->
+        <record id="hr_employee_family_status_mother" model="hr.employee.family.status">
+            <field name="name">Mother</field>
+        </record>
+		<record id="hr_employee_family_status_stepmother" model="hr.employee.family.status">
+            <field name="name">Stepmother</field>
+        </record>
+		<record id="hr_employee_family_status_fostermother" model="hr.employee.family.status">
+            <field name="name">Foster mother</field>
+        </record>
+		<record id="hr_employee_family_status_sister" model="hr.employee.family.status">
+            <field name="name">Sister</field>
+        </record>
+		<record id="hr_employee_family_status_grandmother" model="hr.employee.family.status">
+            <field name="name">Grandmother</field>
+        </record>
+		<record id="hr_employee_family_status_father" model="hr.employee.family.status">
+            <field name="name">Father</field>
+        </record>
+		<record id="hr_employee_family_status_stepfather" model="hr.employee.family.status">
+            <field name="name">Stepfather</field>
+        </record>
+		<record id="hr_employee_family_status_fosterfather" model="hr.employee.family.status">
+            <field name="name">Foster father</field>
+        </record>
+		<record id="hr_employee_family_status_brother" model="hr.employee.family.status">
+            <field name="name">Brother</field>
+        </record>
+		<record id="hr_employee_family_status_grandfather" model="hr.employee.family.status">
+            <field name="name">Grandfather</field>
+        </record>
+		
+	<!-- hack jool: added 2 countries for swissdec -->
+        <record id="uu" model="res.country">
+            <field name="name">unbekannt</field>
+            <field name="code">11</field>
+        </record>
+        
+        <record id="ss" model="res.country">
+            <field name="name">staatenlos</field>
+            <field name="code">22</field>
+        </record>
+        
+        <record id="base.ch" model="res.country">
+        	<field eval="1" name="swiss_payroll_is_switzerland"/>
+            <field eval="1" name="enforce_cities"/>
+        </record>
+        
+        <!-- # HACK: 16.06.2014 11:33:48: olivier: do not create these two entries because maybe it will overwrite some done customizations if module is updated / the Journal must be created manually via GUI and then the sequence will automatically created--> 
+        <!-- create sequence Personalaufwand Lohn -->
+        <!--record id="ir_sequence_personalaufwandlohn0" model="ir.sequence">
+            <field name="name">Personalaufwand Lohn</field>
+            <field eval="1" name="number_next"/>
+            <field name="implementation">no_gap</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field eval="4" name="padding"/>
+            <field eval="1" name="number_increment"/>
+            <field name="prefix">PA/%(year)s/</field>
+            <field eval="1" name="active"/>
+        </record-->
+
+        <!-- create journal Personalaufwand Lohn -->
+        <!--record id="account_journal_personalaufwandlohn0" model="account.journal">
+            <field model="account.account" name="default_debit_account_id" search="[('name', '=', u'Salaires')]"/>
+            <field eval="1" name="update_posted"/>
+            <field name="code">PA</field>
+            <field name="name">Personalaufwand Lohn</field>
+            <field eval="0" name="centralisation"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field eval="[(6,0,[])]" name="type_control_ids"/>
+            <field model="account.account" name="default_credit_account_id" search="[('name', '=', u'Salaires')]"/>
+            <field model="ir.sequence" name="sequence_id" search="[('name', '=', u'Personalaufwand Lohn')]"/>
+            <field eval="[(6,0,[])]" name="account_control_ids"/>
+            <field name="type">purchase</field>
+            <field eval="0" name="group_invoice_lines"/>
+        </record-->
+        
+    </data>
+</openerp>

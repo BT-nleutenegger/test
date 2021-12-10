@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record id="transmitter_get_status_person_correction_tree" model="ir.ui.view">
+			<field name="name">transmitter_get_status_person_correction_tree</field>
+			<field name="model">transmitter_get_status_person_correction</field>
+			<field name="arch" type="xml">
+				<tree string="Correction">
+					<field name="type_of_correction"/>
+					<field name="number_notification"/>
+					<field name="relevant_date"/>
+
+				</tree>
+			</field>
+		</record>
+		<record id="transmitter_get_status_correction_month_tree" model="ir.ui.view">
+			<field name="name">transmitter_get_status_correction_month_tree</field>
+			<field name="model">transmitter_get_status_correction_month</field>
+			<field name="arch" type="xml">
+				<tree string="Correction Month">
+					<field name="Month"/>
+					<field name="TotalTaxableEarning"/>
+					<field name="TotalTaxAtSource"/>
+					<field name="TotalCommission"/>
+				</tree>
+			</field>
+		</record>
+		<record id="transmitter_get_status_correction_month_form" model="ir.ui.view">
+			<field name="name">transmitter_get_status_correction_month_form</field>
+			<field name="model">transmitter_get_status_correction_month</field>
+			<field name="arch" type="xml">
+				<form string="Correction Month">
+					<sheet>
+						<group>
+					<field name="Month"/>
+					<field name="TotalTaxableEarning"/>
+					<field name="TotalTaxAtSource"/>
+					<field name="TotalCommission"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="transmitter_get_status_person_correction_form" model="ir.ui.view">
+			<field name="name">transmitter_get_status_person_correction_form</field>
+			<field name="model">transmitter_get_status_person_correction</field>
+			<field name="arch" type="xml">
+				<form string="Correction">
+					<sheet>
+						<group>
+							<field name="type_of_correction"/>
+							<field name="Reversal" invisible="1"/>
+						</group>
+						<group attrs="{'invisible': [('Reversal', '=', True)]}">
+							<field name="ValidAsOf"/>
+							<field name="TaxAtSourceCode"/>
+							<field name="CategoryPredefined"/>
+							<field name="CategoryOpen"/>
+						</group>
+						<group attrs="{'invisible': [('Reversal', '=', False)]}">
+							<field name="Month"/>
+							<field name="old_TaxableEarning"/>
+							<field name="old_AscertainedTaxableEarning"/>
+							<field name="old_TaxAtSource"/>
+							<field name="new_TaxableEarning"/>
+							<field name="new_AscertainedTaxableEarning"/>
+							<field name="new_TaxAtSource"/>
+						</group>
+						<group>
+							<field name="notifications_ids"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="transmitter_get_status_person_salary_form" model="ir.ui.view">
+			<field name="name">transmitter_get_status_person_salary_form</field>
+			<field name="model">transmitter_get_status_person_salary</field>
+			<field name="arch" type="xml">
+				<form string="SwissDec">
+					<sheet>
+						<group>
+							<field name="CurrentMonth"/>
+							<field name="TaxAtSourceCanton"/>
+							<field name="TaxAtSourceMunicipalityID"/>
+							<field name="CurrentConfirmed"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="transmitter_get_status_person_salary_tree" model="ir.ui.view">
+			<field name="name">transmitter_get_status_person_salary_tree</field>
+			<field name="model">transmitter_get_status_person_salary</field>
+			<field name="arch" type="xml">
+				<tree string="SwissDec">
+					<field name="CurrentMonth"/>
+					<field name="TaxAtSourceCanton"/>
+					<field name="TaxAtSourceMunicipalityID"/>
+					<field name="CurrentConfirmed"/>
+
+				</tree>
+			</field>
+		</record>
+		<record id="transmitter_get_status_person_tree" model="ir.ui.view">
+			<field name="name">transmitter_get_status_person_tree</field>
+			<field name="model">transmitter_get_status_person</field>
+			<field name="arch" type="xml">
+				<tree string="SwissDec"
+					  decoration-success="number_corrections == 0 and number_warning_notification_ids == 0"
+                      decoration-danger="number_corrections != 0"
+                      decoration-warning="number_warning_notification_ids != 0 and number_corrections == 0">
+					<field name="EmployeeNumber"/>
+					<field name="employee_id" />
+					<field name="number_corrections"/>
+					<field name="number_warning_notification_ids"/>
+					<field name="number_info_notification_ids"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="transmitter_get_status_person_form" model="ir.ui.view">
+			<field name="name">transmitter_get_status_person_form</field>
+			<field name="model">transmitter_get_status_person</field>
+			<field name="arch" type="xml">
+				<form string="SwissDec">
+					<sheet>
+						<group>
+							<field name="EmployeeNumber" readonly="1" />
+							<field name="employee_id" readonly="1" />
+							<field name="transmitter_get_status_person_salary_ids"
+								   options='{"no_open": True, "no_create": True}'/>
+							<field name="number_corrections" readonly="1" invisible="1"/>
+							<field name="transmitter_get_status_person_correction_ids"
+								   attrs="{'invisible': [('number_corrections', '=', 0)]}"
+								   options='{"no_open": True, "no_create": True}'/>
+							<field name="number_warning_notification_ids" readonly="1" invisible="1"/>
+							<field name="warning_notification_ids"
+								   attrs="{'invisible': [('number_warning_notification_ids', '=', 0)]}"
+								   options='{"no_open": True, "no_create": True}'/>
+							<field name="number_info_notification_ids" readonly="1" invisible="1"/>
+							<field name="info_notification_ids"
+								   attrs="{'invisible': [('number_info_notification_ids', '=', 0)]}"
+								   options='{"no_open": True, "no_create": True}'/>
+						</group>
+					</sheet>
+
+				</form>
+			</field>
+		</record>
+
+
+		<record id="transmitter_get_status_declare_salary_tree" model="ir.ui.view">
+			<field name="name">transmitter_get_status_declare_salary_tree</field>
+			<field name="model">bt_swissdec.transmitter_get_status</field>
+			<field name="arch" type="xml">
+				<tree string="SwissDec"
+					  decoration-success="state in ('not_supported','success')"
+					  decoration-danger="state in ('error','fault')"
+					  decoration-warning="state=='warning'"
+					  decoration-muted="state in ('completion_release_is_missing','processing')"
+					  decoration-info="state=='info'">
+					<field name="prop_id_type" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="state" />
+					<field name="prop_company_name" />
+					<field name="expected_availability" />
+					<field name="internal_state" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="tax_state" attrs="{'invisible' : [('prop_id_type', 'not in', ['TaxAtSourceIdentificationType'] )]}" />
+
+					<button name="change_internal_state" type="object" string="URL validated"
+						confirm="Confirm yes only if you already went inside the URL and confirmed it."
+						attrs="{'invisible' : ['|', '|', ('internal_state', '=', 'already_validate'), ('state', 'in',  ['error', 'success', 'not_supported', 'ignored']),('prop_id_type','in', ['TaxAtSourceIdentificationType', 'TaxIdentificationType'])]}" />
+
+					<button string="Get Result" name="get_result" type="object"
+						attrs="{'invisible' : ['|', '|', ('internal_state', '=', 'to_validate'), ('state', 'in',  ['error', 'success', 'not_supported', 'ignored']),('prop_id_type','in', ['TaxAtSourceIdentificationType', 'TaxIdentificationType', 'StatisticIdentificationType'])]}" />
+
+					<button string="Get Result" name="get_result" type="object"
+							attrs="{'invisible' : ['|', ('tax_state', '=', 'done'),('prop_id_type','not in', ['TaxAtSourceIdentificationType'])]}"
+						/>
+					<button string="Print" name="print_generic_report" type="object" class="btn btn-primary o_report_print"
+							attrs="{'invisible' : ['|',('tax_state', '!=', 'done'),('prop_id_type','not in', ['TaxAtSourceIdentificationType'])]}"
+						/>
+
+                    <button string="Print" name="print_generic_report" type="object" class="btn btn-primary o_report_print"
+							attrs="{'invisible' : ['|',('tax_state', '!=', 'done'),('prop_id_type','not in', ['AHVAVSIdentificationType'])]}"
+						/>
+
+
+
+				</tree>
+			</field>
+		</record>
+		<record id="transmitter_get_status_declare_salary_form" model="ir.ui.view">
+			<field name="name">transmitter_get_status_declare_salary_form</field>
+			<field name="model">bt_swissdec.transmitter_get_status</field>
+			<field name="arch" type="xml">
+				<form string="SwissDec">
+					<header>
+						<field name="state" widget="statusbar" invisible="1" />
+						<field name="internal_state" widget="statusbar" states="success"
+							invisible="1" />
+						<field name="tax_state" widget="statusbar"
+							   attrs="{'invisible' : [('prop_id_type', 'not in', ['TaxAtSourceIdentificationType'] )]}"/>
+					</header>
+					<sheet>
+						<button string="Get Result" name="get_result" type="object"
+								attrs="{'invisible' : ['|', ('tax_state', '=', 'done'),('prop_id_type','not in', ['TaxAtSourceIdentificationType'])]}"
+						/>
+						<field name="data" filename="data_name" invisible="1" />
+						<field name="data_name" invisible="1" />
+
+						<group states="not_supported" colspan="4">
+							<ul>
+								<li> This message is not supported in this server.</li>
+								<li>
+									Everything is right from your side.
+								</li>
+								<li> You cannot do anything more at this point.</li>
+							</ul>
+
+						</group>
+
+						<group states="error" colspan="4">
+							<field name="end_user_information" />
+							<field name="detail_information" />
+						</group>
+						<group states="success" colspan="4">
+							<field name="success_result"
+								   attrs="{'invisible' : [('prop_id_type', 'in', ['TaxAtSourceIdentificationType'] )]}"/>
+						</group>
+						<group states="fault" colspan="4">
+
+							<field name="quality_level" />
+							<field name="description_code" />
+							<field name="description" />
+						</group>
+
+
+						<field name="prop_id_type" invisible="1" />
+						<field name="prop_expirationdate" invisible="1" />
+						<group colspan="4"
+							   attrs="{'invisible': ['|', '|',('prop_id_type', 'in', ['TaxAtSourceIdentificationType'] ), ('state', 'in', ['error']),('prop_id_type','=', 'TaxIdentificationType')]}">
+
+							<field name="prop_key" groups="bt_swissdec.bt_swissdec_admin" />
+							<field name="prop_password" groups="bt_swissdec.bt_swissdec_admin" />
+
+							<group>
+								<div
+									attrs="{'invisible': ['|', '&amp;', ('state', 'not in', ('not_supported', 'success')),('internal_state', '=', 'to_validate'), ('state', '=', 'completion_release_is_missing')]}">
+									<h3>There is not an existing URL to validate.</h3>
+								</div>
+								<div
+									attrs="{'invisible': ['&amp;', '|', ('state', 'not in', ('not_supported', 'success')),('internal_state', '!=', 'to_validate'), ('state', '!=', 'completion_release_is_missing')]}">
+									<h3>You have to validate this URL. </h3>
+								</div>
+								<field name="prop_url" widget="url" text="Zu validierende URL öffnen"
+									attrs="{'invisible': ['&amp;', ('internal_state', '!=', 'to_validate'), ('state', '!=', 'completion_release_is_missing')]}"/>
+								<field name="prop_expirationdate" />
+							</group>
+						</group>
+
+						<group colspan="4" attrs="{'invisible' : [('prop_id_type', 'not in', ['UVGLAAIdentificationType', 'BVGLPPIdentificationType', 'KTGAMCIdentificationType', 'UVGZLAACIdentificationType', 'TaxAtSourceIdentificationType'] )]}">
+							<field name="prop_company_name" nolabel="1"/>
+						</group>
+
+						<group colspan="4" states="info" groups="bt_swissdec.bt_swissdec_admin">
+							<field name="prop_insurance_id"
+								attrs="{'invisible' : [('prop_id_type', 'not in', ['UVGLAAIdentificationType', 'BVGLPPIdentificationType', 'KTGAMCIdentificationType', 'UVGZLAACIdentificationType'] )]}" />
+							<field name="prop_customer_identity"
+								attrs="{'invisible' : [('prop_id_type', 'not in', ['UVGLAAIdentificationType', 'BVGLPPIdentificationType', 'KTGAMCIdentificationType', 'TaxAtSourceIdentificationType', 'UVGZLAACIdentificationType'] )]}" />
+							<field name="prop_contract_identity"
+								attrs="{'invisible' : [('prop_id_type', 'not in', ['UVGLAAIdentificationType', 'BVGLPPIdentificationType', 'KTGAMCIdentificationType', 'UVGZLAACIdentificationType'] )]}" />
+							<field name="prop_akcc_customer_number"
+								attrs="{'invisible' : [('prop_id_type', 'not in', ['AHVAVSIdentificationType'] )]}" />
+							<field name="prop_akcc_branch_number"
+								attrs="{'invisible' : [('prop_id_type', 'not in', ['AHVAVSIdentificationType'] )]}" />
+							<field name="prop_akcc_sub_number"
+								attrs="{'invisible' : [('prop_id_type', 'not in', ['AHVAVSIdentificationType'] )]}" />
+
+							<field name="prop_fakcaf_branch_number"
+								attrs="{'invisible' : [('prop_id_type', 'not in', ['FAKCAFIdentificationType'] )]}" />
+							<field name="prop_fakcaf_customer_number"
+								attrs="{'invisible' : [('prop_id_type', 'not in', ['FAKCAFIdentificationType'] )]}" />
+							<field name="prop_fakcaf_sub_number"
+								attrs="{'invisible' : [('prop_id_type', 'not in', ['FAKCAFIdentificationType'] )]}" />
+
+						</group>
+
+						<group>
+							<field name="prop_canton_id"
+								   attrs="{'invisible' : [('prop_id_type', 'in', ['TaxAtSourceIdentificationType', 'TaxIdentificationType', 'StatisticIdentificationType'] )]}"/>
+							<field name="prop_payroll_unit"
+								   attrs="{'invisible' : [('prop_id_type', 'in', ['TaxAtSourceIdentificationType'] )]}"/>
+
+							<field name="report_id"
+								   attrs="{'invisible' : [('prop_id_type', 'in', ['TaxAtSourceIdentificationType'] )]}"/>
+
+						</group>
+
+						<div
+								attrs="{'invisible': ['|', ('prop_id_type', 'not in', ['TaxAtSourceIdentificationType'] ), ('TaxAtSourceQuittanceWithoutCompletion', '=', False)]}">
+							<field name="TaxAtSourceQuittanceWithoutCompletion" invisible="1"/>
+							<group colspan="4" col="4">
+								<separator string="Tax At Source Quittance Without Completion" colspan="4"/>
+								<group colspan="2" col="2">
+        							<separator string="Total Month" colspan="2"/>
+									<field name="TotalMonth_CurrentMonth" />
+									<field name="TotalMonth_TotalTaxableEarning"/>
+									<field name="TotalMonth_TotalTaxAtSource"/>
+									<field name="TotalMonth_TotalCommission" />
+								</group>
+    							<group colspan="2" col="2">
+        							<separator string="Total Year" colspan="2"/>
+									<field name="TotalYear_Period_from" />
+									<field name="TotalYear_Period_until" />
+									<field name="TotalYear_TotalTaxableEarning" />
+									<field name="TotalYear_TotalTaxAtSource" />
+									<field name="TotalYear_TotalCommission" />
+								</group>
+								<group  colspan="4" attrs="{'invisible': [('len_transmitter_get_status_correction_month_ids', '=', 0)]}">
+									<separator string="Correction Months" colspan="4"/>
+									<field name="transmitter_get_status_correction_month_ids" nolabel="1" colspan="4"/>
+									<field name="len_transmitter_get_status_correction_month_ids" invisible="1"/>
+								</group>
+							</group>
+						</div>
+
+						<div name="group_TaxAtSourceIdentificationType"
+							 attrs="{'invisible': ['|', ('prop_id_type', 'not in', ['TaxAtSourceIdentificationType'] ), ('TaxAtSourceQuittanceWithoutCompletion', '=', True)]}">
+							<group>
+								<separator string="Tax At Source Identification" colspan="4"/>
+								<field name="NumberOf_TaxAtSourceSalary_Tags" colspan="2"/>
+							</group>
+							<field name="transmitter_get_status_person_ids"/>
+                            <separator string="Warning-Notifications" colspan="4"/>
+							<field name="warning_notification_ids"/>
+                            <separator string="Info-Notifications" colspan="4"/>
+							<field name="info_notification_ids"/>
+						</div>
+						<field name="notifications_ids" colspan="4" nolabel="1"
+							attrs="{'invisible': ['|', ('prop_id_type', 'in', ['TaxAtSourceIdentificationType'] ), ('len_notifications_ids', '=', 0)]}" />
+						<field name="len_notifications_ids" invisible="1" />
+					</sheet>
+
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

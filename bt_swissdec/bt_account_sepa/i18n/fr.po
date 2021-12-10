@@ -1,0 +1,166 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bt_account_sepa
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-26 13:29+0000\n"
+"PO-Revision-Date: 2020-10-26 13:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields,help:bt_account_sepa.field_account_batch_payment__debtor_account_type
+msgid ""
+"Can be used to control the debit advice. The following options are available:\n"
+"• NOA No Advice\n"
+"• SIA Single Advice\n"
+"• CND Collective Advice No Details\n"
+"• CWD Collective Advice With Details\n"
+"If used, then 'Code' must not be present"
+msgstr ""
+"Peut être utilisé pour contrôler l'avis de débit. Les options suivantes peuvent être sélectionnées:\n"
+"• NOA No Advice\n"
+"• SIA Single Advice\n"
+"• CND Collective Advice No Details\n"
+"• CWD Collective Advice With Details\n"
+"Si utilisé, 'Code' ne doit pas être présent."
+
+#. module: bt_account_sepa
+#: model:ir.model.fields,help:bt_account_sepa.field_account_journal__debtor_account_type
+msgid ""
+"Can be used to control the debit advice. The following options are available:\n"
+"• NOA No Advice\n"
+"• SIA Single Advice\n"
+"• CND Collective Advice No Details\n"
+"• CWD Collective Advice With Details\n"
+"If used, then 'Code' must not be present"
+msgstr ""
+"Peut être utilisé pour contrôler l'avis de débit. Les options suivantes peuvent être sélectionnées:\n"
+"• NOA No Advice\n"
+"• SIA Single Advice\n"
+"• CND Collective Advice No Details\n"
+"• CWD Collective Advice With Details\n"
+"Si utilisé, 'Code' ne doit pas être présent."
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_payment__l10n_ch_payment_type__8
+msgid "Bank cheque/Postcash domestic and foreign"
+msgstr "Chèque bancaire/postcash national et étranger"
+
+#. module: bt_account_sepa
+#: model:ir.model,name:bt_account_sepa.model_account_batch_payment
+msgid "Batch Payment"
+msgstr "Paiement en groupe"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_batch_payment__debtor_account_type__cnd
+msgid "Collective Advice No Details"
+msgstr "Collective Advice No Details"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_journal__debtor_account_type__cnd
+msgid "Collective Advice No Details"
+msgstr "Collective Advice No Details"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_batch_payment__debtor_account_type__cwd
+msgid "Collective Advice With Details"
+msgstr "Collective Advice With Details"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_journal__debtor_account_type__cwd
+msgid "Collective Advice With Details"
+msgstr "Collective Advice With Details"
+
+#. module: bt_account_sepa
+#: model_terms:ir.ui.view,arch_db:bt_account_sepa.view_account_journal_form_bt
+msgid "Debit Advice Control"
+msgstr "Contrôle des avis de débit"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields,field_description:bt_account_sepa.field_account_batch_payment__debtor_account_type
+msgid "Debtor Account Type"
+msgstr "Type de compte du débiteur"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields,field_description:bt_account_sepa.field_account_journal__debtor_account_type
+msgid "Debtor Account Type"
+msgstr "Type de compte du débiteur"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_payment__l10n_ch_payment_type__4
+msgid "Domestic - Foreign currency"
+msgstr "National - Devise étrangère"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_payment__l10n_ch_payment_type__3
+msgid "Domestic - IBAN/postal account and IID/BIC"
+msgstr "National - IBAN/compte postal et IID/BIC"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_payment__l10n_ch_payment_type__2_1
+msgid "Domestic - IS 1-stage"
+msgstr "National - IS 1-stage"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_payment__l10n_ch_payment_type__2_2
+msgid "Domestic - IS 2-stage"
+msgstr "National - IS 2-stage"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_payment__l10n_ch_payment_type__1
+msgid "Domestic - ISR"
+msgstr "National - ISR"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_payment__l10n_ch_payment_type__5
+msgid "Foreign SEPA"
+msgstr "SEPA étranger"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_payment__l10n_ch_payment_type__6
+msgid "Foreign"
+msgstr "Étranger"
+
+#. module: bt_account_sepa
+#: model:ir.model,name:bt_account_sepa.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields,field_description:bt_account_sepa.field_account_payment__l10n_ch_payment_type
+msgid "L10N Ch Payment Type"
+msgstr "L10N Ch Payment Type"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_batch_payment__debtor_account_type__noa
+msgid "No Advice"
+msgstr "No Advice"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_journal__debtor_account_type__noa
+msgid "No Advice"
+msgstr "No Advice"
+
+#. module: bt_account_sepa
+#: model:ir.model,name:bt_account_sepa.model_account_payment
+msgid "Payments"
+msgstr "Paiements"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_batch_payment__debtor_account_type__sia
+msgid "Single Advice"
+msgstr "Single Advice"
+
+#. module: bt_account_sepa
+#: model:ir.model.fields.selection,name:bt_account_sepa.selection__account_journal__debtor_account_type__sia
+msgid "Single Advice"
+msgstr "Single Advice"
+

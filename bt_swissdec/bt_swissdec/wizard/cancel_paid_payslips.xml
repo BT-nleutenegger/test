@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="bt_swissdec_cancel_paid_payslips_wizard_form_view" model="ir.ui.view">
+			<field name="name">bt_swissdec_cancel_paid_payslips_wizard_form_view</field>
+			<field name="model">bt_swissdec.cancel_paid_payslips</field>
+			<field name="arch" type="xml">
+				<form string="Cancel paid registers/payslips">
+					<separator string="Cancel paid registers/payslips or delete any registers/payslips" colspan="4" />
+					<separator string="If this payments are in a consolidated booking, the consolidated line will be deleted and the client need to consolidate again." colspan="4"  style="font-size: 100%;"/>
+                    <field name="company_id"/>
+                    <newline/>
+					<field name="cancel_or_delete" widget="radio"/>
+                    <group attrs="{'invisible':[('cancel_or_delete','!=','cancel')]}">
+	                    <field name="registers_or_payslips" widget="radio"/>
+	                    <newline/>
+	                    <field name="register_ids" attrs="{'invisible':[('registers_or_payslips', '!=', 'registers')]}" domain="[('company_id', '=', company_id), ('state', '=', 'done')]"/>
+	                    <newline/>
+	                    <field name="payslip_ids" attrs="{'invisible':[('registers_or_payslips', '!=', 'payslips')]}" domain="[('company_id', '=', company_id), ('state', '=', 'done'), ('transmitted', '=', False)]"/>
+	                </group>
+	                <group attrs="{'invisible':[('cancel_or_delete','!=','delete')]}">
+	                    <field name="delete_registers_or_payslips" widget="radio"/>
+	                    <newline/>
+	                    <field name="register_ids_to_delete" attrs="{'invisible':[('delete_registers_or_payslips', '!=', 'registers')]}" domain="[('company_id', '=', company_id)]"/>
+	                    <newline/>
+	                    <field name="payslip_ids_to_delete" attrs="{'invisible':[('delete_registers_or_payslips', '!=', 'payslips')]}" domain="[('company_id', '=', company_id), ('transmitted', '=', False)]"/>
+	                </group>
+	                <!--footer>
+		                <group>
+		                	<button icon="gtk-cancel" special="cancel" string="Cancel"/>
+	                        <button icon="STOCK_UNDELETE" string="Cancel/Delete" name="cancel_delete_payslips" type="object" confirm="This will cancel all paid payslips/registers or delete them. Are you really sure?"/>
+	                    </group>
+	                </footer-->
+					<footer>
+                        <button string="Cancel/Delete" name="cancel_delete_payslips" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+		
+	    <record id="bt_swissdec_cancel_paid_payslips_wizard" model="ir.actions.act_window">
+			<field name="name">Cancel paid payslips</field>
+			<field name="res_model">bt_swissdec.cancel_paid_payslips</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="bt_swissdec_cancel_paid_payslips_wizard_form_view" />
+			<field name="target">new</field>
+		</record>
+                    
+	</data>
+</openerp>

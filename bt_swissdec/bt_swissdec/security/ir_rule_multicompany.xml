@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_rule_company_contribution_multi_company" model="ir.rule">
+        <field name="name">Company Contribution: Only allowed companies</field>
+        <field name="model_id" ref="model_company_contribution"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_company_contribution_line_multi_company" model="ir.rule">
+        <field name="name">Company Contribution Line: Only allowed companies</field>
+        <field name="model_id" ref="model_company_contribution_line"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_hr_allounce_deduction_categoty_multi_company" model="ir.rule">
+        <field name="name">Allowance Deduction Categories: Only allowed companies</field>
+        <field name="model_id" ref="model_hr_allounce_deduction_categoty"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_hr_adc_history_multi_company" model="ir.rule">
+        <field name="name">Allowance Deduction Category History: Only allowed companies</field>
+        <field name="model_id" ref="model_hr_adc_history"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_hr_qst_multi_company" model="ir.rule">
+        <field name="name">Quellensteuer: Only allowed companies</field>
+        <field name="model_id" ref="model_hr_qst"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_hr_qst_line_multi_company" model="ir.rule">
+        <field name="name">Quellensteuer Detail: Only allowed companies</field>
+        <field name="model_id" ref="model_hr_qst_line"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_res_company_year_multi_company" model="ir.rule">
+        <field name="name">Company Year: Only allowed companies</field>
+        <field name="model_id" ref="model_res_company_year"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_hr_employee_year_multi_company" model="ir.rule">
+        <field name="name">Employee Year: Only allowed companies</field>
+        <field name="model_id" ref="model_hr_employee_year"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_hr_payslip_grosswage_line_multi_company" model="ir.rule">
+        <field name="name">Contract Gross Wage: Only allowed companies</field>
+        <field name="model_id" ref="model_hr_payslip_grosswage_line"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_gui_tax_at_source_transmission_multi_company" model="ir.rule">
+        <field name="name">QST GUI: Only allowed companies</field>
+        <field name="model_id" ref="model_gui_tax_at_source_transmission"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_hr_payroll_register_multi_company" model="ir.rule">
+        <field name="name">Payroll Register: Only allowed companies</field>
+        <field name="model_id" ref="model_hr_payroll_register"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_ahv_mutation_table_multi_company" model="ir.rule">
+        <field name="name">AHV Mutation Table: Only allowed companies</field>
+        <field name="model_id" ref="model_ahv_mutation_table"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="ir_rule_bt_swissdec_gui_ahv_mutations_multi_company" model="ir.rule">
+        <field name="name">AHV Mutations: Only allowed companies</field>
+        <field name="model_id" ref="model_bt_swissdec_gui_ahv_mutations"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="account_move_line_salary_multi_company" model="ir.rule">
+        <field name="name">Consolidated bookings: Only allowed companies</field>
+        <field name="model_id" ref="model_account_move_line_salary"/>
+        <field eval="True" name="global"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

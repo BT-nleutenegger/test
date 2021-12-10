@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Create Partner for Second Company -->
+        <record id="second_partner" model="res.partner" context="{'default_is_company': True}">
+            <field name="name">PROCESS AG</field>
+            <field name="company_id" eval="None"/>
+            <field name="is_company" eval="True"/>
+            <field name="street"></field>
+            <field name="city"></field>
+            <field name="zip"></field>
+            <field name="phone"></field>
+            <field name="email">info@yourcompany.com</field>
+            <field name="website">www.yourcompany.com</field>
+            <field name="image_1920" type="base64" file="base/static/img/res_company_logo.png"/>
+        </record>
+
+        <!-- Create Second Company -->
+        <record id="second_company" model="res.company">
+            <field name="name">PROCESS AG</field>
+            <field name="partner_id" ref="second_partner"/>
+            <field name="currency_id" ref="base.CHF"/>
+            <field name="salary_contact_name">Process Franz</field>
+            <field name="salary_contact_email">franz@process.ch</field>
+            <field name="salary_contact_phone">0313777777</field>
+            <field name="street">Zelgstrasse 12</field>
+            <field name="zip">3027</field>
+            <field name="city">Bern</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="currency_id" ref="base.CHF"/>
+            <field eval="0" name="default_nettolohnausgleich"/>
+            <field eval="0" name="default_zusatzmonatslohn"/>
+            <field eval="1" name="default_booking_salary_payment"/>
+            <field eval="1" name="company_used_for_bt_swissdec"/>
+        </record>
+
+        <record id="second_partner" model="res.partner">
+            <field name="company_id" ref="second_company"/>
+        </record>
+    </data>
+    <data>
+        <function model="account.chart.template" name="try_loading">
+            <value eval="[ref('l10n_ch.l10nch_chart_template')]"/>
+            <value model="res.company" eval="obj().browse([ref('second_company')])"/>
+        </function>
+
+        <!-- Create id for Company Year in ir.model.data -->
+        <!-- Addressees -->
+        <record id="address_ahv_qst" model="res.partner">
+            <field name="name">AHV Ausgleichskasse Name QST</field>
+            <field name="street">AHV Adresse</field>
+            <field name="active" eval="True"/>
+            <field name="city">Naters</field>
+            <field name="zip">3904</field>
+            <field model="res.country" name="country_id" search="[('code','=','CH')]"/>
+            <field name="company_id" ref="second_company" />
+            <field model="res.country.state" name="state_id" search="[('code','=','VS'), ('country_id.code','=','CH')]"/>
+        </record>
+
+        <!-- Update Company Year -->
+
+
+        <record id="year2013_qst" model="res.company.year">
+            <field name="name">2013</field>
+            <field name="company_name">PROCESS AG</field>
+            <field name="company_id" ref="second_company" />
+            <field name="company_address_id" ref="second_partner" />
+            <field name="weeklyhours_or_lessons_default">has_weeklyhours</field>
+            <field name="weeklyhours_or_lessons">has_weeklyhoursandlessons</field>
+            <field name="uid_ehra">CH-100.3.032.254-9</field>
+            <field name="uid_bfs">CHE-999.999.996</field>
+            <field name="beginn_ahv">18</field>
+            <field name="ahv_freigrenze_monat">1400.00</field>
+            <field name="ahv_alv_untergrenze_jahr">2300.00</field>
+            <field name="beginn_rentenalter_m">65</field>
+            <field name="beginn_rentenalter_f">64</field>
+            <!-- AHV -->
+            <field name="ahv_arbeitnehmer_beitrag">5.15</field>
+            <field name="ahv_mitgliednummer">100-9976.9</field>
+            <field name="nummer_ausgleichskasse">003.000</field>
+            <field name="address_ahv_id" ref="address_ahv_qst"/>
+            <!-- ALV -->
+            <field name="alv_hoechstlohn_monat">10500.00</field>
+            <field name="alvz_hoechstlohn_monat">26250.00</field>
+            <field name="alv_arbeitnehmer_beitrag">1.10</field>
+            <field name="alvz_arbeitnehmer_beitrag">0.50</field>
+            <!-- UVG -->
+            <field name="uvg_hoechstlohn_monat">10500</field>
+            <!-- QST -->
+            <field name="use_qst_transmission">1</field>
+            <field name="workdays_ch_per_default_20">1</field>
+            <!-- LOHNVEREINBARUNG -->
+            <field name="pay_agreement">individualContract</field>
+            <!-- LOHNAUSWEIS -->
+            <field name="ma_beteiligung">1</field>
+            <field name="ma_beteiligung_yes_and_reason_is_selected">OK</field>
+            <field name="nicht_bewertbare_optionen">1</field>
+            <field name="gesperrte_ma_optionen">1</field>
+            <!-- DIVERSES -->
+            <field name="yearlyholidays_company">25</field>
+        </record>
+
+
+        <record id="year2014_qst" model="res.company.year">
+            <field name="name">2014</field>
+            <field name="company_name">PROCESS AG</field>
+            <field name="company_id" ref="second_company" />
+            <field name="company_address_id" ref="second_partner" />
+            <field name="weeklyhours_or_lessons_default">has_weeklyhours</field>
+            <field name="weeklyhours_or_lessons">has_weeklyhoursandlessons</field>
+            <field name="uid_ehra">CH-100.3.032.254-9</field>
+            <field name="uid_bfs">CHE-999.999.996</field>
+            <field name="beginn_ahv">18</field>
+            <field name="ahv_freigrenze_monat">1400.00</field>
+            <field name="ahv_alv_untergrenze_jahr">2300.00</field>
+            <field name="beginn_rentenalter_m">65</field>
+            <field name="beginn_rentenalter_f">64</field>
+            <!-- AHV -->
+            <field name="ahv_arbeitnehmer_beitrag">5.15</field>
+            <field name="ahv_mitgliednummer">100-9976.9</field>
+            <field name="nummer_ausgleichskasse">003.000</field>
+            <field name="address_ahv_id" ref="address_ahv_qst"/>
+            <!-- ALV -->
+            <field name="alv_hoechstlohn_monat">10500.00</field>
+            <field name="alvz_hoechstlohn_monat">26250.00</field>
+            <field name="alv_arbeitnehmer_beitrag">1.10</field>
+            <field name="alvz_arbeitnehmer_beitrag">0.50</field>
+            <!-- UVG -->
+            <field name="uvg_hoechstlohn_monat">10500.00</field>
+            <!-- QST -->
+            <field name="use_qst_transmission">1</field>
+            <field name="workdays_ch_per_default_20">1</field>
+            <!-- LOHNVEREINBARUNG -->
+            <field name="pay_agreement">individualContract</field>
+            <!-- LOHNAUSWEIS -->
+            <field eval="1" name="ma_beteiligung"/>
+            <field name="ma_beteiligung_yes_and_reason_is_selected">OK</field>
+            <field eval="1" name="nicht_bewertbare_optionen"/>
+            <field eval="1" name="gesperrte_ma_optionen"/>
+            <!-- DIVERSES -->
+            <field name="yearlyholidays_company">25</field>
+        </record>
+
+        <record model="res.company" id="second_company">
+            <field name="year_ids" eval="[(4, ref('year2013_qst')),(4, ref('year2014_qst'))]"/>
+        </record>
+
+        <!-- BUR -->
+        <record id="res_company_bur_lu_2013_qst" model="res.company.bur">
+            <field name="name">Luzern</field>
+            <field name="bur_ree_number">12345677</field>
+            <field name="weeklyhours_bur">42.00</field>
+            <field name="weeklylessons_bur">21</field>
+            <field name="description">Verkauf</field>
+            <field name="street">Bahnhofstrasse 1</field>
+            <field name="zip">6002</field>
+            <field name="city">Luzern</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="municipality">1061</field>
+            <field name="year_id" ref="year2013_qst"/>
+        </record>
+        <record id="res_company_bur_ag_2013_qst" model="res.company.bur">
+            <field name="name">Aarau</field>
+            <field name="bur_ree_number">58765431</field>
+            <field name="weeklyhours_bur">40.00</field>
+            <field name="weeklylessons_bur">20</field>
+            <field name="description">Werkhof / Büro</field>
+            <field name="street">Neumattstrasse 45</field>
+            <field name="zip">5000</field>
+            <field name="city">Aarau</field>
+            <field name="state_id" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="municipality">4001</field>
+            <field name="year_id" ref="year2013_qst"/>
+        </record>
+        <record id="res_company_bur_be_2013_qst" model="res.company.bur">
+            <field name="name">Bern</field>
+            <field name="bur_ree_number">23456788</field>
+            <field name="weeklyhours_bur">40.00</field>
+            <field name="weeklylessons_bur">20</field>
+            <field name="description">Hauptsitz</field>
+            <field name="street">Zelgstrasse 12</field>
+            <field name="zip">3027</field>
+            <field name="city">Bern</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="year_id" ref="year2013_qst"/>
+        </record>
+
+        <record id="res_company_bur_lu_2014_qst" model="res.company.bur">
+            <field name="name">Luzern</field>
+            <field name="bur_ree_number">12345677</field>
+            <field name="city">Luzern</field>
+            <field name="description">Verkauf</field>
+            <field name="zip">6002</field>
+            <field name="weeklyhours_bur">42.00</field>
+            <field name="year_id" ref="year2014_qst"/>
+            <field name="street">Bahnhofstrasse 1</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="municipality">1061</field>
+            <field name="sequence">1</field>
+            <field name="weeklyhours_bur">42.00</field>
+            <field name="weeklylessons_bur">21</field>
+        </record>
+
+        <record id="res_company_bur_ag_2014_qst" model="res.company.bur">
+            <field name="name">Aarau</field>
+            <field name="bur_ree_number">58765431</field>
+            <field name="city">Aarau</field>
+            <field name="description">Werkhof / Büro</field>
+            <field name="zip">5000</field>
+            <field name="weeklyhours_bur">40.00</field>
+            <field name="year_id" ref="year2014_qst"/>
+            <field name="street">Neumattstrasse 45</field>
+            <field name="state_id" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="weeklylessons_bur">20</field>
+            <field name="municipality">4001</field>
+            <field name="sequence">2</field>
+            <field name="weeklylessons_bur">20</field>
+        </record>
+
+        <record id="res_company_bur_be_2014_qst" model="res.company.bur">
+            <field name="name">Bern</field>
+            <field name="bur_ree_number">23456788</field>
+            <field name="city">Bern</field>
+            <field name="description">Hauptsitz</field>
+            <field name="zip">3027</field>
+            <field name="weeklyhours_bur">40.00</field>
+            <field name="year_id" ref="year2014_qst"/>
+            <field name="street">Zelgstrasse 12</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="country_id" search="[('code','=','CH')]" />
+            <field name="municipality">351</field>
+            <field name="weeklylessons_bur">20</field>
+            <field name="sequence">3</field>
+            <field name="weeklyhours_bur">40.00</field>
+            <field name="weeklylessons_bur">20</field>
+        </record>
+
+        <!-- QST -->
+        <record id="res_company_qst_0_2013" model="res.company.qst">
+            <field name="country_id" ref="base.ch"/>
+            <field name="year_id" ref="year2013_qst"/>
+            <field eval="4.0" name="qst_kommission"/>
+            <field name="kundennummer_qst">765680</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="qst_compensation">monthly</field>
+        </record>
+        <record id="res_company_qst_1_2013" model="res.company.qst">
+            <field name="country_id" ref="base.ch"/>
+            <field name="year_id" ref="year2013_qst"/>
+            <field eval="4.0" name="qst_kommission"/>
+            <field name="kundennummer_qst">334600</field>
+            <field name="state_id" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="qst_compensation">monthly</field>
+        </record>
+        <record id="res_company_qst_2_2013" model="res.company.qst">
+            <field eval="23.0" name="qst_vr_honorar"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="year_id" ref="year2013_qst"/>
+            <field eval="23.0" name="qst_geldwerte_leistungen"/>
+            <field eval="4.0" name="qst_kommission"/>
+            <field name="kundennummer_qst">200258</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_compensation">monthly</field>
+        </record>
+
+        <record id="res_company_qst_0_2014" model="res.company.qst">
+            <field name="country_id" ref="base.ch"/>
+            <field name="year_id" ref="year2014_qst"/>
+            <field eval="4.0" name="qst_kommission"/>
+            <field name="kundennummer_qst">765680</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="qst_compensation">monthly</field>
+        </record>
+        <record id="res_company_qst_1_2014" model="res.company.qst">
+            <field name="country_id" ref="base.ch"/>
+            <field name="year_id" ref="year2014_qst"/>
+            <field eval="4.0" name="qst_kommission"/>
+            <field name="kundennummer_qst">334600</field>
+            <field name="state_id" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="qst_compensation">monthly</field>
+        </record>
+        <record id="res_company_qst_2_2014" model="res.company.qst">
+            <field eval="23.0" name="qst_vr_honorar"/>
+            <field name="country_id" ref="base.ch"/>
+            <field name="year_id" ref="year2014_qst"/>
+            <field eval="23.0" name="qst_geldwerte_leistungen"/>
+            <field eval="4.0" name="qst_kommission"/>
+            <field name="kundennummer_qst">200258</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="qst_compensation">monthly</field>
+        </record>
+
+        <!-- FAK PARTS LU -->
+        <record id="fak_lu_1_qst" model="res.company.fak.part">
+            <field name="name">0-11</field>
+            <field name="alter_von">0</field>
+            <field name="alter_bis">11</field>
+            <field name="betrag_zulage">200.00</field>
+            <field name="is_kizu" eval="True"/>
+        </record>
+        <record id="fak_lu_2_qst" model="res.company.fak.part">
+            <field name="name">12-15</field>
+            <field name="alter_von">12</field>
+            <field name="alter_bis">15</field>
+            <field name="betrag_zulage">210.00</field>
+            <field name="is_kizu" eval="True"/>
+        </record>
+        <record id="fak_lu_3_qst" model="res.company.fak.part">
+            <field name="name">16-25</field>
+            <field name="alter_von">16</field>
+            <field name="alter_bis">25</field>
+            <field name="betrag_zulage">250.00</field>
+            <field name="is_kizu" eval="False"/>
+        </record>
+
+
+        <record id="fak_lu_1b_qst" model="res.company.fak.part">
+            <field name="name">0-11</field>
+            <field name="alter_von">0</field>
+            <field name="alter_bis">11</field>
+            <field name="betrag_zulage">200.00</field>
+            <field name="is_kizu" eval="True"/>
+        </record>
+        <record id="fak_lu_2b_qst" model="res.company.fak.part">
+            <field name="name">12-15</field>
+            <field name="alter_von">12</field>
+            <field name="alter_bis">15</field>
+            <field name="betrag_zulage">210.00</field>
+            <field name="is_kizu" eval="True"/>
+        </record>
+        <record id="fak_lu_3b_qst" model="res.company.fak.part">
+            <field name="name">16-25</field>
+            <field name="alter_von">16</field>
+            <field name="alter_bis">25</field>
+            <field name="betrag_zulage">250.00</field>
+            <field name="is_kizu" eval="False"/>
+        </record>
+
+        <!-- FAK PARTS BE -->
+        <record id="fak_be_1_qst" model="res.company.fak.part">
+            <field name="name">0-15</field>
+            <field name="alter_von">0</field>
+            <field name="alter_bis">15</field>
+            <field name="betrag_zulage">230.00</field>
+            <field name="is_kizu" eval="True"/>
+        </record>
+        <record id="fak_be_2_qst" model="res.company.fak.part">
+            <field name="name">16-25</field>
+            <field name="alter_von">16</field>
+            <field name="alter_bis">25</field>
+            <field name="betrag_zulage">290.00</field>
+            <field name="is_kizu" eval="False"/>
+        </record>
+
+        <record id="fak_be_1b_qst" model="res.company.fak.part">
+            <field name="name">0-15</field>
+            <field name="alter_von">0</field>
+            <field name="alter_bis">15</field>
+            <field name="betrag_zulage">230.00</field>
+            <field name="is_kizu" eval="True"/>
+        </record>
+        <record id="fak_be_2b_qst" model="res.company.fak.part">
+            <field name="name">16-25</field>
+            <field name="alter_von">16</field>
+            <field name="alter_bis">25</field>
+            <field name="betrag_zulage">290.00</field>
+            <field name="is_kizu" eval="False"/>
+        </record>
+
+
+        <!-- FAK PARTS AG -->
+        <record id="fak_ag_1_qst" model="res.company.fak.part">
+            <field name="name">0-15</field>
+            <field name="alter_von">0</field>
+            <field name="alter_bis">15</field>
+            <field name="betrag_zulage">200.00</field>
+            <field name="is_kizu" eval="True"/>
+        </record>
+        <record id="fak_ag_2_qst" model="res.company.fak.part">
+            <field name="name">16-25</field>
+            <field name="alter_von">16</field>
+            <field name="alter_bis">25</field>
+            <field name="betrag_zulage">250.00</field>
+            <field name="is_kizu" eval="False"/>
+        </record>
+        <record id="fak_ag_1b_qst" model="res.company.fak.part">
+            <field name="name">0-15</field>
+            <field name="alter_von">0</field>
+            <field name="alter_bis">15</field>
+            <field name="betrag_zulage">200.00</field>
+            <field name="is_kizu" eval="True"/>
+        </record>
+        <record id="fak_ag_2b_qst" model="res.company.fak.part">
+            <field name="name">16-25</field>
+            <field name="alter_von">16</field>
+            <field name="alter_bis">25</field>
+            <field name="betrag_zulage">250.00</field>
+            <field name="is_kizu" eval="False"/>
+        </record>
+        <!-- FAK -->
+        <record id="res_partner_address_fak_lu_qst" model="res.partner">
+            <field name="name">FAK LU</field>
+            <field name="street">Strasse FAK LU</field>
+            <field name="active" eval="True"/>
+            <field name="city">Zürich</field>
+            <field name="zip">8000</field>
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]" />
+        </record>
+        <record id="res_partner_address_fak_be_qst" model="res.partner">
+            <field name="name">FAK BE</field>
+            <field name="street">Strasse FAK BE</field>
+            <field name="active" eval="True"/>
+            <field name="city">Bern</field>
+            <field name="zip">3000</field>
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]" />
+        </record>
+        <record id="res_partner_address_fak_ag_qst" model="res.partner">
+            <field name="name">FAK AG</field>
+            <field name="street">Strasse FAK AG</field>
+            <field name="active" eval="True"/>
+            <field name="city">Aarau</field>
+            <field name="zip">5000</field>
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','AG'), ('country_id.code','=','CH')]" />
+        </record>
+        <!-- FAK -->
+        <record id="res_company_fak_lu_2013_qst" model="res.company.fak">
+            <field name="mitgliednummer">100-9976.70</field>
+            <field name="nummer">003</field>
+            <field name="fak_beitrag_ag">0.00</field>
+            <field name="fak_beitrag_an">0.00</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="year_id" ref="year2013_qst"/>
+            <field name="fak_part_ids" eval="[(4, ref('fak_lu_1_qst')),(4, ref('fak_lu_2_qst')),(4, ref('fak_lu_3_qst'))]"/>
+            <field name="address_fak_id" ref="res_partner_address_fak_lu_qst" />
+        </record>
+        <record id="res_company_fak_be_2013_qst" model="res.company.fak">
+            <field name="mitgliednummer">100-2136.90</field>
+            <field name="nummer">002</field>
+            <field name="fak_beitrag_ag">0.00</field>
+            <field name="fak_beitrag_an">0.00</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="year_id" ref="year2013_qst"/>
+            <field name="fak_part_ids" eval="[(4, ref('fak_be_1_qst')),(4, ref('fak_be_2_qst'))]"/>
+                        <field name="address_fak_id" ref="res_partner_address_fak_be_qst" />
+        </record>
+        <record id="res_company_fak_ag_2013_qst" model="res.company.fak">
+            <field name="mitgliednummer">100-5467.80</field>
+            <field name="nummer">019</field>
+            <field name="fak_beitrag_ag">0.00</field>
+            <field name="fak_beitrag_an">0.00</field>
+            <field name="state_id" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="year_id" ref="year2013_qst"/>
+            <field name="fak_part_ids" eval="[(4, ref('fak_ag_1_qst')),(4, ref('fak_ag_2_qst'))]"/>
+            <field name="address_fak_id" ref="res_partner_address_fak_ag_qst" />
+        </record>
+
+        <record id="res_company_fak_lu_2014_qst" model="res.company.fak">
+            <field name="mitgliednummer">100-9976.70</field>
+            <field name="nummer">003</field>
+            <field name="fak_beitrag_ag">0.00</field>
+            <field name="fak_beitrag_an">0.00</field>
+            <field name="state_id" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="year_id" ref="year2014_qst"/>
+            <field name="fak_part_ids" eval="[(4, ref('fak_lu_1b_qst')),(4, ref('fak_lu_2b_qst')),(4, ref('fak_lu_3b_qst'))]"/>
+            <field name="address_fak_id" ref="res_partner_address_fak_lu_qst" />
+        </record>
+        <record id="res_company_fak_be_2014_qst" model="res.company.fak">
+            <field name="mitgliednummer">100-2136.90</field>
+            <field name="nummer">002</field>
+            <field name="fak_beitrag_ag">0.00</field>
+            <field name="fak_beitrag_an">0.00</field>
+            <field name="state_id" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="year_id" ref="year2014_qst"/>
+            <field name="fak_part_ids" eval="[(4, ref('fak_be_1b_qst')),(4, ref('fak_be_2b_qst'))]"/>
+            <field name="address_fak_id" ref="res_partner_address_fak_be_qst" />
+        </record>
+        <record id="res_company_fak_ag_2014_qst" model="res.company.fak">
+            <field name="mitgliednummer">100-5467.80</field>
+            <field name="nummer">019</field>
+            <field name="fak_beitrag_ag">0.00</field>
+            <field name="fak_beitrag_an">0.00</field>
+            <field name="state_id" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="year_id" ref="year2014_qst"/>
+            <field name="fak_part_ids" eval="[(4, ref('fak_ag_1b_qst')),(4, ref('fak_ag_2b_qst'))]"/>
+            <field name="address_fak_id" ref="res_partner_address_fak_ag_qst" />
+        </record>
+
+        <!-- UVG PARTS -->
+        <record id="res_company_uvg_part_a_2013_qst" model="res.company.uvg.part">
+            <field name="name">A</field>
+            <field name="buv_mf">0.0000</field>
+            <field name="nbuv_mf">1.4600</field>
+        </record>
+        <record id="res_company_uvg_part_b_2013_qst" model="res.company.uvg.part">
+            <field name="name">B</field>
+            <field name="buv_mf">0.0000</field>
+            <field name="nbuv_mf">1.6200</field>
+        </record>
+
+        <record id="res_company_uvg_part_a_2014_qst" model="res.company.uvg.part">
+            <field name="name">A</field>
+            <field name="buv_mf">0.0000</field>
+            <field name="nbuv_mf">1.4600</field>
+        </record>
+        <record id="res_company_uvg_part_b_2014_qst" model="res.company.uvg.part">
+            <field name="name">B</field>
+            <field name="buv_mf">0.0000</field>
+            <field name="nbuv_mf">1.6200</field>
+        </record>
+
+        <!-- UVG -->
+        <record id="res_company_uvg_2013_qst" model="res.company.uvg">
+            <field name="name">UVG Backwork-Versicherungen</field>
+            <field name="versicherer_nr">S1000</field>
+            <field name="kundennr">6476.2</field>
+            <field name="vertragsnr">237</field>
+            <field name="uvg_part_ids" eval="[(4, ref('res_company_uvg_part_a_2013_qst')),(4, ref('res_company_uvg_part_b_2013_qst'))]"/>
+            <field name="year_id" ref="year2013_qst"/>
+        </record>
+
+        <record id="res_company_uvg_2014_qst" model="res.company.uvg">
+            <field name="name">UVG Backwork-Versicherungen</field>
+            <field name="versicherer_nr">S1000</field>
+            <field name="kundennr">6476.2</field>
+            <field name="vertragsnr">237</field>
+            <field name="uvg_part_ids" eval="[(4, ref('res_company_uvg_part_a_2014_qst')),(4, ref('res_company_uvg_part_b_2014_qst'))]"/>
+            <field name="year_id" ref="year2014_qst"/>
+        </record>
+
+
+
+        <!-- PERSONENGRUPPE UVGZ -->
+        <record id="res_company_group_uvgz_m_2013_qst" model="res.company.group.uvgz">
+            <field name="name">Manager</field>
+            <field name="code">M</field>
+            <field name="year_id" ref="year2013_qst"/>
+        </record>
+        <!-- PERSONENGRUPPE KTG -->
+        <record id="res_company_group_ktg_m_2013_qst" model="res.company.group.ktg">
+            <field name="name">Manager</field>
+            <field name="code">M</field>
+            <field name="year_id" ref="year2013_qst"/>
+        </record>
+
+
+        <record id="res_company_group_uvgz_m_2014_qst" model="res.company.group.uvgz">
+            <field name="name">Manager</field>
+            <field name="code">M</field>
+            <field name="year_id" ref="year2014_qst"/>
+        </record>
+        <!-- PERSONENGRUPPE KTG -->
+        <record id="res_company_group_ktg_m_2014_qst" model="res.company.group.ktg">
+            <field name="name">Manager</field>
+            <field name="code">M</field>
+            <field name="year_id" ref="year2014_qst"/>
+        </record>
+
+        <!-- BUCHUNGSKREIS BVG -->
+        <record id="res_company_group_bvg_b_2013_qst" model="res.company.group.bvg">
+            <field name="name">Filiale Bern</field>
+            <field name="year_id" ref="year2013_qst"/>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_group_bvg_a_2013_qst" model="res.company.group.bvg">
+            <field name="name">Filiale Aarau</field>
+            <field name="year_id" ref="year2013_qst"/>
+            <field name="is_default" eval="True"/>
+        </record>
+
+        <record id="res_company_group_bvg_b_2014_qst" model="res.company.group.bvg">
+            <field name="name">Filiale Bern</field>
+            <field name="year_id" ref="year2014_qst"/>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_group_bvg_a_2014_qst" model="res.company.group.bvg">
+            <field name="name">Filiale Aarau</field>
+            <field name="year_id" ref="year2014_qst"/>
+            <field name="is_default" eval="True"/>
+        </record>
+
+
+        <!-- UVGZ CODES -->
+        <record id="res_company_uvgz_code_0_2013_qst" model="res.company.uvgz.code">
+            <field name="name">M0</field>
+            <field name="beschreibung">10</field>
+            <field name="uvgz_lohn_ab">0.00</field>
+            <field name="uvgz_hoechstlohn_bis">0.00</field>
+            <field name="uvgz_beitrag_m">0.0000</field>
+            <field name="uvgz_beitrag_f">0.0000</field>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_uvgz_code_1_2013_qst" model="res.company.uvgz.code">
+            <field name="name">M1</field>
+            <field name="beschreibung">11</field>
+            <field name="uvgz_lohn_ab">0.00</field>
+            <field name="uvgz_hoechstlohn_bis">126000.00</field>
+            <field name="uvgz_beitrag_m">0.2010</field>
+            <field name="uvgz_beitrag_f">0.2010</field>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_uvgz_code_2_2013_qst" model="res.company.uvgz.code">
+            <field name="name">M2</field>
+            <field name="beschreibung">12</field>
+            <field name="uvgz_lohn_ab">126000.00</field>
+            <field name="uvgz_hoechstlohn_bis">300000.00</field>
+            <field name="uvgz_beitrag_m">0.6340</field>
+            <field name="uvgz_beitrag_f">0.6340</field>
+            <field name="is_default" eval="False"/>
+        </record>
+
+
+        <record id="res_company_uvgz_code_0_2014_qst" model="res.company.uvgz.code">
+            <field name="name">M0</field>
+            <field name="beschreibung">10</field>
+            <field name="uvgz_lohn_ab">0.00</field>
+            <field name="uvgz_hoechstlohn_bis">0.00</field>
+            <field name="uvgz_beitrag_m">0.0000</field>
+            <field name="uvgz_beitrag_f">0.0000</field>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_uvgz_code_1_2014_qst" model="res.company.uvgz.code">
+            <field name="name">M1</field>
+            <field name="beschreibung">11</field>
+            <field name="uvgz_lohn_ab">0.00</field>
+            <field name="uvgz_hoechstlohn_bis">126000.00</field>
+            <field name="uvgz_beitrag_m">0.2010</field>
+            <field name="uvgz_beitrag_f">0.2010</field>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_uvgz_code_2_2014_qst" model="res.company.uvgz.code">
+            <field name="name">M2</field>
+            <field name="beschreibung">12</field>
+            <field name="uvgz_lohn_ab">126000.00</field>
+            <field name="uvgz_hoechstlohn_bis">300000.00</field>
+            <field name="uvgz_beitrag_m">0.6340</field>
+            <field name="uvgz_beitrag_f">0.6340</field>
+            <field name="is_default" eval="False"/>
+        </record>
+
+        <!-- UVGZ -->
+        <record id="res_partner_address_uvzg_qst" model="res.partner">
+            <field name="name">UVGZ Backwork-Versicherungen</field>
+            <field name="street">Strasse UVGZ</field>
+            <field name="active" eval="True"/>
+            <field name="city">Sion</field>
+            <field name="name">UVGZ 1 Name</field>
+            <field name="zip">1950</field>
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','VS'), ('country_id.code','=','CH')]" />
+        </record>
+        <record id="res_company_uvgz_1_2013_qst" model="res.company.uvgz">
+            <field name="group" ref="res_company_group_uvgz_m_2013_qst"/>
+            <field name="address_uvgz_id" ref="res_partner_address_uvzg_qst" />
+            <field name="vertragsnr">4566-4</field>
+            <field name="kundennummer">7651-873.1</field>
+            <field name="vers_nr">S1000</field>
+            <field name="uvgz_code_ids" eval="[(4, ref('res_company_uvgz_code_0_2013_qst')),(4, ref('res_company_uvgz_code_1_2013_qst')),(4, ref('res_company_uvgz_code_2_2013_qst'))]"/>
+            <field name="year_id" ref="year2013_qst"/>
+            <field eval="1" name="at_least_two_entries_uvgz_code_ids_ok"/>
+        </record>
+
+        <record id="res_company_uvgz_1_2014_qst" model="res.company.uvgz">
+            <field name="group" ref="res_company_group_uvgz_m_2014_qst"/>
+            <field name="address_uvgz_id" ref="res_partner_address_uvzg_qst" />
+            <field name="vertragsnr">4566-4</field>
+            <field name="kundennummer">7651-873.1</field>
+            <field name="vers_nr">S1000</field>
+            <field name="uvgz_code_ids" eval="[(4, ref('res_company_uvgz_code_0_2014_qst')),(4, ref('res_company_uvgz_code_1_2014_qst')),(4, ref('res_company_uvgz_code_2_2014_qst'))]"/>
+            <field name="year_id" ref="year2014_qst"/>
+            <field eval="1" name="at_least_two_entries_uvgz_code_ids_ok"/>
+        </record>
+
+        <!-- KTG CODES -->
+        <record id="res_company_ktg_code_0_2013_qst" model="res.company.ktg.code">
+            <field name="name">M0</field>
+            <field name="beschreibung">10</field>
+            <field name="ktg_lohn_ab">0.00</field>
+            <field name="ktg_hoechstlohn_bis">0.00</field>
+            <field name="ktg_beitrag_m">0.0000</field>
+            <field name="ktg_beitrag_f">0.0000</field>
+            <field name="ktg_beitrag_m_employer">0.0000</field>
+            <field name="ktg_beitrag_f_employer">0.0000</field>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_ktg_code_1_2013_qst" model="res.company.ktg.code">
+            <field name="name">M1</field>
+            <field name="beschreibung">11</field>
+            <field name="ktg_lohn_ab">0.00</field>
+            <field name="ktg_hoechstlohn_bis">120000.00</field>
+            <field name="ktg_beitrag_m">0.5430</field>
+            <field name="ktg_beitrag_f">0.6100</field>
+            <field name="ktg_beitrag_m_employer">0.0000</field>
+            <field name="ktg_beitrag_f_employer">0.0000</field>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_ktg_code_2_2013_qst" model="res.company.ktg.code">
+            <field name="name">M2</field>
+            <field name="beschreibung">12</field>
+            <field name="ktg_lohn_ab">120000.00</field>
+            <field name="ktg_hoechstlohn_bis">500000.00</field>
+            <field name="ktg_beitrag_m">0.6780</field>
+            <field name="ktg_beitrag_f">0.7200</field>
+            <field name="ktg_beitrag_m_employer">0.0000</field>
+            <field name="ktg_beitrag_f_employer">0.0000</field>
+            <field name="is_default" eval="False"/>
+        </record>
+
+        <record id="res_company_ktg_code_0_2014_qst" model="res.company.ktg.code">
+            <field name="name">M0</field>
+            <field name="beschreibung">10</field>
+            <field name="ktg_lohn_ab">0.00</field>
+            <field name="ktg_hoechstlohn_bis">0.00</field>
+            <field name="ktg_beitrag_m">0.0000</field>
+            <field name="ktg_beitrag_f">0.0000</field>
+            <field name="ktg_beitrag_m_employer">0.0000</field>
+            <field name="ktg_beitrag_f_employer">0.0000</field>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_ktg_code_1_2014_qst" model="res.company.ktg.code">
+            <field name="name">M1</field>
+            <field name="beschreibung">11</field>
+            <field name="ktg_lohn_ab">0.00</field>
+            <field name="ktg_hoechstlohn_bis">120000.00</field>
+            <field name="ktg_beitrag_m">0.5430</field>
+            <field name="ktg_beitrag_f">0.6100</field>
+            <field name="ktg_beitrag_m_employer">0.0000</field>
+            <field name="ktg_beitrag_f_employer">0.0000</field>
+            <field name="is_default" eval="False"/>
+        </record>
+        <record id="res_company_ktg_code_2_2014_qst" model="res.company.ktg.code">
+            <field name="name">M2</field>
+            <field name="beschreibung">12</field>
+            <field name="ktg_lohn_ab">88200.00</field>
+            <field name="ktg_hoechstlohn_bis">500000.00</field>
+            <field name="ktg_beitrag_m">0.6780</field>
+            <field name="ktg_beitrag_f">0.7200</field>
+            <field name="ktg_beitrag_m_employer">0.0000</field>
+            <field name="ktg_beitrag_f_employer">0.0000</field>
+            <field name="is_default" eval="False"/>
+        </record>
+
+
+        <!-- KTG -->
+        <record id="res_partner_address_ktg_qst" model="res.partner">
+            <field name="name">KTG Backwork-Versicherungen</field>
+            <field name="street">Strasse KTG 1</field>
+            <field name="active" eval="True"/>
+            <field name="city">Zürich</field>
+            <field name="zip">8000</field>
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','ZH'), ('country_id.code','=','CH')]" />
+        </record>
+
+        <record id="res_company_ktg_1_2013_qst" model="res.company.ktg">
+            <field name="group" ref="res_company_group_ktg_m_2013_qst"/>
+            <field name="address_ktg_id" ref="res_partner_address_ktg_qst" />
+            <field name="vertragsnr">4567-4</field>
+            <field name="kundennummer">7651-873.1</field>
+            <field name="vers_nr">S1000</field>
+            <field name="ktg_code_ids" eval="[(4, ref('res_company_ktg_code_0_2013_qst')),(4, ref('res_company_ktg_code_1_2013_qst')),(4, ref('res_company_ktg_code_2_2013_qst'))]"/>
+            <field name="year_id" ref="year2013_qst"/>
+            <field eval="1" name="at_least_two_entries_ktg_code_ids_ok"/>
+        </record>
+
+        <record id="res_company_ktg_1_2014_qst" model="res.company.ktg">
+            <field name="group" ref="res_company_group_ktg_m_2014_qst"/>
+            <field name="address_ktg_id" ref="res_partner_address_ktg_qst" />
+            <field name="vertragsnr">4567-4</field>
+            <field name="kundennummer">7651-873.1</field>
+            <field name="vers_nr">S1000</field>
+            <field name="ktg_code_ids" eval="[(4, ref('res_company_ktg_code_0_2014_qst')),(4, ref('res_company_ktg_code_1_2014_qst')),(4, ref('res_company_ktg_code_2_2014_qst'))]"/>
+            <field name="year_id" ref="year2014_qst"/>
+            <field eval="1" name="at_least_two_entries_ktg_code_ids_ok"/>
+        </record>
+
+
+        <!-- BVG CODES -->
+        <record id="res_company_bvg_code_1_2013_qst" model="res.company.bvg.code">
+            <field name="code">11</field>
+            <field name="name">Produktion</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2013_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+        <record id="res_company_bvg_code_2_2013_qst" model="res.company.bvg.code">
+            <field name="code">13</field>
+            <field name="name">-</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2013_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+        <record id="res_company_bvg_code_3_2013_qst" model="res.company.bvg.code">
+            <field name="code">21</field>
+            <field name="name">Verkauf</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2013_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+        <record id="res_company_bvg_code_4_2013_qst" model="res.company.bvg.code">
+            <field name="code">22</field>
+            <field name="name">Administration</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2013_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+        <record id="res_company_bvg_code_5_2013_qst" model="res.company.bvg.code">
+            <field name="code">K2010</field>
+            <field name="name">Kader überobligatorisch</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2013_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+
+        <record id="res_company_bvg_code_1_2014_qst" model="res.company.bvg.code">
+            <field name="code">11</field>
+            <field name="name">Produktion</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2014_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+        <record id="res_company_bvg_code_2_2014_qst" model="res.company.bvg.code">
+            <field name="code">13</field>
+            <field name="name">-</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2014_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+        <record id="res_company_bvg_code_3_2014_qst" model="res.company.bvg.code">
+            <field name="code">21</field>
+            <field name="name">Verkauf</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2014_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+        <record id="res_company_bvg_code_4_2014_qst" model="res.company.bvg.code">
+            <field name="code">22</field>
+            <field name="name">Administration</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2014_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+        <record id="res_company_bvg_code_5_2014_qst" model="res.company.bvg.code">
+            <field name="code">K2010</field>
+            <field name="name">Kader überobligatorisch</field>
+            <field name="group_bvg_id" ref="res_company_group_bvg_b_2014_qst"/>
+            <field eval="0" name="group_invisible"/>
+            <field eval="1" name="group_required"/>
+            <field eval="0" name="group_readonly"/>
+        </record>
+
+        <!-- BVG -->
+        <record id="res_partner_address_bvg_qst" model="res.partner">
+            <field name="name">Pensionskasse Oldsoft</field>
+            <field name="street">Strasse BVG 1</field>
+            <field name="active" eval="True"/>
+            <field name="city">Mund</field>
+            <field name="zip">3904</field>
+            <field name="company_id" ref="second_company" />
+            <field name="state_id" search="[('code','=','VS'), ('country_id.code','=','CH')]" />
+        </record>
+
+        <record id="res_company_bvg_1_2013_qst" model="res.company.bvg">
+            <field name="address_bvg_id" ref="res_partner_address_bvg_qst" />
+            <field name="sequence">1</field>
+            <field name="vertragsnr">4500-0</field>
+            <field name="kundennummer">1099-8777.1</field>
+            <field name="vers_nr">L1200</field>
+            <field name="bvg_code_ids" eval="[(4, ref('res_company_bvg_code_1_2013_qst')),(4, ref('res_company_bvg_code_2_2013_qst')),(4, ref('res_company_bvg_code_3_2013_qst')),(4, ref('res_company_bvg_code_4_2013_qst')),(4, ref('res_company_bvg_code_5_2013_qst'))]"/>
+            <field name="year_id" ref="year2013_qst"/>
+        </record>
+
+        <record id="res_company_bvg_1_2014_qst" model="res.company.bvg">
+            <field name="address_bvg_id" ref="res_partner_address_bvg_qst" />
+            <field name="sequence">1</field>
+            <field name="vertragsnr">4500-0</field>
+            <field name="kundennummer">1099-8777.1</field>
+            <field name="vers_nr">L1200</field>
+            <field name="bvg_code_ids" eval="[(4, ref('res_company_bvg_code_1_2014_qst')),(4, ref('res_company_bvg_code_2_2014_qst')),(4, ref('res_company_bvg_code_3_2014_qst')),(4, ref('res_company_bvg_code_4_2014_qst')),(4, ref('res_company_bvg_code_5_2014_qst'))]"/>
+            <field name="year_id" ref="year2014_qst"/>
+        </record>
+
+
+        <!-- LOHNAUSWEIS NEBENLEISTUNGEN -->
+        <record id="res_company_la_nebenleistung_1_2013_qst" model="res.company.la.nebenleistung">
+            <field name="note">Vergünstigung Versicherungsprämien</field>
+            <field name="year_id" ref="year2013_qst"/>
+        </record>
+
+        <record id="res_company_la_nebenleistung_1_2014_qst" model="res.company.la.nebenleistung">
+            <field name="note">Vergünstigung Versicherungsprämien</field>
+            <field name="year_id" ref="year2014_qst"/>
+        </record>
+    </data>
+
+    <data>
+        <!-- create journal Personalaufwand Lohn -->
+        <record id="account_journal_personalaufwandlohn0_qst" model="account.journal">
+            <field model="account.account" name="payment_debit_account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field name="code">PA</field>
+            <field name="name">Personalaufwand Lohn QST</field>
+            <field name="sequence">1</field>
+            <field name="company_id" ref="second_company"/>
+            <field eval="[(6,0,[])]" name="type_control_ids"/>
+            <field model="account.account" name="payment_credit_account_id" search="[('name', '=', u'Salaires'), ('company_id.name', '=', 'PROCESS AG')]"/>
+            <field model="ir.sequence" name="secure_sequence_id" search="[('name', '=', u'Personalaufwand Lohn QST')]"/>
+            <field eval="[(6,0,[])]" name="account_control_ids"/>
+            <field name="type">purchase</field>
+        </record>
+    </data>
+</odoo>

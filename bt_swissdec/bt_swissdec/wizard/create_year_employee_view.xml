@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_create_year_employee" model="ir.ui.view">
+            <field name="name">create.year.employee.form</field>
+            <field name="model">create.year.employee</field>
+            <field name="arch" type="xml">
+                <form string="Create new year">
+                    <group colspan="4">
+                        <field name="year_id" attrs="{'invisible':[('show_year','=',False)], 'required':[('show_year','=',True)]}"/>
+                        <field name="info_message" colspan="4" nolabel="1" attrs="{'invisible':[('show_year','=',True)]}"/>
+                        <field name="show_year" invisible="1"/>
+                        <field name="show_address_fields" invisible="1"/>
+                    </group>
+                    <separator string="Employee address" colspan="4" attrs="{'invisible':['|', ('show_year','=',False), ('show_address_fields','=',False)]}"/>
+                    <group colspan="4" attrs="{'invisible':[('show_address_fields','=',False)]}">
+                    	<field name="existing_address_id" attrs="{'invisible':[('show_year','=',False)]}" context="{'create_year_employee_wizard': True, 'show_address': 1, 'show_address_m2o': 1}" options="{'always_reload': True, 'no_create': True}"/>
+                    	<field name="expatriate" attrs="{'invisible':['|', ('show_year','=',False), ('existing_address_id','!=',False)]}"/>
+                    </group>
+                    <div attrs="{'invisible':['|', ('show_address_fields','=',False), ('existing_address_id','!=',False)]}">
+                        <field name="street" placeholder="Street..." attrs="{'invisible':[('show_year','=',False)], 'required':[('show_address_fields','!=',False), ('existing_address_id','=',False)]}"/>
+                        <field name="street2" placeholder="Street2..." attrs="{'invisible':[('show_year','=',False)]}"/>
+                        <field name="city_id"
+				               options="{'create_name_field': 'city'}"
+				               placeholder="City completion"
+				               class="oe_edit_only"
+				               attrs="{'invisible':['|', ('expatriate','=',True),('show_year','=',False)], 'required':[('expatriate','=',False), ('show_address_fields','!=',False), ('existing_address_id','=',False)]}"
+				               />
+                        <div class="address_format">
+                            <field name="zip" placeholder="ZIP" 
+                                   style="width: 20%%" 
+                                   attrs="{'invisible':['|', ('expatriate','=',False),('show_year','=',False)], 'required':[('expatriate','=',True)]}"/>
+                            <field name="city" placeholder="City" 
+                                   style="width: 40%%" 
+                                   attrs="{'invisible':['|', ('expatriate','=',False),('show_year','=',False)], 'required':[('expatriate','=',True)]}"/>
+	                        <field name="country_id" placeholder="Country" 
+	                        	   class="oe_no_button" style="width: 40%%" 
+	                        	   options='{"no_open": True, "no_create": True}' 
+	                        	   attrs="{'invisible':['|', ('expatriate','=',False),('show_year','=',False)], 'required':[('expatriate','=',True)]}"
+	                        	   domain="[('code','!=','CH')]"/>
+                        </div>
+                        <field name="state_id" invisible="1" class="oe_no_button" placeholder="State" style="width: 37%%" options='{"no_open": True}'/>
+                        <field name="municipality" invisible="1" placeholder="Municipality..." />
+                    </div>
+					<footer>
+						<button string="Create new year" name="create_year" type="object" class="btn-primary" attrs="{'invisible':[('show_year','=',False)]}"/>
+                        <button string="Close" name="close_dialog" type="object" class="btn-primary"/>
+					</footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_create_year_employee" model="ir.actions.act_window">
+            <field name="name">Create new year</field>
+            <field name="res_model">create.year.employee</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

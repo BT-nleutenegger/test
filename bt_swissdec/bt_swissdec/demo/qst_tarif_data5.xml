@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_qst_a0n" model="hr.qst">
+            <field name="description">A0N</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">A0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_b0n" model="hr.qst">
+            <field name="description">B0N</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">B0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_b1n" model="hr.qst">
+            <field name="description">B1N</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">B1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_c0n" model="hr.qst">
+            <field name="description">C0N</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">C0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_c1n" model="hr.qst">
+            <field name="description">C1N</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">C1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_h1n" model="hr.qst">
+            <field name="description">H1N</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">H1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+    </data>
+    <data>
+        <record id="hr_qst_a0nAG" model="hr.qst">
+            <field name="description">A0N</field>
+            <field name="kanton" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="name">A0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_b0nAG" model="hr.qst">
+            <field name="description">B0N</field>
+            <field name="kanton" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="name">B0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_b1nAG" model="hr.qst">
+            <field name="description">B1N</field>
+            <field name="kanton" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="name">B1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_c0nAG" model="hr.qst">
+            <field name="description">C0N</field>
+            <field name="kanton" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="name">C0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_c1nAG" model="hr.qst">
+            <field name="description">C1N</field>
+            <field name="kanton" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="name">C1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_h1nAG" model="hr.qst">
+            <field name="description">H1N</field>
+            <field name="kanton" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="name">H1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+    </data>
+    <data>
+        <record id="hr_qst_a0nY" model="hr.qst">
+            <field name="description">A0N</field>
+            <field name="kanton" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="name">A0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_b0nY" model="hr.qst">
+            <field name="description">B0N</field>
+            <field name="kanton" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="name">B0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_b1nY" model="hr.qst">
+            <field name="description">B1N</field>
+            <field name="kanton" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="name">B1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_c0nY" model="hr.qst">
+            <field name="description">C0N</field>
+            <field name="kanton" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="name">C0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_c1nY" model="hr.qst">
+            <field name="description">C1N</field>
+            <field name="kanton" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="name">C1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_h1nY" model="hr.qst">
+            <field name="description">H1N</field>
+            <field name="kanton" search="[('code','=','TI'), ('country_id.code','=','CH')]"/>
+            <field name="name">H1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+    </data>
+    <data>
+        <record id="hr_qst_a0nYVD" model="hr.qst">
+            <field name="description">A0N</field>
+            <field name="kanton" search="[('code','=','VD'), ('country_id.code','=','CH')]"/>
+            <field name="name">A0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_b0nYVD" model="hr.qst">
+            <field name="description">B0N</field>
+            <field name="kanton" search="[('code','=','VD'), ('country_id.code','=','CH')]"/>
+            <field name="name">B0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_b1nYVD" model="hr.qst">
+            <field name="description">B1N</field>
+            <field name="kanton" search="[('code','=','VD'), ('country_id.code','=','CH')]"/>
+            <field name="name">B1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_c0nYVD" model="hr.qst">
+            <field name="description">C0N</field>
+            <field name="kanton" search="[('code','=','VD'), ('country_id.code','=','CH')]"/>
+            <field name="name">C0N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_c1nYVD" model="hr.qst">
+            <field name="description">C1N</field>
+            <field name="kanton" search="[('code','=','VD'), ('country_id.code','=','CH')]"/>
+            <field name="name">C1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+        <record id="hr_qst_h1nYVD" model="hr.qst">
+            <field name="description">H1N</field>
+            <field name="kanton" search="[('code','=','VD'), ('country_id.code','=','CH')]"/>
+            <field name="name">H1N</field>
+            <field name="company_id" ref="second_company5" />
+        </record>
+    </data>
+</odoo>

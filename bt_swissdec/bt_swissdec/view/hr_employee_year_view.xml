@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="hr_employee_year_tree" model="ir.ui.view">
+			<field name="name">hr.employee.year.tree</field>
+			<field name="model">hr.employee.year</field>
+			<field name="arch" type="xml">
+				<tree string="Years">
+					<field name="name" />
+					<field name="warning_notes"/>
+					<button name="%(action_report_hr_employee)d" string="Print employee parameters"
+						icon="fa-print" type="action" />
+					<field name="state" invisible="1" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="hr_employee_year_form" model="ir.ui.view">
+			<field name="name">hr.employee.year.form</field>
+			<field name="model">hr.employee.year</field>
+			<field name="arch" type="xml">
+				<form string="Years" delete="0" create="0">
+					<sheet>
+						<div class="oe_left oe_button_box" style="text-align:left"
+							name="buttons">
+							<button class="oe_inline oe_stat_button" type="action"
+								name="%(search_bvg_import_data)d" help="Show all sent mutations"
+								icon="fa-pencil-square-o"
+								attrs="{'invisible':[('number_bvg_import_data','=',0)]}"
+							>
+								<field string="Imp. Data" name="number_bvg_import_data"
+									widget="statinfo" />
+							</button>
+						</div>
+
+						<group col="8" colspan="4">
+							<field name="name" colspan="2" />
+							<field name="company_id" groups="base.group_multi_company" />
+							<label colspan="4" string="" for="employee_name" class="o_form_label"/>
+							<field name="employee_name" colspan="2" />
+							<field name="ssnid" colspan="2" />
+							<label colspan="4" string="" for="address_home_id" class="o_form_label"/>
+							<field name="address_home_id" colspan="2" context="{'show_address': 1}"
+								options="{'always_reload': True}" />
+							<field name="hometown" colspan="2" />
+						</group>
+						<!--group col="2" colspan="2">
+							<field name="contract_ids" colspan="4" nolabel="1">
+								<form string="Contract">
+									<group col="2" colspan="2">
+										<field name="name" readonly="1" />
+										<field name="employee_id" readonly="1" />
+										<field name="type_id" readonly="1" />
+										<field name="country_id" invisible="1" readonly="1" />
+										<field name="date_start" readonly="1" />
+										<field name="date_end" readonly="1" />
+									</group>
+
+								</form>
+								<tree string="Contract">
+									<field name="name" readonly="1" />
+									<field name="employee_id" readonly="1" />
+									<field name="type_id" readonly="1" />
+									<field name="country_id" invisible="1" readonly="1" />
+									<field name="date_start" readonly="1" />
+									<field name="date_end" readonly="1" />
+								</tree>
+							</field>
+						</group-->
+						<notebook colspan="4">
+							<page string="AHV/ALV">
+								<group col="4" colspan="4">
+									<field name="is_specialcase"
+										attrs="{'readonly':['|', ('state','=','closed'), ('set_readonly','!=',False)]}" />
+									<field name="ignore_ahv_alv_untergrenze_jahr"
+										attrs="{'readonly':['|', ('state','=','closed'), ('set_readonly','!=',False)]}" />
+								</group>
+								<div>
+									<p class="oe_grey">Im Allgemeinen wird die AHV automatisch berechnet. Insbesondere werden auch Altersgrenzen automatisch berücksichtigt und stellen keinen Sonderfall dar. Einzig wenn ein Sonderfall vorliegt, können Sie diesen hier mittels dem Feld <strong><em>Sonderfall, nicht AHV-pflichtige Person</em></strong> angeben. Die AHV wird dann nicht mehr durch das System berechnet.</p><p class="oe_grey">Weiter besteht die Möglichkeit für bestimmte Mitarbeiter mittels Flag <em><strong>Ignoriere AHV/ALV Untergrenze</strong></em> festzulegen ob die AHV/ALV Untergrenze ignoriert werden soll.</p>
+								</div>
+							</page>
+							<page string="UVG">
+								<group col="4" colspan="4">
+									<div attrs="{'invisible':[('reset_uvg_ids','=',False)]}"
+										colspan="4">
+										<h2 style="color:red">This entry cannot be deleted, because it relates
+											to a payslip or it needs at least one entry. You need to
+											click on the flag 'RESET' in order to refresh the page.
+										</h2>
+									</div>
+									<field name="do_reset_uvg_ids"
+										context="{'year_id': id, 'uvg_ids': uvg_ids}" attrs="{'invisible':[('reset_uvg_ids','=',False)]}"
+										colspan="2" />
+									<field name="uvg_ids" colspan="4" nolabel="1" height="150"
+										context="{'year_id': id, 'uvg_ids': uvg_ids}"
+										attrs="{'readonly':['|', ('state','=','closed'), ('reset_uvg_ids','=',True)]}" />
+								</group>
+								<div>
+									<p class="oe_grey">In diesem Tab können nur UVG ausgewählt werden, die für das Unternehmen konfiguriert sind (Tab &quot;UVG&quot;).</p><p class="oe_grey">Es kann mehr als eine Versicherung für den Mitarbeiter erfasst werden, es ist jedoch immer nur eine gültig (<strong><em>Gültig ab</em></strong>).</p>
+								</div>
+							</page>
+							<page string="UVGZ">
+								<group col="4" colspan="4">
+									<div attrs="{'invisible':[('reset_uvgz_ids','=',False)]}"
+										colspan="4">
+										<h2 style="color:red">This entry cannot be deleted, because it relates
+											to a payslip or it needs at least one entry. You need to
+											click on the flag 'RESET' in order to refresh the page.
+										</h2>
+									</div>
+									<field name="do_reset_uvgz_ids"
+										context="{'year_id': id, 'uvgz_ids': uvgz_ids}" attrs="{'invisible':[('reset_uvgz_ids','=',False)]}"
+										colspan="2" />
+									<field name="uvgz_ids" colspan="4" nolabel="1" height="150"
+										context="{'year_id': id, 'uvgz_ids': uvgz_ids}"
+										attrs="{'readonly':['|', ('state','=','closed'), ('reset_uvgz_ids','=',True)]}" />
+								</group>
+								<div>
+									<p class="oe_grey">Es kann mehr als eine Versicherung für den Mitarbeiter erfasst werden.</p>
+								</div>
+							</page>
+							<page string="KTG">
+								<group col="4" colspan="4">
+									<div attrs="{'invisible':[('reset_ktg_ids','=',False)]}"
+										colspan="4">
+										<h2 style="color:red">This entry cannot be deleted, because it relates
+											to a payslip or it needs at least one entry. You need to
+											click on the flag 'RESET' in order to refresh the page.
+										</h2>
+									</div>
+									<field name="do_reset_ktg_ids"
+										context="{'year_id': id, 'ktg_ids': ktg_ids}" attrs="{'invisible':[('reset_ktg_ids','=',False)]}"
+										colspan="2" />
+									<field name="ktg_ids" colspan="4" nolabel="1" height="150"
+										context="{'year_id': id, 'ktg_ids': ktg_ids}"
+										attrs="{'readonly':['|', ('state','=','closed'), ('reset_ktg_ids','=',True)]}" />
+								</group>
+								<div>
+									<p class="oe_grey">Es kann mehr als eine Versicherung für den Mitarbeiter erfasst werden.</p>
+								</div>
+							</page>
+							<page string="BVG">
+								<group col="4" colspan="4">
+									<field name="company_year_id" invisible="1" />
+									<field name="group_bvg_id" domain="[('year_id','=',company_year_id)]"
+										force_save="1"
+										attrs="{
+													'invisible': [('group_invisible','=',True)],
+
+													'readonly': ['|', ('state','=','closed'), ('group_readonly','=',True)],
+													'required': ['&amp;',('group_readonly','=',True),('number_bvg_lines','=','0')]}" />
+									<field name="group_invisible" invisible="1" />
+									<field name="group_required" invisible="1" />
+									<field name="group_readonly" invisible="1" />
+									<field name="number_bvg_lines" invisible="1" />
+									<div attrs="{'invisible':[('reset_bvg_ids','=',False)]}"
+										colspan="4">
+										<h2 style="color:red">This entry cannot be deleted, because it relates
+											to a payslip or it needs at least one entry. You need to
+											click on the flag 'RESET' in order to refresh the page.
+										</h2>
+									</div>
+									<field name="do_reset_bvg_ids"
+										context="{'year_id': id, 'bvg_ids': bvg_ids}" attrs="{'invisible':[('reset_bvg_ids','=',False)]}"
+										colspan="2" />
+									<field name="bvg_ids" colspan="4" nolabel="1" height="150"
+										context="{'year_id': id, 'bvg_ids': bvg_ids, 'default_group_bvg_id': group_bvg_id}"
+										attrs="{'readonly':['|', ('state','=','closed'), ('reset_bvg_ids','=',True)]}" />
+								</group>
+								<div>
+									<p class="oe_grey">Es kann mehr als eine Versicherung für den Mitarbeiter erfasst werden.</p>
+								</div>
+							</page>
+							<page string="Arbeitsort / Adresse / Aufenthaltsbewilligung / QST / Beschäftigung">
+								<group col="4" colspan="4">
+									<field name="qst_ids" colspan="4" nolabel="1" height="150"
+										context="{'year_id': id, 'qst_ids': qst_ids, 'modified_entry_set_readonly_qst_ids': modified_entry_set_readonly_qst_ids, 'form_view_ref' : 'bt_swissdec.view_hr_allowance_calculationparameter_qst_form'}"
+										force_save="1"
+										attrs="{'readonly':['|', ('state','=','closed'), ('modified_entry_set_readonly_qst_ids','!=',False)]}" />
+								</group>
+								<div>
+									<p class="oe_grey">Das Tab enthält pro Monat einen fixen Eintrag. Der Grund hierführ ist die bessere Handhabung bei Änderungen welche die QST betreffen.</p><p class="oe_grey">Sobald es eine Veränderung gibt, kann diese ab dem gewünschten Monat erfasst werden. Die Anpassungen wird für alle Folgemonate bei denen derselbe Wert gesetzt war übernommen. Wurde bereits ein Monat via Transmitter übermittelt oder eine Mitarbeiterabrechnung erstellt, kann der Eintrag mittels dem setzen des Flag "Änderung vornehmen" gemacht werden.</p>
+								</div>
+							</page>
+							<page string="13. ML">
+								<group col="4" colspan="4">
+									<field name="zusatzmonatslohn_ids" colspan="4" nolabel="1"
+										height="150" context="{'year_id': id}" />
+								</group>
+								<div>
+									<p class="oe_grey">Der Eintrag 13. ML hat keine direkte Auswirkung auf den Lohn. Die Angabe steuert lediglich, ob der 13. ML gerechnet werden soll, wenn bei der Mitarbeiterabrechnung oder der Personalabrechnung der Button <strong><em>13. Monatslohn bis jetzt</em></strong> betätigt wird. Mittels diesem Button kann gesteuert werden, ob die Berechnung des 13. Monatslohnes im Lohn hinzugefügt werden soll. Insbesondere wenn dies via der Personalabrechnung für alle gemacht werden soll, bei denen dieser Wert auf <strong><em>1 - Ja</em></strong> gesetzt ist. Dieser Wert wird standardmässig auf den Wert <strong><em>0- Nein</em></strong> gesetzt.</p>
+								</div>
+							</page>
+							<page string="Nettolohnausgleich">
+								<group col="4" colspan="4">
+									<div
+										attrs="{'invisible':[('reset_nettolohnausgleich_ids','=',False)]}"
+										colspan="4">
+										<h2 style="color:red">This entry cannot be deleted, because it relates
+											to a payslip or it needs at least one entry. You need to
+											click on the flag 'RESET' in order to refresh the page.
+										</h2>
+									</div>
+									<field name="do_reset_nettolohnausgleich_ids"
+										context="{'year_id': id, 'nettolohnausgleich_ids': nettolohnausgleich_ids}"
+										attrs="{'invisible':[('reset_nettolohnausgleich_ids','=',False)]}"
+										colspan="2" />
+									<field name="nettolohnausgleich_ids" colspan="4" nolabel="1"
+										height="150"
+										context="{'year_id': id, 'nettolohnausgleich_ids': nettolohnausgleich_ids}"
+										attrs="{'readonly':['|', ('state','=','closed'), ('reset_nettolohnausgleich_ids','=',True)]}" />
+								</group>
+								<div>
+									<p class="oe_grey">Wenn der Code auf <strong><em>1 - Ja</em></strong> gesetzt wird, erfolgt die Berechnung des Nettolohnausgleichs automatisch. Dieser Wert wird standardmässig auf den Wert gesetzt, welcher in der Konfiguration beim Unternehmen im Feld <strong><em>Standard Nettolohnausgleich</em></strong> gesetzt ist.</p>
+								</div>
+							</page>
+							<page string="Lohnausweis">
+								<notebook colspan="4">
+									<page string="Angaben 1">
+										<group col="12" colspan="4">
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="lohnausweis_or_rentenbescheinigung"
+												colspan="6" string="Erhält Lohnausweis / Rentenbescheinigung" />
+											<field name="lohnausweis_or_rentenbescheinigung"
+												widget="radio" nolabel="1" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="unentgeltliche_befoerderung" colspan="6"
+												string="Unentgeltliche Beförderung zwischen Wohn- und Arbeitsort" />
+											<field name="unentgeltliche_befoerderung" nolabel="1" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="kantine" colspan="6"
+												string="Kantinenverpflegung/Lunch-Checks" />
+											<field name="kantine" nolabel="1" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="effektive_spesen" colspan="6"
+												string="Effektive Spesen Expatriate" />
+											<field name="effektive_spesen" nolabel="1" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="spesen_stv" colspan="6"
+												string="Spesenreglement durch die Steuerverwaltung bewilligt" />
+											<field name="spesen_stv"
+												attrs="{'readonly':[('spesen_stv_all_company','=',True)], 'invisible':[('spesen_stv_all_company','=',True)]}"
+												colspan="6" nolabel="1" />
+											<label colspan="3" string="" for="spesen_stv" class="o_form_label"/>
+											<label for="spesen_stv_company" colspan="2"
+												string="Wert Unternehmen"
+												attrs="{'invisible':[('spesen_stv','!=','company'), ('spesen_stv_all_company','=',False)]}" />
+											<field name="spesen_stv_company" colspan="1"
+												attrs="{'invisible':[('spesen_stv','!=','company'), ('spesen_stv_all_company','=',False)]}"
+												nolabel="1" />
+											<field name="spesen_stv_datum_company" colspan="3"
+												attrs="{'invisible':[('spesen_stv','!=','company'), ('spesen_stv_all_company','=',False)]}" />
+											<field name="spesen_stv_state_id_company" colspan="3"
+												attrs="{'invisible':[('spesen_stv','!=','company'), ('spesen_stv_all_company','=',False)]}" />
+											<newline />
+											<label colspan="5" string="" for="spesen_stv_datum" class="o_form_label"/>
+											<field name="spesen_stv_datum"
+												attrs="{'required':[('spesen_stv','=','yes'),('spesen_stv_all_company','=',False)], 'invisible':['|', ('spesen_stv','in',('company', 'no')), ('spesen_stv_all_company','=',True)], 'readonly':[('spesen_stv_all_company','=',True)]}" />
+											<field name="spesen_stv_state_id" options='{"no_open": True, "no_create": True}'
+												attrs="{'required':[('spesen_stv','=','yes'),('spesen_stv_all_company','=',False)], 'invisible':['|', ('spesen_stv','in',('company', 'no')), ('spesen_stv_all_company','=',True)], 'readonly':[('spesen_stv_all_company','=',True)]}" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<field name="spesen_stv_all_company" invisible="1" />
+										</group>
+									</page>
+									<page string="Angaben 2">
+										<group col="12" colspan="4">
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="bedingungen_rz52" colspan="6"
+												string="Bedingungen von Rz 52 werden eingehalten" />
+											<field name="bedingungen_rz52"
+												attrs="{'readonly':[('bedingungen_rz52_all_company','=',True)], 'invisible':[('bedingungen_rz52_all_company','=',True)]}"
+												colspan="6" nolabel="1" />
+											<label colspan="5" string="" for="bedingungen_rz52" class="o_form_label"/>
+											<label for="bedingungen_rz52_company" colspan="1"
+												string="Wert Unternehmen"
+												attrs="{'invisible':[('bedingungen_rz52','!=','company'), ('bedingungen_rz52_all_company','=',False)]}" />
+											<field name="bedingungen_rz52_company"
+												attrs="{'invisible':[('bedingungen_rz52','!=','company'), ('bedingungen_rz52_all_company','=',False)]}"
+												nolabel="1" colspan="6" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="privat_fz" colspan="6"
+												string="Privatanteil für Geschäftswagen durch die STV genehmigt (&lt;0.8%)" />
+											<field name="privat_fz"
+												attrs="{'readonly':[('privat_fz_all_company','=',True)], 'invisible':[('privat_fz_all_company','=',True)]}"
+												colspan="6" nolabel="1" />
+											<label colspan="3" string="" for="privat_fz" class="o_form_label"/>
+											<label for="privat_fz_company" colspan="2"
+												string="Wert Unternehmen"
+												attrs="{'invisible':[('privat_fz','!=','company'),('privat_fz_all_company','=',False)]}" />
+											<field name="privat_fz_company" colspan="1"
+												attrs="{'invisible':[('privat_fz','!=','company'),('privat_fz_all_company','=',False)]}"
+												nolabel="1" />
+											<field name="privat_fz_datum_company" colspan="3"
+												attrs="{'invisible':[('privat_fz','!=','company'),('privat_fz_all_company','=',False)]}" />
+											<field name="privat_fz_state_id_company" colspan="3"
+												attrs="{'invisible':[('privat_fz','!=','company'),('privat_fz_all_company','=',False)]}" />
+											<newline />
+											<label colspan="5" string="" for="privat_fz_datum" class="o_form_label"/>
+											<field name="privat_fz_datum"
+												attrs="{'required':[('privat_fz','=','yes'),('privat_fz_all_company','=',False)], 'invisible':['|', ('privat_fz','in',('company', 'no')), ('privat_fz_all_company','=',True)], 'readonly':[('privat_fz_all_company','=',True)]}" />
+											<field name="privat_fz_state_id" options='{"no_open": True, "no_create": True}'
+												attrs="{'required':[('privat_fz','=','yes'),('privat_fz_all_company','=',False)], 'invisible':['|', ('privat_fz','in',('company', 'no')), ('privat_fz_all_company','=',True)], 'readonly':[('privat_fz_all_company','=',True)]}" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="privat_dienstauto" colspan="6"
+												string="Privatanteil Geschäftswagen im Veranlagungsverfahren abzuklären" />
+											<field name="privat_dienstauto"
+												attrs="{'readonly':[('privat_dienstauto_all_company','=',True)], 'invisible':[('privat_dienstauto_all_company','=',True)]}"
+												colspan="6" nolabel="1" />
+											<label colspan="5" string="" for="privat_dienstauto" class="o_form_label"/>
+											<label for="privat_dienstauto_company" colspan="1"
+												string="Wert Unternehmen"
+												attrs="{'invisible':[('privat_dienstauto','!=','company'), ('privat_dienstauto_all_company','=',False)]}" />
+											<field name="privat_dienstauto_company"
+												attrs="{'invisible':[('privat_dienstauto','!=','company'), ('privat_dienstauto_all_company','=',False)]}"
+												nolabel="1" colspan="6" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="privatanteil_fz" colspan="6"
+												string="Mitarbeiter bezahlt (mind.) 0.8% pro Monat Privatanteil Geschäftswagen" />
+											<field name="privatanteil_fz" nolabel="1" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="lohnausweis_ohne_kz" colspan="6"
+												string="Lohnausweis ohne Kinderzulagen von der Ausgleichskasse überwiesen" />
+											<field name="lohnausweis_ohne_kz" nolabel="1" colspan="1" />
+											<field name="lohnausweis_ohne_kz_betrag"
+												attrs="{'invisible':[('lohnausweis_ohne_kz','=',False)], 'readonly':[('lohnausweis_ohne_kz','=',False)]}"
+												colspan="5" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="umzug_bezahlt_ag" colspan="6"
+												string="Umzugsspesen vom Arbeitgeber bezahlt" />
+											<field name="umzug_bezahlt_ag" nolabel="1" colspan="1" />
+											<field name="umzug_bezahlt_ag_betrag"
+												attrs="{'invisible':[('umzug_bezahlt_ag','=',False)], 'readonly':[('umzug_bezahlt_ag','=',False)]}"
+												colspan="5" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<field name="bedingungen_rz52_all_company" groups="bt_swissdec.bt_swissdec_admin" />
+											<field name="privat_fz_all_company" groups="bt_swissdec.bt_swissdec_admin" />
+											<field name="privat_dienstauto_all_company" groups="bt_swissdec.bt_swissdec_admin" />
+										</group>
+									</page>
+									<page string="Angaben 3">
+										<group col="12" colspan="4">
+											<separator colspan="12" string="Mitarbeiterbeteiligung" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+											<label for="verkehrswert_stv_ok" colspan="6"
+												string="Verkehrswert durch die Steuerverwaltung genehmigt" />
+											<field name="verkehrswert_stv_ok"
+												attrs="{'readonly':[('verkehrswert_stv_ok_all_company','=',True)], 'invisible':[('verkehrswert_stv_ok_all_company','=',True)]}"
+												colspan="6" nolabel="1" />
+											<label colspan="3" string="" for="verkehrswert_stv_ok" class="o_form_label"/>
+											<label for="verkehrswert_stv_ok_company" colspan="2"
+												string="Wert Unternehmen"
+												attrs="{'invisible':[('verkehrswert_stv_ok','!=','company'), ('verkehrswert_stv_ok_all_company','=',False)]}" />
+											<field name="verkehrswert_stv_ok_company" colspan="1"
+												attrs="{'invisible':[('verkehrswert_stv_ok','!=','company'), ('verkehrswert_stv_ok_all_company','=',False)]}"
+												nolabel="1" />
+											<field name="verkehrswert_stv_ok_datum_company"
+												colspan="3"
+												attrs="{'invisible':[('verkehrswert_stv_ok','!=','company'), ('verkehrswert_stv_ok_all_company','=',False)]}" />
+											<field name="verkehrswert_stv_ok_state_id_company"
+												colspan="3"
+												attrs="{'invisible':[('verkehrswert_stv_ok','!=','company'), ('verkehrswert_stv_ok_all_company','=',False)]}" />
+											<newline />
+											<label colspan="5" string="" for="verkehrswert_stv_ok_datum" class="o_form_label"/>
+											<field name="verkehrswert_stv_ok_datum"
+												attrs="{'required':[('verkehrswert_stv_ok','=','yes'),('verkehrswert_stv_ok_all_company','=',False)], 'invisible':['|', ('verkehrswert_stv_ok','in',('company', 'no')), ('verkehrswert_stv_ok_all_company','=',True)], 'readonly':[('verkehrswert_stv_ok_all_company','=',True)]}" />
+											<field name="verkehrswert_stv_ok_state_id" options='{"no_open": True, "no_create": True}'
+												attrs="{'required':[('verkehrswert_stv_ok','=','yes'),('verkehrswert_stv_ok_all_company','=',False)], 'invisible':['|', ('verkehrswert_stv_ok','in',('company', 'no')), ('verkehrswert_stv_ok_all_company','=',True)], 'readonly':[('verkehrswert_stv_ok_all_company','=',True)]}" />
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+
+											<label for="ma_beteiligung" colspan="6"
+												string="Mitarbeiterbeteiligung noch ohne steuerbares Einkommen" />
+											<field name="ma_beteiligung"
+												attrs="{'readonly':[('ma_beteiligung_all_company','=',True)], 'invisible':[('ma_beteiligung_all_company','=',True)]}"
+												colspan="2" nolabel="1" />
+											<label for="ma_beteiligung_company" colspan="2"
+												string="Wert Unternehmen"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}" />
+											<field name="ma_beteiligung_company"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}"
+												nolabel="1" colspan="2" />
+
+											<label for="anwartschaftliche_rechte" colspan="6"
+												string="Anwartschaftliche Rechte (Optionen, Aktien etc.)"
+												attrs="{'invisible':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung_all_company','=',True)]}" />
+											<field name="anwartschaftliche_rechte"
+												attrs="{'invisible':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung_all_company','=',True)], 'readonly':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung','=','no') ]}"
+												colspan="6" nolabel="1" />
+											<label for="anwartschaftliche_rechte_company" colspan="6"
+												string="Anwartschaftliche Rechte (Optionen, Aktien etc.)"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}" />
+											<field name="anwartschaftliche_rechte_company"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}"
+												nolabel="1" colspan="6" />
+
+											<label for="verausserungssperre" colspan="6"
+												string="Veräusserungssperre mehr als 10 Jahre"
+												attrs="{'invisible':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung_all_company','=',True)]}" />
+											<field name="verausserungssperre"
+												attrs="{'invisible':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung_all_company','=',True)], 'readonly':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung','=','no') ]}"
+												colspan="6" nolabel="1" />
+											<label for="verausserungssperre_company" colspan="6"
+												string="Veräusserungssperre mehr als 10 Jahre"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}" />
+											<field name="verausserungssperre_company"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}"
+												nolabel="1" colspan="6" />
+
+											<label for="nicht_bewertbare_optionen" colspan="6"
+												string="Bei der Ausgabe nicht bewertbare Optionen"
+												attrs="{'invisible':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung_all_company','=',True)]}" />
+											<field name="nicht_bewertbare_optionen"
+												attrs="{'invisible':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung_all_company','=',True)], 'readonly':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung','=','no') ]}"
+												colspan="6" nolabel="1" />
+											<label for="nicht_bewertbare_optionen_company" colspan="6"
+												string="Bei der Ausgabe nicht bewertbare Optionen"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}" />
+											<field name="nicht_bewertbare_optionen_company"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}"
+												nolabel="1" colspan="6" />
+
+											<label for="gesperrte_ma_optionen" colspan="6"
+												string="Nicht börsenkotierte oder gesperrte Mitarbeiteroptionen"
+												attrs="{'invisible':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung_all_company','=',True)]}" />
+											<field name="gesperrte_ma_optionen"
+												attrs="{'invisible':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung_all_company','=',True)], 'readonly':['|', ('ma_beteiligung','=','company'), ('ma_beteiligung','=','no') ]}"
+												colspan="6" nolabel="1" />
+											<label for="gesperrte_ma_optionen_company" colspan="6"
+												string="Nicht börsenkotierte oder gesperrte Mitarbeiteroptionen"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}" />
+											<field name="gesperrte_ma_optionen_company"
+												attrs="{'invisible':[('ma_beteiligung','!=','company'), ('ma_beteiligung_all_company','=',False)]}"
+												nolabel="1" colspan="6" />
+
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+
+											<label for="ma_beteiligung_drittfirma" colspan="6"
+												string="Mitarbeiterbeteiligung durch Drittfirma vereinbart" />
+											<field name="ma_beteiligung_drittfirma" nolabel="1"
+												colspan="1" />
+											<field name="ma_beteiligung_drittfirma_firma"
+												attrs="{'invisible':[('ma_beteiligung_drittfirma','=',False)], 'readonly':[('ma_beteiligung_drittfirma','=',False)]}"
+												colspan="5" />
+
+											<hr width="100%"
+												style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+												colspan="12" />
+
+											<field name="verkehrswert_stv_ok_all_company" nolabel="1"
+												groups="bt_swissdec.bt_swissdec_admin" />
+											<field name="ma_beteiligung_all_company" nolabel="1"
+												groups="bt_swissdec.bt_swissdec_admin" />
+											<field name="ma_beteiligung_yes_and_reason_is_selected" invisible="1"
+												attrs="{'required':[('ma_beteiligung','=','yes')]}"/>
+										</group>
+									</page>
+									<page string="Angaben 4">
+										<group col="6" colspan="4">
+											<field name="notes" colspan="6" height="50" />
+										</group>
+										<group col="6" colspan="6">
+											<separator colspan="6" string="Nebenleistungen (Ziffer 14)" />
+											<group col="6" colspan="6">
+												<field name="lohnausweis_nl_ignore_company" colspan="6" />
+											</group>
+											<field name="lohnausweis_nebenleistung_ids" colspan="6"
+												nolabel="1" height="150">
+												<form>
+													<group col="4" colspan="4">
+														<field name="note" />
+													</group>
+												</form>
+												<tree string="">
+													<field name="note" />
+												</tree>
+											</field>
+										</group>
+									</page>
+								</notebook>
+								<div>
+									<p class="oe_grey">Hier können in 4 Tabs (<strong><em>Angaben 1 -4</em></strong>) nur Einstellungen verändert werden, die nicht unternehmensweit gültig sind (siehe dazu Tab &quot;Lohnausweis&quot;). Werte bei denen im Unternehmen der Wert <strong><em>Gilt für ganzes Unternehmen</em></strong> gesetzt wurde, können hier nicht mehr angepasst werden.</p>
+								</div>
+							</page>
+
+							<page string="Statistic">
+								<group col="4" colspan="4">
+									<newline />
+									<field name="education_id" options='{"no_open": True, "no_create": True}' colspan="4" />
+									<newline />
+									<field name="education_id_note" colspan="4" string=" " />
+									<newline />
+									<field name="position_id" options='{"no_open": True, "no_create": True}' colspan="4" />
+									<newline />
+									<field name="position_id_note" colspan="4" string=" " />
+									<newline />
+									<field name="jobtitle_id" options='{"no_open": True}'
+										colspan="4" />
+									<newline />
+								</group>
+							</page>
+
+
+							<page string="Diverses">
+								<group col="4" colspan="4">
+									<field name="yearlyholidays" />
+									<newline />
+									<separator colspan="4" string="Warnungen/Bemerkungen"/>
+									<field name="warning_notes" nolabel="1" colspan="4"/>
+								</group>
+								<div>
+									<p class="oe_grey">Beim Feld <strong><em>Ferientage gemäss Arbeitsvertrag</em></strong> ist die Anzahl der nach Arbeitsvertrag gutgeschriebenen Ferientage pro Person und Jahr einzutragen. Die Angaben werden für die Meldung an das Bundesamt für Statistik verwendet. Sie beeinflussen keine Berechnungen im System.</p><p class="oe_grey">Das Feld <em><strong>Warnungen/Bemerkungen</strong></em> kann bei Problemen welche beim Erstellen eines neuen Jahres einen Eintrag enthalten. Dieses Problem muss manuell gelöst werden. Sobald das Problem gelöst wurde, kann dieser Text wie gewünscht angepasst werden.</p>
+								</div>
+							</page>
+							<page string="DO NOT CHANGE ANYTHING -  ONLY FOR brain-tec" groups="bt_swissdec.bt_swissdec_admin">
+								<group col="8" colspan="4">
+									<field name="id"/>
+									<field name="state"/>
+									<field name="weeklyhours_or_lessons_company"/>
+									<field name="set_readonly"/>
+									<newline/>
+									<field name="reset_uvg_ids"/>
+									<field name="help_field_save_uvg_ids_not_allowed" attrs="{'required':[('reset_uvg_ids','=',True)]}"/>
+									<newline/>
+									<field name="reset_uvgz_ids"/>
+									<field name="help_field_save_uvgz_ids_not_allowed" attrs="{'required':[('reset_uvgz_ids','=',True)]}"/>
+									<newline/>
+									<field name="reset_ktg_ids"/>
+									<field name="help_field_save_ktg_ids_not_allowed" attrs="{'required':[('reset_ktg_ids','=',True)]}"/>
+									<newline/>
+									<field name="reset_bvg_ids"/>
+									<field name="help_field_save_bvg_ids_not_allowed" attrs="{'required':[('reset_bvg_ids','=',True)]}"/>
+									<newline/>
+									<field name="modified_entry_set_readonly_qst_ids"/>
+									<field name="update_other_lines_qst_ids"/>
+									<newline/>
+									<field name="reset_nettolohnausgleich_ids"/>
+									<field name="at_least_one_entry_nettolohnausgleich_ids_ok"/>
+									<field name="help_field_save_nettolohnausgleich_ids_not_allowed" attrs="{'required':['|', ('reset_nettolohnausgleich_ids','=',True), ('at_least_one_entry_nettolohnausgleich_ids_ok','=',False)]}"/>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

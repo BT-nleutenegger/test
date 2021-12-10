@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+        <data noupdate="1">
+            <record id="ir_sequence_removal" model="ir.sequence">
+                <field name="name">HR BVG SEQ</field>
+                <field name="code">hr.bvg.basis</field>
+                <field name="number_next">1</field>
+                <field name="implementation">standard</field>
+                <field name="padding">5</field>
+                <field name="number_increment">1</field>
+                <field eval="1" name="active"/>
+            </record>
+			<!-- 
+				May be is needed this sql:
+				delete from ir_sequence_type where code = 'bt_swissdec.report.line'; -->
+            <record id="ir_sequence_swissdec_report_line" model="ir.sequence">
+                <field name="name">Swissdec Report Line SEQ</field>
+                <field name="code">bt_swissdec.report.line</field>
+                <field name="number_next">1</field>
+                <field name="implementation">standard</field>
+                <field name="padding">5</field>
+                <field name="number_increment">1</field>
+                <field eval="1" name="active"/>
+            </record>
+            
+        </data>
+</openerp>

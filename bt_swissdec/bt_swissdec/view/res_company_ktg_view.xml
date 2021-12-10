@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_res_company_ktg_form" model="ir.ui.view">
+			<field name="name">res.company.ktg.form</field>
+			<field name="model">res.company.ktg</field>
+			<field name="arch" type="xml">
+				<form string="KTG">
+					<sheet>
+						<group col="4" colspan="4">
+							<field name="group" readonly="1" />
+							<field name="address_ktg_id" readonly="1" context="{'show_address': 1}"
+								options="{'always_reload': True}" />
+							<newline />
+							<field name="vertragsnr" readonly="1" />
+							<field name="kundennummer" readonly="1" />
+							<field name="vers_nr" readonly="1" />
+							<newline />
+							<!-- <field name="dienstleistung_los1" readonly="1"/> -->
+							<!-- <field name="dienstleistung_los2" readonly="1"/> -->
+							<!-- <newline /> -->
+							<field name="ktg_code_ids" colspan="4" nolabel="1" height="150"
+								readonly="1">
+								<form string="KTG Codes">
+									<group col="4" colspan="4">
+										<field name="is_default" readonly="1" />
+										<newline/>
+										<field name="name" readonly="1" />
+										<field name="beschreibung" readonly="1" />
+										<field name="category_beitrag_id" readonly="1" />
+										<field name="category_salary_id" readonly="1" />
+										<newline />
+										<field name="dienstleistung" readonly="1" />
+										<newline />
+										<field name="ktg_lohn_ab" readonly="1" />
+										<field name="ktg_hoechstlohn_bis" readonly="1" />
+										<newline />
+										<field name="ktg_beitrag_m" readonly="1" />
+										<field name="ktg_beitrag_f" readonly="1" />
+										<newline />
+										<field name="ktg_beitrag_m_employer" readonly="1" />
+										<field name="ktg_beitrag_f_employer" readonly="1" />
+									</group>
+								</form>
+								<tree string="KTG Codes">
+									<field name="name" />
+									<field name="beschreibung" />
+									<field name="category_beitrag_id" />
+									<field name="category_salary_id" />
+									<field name="dienstleistung" />
+									<field name="ktg_lohn_ab" />
+									<field name="ktg_hoechstlohn_bis" />
+									<field name="ktg_beitrag_m" />
+									<field name="ktg_beitrag_f" />
+									<field name="ktg_beitrag_m_employer" />
+									<field name="ktg_beitrag_f_employer" />
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_res_company_ktg_tree" model="ir.ui.view">
+			<field name="name">res.company.ktg.tree</field>
+			<field name="model">res.company.ktg</field>
+			<field name="arch" type="xml">
+				<tree string="KTG">
+					<field name="group" readonly="1" />
+					<field name="address_ktg_id" readonly="1" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

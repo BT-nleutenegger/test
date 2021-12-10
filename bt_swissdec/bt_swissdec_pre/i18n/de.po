@@ -1,0 +1,422 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bt_swissdec_pre
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-08 04:25+0000\n"
+"PO-Revision-Date: 2020-09-08 04:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,help:bt_swissdec_pre.field_transmitter_configuration__alignment
+msgid ""
+"Address the right or left, according to the window envelope to be used."
+msgstr ""
+"Adresse rechts oder links, entsprechend dem zu verwendenden Fenstercouvert."
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,help:bt_swissdec_pre.field_transmitter_configuration__language
+msgid ""
+"The  language used in the transmitter, when translations are available for "
+"the communcation with the transmitter, and for the reports of viewgen."
+msgstr ""
+"Die Sprache die im Transmitter verwendet wird, insofern Übersetzungen für "
+"die Übermittlung mittels Transmitter und die Berichte von Viewgen vorhanden sind."
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__alignment
+msgid "Alignment"
+msgstr "Ausrichtung"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__anonymize
+msgid "Anonymize"
+msgstr "Anonymisieren"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__automatic_step
+msgid "Automatic steps?"
+msgstr "Automatisiert"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__bildformat__bmp
+msgid "BMP"
+msgstr "BMP"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__bildformat
+msgid "Bildformat"
+msgstr "Bildformat"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__group__birthday,identification_id_bt
+msgid "Birthday"
+msgstr "Geburtsdatum"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__uacertificate
+msgid "Certificate"
+msgstr "Zertifikat"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__company_id
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.constraint,message:bt_swissdec_pre.constraint_transmitter_configuration_name_company_uniq
+msgid "Configurations name must be unique per company!"
+msgstr "Konfigurationsname muss eindeutig sein pro Unternehmen!"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state__configure_end_point
+msgid "Configure End Point"
+msgstr "Endpoint konfigurieren"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state__configure_reports
+msgid "Configure Reports"
+msgstr "Berichte konfigurieren"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state__configure_security
+msgid "Configure Security"
+msgstr "Security konfigurieren"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state_interoperability__correct
+msgid "Correct Interoperability"
+msgstr "Interoperabilitätstest OK"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state_ping__correct
+msgid "Correct Ping"
+msgstr "Erreichbarkeitstest mit Ping OK"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__create_uid
+msgid "Created by"
+msgstr "Angelegt von"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration_create_date
+msgid "Created on"
+msgstr "Angelegt am"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,help:bt_swissdec_pre.field_transmitter_configuration__english
+msgid "Created the report with the text in German, French and English."
+msgstr "Erstellt den Report mit den Textsprachen Deutsch, Französisch und Englisch."
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__elmstdversion
+msgid "D Version"
+msgstr "D Version"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state_default__default
+msgid "Default"
+msgstr "Standard"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__description
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__distributor_name
+msgid "Distributor Name"
+msgstr "Distributor Name"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state__done
+msgid "Done"
+msgstr "Erledigt"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state__draft
+msgid "Draft"
+msgstr "Entwurf"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__end_point
+msgid "End Point"
+msgstr "Serveradresse"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__english
+msgid "English"
+msgstr "Englisch"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__language__en
+msgid "English"
+msgstr "Englisch"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__fak_detail
+msgid "Fak Detail?"
+msgstr "FAK im Detail?"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,help:bt_swissdec_pre.field_transmitter_configuration__group
+msgid "Field of the employee to show them in the reports"
+msgstr "Feld des Mitarbeiters um es in den Berichten anzuzeigen"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__group__firstname,name_related
+msgid "First name, Name"
+msgstr "Vorname, Nachname"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__language__fr
+msgid "French"
+msgstr "Französisch"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__bildformat__gif
+msgid "GIF"
+msgstr "GIF"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__language__de
+msgid "German"
+msgstr "Deutsch"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__id
+msgid "ID"
+msgstr "ID"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__group__identification_id_bt
+msgid "Identification id"
+msgstr "Identifikationsnummer"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__state_default
+msgid "Internal State"
+msgstr "Interner Status"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state_interoperability__not_done
+msgid "Interoperability Not Done"
+msgstr "Interoperabilitätstest nicht ausgeführt"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__date_interoperability
+msgid "Interoperability date"
+msgstr "Datum Interoperabilitätstest"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__state_interoperability
+msgid "Interoperability"
+msgstr "Interoperabilitätstest"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,help:bt_swissdec_pre.field_transmitter_configuration__anonymize
+msgid "Is used to anonymize any document that we generate"
+msgstr "Wird verwendet, um ein zu generierendes Dokument zu anonymisieren"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__language__it
+msgid "Italian"
+msgstr "Italienisch"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__jks_state
+msgid "JKS Selection"
+msgstr "Auswahl JKS"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__bildformat__jpeg
+msgid "JPEG"
+msgstr "JPEG"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__data
+msgid "Java Key Store"
+msgstr "Java Key Store"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__alignment__left
+msgid "LEFT"
+msgstr "LINKS"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__language
+msgid "Language"
+msgstr "Sprache"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__monitoring_id
+msgid "Monitoring ID"
+msgstr "Überwachungs ID"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__name
+msgid "Name"
+msgstr "Bezeichnung"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__group__name_related,firstname
+msgid "Name, First name"
+msgstr "Nachname, Vorname"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state_default__no_default
+msgid "No Default"
+msgstr "Nicht Standard"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__group
+msgid "Order by"
+msgstr "Sortiert nach"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__bildformat__png
+msgid "PNG"
+msgstr "PNG"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__password
+msgid "Password"
+msgstr "Passwort"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state_ping__not_done
+msgid "Ping Not Done"
+msgstr "Ping nicht ausgeführt"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__ping_time
+msgid "Ping Time"
+msgstr "Dauer Ping"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__date_ping
+msgid "Ping date"
+msgstr "Datum Ping"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__uaproducer
+msgid "Producer"
+msgstr "Producer"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__alignment__right
+msgid "RIGHT"
+msgstr "RECHTS"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,help:bt_swissdec_pre.field_transmitter_configuration__jks_state
+msgid "Selects the input JKS (for crypt) needed"
+msgstr "Selects the input JKS (for crypt) needed"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__data_name
+msgid "Signature for data file"
+msgstr "Unterschrift für die Datendatei"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__socket
+msgid "Socket"
+msgstr "Socket"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__state_ping
+msgid "State Ping"
+msgstr "Ping Status"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__state
+msgid "State"
+msgstr "Status"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,help:bt_swissdec_pre.field_transmitter_configuration__bildformat
+msgid "The  bild format used in the Barcode"
+msgstr "Das Bildformat welches beim Barcode benutzt wird"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,help:bt_swissdec_pre.field_transmitter_configuration__water_mark
+msgid "To create a watermark in the pdf reports"
+msgstr "Erstellt in diesem Report ein Wasserzeichen"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__jks_state__use_own_jks
+msgid "Use Own JKS"
+msgstr "Eigenen JKS verwenden"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__jks_state__use_productive_jks
+msgid "Use Productive JKS"
+msgstr "Produktiven JKS verwenden"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__jks_state__use_testing_jks
+msgid "Use Testing JKS"
+msgstr "Test JKS verwenden"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__verbose
+msgid "Verbose"
+msgstr "Zusätzliche Informationen"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,help:bt_swissdec_pre.field_transmitter_configuration__verbose
+msgid "Viewgen is talkative. It creates a more detailed output."
+msgstr "Viewgen wird gesprächiger. Es wird eine detailliertere Ausgabe erstellt."
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__water_mark
+msgid "Water Mark"
+msgstr "Wasserzeichen"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state_interoperability__wrong
+msgid "Wrong Interoperability"
+msgstr "Interoperabilitätstest fehlgeschlagen"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields.selection,name:bt_swissdec_pre.selection__transmitter_configuration__state_ping__wrong
+msgid "Wrong Ping"
+msgstr "Ping fehlgeschlagen"
+
+#. module: bt_swissdec_pre
+#: model:ir.model,name:bt_swissdec_pre.model_transmitter_configuration
+msgid "transmitter configuration"
+msgstr "transmitter configuration"
+
+#. module: bt_swissdec_pre
+#: model:ir.model.fields,field_description:bt_swissdec_pre.field_transmitter_configuration__uaversion
+msgid "ua Version"
+msgstr "ua Version"

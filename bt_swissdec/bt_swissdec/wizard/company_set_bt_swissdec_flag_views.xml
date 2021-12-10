@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bt_swissdec_company_set_bt_swissdec_flag_wizard_form_view" model="ir.ui.view">
+        <field name="name">bt_swissdec.company_set_bt_swissdec_flag.wizard.form</field>
+        <field name="model">bt_swissdec.company_set_bt_swissdec_flag.wizard</field>
+        <field name="inherit_id" ref="bt_swissdec.view_bt_swissdec_installer"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="company_id" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <footer position="before">
+                <group string="Fiscal Localization">
+                    <div class="text-muted" colspan="4">
+                        Taxes, fiscal positions, chart of accounts &amp; legal statements for your country
+                    </div>
+                    <div class="text-muted" colspan="4">
+                        If you need to install more packages go to
+                        "General Settings" / "Accounting" > "Fiscal Localization" and
+                        click on "Install More Packages"
+                    </div>
+                    <group>
+                        <field name="chart_template_id" options="{'no_create': True}" required="1"/>
+                    </group>
+                </group>
+            </footer>
+            <footer position="replace">
+                <footer>
+                    <button name="set_bt_swissdec_flag" type="object" string="Apply" class="btn-primary"/>
+                    <button type="object" special="cancel" string="Cancel" class="btn-secondary"/>
+                </footer>
+            </footer>
+        </field>
+    </record>
+
+</odoo>

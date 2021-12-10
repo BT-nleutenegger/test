@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_res_company_uvgz_form" model="ir.ui.view">
+			<field name="name">res.company.uvgz.form</field>
+			<field name="model">res.company.uvgz</field>
+			<field name="arch" type="xml">
+				<form string="UVGZ">
+					<sheet>
+						<group col="4" colspan="4">
+							<field name="group" readonly="1" />
+							<field name="address_uvgz_id" readonly="1"
+								context="{'show_address': 1}" options="{'always_reload': True}" />
+							<newline />
+							<field name="vertragsnr" readonly="1" />
+							<field name="kundennummer" readonly="1" />
+							<field name="vers_nr" readonly="1" />
+							<newline />
+							<field name="uvgz_code_ids" colspan="4" nolabel="1" height="150"
+								readonly="1">
+								<form string="UVGZ Codes">
+									<group col="4" colspan="4">
+										<field name="is_default" readonly="1" />
+										<newline/>
+										<field name="name" readonly="1" />
+										<field name="beschreibung" readonly="1" />
+										<field name="category_beitrag_id" readonly="1" />
+										<field name="category_salary_id" readonly="1" />
+										<newline />
+										<field name="taggeld" readonly="1" />
+										<field name="tod" readonly="1" />
+										<newline />
+										<field name="invaliditaet" readonly="1" />
+										<field name="andere" readonly="1" />
+										<newline />
+										<field name="uvgz_lohn_ab" readonly="1" />
+										<field name="uvgz_hoechstlohn_bis" readonly="1" />
+										<newline />
+										<field name="uvgz_beitrag_m" readonly="1" />
+										<field name="uvgz_beitrag_f" readonly="1" />
+										<newline />
+										<field name="uvgz_beitrag_m_employer" readonly="1" />
+										<field name="uvgz_beitrag_f_employer" readonly="1" />
+									</group>
+								</form>
+								<tree string="UVGZ Codes">
+									<field name="name" />
+									<field name="beschreibung" />
+									<field name="category_beitrag_id" />
+									<field name="category_salary_id" />
+									<field name="taggeld" />
+									<field name="tod" />
+									<field name="invaliditaet" />
+									<field name="andere" />
+									<field name="uvgz_lohn_ab" />
+									<field name="uvgz_hoechstlohn_bis" />
+									<field name="uvgz_beitrag_m" />
+									<field name="uvgz_beitrag_f" />
+									<field name="uvgz_beitrag_m_employer" />
+									<field name="uvgz_beitrag_f_employer" />
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_res_company_uvgz_tree" model="ir.ui.view">
+			<field name="name">res.company.uvgz.tree</field>
+			<field name="model">res.company.uvgz</field>
+			<field name="arch" type="xml">
+				<tree string="UVGZ">
+					<field name="group" readonly="1" />
+					<field name="address_uvgz_id" readonly="1" />
+				</tree>
+			</field>
+		</record>
+	</data>
+</openerp>

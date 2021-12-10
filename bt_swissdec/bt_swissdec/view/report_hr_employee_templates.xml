@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_hr_employee_document">
+    <t t-call="web.internal_layout">
+        <t t-set="o" t-value="o.with_context({'lang':lang_set})"/>
+        <t t-set="employee" t-value="get_employee(o.employee_id.id)"/>
+        <t t-set="first_contract" t-value="get_ids_of_current_year(o, o.contract_ids, 'contract')[0] if o.contract_ids and get_ids_of_current_year(o, o.contract_ids, 'contract') else False"/>
+<!--        <t t-set="first_contract" t-value="get_ids_of_current_year(o.contract_ids, 'contract')[0]"/>-->
+<!--        <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>-->
+        <t t-set="style_tr" t-value="'background-color: #F5F5DC; border: 1px solid white'"/>
+        <t t-set="style_tr_head" t-value="'background-color: #1E90FF; color: white; border: 1px solid white'"/>
+        <t t-set="style_td" t-value="'padding-top: 0.08cm; padding-bottom: 0.08cm; border: 1px solid white; width: 50%'"/>
+        <t t-set="style_table" t-value="'font-size: 75%; page-break-inside:avoid; border: 1px solid white'"/>
+        <t t-set="employee_infos_tr" t-value="str(employee.identification_id_bt) + ' - ' + o.employee_name + ' ' + employee.firstname + ' - ' + o.name"/>
+        <div class="page">
+            <section class="oe_mb16">
+                <h4 style="text-align: center"><strong>Employee parameters</strong></h4>
+            </section>
+            <table class="table" style="font-size: 75%;">
+                <thead>
+                    <tr t-att-style="style_tr_head">
+                        <td t-att-style="style_td">Daten</td>
+                        <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                    </tr>
+                </thead>
+                <t t-set="counter_contracts" t-value="0"/>
+                <tr t-att-style="style_tr">
+                    <td t-att-style="style_td">
+                        <strong>Personalnummer</strong><br/>
+                        <div t-foreach="get_ids_of_current_year(o, o.contract_ids, 'contract')" t-as="contract"><t t-set="counter_contracts" t-value="counter_contracts+1"/>Eintritt <span t-esc="counter_contracts"/><br/>
+                        Austritt <span t-esc="counter_contracts"/>
+                        </div>
+                        <div t-foreach="o.contract_ids_last_year" t-as="contract"><t t-set="counter_contracts" t-value="counter_contracts+1"/>Eintritt<br/>
+                        Austritt im Vorjahr
+                        </div>
+                    </td>
+                    <td t-att-style="style_td">
+                        <strong><span t-field="employee.identification_id_bt"/></strong><br/>
+                        <div t-foreach="get_ids_of_current_year(o, o.contract_ids, 'contract')" t-as="contract"><span t-field="contract.date_start"/><br/>
+                        <span t-field="contract.date_end"/>
+                        </div>
+                        <div t-foreach="o.contract_ids_last_year" t-as="contract"><span t-field="contract.date_start"/><br/>
+                        <span t-field="contract.date_end"/>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Personalien</td>
+                            <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <strong>Name und Vorname</strong>
+                            </td>
+                            <td t-att-style="style_td">
+                                <strong><span t-field="o.employee_name"/> <span t-esc="employee.firstname"/></strong>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'address_home_id')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <span t-if="not is_first_entry(lines, line)">Gültig ab<br/></span>
+                                Strasse<br/>
+                                Ort<div t-if="line.address_home_id.country_id.code != 'CH'">Land</div>
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/><br/></span>
+                                <span t-field="line.address_home_id.street"/><br/>
+                                <span t-field="line.address_home_id.zip"/> <span t-field="line.address_home_id.city"/><div t-if="line.address_home_id.country_id.code != 'CH'"><span t-field="line.address_home_id.country_id.code"/></div>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'denomination_type')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Konfession
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <span t-field="line.denomination_type"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Geschlechts-Code
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="employee.gender[0].upper()"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Geburtsdatum
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="employee.birthday" t-options='{"widget": "date"}'/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Ferienanspruch / Jahr
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="o.yearlyholidays" t-options='{"widget": "integer"}'/> Tage
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Alleinerziehend
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="employee.is_single_parent">X</div>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Sprache<br/>
+                                Sozialversicherungsnummer SV
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="(employee.lang or employee.lang_fnct or 'de_DE')[0:2].upper()"/><br/>
+                                <div t-if="o.ssnid">
+                                    <span t-field="o.ssnid"/>
+                                </div>
+                                <div t-else="">
+                                    unbekannt
+                                </div>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'marital_code')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Zivilstand<br/>
+                                Zivilstand gültig ab
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <span t-field="line.marital_code.name"/><br/>
+                                <span t-field="line.marital_validasof" t-options='{"widget": "date"}'/>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'degree')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Beschäftigungsgrad<br/>
+                                <div t-if="o.weeklyhours_or_lessons_company in ('has_weeklyhours','has_weeklyhoursandlessons') and line.weeklyhours_or_lessons in ('has_weeklyhours')">
+                                    Individuell vereinbarte wöchtenliche Arbeitszeit Stunden
+                                </div>
+                                <div t-if="o.weeklyhours_or_lessons_company in ('has_weeklylessons','has_weeklyhoursandlessons') and line.weeklyhours_or_lessons in ('has_weeklylessons')">
+                                    Individuell vereinbarte wöchtenliche Arbeitszeit Lektionen
+                                </div>
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <span t-field="line.degree"/><br/>
+                                <div t-if="o.weeklyhours_or_lessons_company in ('has_weeklyhours','has_weeklyhoursandlessons') and line.weeklyhours_or_lessons in ('has_weeklyhours') and line.degree > 0">
+                                    <span t-field="line.weeklyhours_besch"/>
+                                </div>
+                                <div t-if="o.weeklyhours_or_lessons_company in ('has_weeklylessons','has_weeklyhoursandlessons') and line.weeklyhours_or_lessons in ('has_weeklylessons') and line.degree > 0">
+                                    <span t-field="line.weeklylessons_besch"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'employment_type')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Beschäftigung
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <span t-field="line.employment_type"/>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'otheractivities_type')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Weitere Beschäftigung
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <span t-field="line.otheractivities_type"/>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'rente')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Rente
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <div t-if="line.rente == '1'">
+                                    Ja
+                                </div>
+                                <div t-else="">
+                                    Nein
+                                </div>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'grenzgaenger_type')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Aufenthaltskategorie
+                                <div t-if="line.grenzgaenger_type == 'abroadAndCH' and line.qst_address_id"><br/>
+                                    Strasse<br/>
+                                    Ort<br/>
+                                    Land
+                                </div>
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <span t-field="line.grenzgaenger_type"/>
+                                <div t-if="line.grenzgaenger_type == 'abroadAndCH' and line.qst_address_id"><br/>
+                                    <span t-esc="line.qst_address_id.street or '-'"/><br/>
+                                    <span t-esc="line.qst_address_id.zip or '-'"/> <span t-esc="line.qst_address_id.city or '-'"/><br/>
+                                    <span t-esc="line.qst_address_id.country_id.name.upper() or '-'"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'residence_category,nationality_country_id')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Aufenthaltsbewilligung<br/>
+                                Staatsangehörigkeit
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <span t-field="line.residence_category.name"/><br/>
+                                <span t-field="line.nationality_country_id.name"/>
+                            </td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'address_home_id')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Wohnkanton<br/>
+                                Gemeinde-Nr.
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <span t-esc="line.address_home_id.state_id.code or '-'"/><br/>
+                                <span t-esc="line.address_home_id.municipality or '-'"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Stunden-/Lektionen-Lohn
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="get_std_lek_salary_from_current_contract(o)"/><br/>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Arbeitsstätten</td>
+                            <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                        </tr>
+                        <div t-if="not has_only_zahlung_nach_austritt(o)">
+                            <t t-set="bur_ids" t-value="reversed(o.contract_bur_ids)"/>
+                            <tr t-foreach="bur_ids" t-as="bur" t-att-style="style_tr">
+                                <td t-att-style="style_td">
+                                    <span t-if="not is_first_entry(bur_ids, bur)">Gültig ab<br/></span>
+                                    BUR-Nummber<br/>
+                                    Filiale<br/>
+                                    Bezeichnung<br/>
+                                    Arbeitsplatzkanton<br/>
+                                    Gemeinde-Nr.
+                                </td>
+                                <td t-att-style="style_td">
+                                    <span t-if="not is_first_entry(bur_ids, bur)"><span t-field="bur.valid_from" t-options='{"widget": "date"}'/><br/></span>
+                                    <span t-esc="bur.bur_id.bur_ree_number or '-'"/><br/>
+                                    <span t-esc="bur.bur_id.name or '-'"/><br/>
+                                    <span t-esc="bur.bur_id.description"/><br/>
+                                    <span t-esc="bur.bur_id.state_id.code"/><br/>
+                                    <span t-esc="bur.bur_id.municipality"/>
+                                </td>
+                            </tr>
+                        </div>
+                        <div t-if="has_only_zahlung_nach_austritt(o)">
+                            <t t-set="bur_ids" t-value="reversed(o.contract_bur_ids_last_year)"/>
+                            <tr t-foreach="bur_ids" t-as="bur" t-att-style="style_tr">
+                                <td t-att-style="style_td">
+                                    <span t-if="not is_first_entry(bur_ids, bur)">Gültig ab<br/></span>
+                                    BUR-Nummber<br/>
+                                    Filiale<br/>
+                                    Bezeichnung<br/>
+                                    Arbeitsplatzkanton<br/>
+                                    Gemeinde-Nr.
+                                </td>
+                                <td t-att-style="style_td">
+                                    <span t-if="not is_first_entry(bur_ids, bur)"><span t-field="bur.valid_from" t-options='{"widget": "date"}'/><br/></span>
+                                    <span t-esc="bur.bur_id.bur_ree_number or '-'"/><br/>
+                                    <span t-esc="bur.bur_id.name or '-'"/><br/>
+                                    <span t-esc="bur.bur_id.description"/><br/>
+                                    <span t-esc="bur.bur_id.state_id.code"/><br/>
+                                    <span t-esc="bur.bur_id.municipality"/>
+                                </td>
+                            </tr>
+                        </div>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Familie</td>
+                            <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                        </tr>
+                        <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'konkubinat,partner_lastname,partner_firstname,partner_birthday,partner_ssnid,partner_other_address_id,partner_payment_type,partner_employment_type,partner_working_state_id,partner_working_start_date,partner_working_end_date')"/>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                Konkubinat<br/>
+                                <strong>Partner</strong><br/>
+                                Name<br/>
+                                Vorname<br/>
+                                Geburtstag<br/>
+                                Sozialversicherungsnummer SV<br/>
+                                <div t-if="line.partner_other_address_id">
+                                    <strong>Separate Wohnadresse</strong><br/>
+                                    Strasse<br/>
+                                    Ort<br/>
+                                    <div t-if="line.partner_other_address_id.country_id.code != 'CH'">
+                                        Land<br/>
+                                    </div>
+                                </div>
+                                Einkommen<br/>
+                                Beschäftigung
+                                <div t-if="line.partner_working_state_id">
+                                    Arbeitsplatzkanton<br/>
+                                    Beginn der Tätigkeit<br/>
+                                    Ende der Tätigkeit
+                                </div>
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                <span t-field="line.konkubinat"/><br/>
+                                <br/>
+                                <span t-field="line.partner_lastname"/><br/>
+                                <span t-field="line.partner_firstname"/><br/>
+                                <span t-field="line.partner_birthday" t-options='{"widget": "date"}'/><br/>
+                                <span t-field="line.partner_ssnid"/><br/>
+                                <div t-if="line.partner_other_address_id">
+                                    <br/>
+                                    <span t-field="line.partner_other_address_id.street"/><br/>
+                                    <span t-field="line.partner_other_address_id.zip"/> <span t-field="line.partner_other_address_id.city"/><br/>
+                                    <div t-if="line.partner_other_address_id.country_id.code != 'CH'">
+                                        <span t-field="line.partner_other_address_id.country_id.code"/><br/>
+                                    </div>
+                                </div>
+                                <span t-field="line.partner_payment_type"/><br/>
+                                <span t-field="line.partner_employment_type"/>
+                                <div t-if="line.partner_working_state_id">
+                                    <span t-field="line.partner_working_state_id.code"/><br/>
+                                    <span t-field="line.partner_working_start_date" t-options='{"widget": "date"}'/><br/>
+                                    <span t-field="line.partner_working_end_date" t-options='{"widget": "date"}'/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <div t-if="len(employee.children_ids) > 0">
+                    <tr>
+                        <table class="table" t-att-style="style_table">
+                            <tr t-att-style="style_tr_head">
+                                <td t-att-style="style_td">Kinder</td>
+                                <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                            </tr>
+                            <tr t-foreach="reversed(employee.children_ids)" t-as="child" t-att-style="style_tr">
+                                <td t-att-style="style_td">
+                                    Name<br/>
+                                    Vorname<br/>
+                                    Geburtstag<br/>
+                                    Sozialversicherungsnummer SV<br/>
+                                    Kinderzulage bis<br/>
+                                    Ausbildungszulage bis
+                                </td>
+                                <td t-att-style="style_td">
+                                    <span t-field="child.name"/><br/>
+                                    <span t-field="child.firstname"/><br/>
+                                    <span t-field="child.birthday" t-options='{"widget": "date"}'/><br/>
+                                    <span t-field="child.ahvnr"/><br/>
+                                    <span t-field="child.right_until" t-options='{"widget": "date"}'/><br/>
+                                    <span t-field="child.right_extended_until" t-options='{"widget": "date"}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                </div>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">AHV/ALV</td>
+                            <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Sonderfall
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.is_specialcase == True and 'X'"/>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <t t-set="lines" t-value="get_ids_of_current_year(o, o.uvg_ids, 'uvg')"/>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">UVG</td>
+                            <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                        </tr>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Code
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="line.code_betriebsteil.name"/><span t-field="line.code_versicherung"/><span t-if="len(lines) > 1"> - Gültig ab <span t-field="line.valid_from" t-options='{"widget": "date"}'/></span>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <t t-set="lines" t-value="get_ids_of_current_year(o, o.uvgz_ids, 'uvgz')"/>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">UVGZ</td>
+                            <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                        </tr>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Code
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="line.code.beschreibung"/><span t-if="len(lines) > 1"> - Gültig ab <span t-field="line.valid_from" t-options='{"widget": "date"}'/></span><span t-if="len(lines) > 1 and line.valid_to"> bis <span t-field="line.valid_to" t-options='{"widget": "date"}'/></span>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <t t-set="lines" t-value="get_ids_of_current_year(o, o.ktg_ids, 'ktg')"/>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">KTG</td>
+                            <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                        </tr>
+                        <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Code
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="line.code.beschreibung"/><span t-if="len(lines) > 1"> - Gültig ab <span t-field="line.valid_from" t-options='{"widget": "date"}'/></span><span t-if="len(lines) > 1 and line.valid_to"> bis <span t-field="line.valid_to" t-options='{"widget": "date"}'/></span>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <t t-set="lines" t-value="get_ids_of_current_year(o, o.bvg_ids, 'bvg')"/>
+                <div t-if="len(lines) == 0">
+                    <tr>
+                        <table class="table" t-att-style="style_table">
+                            <tr t-att-style="style_tr_head">
+                                <td t-att-style="style_td">BVG</td>
+                                <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                            </tr>
+                            <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                                <td t-att-style="style_td">
+                                    Nicht BVG-versichert
+                                </td>
+                                <td t-att-style="style_td">
+                                    X
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                </div>
+                <div t-else="">
+                    <tr>
+                        <table class="table" t-att-style="style_table">
+                            <tr t-att-style="style_tr_head">
+                                <td t-att-style="style_td">BVG</td>
+                                <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                            </tr>
+                            <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                                <td t-att-style="style_td">
+                                    Code
+                                </td>
+                                <td t-att-style="style_td">
+                                    <div t-if="line.not_bvg">
+                                        Nicht BVG-versichert <span t-if="len(lines) > 1"> - Gültig ab <span t-field="line.valid_from" t-options='{"widget": "date"}'/></span><span t-if="len(lines) > 1 and line.valid_to"> bis <span t-field="line.valid_to" t-options='{"widget": "date"}'/></span>
+                                    </div>
+                                    <div t-else="">
+                                        <span t-field="line.bvg_code_id.code"/><span t-if="len(lines) > 1"> - Gültig ab <span t-field="line.valid_from" t-options='{"widget": "date"}'/></span><span t-if="len(lines) > 1 and line.valid_to"> bis <span t-field="line.valid_to" t-options='{"widget": "date"}'/></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                </div>
+                <t t-set="lines" t-value="get_distinct_values_of_qst_ids(first_contract, o.qst_ids, 'qst_code,qst_state_id,category_predefined,category_open')"/>
+                <div t-if="len(lines) > 0">
+                    <tr>
+                        <table class="table" t-att-style="style_table">
+                            <tr t-att-style="style_tr_head">
+                                <td t-att-style="style_td">Quellensteuer</td>
+                                <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                            </tr>
+                            <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                                <td t-att-style="style_td">
+                                    <div t-if="not is_first_entry(lines, line)">Gültig ab</div>
+                                    QST-Code<br/>
+                                    QST-Kanton<br/>
+                                    Offene Kategorie<br/>
+                                    VR Honorar an Personen mit Wohnsitz im Ausland<br/>
+                                    Geldwerte Leistungen an Personen mit Ansässigkeit im Ausland<br/>
+                                    Sondervereinbarung mit Frankreich
+                                </td>
+                                <td t-att-style="style_td">
+                                    <div t-if="not is_first_entry(lines, line)"><span t-field="line.valid_from" t-options='{"widget": "date"}'/></div>
+                                    <span t-field="line.qst_code.name"/><br/>
+                                    <span t-field="line.qst_state_id.code"/><br/>
+                                    <span t-field="line.category_open"/><br/>
+                                    <span t-esc="line.category_predefined == 'specialAgreement' and 'X'"/><br/>
+                                    <span t-esc="line.category_predefined == 'honoraryBoardOfDirecotrsResidingAbroad' and 'X'"/><br/>
+                                    <span t-esc="line.category_predefined == 'monetaryValuesServicesResidingAbroad' and 'X'"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </tr>
+                </div>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Lohnausweis</td>
+                            <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Lohnausweis
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.lohnausweis_or_rentenbescheinigung == 'lohnausweis' and 'X'"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Rentenbescheinigung
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.lohnausweis_or_rentenbescheinigung != 'lohnausweis' and 'X'"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Unentgeltliche Beförderung zwischen Wohn- und Arbeitsort
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.unentgeltliche_befoerderung and 'X'"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Kantinenverpflegung/Lunch-Checks
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.kantine and 'X'"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Effektive Spesen Expatriate
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.effektive_spesen and 'X'"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Weitere (nicht bewertete) Gehaltsnebenleistungen
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="get_lohnausweis_nebenleistung_ids_note(o.lohnausweis_nebenleistung_ids, o.company_year_id.lohnausweis_nebenleistung_ids, o.lohnausweis_nl_ignore_company)"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Spesenreglement
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="o.spesen_stv == 'company' and not o.spesen_stv_all_company and o.spesen_stv_state_id_company">
+                                    Spesenreglement durch Kanton <span t-field="o.spesen_stv_state_id_company"/> am <span t-field="o.spesen_stv_datum_company" t-options='{"widget": "date"}'/> genehmigt
+                                </div>
+                                <div t-if="o.spesen_stv == 'yes' and not o.spesen_stv_all_company and o.spesen_stv_state_id.code">
+                                    Spesenreglement durch Kanton <span t-field="o.spesen_stv_state_id.code"/> am <span t-field="o.spesen_stv_datum" t-options='{"widget": "date"}'/> genehmigt
+                                </div>
+                                <div t-if="o.spesen_stv_all_company and o.company_year_id.spesen_stv and o.company_year_id.spesen_stv_state_id.code">
+                                    Spesenreglement durch Kanton <span t-field="o.company_year_id.spesen_stv_state_id.code"/> am <span t-field="o.company_year_id.spesen_stv_datum" t-options='{"widget": "date"}'/> genehmigt
+                                </div>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Randziffer 52
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.bedingungen_rz52=='company' and not o.bedingungen_rz52_all_company and o.bedingungen_rz52_company == True and 'X'"/>
+                                <span t-esc="o.bedingungen_rz52=='yes' and not o.bedingungen_rz52_all_company and o.bedingungen_rz52 and 'X'"/>
+                                <span t-esc="o.bedingungen_rz52_all_company and o.company_year_id.bedingungen_rz52 and 'X'"/>
+                                <span t-esc="o.bedingungen_rz52=='no' and ''"/>
+                            </td>
+                        </tr>
+			                  <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Privatanteil Geschäftswagen
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="o.privat_fz=='company' and not o.privat_fz_all_company and o.privat_fz_state_id_company">
+                                    Privatanteil Geschäftswagen durch Kanton <span t-field="o.privat_fz_state_id_company"/> am <span t-field="o.privat_fz_datum_company" t-options='{"widget": "date"}'/> genehmigt
+                                </div>
+                                <div t-if="o.privat_fz=='yes' and not o.privat_fz_all_company and o.privat_fz_state_id.code">
+                                    Privatanteil Geschäftswagen durch Kanton <span t-field="o.privat_fz_state_id.code"/> am <span t-field="o.privat_fz_datum" t-options='{"widget": "date"}'/> genehmigt
+                                </div>
+                                <div t-if="o.privat_fz_all_company and o.company_year_id.privat_fz and o.company_year_id.privat_fz_state_id.code">
+                                    Privatanteil Geschäftswagen durch Kanton <span t-field="o.company_year_id.privat_fz_state_id.code"/> am <span t-field="o.company_year_id.privat_fz_datum" t-options='{"widget": "date"}'/> genehmigt
+                                </div>
+                                <div t-if="o.privat_fz=='no'">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Mitarbeiterbeteiligungen Verkehrswert
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="o.verkehrswert_stv_ok =='company' and not o.verkehrswert_stv_ok_all_company and o.verkehrswert_stv_ok_state_id_company">
+                                    Verkehrswert durch die Steuerverwaltung Kanton <span t-field="o.verkehrswert_stv_ok_state_id_company"/> am <span t-field="o.verkehrswert_stv_ok_datum_company" t-options='{"widget": "date"}'/> genehmigt
+                                </div>
+                                <div t-if="o.verkehrswert_stv_ok=='yes' and not o.verkehrswert_stv_ok_all_company and o.verkehrswert_stv_ok_state_id.code">
+                                    Verkehrswert durch die Steuerverwaltung Kanton <span t-field="o.verkehrswert_stv_ok_state_id.code"/> am <span t-field="o.verkehrswert_stv_ok_datum" t-options='{"widget": "date"}'/> genehmigt
+                                </div>
+                                <div t-if="o.verkehrswert_stv_ok_all_company and o.company_year_id.verkehrswert_stv_ok and o.company_year_id.verkehrswert_stv_ok_state_id.code">
+                                    Verkehrswert durch die Steuerverwaltung Kanton <span t-field="o.company_year_id.verkehrswert_stv_ok_state_id.code"/> am <span t-field="o.company_year_id.verkehrswert_stv_ok_datum" t-options='{"widget": "date"}'/> genehmigt
+                                </div>
+                                <div t-if="o.verkehrswert_stv_ok=='no'">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Mitarbeiterbeteiligungen noch ohne steuerbares Einkommen<br/>
+                                Gründe
+                            </td>
+                            <td t-att-style="style_td">
+                                <div t-if="o.ma_beteiligung=='company' and not o.ma_beteiligung_all_company and o.ma_beteiligung_company == True">
+                                    X<br/>
+                                    <span t-esc="get_gruende_ma_beteiligung(o)"/>
+                                </div>
+                                <div t-if="o.ma_beteiligung=='yes' and not o.ma_beteiligung_all_company and o.ma_beteiligung">
+                                    X<br/>
+                                    <span t-esc="get_gruende_ma_beteiligung(o)"/>
+                                </div>
+                                <div t-if="o.ma_beteiligung_all_company and o.company_year_id.ma_beteiligung">
+                                    X<br/>
+                                    <span t-esc="get_gruende_ma_beteiligung(o.company_year_id, True)"/>
+                                </div>
+                                <div t-if="o.ma_beteiligung=='no'">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Mitarbeiterbeteiligungen durch Drittgesellschaft<br/>
+                                Name der Drittfirma
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.ma_beteiligung_drittfirma == True and 'X'"/><br/>
+                                <span t-esc="o.ma_beteiligung_drittfirma == True and o.ma_beteiligung_drittfirma_firma"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Kinderzulagen direkt durch Ausgleichskasse ausbezahlt
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-if="o.lohnausweis_ohne_kz== True and o.lohnausweis_ohne_kz_betrag > 0">
+                                    X <span t-field="o.lohnausweis_ohne_kz_betrag"/>
+                                </span>
+                                <span t-if="o.lohnausweis_ohne_kz== True and o.lohnausweis_ohne_kz_betrag == 0">
+                                    X 0.00
+                                </span>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Umzugskosten durch Arbeitgeber inkl. Betrag
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-if="o.umzug_bezahlt_ag== True and o.umzug_bezahlt_ag_betrag > 0">
+                                    <span t-field="o.umzug_bezahlt_ag_betrag"/>
+                                </span>
+                                <span t-if="o.umzug_bezahlt_ag== True and o.umzug_bezahlt_ag_betrag == 0">
+                                    0.00
+                                </span>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Privatanteil Geschäftswagen Abkl. Veranlagungsverfahren
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.privat_dienstauto=='company' and not o.privat_dienstauto_all_company and o.privat_dienstauto_company == True and 'X'"/>
+                                <span t-esc="o.privat_dienstauto=='yes' and not o.privat_dienstauto_all_company and o.privat_dienstauto and 'X'"/>
+                                <span t-esc="o.privat_dienstauto_all_company and o.company_year_id.privat_dienstauto and 'X'"/>
+                                <span t-esc="o.privat_dienstauto=='no' and ''"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Mitarbeiter bezahlt (mind.) 0.8% pro Monat Privatanteil Geschäftswagen
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.privatanteil_fz == True and 'X'"/>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Lohnstrukturerhebung</td>
+                            <td t-att-style="style_td"><span t-esc="employee_infos_tr"/></td>
+                        </tr>
+                        <div t-if="not has_only_zahlung_nach_austritt(o)">
+                            <t t-set="lines" t-value="get_distinct_values_of_contract_type_id_names(get_ids_of_current_year(o, o.contract_ids, 'contract'))"/>
+                            <tr t-foreach="lines" t-as="line" t-att-style="style_tr">
+                                <td t-att-style="style_td">
+                                    Arbeitsvertrag<span t-if="len(lines) > 1"><br/>von - bis</span>
+                                </td>
+                                <td t-att-style="style_td">
+                                    <span t-esc="line.type_id.name"/><span t-if="len(lines) > 1"><br/><span t-field="line.date_start" t-options='{"widget": "date"}'/> - <span t-field="line.date_end" t-options='{"widget": "date"}'/></span>
+                                </td>
+                            </tr>
+                        </div>
+                        <div t-if="has_only_zahlung_nach_austritt(o)">
+                            <tr t-foreach="get_distinct_values_of_contract_type_id_names(o.contract_ids_last_year)" t-as="line" t-att-style="style_tr">
+                                <td t-att-style="style_td">
+                                    Arbeitsvertrag<br/>
+                                    von - bis
+                                </td>
+                                <td t-att-style="style_td">
+                                    <span t-esc="line.type_id.name"/><br/><span t-field="line.date_start" t-options='{"widget": "date"}'/> - <span t-field="line.date_end" t-options='{"widget": "date"}'/>
+                                </td>
+                            </tr>
+                        </div>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Ausbildung des Arbeitnehmers
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.education_id.name if o.education_id else ''"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Berufliche Stellung
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.position_id.name if o.position_id else ''"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Effektive Tätigkeit des Arbeitnehmers
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="o.jobtitle_id.name if o.jobtitle_id else ''"/>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+            </table>
+        </div>
+    </t>
+</template>
+
+<template id="report_hr_employee">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_hr_employee_document" t-lang="lang_set"/>
+        </t>
+    </t>
+</template>
+</odoo>

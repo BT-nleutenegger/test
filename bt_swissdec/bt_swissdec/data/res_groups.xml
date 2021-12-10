@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="res.groups" id="bt_swissdec.bt_swissdec_admin">
+            <field name="name">brain-tec Swissdec Admin</field>
+        </record>
+
+        <record model="ir.module.category" id="module_category_swissdec">
+            <field name="name">BT-Swissdec</field>
+        </record>
+
+		<record model="res.groups" id="user_swissdec">
+			<field name="name">User</field>
+			<field name="category_id" ref="module_category_swissdec"/>
+		</record>
+    </data>
+</odoo>

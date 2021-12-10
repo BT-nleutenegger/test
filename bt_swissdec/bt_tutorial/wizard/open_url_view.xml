@@ -1,0 +1,16 @@
+<odoo>
+
+    <record id="open_url_form" model="ir.ui.view">
+        <field name="name">open.url.form</field>
+        <field name="model">open.url</field>
+        <field name="arch" type="xml">
+            <form string="Open Url" edit="false">
+                <field name="url" widget="html" options="{'style-inline': false}" nolabel="1" readonly="1"/>
+                <footer>
+                    <button string="Close" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

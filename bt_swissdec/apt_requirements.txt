@@ -1,0 +1,6 @@
+python3-markdown
+openssh-client
+python-yaml
+openjdk-11-jdk
+libxml2-utils
+p7zip-full

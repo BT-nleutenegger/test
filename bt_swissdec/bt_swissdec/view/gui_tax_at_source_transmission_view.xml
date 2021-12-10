@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record id="gui_tax_at_source_transmission_form_view" model="ir.ui.view">
+			<field name="name">gui_tax_at_source_transmission_form_view</field>
+			<field name="model">gui_tax_at_source_transmission</field>
+			<field name="arch" type="xml">
+				<form string="Tax at Source Transmission">
+					<header>
+						<button name="action_print_data_review" type="object"
+							string="Data Review" class="oe_highlight" states="draft" />
+
+						<button name="action_send_declaration" type="object"
+							string="Send Tax at Source" class="oe_highlight" states="data_review"
+							confirm="Make sure you checked with 'PREVIEW' what will be send. Click only 'OK' if you are sure all data is correct."/>
+						<button name="action_send_declaration_preview_pdf" type="object"
+							string="PREVIEW - Send Tax at Source" class="oe_highlight" states="data_review" />
+						<button name="action_get_status" type="object" string="Get Status"
+							class="oe_highlight" states="get_status" />
+
+
+						<button name="print_report" type="object" string="Print attachment"
+							attrs="{'invisible': [('valid_print','=', False)]}" class="oe_highlight" />
+
+						<button name="parser_response" type="object" string="Parser response" confirm="Are you sure you want to do this?"
+							groups="bt_swissdec.bt_swissdec_admin" class="oe_highlight" invisible="1" />
+
+
+						<button name="all_get_all_information" type="object" string="Get all results"
+								class="oe_highlight" attrs="{'invisible': ['|', ('state', '!=', 'get_result'), ('number_of_open_get_status', '=', 0)]}"/>
+
+						<button name="do_next" type="object" string="Next" class="oe_highlight"
+							attrs="{'invisible': ['|', ('state', '!=', 'get_result'), ('number_of_open_get_status', '!=', 0)]}" />
+
+
+						<button string="Print"  name="print_generic_report" type="object" icon="fa-print" states="done,corrected"
+						/>
+						<field name="state" widget="statusbar" />
+
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="%(bt_tutorial.action_tutorial_link_to_use_in_other_modules)d" class="oe_stat_button" icon="fa-youtube" string="Tutorials" type="action" context="{'model_name': 'gui_tax_at_source_transmission'}"/>
+						</div>
+						<field name="number_of_open_get_status" invisible="1" />
+						<field name="number_of_payslips_not_ready" invisible="1" />
+						<group name="name_group" colspan="4">
+							<label for="name" />
+							<field name="name" />
+						</group>
+						<field name="data_report" filename="data_report_name" groups="bt_swissdec.bt_swissdec_admin" />
+						<field name="data_report_name" invisible="1" />
+						<group attrs="{'invisible':[('error_in_declare_exists', '=', False)]}"
+							colspan="4">
+							<h1>There are some errors:</h1>
+							<br />
+							<field name="error_in_declare" colspan="4" nolabel="1" />
+							<field name="error_in_declare_exists" invisible="1" />
+							<button name="action_brain_tec_send" string="Report Error by Mail to brain-tec"
+								type="object" attrs="{'invisible':[('error_in_declare_exists', '=', False)]}"
+								class="oe_highlight" />
+							<field name="last_mail_id_text" colspan="4" nolabel="1" />
+						</group>
+
+						<group attrs="{'invisible':[('extra_information_exists', '=', False)]}"
+							colspan="4">
+							<h1>Information...</h1>
+							<br />
+							<field name="extra_information" colspan="4" />
+							<field name="extra_information_exists" invisible="1" />
+						</group>
+
+						<notebook>
+							<page string="Results" states="get_status,get_result,done">
+								<group colspan="4" col="2">
+									<field name="transmission_date" />
+									<field name="declaration_id" />
+									<field name="valid_print" groups="bt_swissdec.bt_swissdec_admin" confirm="Are you sure you want to do this?" />
+									<field name="transmitter_id" invisible="1" />
+
+									<group colspan="4"
+										attrs="{'invisible':[('validity_plausibility_checking', '=', False)]}">
+										<ul>
+											<li>Validity plausibility checking.</li>
+											<li>Try again in few minutes.</li>
+										</ul>
+									</group>
+									<group colspan="4"
+										attrs="{'invisible':[('job_finished', '=', True)]}">
+										<ul>
+											<li>Just waiting to receive all the information from the
+												server.
+											</li>
+											<li>Try again in few minutes.</li>
+										</ul>
+									</group>
+									<field name="validity_plausibility_checking" invisible="1" />
+									<field name="job_finished" invisible="1" />
+
+
+
+									<group colspan="4" col="2" states="get_result,done">
+										<field name="transmitter_get_status_ids" readonly="1"
+											colspan="4" options="{'reload_on_button': True}" nolabel="1" />
+
+									</group>
+									<group colspan="4" col="2" states="done" string="Sent Mutations" groups="bt_swissdec.bt_swissdec_admin">
+										<field name="sent_mutation_ids" readonly="1" colspan="4" options="{'reload_on_button': True}" nolabel="1" />
+									</group>
+
+								</group>
+							</page>
+
+							<page string="Options">
+								<separator string="General Options" colspan="4" />
+								<group colspan="4" col="2">
+									<field name="year_id"
+										   options='{"no_open": True, "no_create": True}'
+										   force_save="1"
+										   attrs="{'readonly': [('test_case', '=', True)]}"/>
+									<field name="company_qst_ids" widget="many2many_checkboxes"
+										invisible="1">
+
+									</field>
+
+									<field name="qst_month" invisible="1" />
+									<field name="qst_month_id" domain="[('id', 'in', qst_month_ids)]"
+										   colspan="2" attrs="{'invisible': ['|', ('year_id', '=', False), ('qst_month_ids', '=', [])], 'readonly': [('test_scenario_id', '=', False), ('test_case', '=', True)]}"
+										   options='{"no_open": True, "no_create": True}' />
+									<field name="qst_month_ids" invisible="1" widget="many2many_checkboxes" />
+									<div attrs="{'invisible':[('contains_payslips_for_selected_month','=',True)]}" colspan="2">
+										<span style="color:red;font-weight:bold">There are no payslips for this month. Are you sure you want to compute/send QST data anyway?</span>
+									</div>
+									<div attrs="{'invisible':[('all_payslips_in_correct_state_for_selected_month','=',True)]}" colspan="2">
+										<span style="color:red;font-weight:bold">There are not all payslips in correct state for this month. Are you sure you want to compute/send QST data anyway?</span>
+									</div>
+									<field name="transmitter_configuration_id"
+										   options='{"no_open": True, "no_create": True}' required="1"
+										   domain="[('state', '=', 'done')]"/>
+									<field name="test_case" readonly="1" groups="bt_swissdec.bt_swissdec_admin"/>
+									<field name="test_scenario_id" options='{"no_open": True, "no_create": True}'
+										   attrs="{'required': [('test_case', '=', True)], 'invisible': [('test_case', '=', False)]}" />
+									<field name="working_offline" />
+									<field name="contains_payslips_for_selected_month" invisible="1"/>
+									<field name="all_payslips_in_correct_state_for_selected_month" invisible="1"/>
+								</group>
+								<group>
+									<field name="qst_mutation_table_to_show_ids" states="data_review"
+										options='{"reload_on_button": True, "no_open": True, "no_create": True}'
+									    context="{'tree_view_ref': 'bt_swissdec.qst_mutation_table_tree_view_ne',
+									    		  'form_view_ref': 'bt_swissdec.qst_mutation_table_form_view_ne'}"/>
+
+									<field name="mutation_ids" invisible="1" widget="many2many_checkboxes"/>
+									<field name="number_months_to_change" groups="bt_swissdec.bt_swissdec_admin" attrs="{'invisible': [('number_months_to_change', '!=', 0)]}" />
+									<field name="line_correction_ids"
+										attrs="{'invisible': ['|', ('state', 'not in', ['data_review']), ('number_months_to_change', '=', 0)]}"
+										   readonly="1"
+										   options='{"no_open": True, "no_create": True}'
+										context="{'tree_view_ref': 'bt_swissdec.gts_transmission_line_demo_tree_view'}"/>
+
+
+								</group>
+							</page>
+							<page string="QST DATA (FIX)" states="data_review,get_status,get_result,done" groups="bt_swissdec.bt_swissdec_admin">
+								<separator string="QST DATA" colspan="4" />
+								<p>
+									This data are the original data send from this month.
+									If there
+									is any change then go to "Current DATA" as admin user.
+								</p>
+								<button name="parser_input_data" type="object"
+									string="QST-DATA (PARSER-Sent)" groups="bt_swissdec.bt_swissdec_admin" confirm="Are you sure you want to do this?"
+									class="oe_highlight"  />
+								<button name="action_recalculate_data" type="object"
+									string="QST-DATA (Recalculate)" groups="bt_swissdec.bt_swissdec_admin" confirm="Are you sure you want to do this?"
+									class="oe_highlight"  />
+									
+								<button name="do_backup" type="object"
+									string="DO BACKUP" groups="bt_swissdec.bt_swissdec_admin" confirm="Are you sure you want to do this?" help="This backup will be used in the payroll. Calculation of the correction lines in the salary."
+									class="oe_highlight"  />
+									
+								<button name="recover_backup" type="object"
+									string="RECOVER BACKUP" groups="bt_swissdec.bt_swissdec_admin" confirm="Are you sure you want to do this?"
+									help="This backup will be used in the payroll. Calculation of the correction lines in the salary."
+									class="oe_highlight"  />
+								<button name="mark_all_as_correct" type="object"
+									string="MARK ALL AS CORRECT" groups="bt_swissdec.bt_swissdec_admin"  class="oe_highlight"  />
+
+
+								<button name="action_get_total_transmission" type="object"
+									string="Get Total Transmission" groups="bt_swissdec.bt_swissdec_admin" confirm="Are you sure you want to do this?"
+									class="oe_highlight"  />
+
+									
+								<field name="gui_tax_at_source_transmission_line_ids" />
+								<group groups="bt_swissdec.bt_swissdec_admin">
+								<separator string="QST Recalculated DATA" colspan="4" />
+								<field name="gui_tax_at_source_transmission_line_recalculate_ids" colspan="4" />
+								
+								</group>
+							</page>
+							<page string="Sumarize" attrs="{'invisible': [('advance_mode', '=', False)]}" >
+								<field name="log_correction_ids" options='{"no_open": True, "no_create": True}' readonly="1"/>
+								<field name="internal_notes" readonly="1"/>
+							</page>
+							<page string="Advance Mode" attrs="{'invisible': [('advance_mode', '=', False)]}">
+								<group colspan="4" col="2">
+									<field name="execution_ids" readonly="1" nolabel="1" />
+								</group>
+							</page>
+
+						</notebook>
+
+					</sheet>
+					<footer>
+						<field name="advance_mode" invisible="1" />
+						<button name="action_technical_details" type="object"
+							string="Techn. Details" class="oe_stat_button"
+							states="data_review,get_status,get_result,done" />
+
+					</footer>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"
+							groups="base.group_user" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
+
+		<record id="gui_tax_at_source_transmission_tree_view" model="ir.ui.view">
+			<field name="name">gui_tax_at_source_transmission_tree_view</field>
+			<field name="model">gui_tax_at_source_transmission</field>
+			<field name="arch" type="xml">
+				<tree string="Tax at Source Transmission"
+					  decoration-success="state=='done'"
+					  decoration-info="state=='draft'"
+					  decoration-warning="state in ('data_review','get_status')"
+					  decoration-muted="state=='corrected'">
+					<field name="name" />
+					<field name="year_id" />
+					<field name="qst_month_id" />
+					<field name="company_qst_ids" options='{"no_open": True, "no_create": True}' />
+					<field name="test_case" />
+					<field name="transmission_date" />
+					<field name="declaration_id" />
+					<field name="working_offline" />
+					<field name="state" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="gui_tax_at_source_transmission_search_view" model="ir.ui.view">
+			<field name="name">gui_tax_at_source_transmission_search_view</field>
+			<field name="model">gui_tax_at_source_transmission</field>
+			<field name="arch" type="xml">
+				<search string="QST Mutation">
+					<field name="name" />
+					<field name="year_id" />
+					<field name="qst_month_id" />
+					<field name="state" />
+					<field name="working_offline" />
+					<group expand="0" string="Group By...">
+						<filter string="Year" domain="[]"
+							name="group_by_year" context="{'group_by':'year_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+	</data>
+</openerp>

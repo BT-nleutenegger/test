@@ -1,0 +1,62 @@
+<openerp>
+	<data>
+		<record id="bvg_basis_line_detail_tree_view_ds" model="ir.ui.view">
+			<field name="name">bvg_basis_line_detail_tree_view</field>
+			<field name="model">hr.bvg.basis.line.detail</field>
+			<field name="arch" type="xml">
+				<tree string="Details">
+					<field name="name" />
+					<field name="bezug_von" />
+					<field name="bezug_bis" />
+					<field name="amount_month" />
+					<field name="factor" />
+					<field name="amount_year" />
+					<field name="bvg_basis" />
+				</tree>
+			</field>
+		</record>
+		<record id="bvg_basis_line_detail_form_view_ds" model="ir.ui.view">
+			<field name="name">bvg_basis_line_detail_form_view</field>
+			<field name="model">hr.bvg.basis.line.detail</field>
+			<field name="arch" type="xml">
+				<form string="Details">
+					<group colspan="4" col="8">
+						<field name="name" colspan="2" />
+						<field name="bezug_von" />
+						<field name="bezug_bis" />
+						<field name="amount_month" />
+						<field name="factor" />
+						<field name="amount_year" />
+						<field name="bvg_basis" />
+					</group>
+				</form>
+			</field>
+		</record>
+		<record id="bvg_basis_line_detail_tree_view_sc" model="ir.ui.view">
+			<field name="name">bvg_basis_line_detail_tree_view</field>
+			<field name="model">hr.bvg.basis.line.detail</field>
+			<field name="arch" type="xml">
+				<tree string="Details">
+					<field name="name" />
+					<field name="bezug_von" />
+					<field name="bezug_bis" />
+					<field name="factor" />
+				</tree>
+			</field>
+		</record>
+		<record id="bvg_basis_line_detail_form_view_sc" model="ir.ui.view">
+			<field name="name">bvg_basis_line_detail_form_view</field>
+			<field name="model">hr.bvg.basis.line.detail</field>
+			<field name="arch" type="xml">
+				<form string="Details">
+					<group colspan="4" col="8">
+						<field name="name" colspan="2" />
+						<field name="bezug_von" />
+						<field name="bezug_bis" />
+						<field name="factor" />
+					</group>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

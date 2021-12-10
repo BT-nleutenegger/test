@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- =========== Actions =========== -->
+		<!-- Root Menus -->
+		<menuitem id="hr.hr_menu_hr_reports" name="Reporting" parent="hr.menu_hr_root" sequence="10"/>
+		<menuitem id="menu_hr_root_payroll" parent="hr.menu_hr_root"
+			name="Payroll" sequence="9" />
+		<menuitem id="payroll_configure" parent="hr.menu_hr_root"
+			name="Swissdec" sequence="20" groups="hr.group_hr_manager" />
+		<menuitem id="payroll_configure_admin" parent="hr.menu_hr_root"
+			name="Swissdec Admin" sequence="25" groups="bt_swissdec.bt_swissdec_admin" />
+
+		<!--delete model="ir.ui.view" search="[('name','=','hr.payslip.inherit.form')]" /-->
+		<record id="hr_payroll_account.hr_payslip_view_form" model="ir.ui.view">
+     	    <field eval="[(6, 0,  [ref('bt_swissdec.bt_swissdec_admin')])]" name="groups_id"/>
+		</record>
+		<!--delete model="ir.ui.view" search="[('name','=','hr.payslip.line.select')]" /-->
+		<record id="hr_payroll.view_hr_payslip_line_filter" model="ir.ui.view">
+     	    <field eval="[(6, 0,  [ref('bt_swissdec.bt_swissdec_admin')])]" name="groups_id"/>
+		</record>
+
+	</data>
+</openerp>

@@ -1,0 +1,355 @@
+<openerp>
+	<data>
+
+		<!-- menu Personal/BVG Basis -->
+
+
+		<!-- BVG Basis search view -->
+		<record id="bvg_basis_search_view" model="ir.ui.view">
+			<field name="name">bvg_basis_search_view</field>
+			<field name="model">hr.bvg.basis</field>
+			<field name="arch" type="xml">
+				<search string="BVG Basis">
+					<filter string="Draft" name="draft" domain="[('state','=','draft')]" />
+					<filter string="Transmitted" name="transmitted" domain="[('state','=','transmitted')]" />
+					<newline />
+					<field name="name" />
+					<field name="company_id" />
+					<field name="validasof_date" />
+					<newline />
+					<group expand="0" string="Group By...">
+						<filter string="State" name="state"
+							context="{'group_by':'state'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="view_bvg_basis_tree_sc" model="ir.ui.view">
+			<field name="name">view_bvg_basis_tree</field>
+			<field name="model">hr.bvg.basis</field>
+			<field name="arch" type="xml">
+				<tree string="HR BVG Basis"
+					  decoration-success="state=='blocked'"
+					  decoration-danger="state=='cancel'"
+					  decoration-warning="state=='calculated'"
+					  decoration-info="state=='draft'">
+					<field name="name" />
+					<field name="company_id" />
+					<field name="validasof_date" />
+					<field name="bvg_id" />
+					<field name="state" />
+				</tree>
+			</field>
+		</record>
+		<record id="view_bvg_basis_form_sc" model="ir.ui.view">
+			<field name="name">view_bvg_basis_form_sc</field>
+			<field name="model">hr.bvg.basis</field>
+			<field name="arch" type="xml">
+				<form string="HR BVG Basis">
+					<header>
+
+						<button name="print_bvg" string="Print Synchronize Contract"
+							states="calculated,perform_operation,all_transmitted,automatic_imported"
+							type="object" icon="fa-print" />
+
+						<button name="calculate_bvg_basis" string="Calculate"
+							icon="fa-check" states="draft" type="object" />
+
+						<button name="state_perform_operation" string="Ready To Transmit"
+							type="object" states="calculated" />
+
+						<field name="exist_open_session" invisible="1" />
+
+
+						<button name="action_po_open" string="Open existing session"
+							type="object" class="oe_highlight"
+							attrs="{'invisible': [('exist_open_session', '!=', 2)]}" />
+						<button name="action_po_correct" string="Replace existing session"
+							type="object" class="oe_highlight"
+							attrs="{'invisible': [('exist_open_session', '!=', 2)]}" />
+
+
+
+						<button name="action_po_correct" string="Next" type="object"
+							class="oe_highlight"
+							attrs="{'invisible': [('exist_open_session', '!=', 1)]}" />
+
+
+
+
+						<button name="state_draft" string="Reset" type="object"
+							icon="fa-refresh" states="perform_operation" />
+
+
+						<button name="state_draft" string="Reopen" icon="fa-retweet"
+							states="cancel" type="object" />
+
+						<button name="activity_automatic_imported" string="Automatic Import"
+							icon="fa-retweet" states="all_transmitted" type="object" />
+
+
+						<button name="cancel" string="Cancel" icon="fa-ban"
+							states="perform_operation,calculated" type="object" />
+
+						<button name="print_report_po" type="object" string="Print Result"
+							class="oe_highlight" states="all_transmitted,automatic_imported"
+							icon="fa-print"/>
+
+
+
+						<field name="state" widget="statusbar" />
+					</header>
+					<sheet>
+						<group colspan="4">
+							<field name="validasof_date" options="{'showInitDate': False, 'useCurrent': False}"/>
+							<field name="name" invisible="1" />
+							<field name="type" invisible="1" />
+							<field name="payroll_year_id" options='{"no_open": True, "no_create": True}'
+								invisible="1" />
+
+							<field name="current_year_id" options='{"no_open": True, "no_create": True}'
+								invisible="1" />
+
+							<field name="company_id" options='{"no_open": True, "no_create": True}'
+								attrs="{'invisible':[('len_companies','==',1)]}" />
+							<field name="len_companies" groups="bt_swissdec.bt_swissdec_admin" />
+						</group>
+						<group colspan="4"
+							attrs="{'invisible': [('current_year_id','=', False)]}">
+
+							<field name="bvg_id" options='{"no_open": True, "no_create": True}' />
+							<field name="group_bvg_id" domain="[('year_id.id', '=', current_year_id)]"
+								options='{"no_open": True, "no_create": True}'
+								force_save="1"
+								attrs="{'invisible':[('group_invisible','=',True)],
+										'required':[('group_required','=',True)],
+									    'readonly':['|',('state','!=','draft'),('group_readonly','=',True)]}" />
+
+							<field name="group_invisible" invisible="1" />
+							<field name="group_required" invisible="1" />
+							<field name="group_readonly" invisible="1" />
+							<notebook colspan="2">
+								<page string="Data to import" states="all_transmitted,automatic_imported">
+									<field name="bvg_import_data_ids" nolabel="1" readonly="1"
+										context="{'tree_view_ref': 'bt_swissdec.bvg_import_tree_view',
+										      'form_view_ref': 'bt_swissdec.bvg_import_form_view'}" />
+
+								</page>
+								<page string="Initial Data" attrs="{'invisible': [('state', '=', 'draft')]}">
+									<field name="basis_line_ids" options='{"selectable": true}'
+										context="{'tree_view_ref': 'bt_swissdec.bvg_basis_line_tree_view_sc',
+												  'form_view_ref': 'bt_swissdec.bvg_basis_line_form_view_sc'}"
+										nolabel="1" colspan="4" />
+
+								</page>
+								<page string="Employees" invisible="1">
+									<group colspan="4" col="2">
+										<button icon="fa-check-square-o" string="All"
+											name="change_report_line_ids_all" type="object"
+											attrs="{'invisible': [('state', '!=', 'draft')]}" />
+										<button icon="fa-square-o" string="Disable"
+											name="change_report_line_ids_none" type="object"
+											attrs="{'invisible': [('state', '!=', 'draft')]}" />
+
+										<field name="report_line_ids" colspan="4" nolabel="1" />
+									</group>
+								</page>
+
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_bvg_basis_tree_ds" model="ir.ui.view">
+			<field name="name">view_bvg_basis_tree</field>
+			<field name="model">hr.bvg.basis</field>
+			<field name="arch" type="xml">
+				<tree string="HR BVG Basis"
+					  decoration-success="state=='blocked'"
+					  decoration-danger="state=='cancel'"
+					  decoration-warning="state=='calculated'"
+					  decoration-info="state=='draft'">
+					<field name="name" />
+					<field name="company_id" />
+					<field name="validasof_date" />
+					<field name="bvg_id" />
+					<field name="amount_calculated" />
+					<field name="amount_transmitted" />
+					<field name="state" />
+				</tree>
+			</field>
+		</record>
+		<record id="view_bvg_basis_form_ds" model="ir.ui.view">
+			<field name="name">view_bvg_basis_form_ds</field>
+			<field name="model">hr.bvg.basis</field>
+			<field name="arch" type="xml">
+				<form string="HR BVG Basis">
+					<header>
+
+						<button name="print_bvg" string="Print Declare Salary"
+							states="calculated,perform_operation,all_transmitted,automatic_imported"
+							type="object" icon="fa-print" />
+
+						<button name="calculate_bvg_basis" string="Calculate"
+							icon="fa-check" states="draft" type="object" />
+
+						<button name="state_perform_operation" string="Ready To Transmit"
+							type="object" states="calculated" />
+
+						<field name="exist_open_session" invisible="1" />
+
+
+						<button name="action_po_open" string="Open existing session"
+							type="object" class="oe_highlight"
+							attrs="{'invisible': [('exist_open_session', '!=', 2)]}" />
+						<button name="action_po_correct" string="Replace existing session"
+							type="object" class="oe_highlight"
+							attrs="{'invisible': [('exist_open_session', '!=', 2)]}" />
+
+
+
+						<button name="action_po_correct" string="Next" type="object"
+							attrs="{'invisible': [('exist_open_session', '!=', 1)]}" class="oe_highlight"/>
+
+
+
+						<button name="state_draft" string="Reset" type="object"
+							icon="fa-refresh" states="perform_operation" />
+
+
+						<button name="state_draft" string="Reopen" icon="fa-retweet"
+							states="cancel" type="object" />
+
+						<button name="activity_automatic_imported" string="Automatic Import"
+							icon="fa-retweet" states="all_transmitted" type="object" />
+
+
+						<button name="cancel" string="Cancel" icon="fa-ban"
+							states="perform_operation,calculated" type="object" />
+
+						<button name="print_report_po" type="object" string="Print Result"
+							class="oe_highlight" states="all_transmitted,automatic_imported"
+							icon="fa-print" />
+
+						<button name="activity_all_transmitted" type="object"
+							string="Parser Results" class="oe_highlight"
+							states="perform_operation,all_transmitted,automatic_imported"
+							groups="bt_swissdec.bt_swissdec_admin" />
+
+
+						<field name="state" widget="statusbar" />
+					</header>
+					<sheet>
+
+						<group colspan="4">
+							<field name="validasof_date" options="{'showInitDate': False, 'useCurrent': False}"/>
+							<field name="name" invisible="1" />
+							<field name="type" invisible="1" />
+							<field name="payroll_year_id" options='{"no_open": True, "no_create": True}'
+								invisible="1" />
+
+							<field name="current_year_id" options='{"no_open": True, "no_create": True}'
+								invisible="1" />
+
+							<field name="company_id" options='{"no_open": True, "no_create": True}'
+								attrs="{'invisible':[('len_companies','==',1)]}" />
+							<field name="len_companies" groups="bt_swissdec.bt_swissdec_admin" />
+						</group>
+						<group colspan="4"
+							attrs="{'invisible': [('current_year_id','=', False)]}">
+
+							<field name="bvg_id" options='{"no_open": True, "no_create": True}' />
+							<field name="group_bvg_id" domain="[('year_id.id', '=', current_year_id)]"
+								options='{"no_open": True, "no_create": True}'
+								attrs="{'invisible':[('group_invisible','=',True)], 
+										'required':[('group_required','=',True)],
+									    'readonly':['|',('state','!=','draft'),('group_readonly','=',True)]}"
+								force_save="1"/>
+
+							<field name="group_invisible" invisible="1" />
+							<field name="group_required" invisible="1" />
+							<field name="group_readonly" invisible="1" />
+							<notebook colspan="2">
+								<page string="Data to import" states="all_transmitted,automatic_imported">
+									<field name="bvg_import_data_ids" nolabel="1" readonly="1"
+										context="{'tree_view_ref': 'bt_swissdec.bvg_import_tree_view',
+										      'form_view_ref': 'bt_swissdec.bvg_import_form_view'}" />
+
+								</page>
+								<page string="Initial Data" attrs="{'invisible': [('state', '=', 'draft')]}">
+									<field name="basis_line_ids" options='{"selectable": true}'
+										context="{'tree_view_ref': 'bt_swissdec.bvg_basis_line_tree_view_ds',
+												  'form_view_ref': 'bt_swissdec.bvg_basis_line_form_view_ds'}"
+										nolabel="1" colspan="4" />
+									<group col="2" colspan="1">
+										<field name="amount_calculated" />
+										<field name="amount_transmitted" />
+									</group>
+
+								</page>
+								<page string="Employees" invisible="1">
+									<group colspan="4" col="2">
+										<button icon="fa-check-square-o" string="All"
+											name="change_report_line_ids_all" type="object"
+											attrs="{'invisible': [('state', '!=', 'draft')]}" />
+										<button icon="fa-square-o" string="Disable"
+											name="change_report_line_ids_none" type="object"
+											attrs="{'invisible': [('state', '!=', 'draft')]}" />
+
+										<field name="report_line_ids" colspan="4" nolabel="1" />
+									</group>
+								</page>
+
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<!-- menu BVG/BVG Basis/BVG Basis -->
+		<record id="action_bvg_basis_list_ds" model="ir.actions.act_window">
+			<field name="name">BVG Declare Salary</field>
+			<field name="res_model">hr.bvg.basis</field>
+			<field name="domain">[('type', '=', 'declare_salary')]</field>
+
+			<field name="context">{'search_default_my_user_id': 1,
+				'default_type':
+				'declare_salary'}
+			</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_bvg_basis_tree_ds')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_bvg_basis_form_ds')}),
+                ]" />
+
+		</record>
+
+		<record id="action_bvg_basis_list_sc" model="ir.actions.act_window">
+			<field name="name">BVG Synchronize Contract</field>
+			<field name="res_model">hr.bvg.basis</field>
+			<field name="domain">[('type', '=', 'synchronize_contract')]</field>
+			<field name="context">{'search_default_my_user_id': 1,
+				'default_type':
+				'synchronize_contract'}
+			</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_bvg_basis_tree_sc')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_bvg_basis_form_sc')}),
+                ]" />
+
+
+		</record>
+
+
+
+
+
+
+
+	</data>
+</openerp>

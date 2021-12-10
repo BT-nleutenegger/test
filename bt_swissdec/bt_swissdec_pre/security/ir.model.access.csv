@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+hr_manager_access_transmitter_configuration,access_transmitter_configuration,model_transmitter_configuration,hr.group_hr_manager,1,1,0,0

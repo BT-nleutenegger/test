@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_partner_form_ext" model="ir.ui.view">
+      <field name="name">res.partner.form.ext</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="priority">100</field>
+      <field name="arch" type="xml">
+        <field name="website" position="before">
+          <field name="country_id_swiss_payroll_is_switzerland" invisible="1"/>
+          <field name="municipality"
+          	attrs="{'invisible': [('salary_relevant','=',False)], 'required': [('salary_relevant','=',True), ('country_id_swiss_payroll_is_switzerland', '=', True)]}" 
+          	context="{'change_municipality': 1}"/>
+          <field name="salary_relevant" readonly="context.get('set_salary_relevant',False)"/>
+        </field>
+        <field name="state_id" position="attributes">
+          <attribute name="attrs">{'required': [('salary_relevant','=',True)]}</attribute>
+        </field>
+        <field name="city" position="attributes">
+          <attribute name="attrs">{'required': [('salary_relevant','=',True)]}</attribute>
+        </field>
+        <field name="zip" position="attributes">
+          <attribute name="attrs">{'required': [('salary_relevant','=',True)]}</attribute>
+        </field>
+        <field name="country_id" position="attributes">
+          <attribute name="attrs">{'required': [('salary_relevant','=',True)]}</attribute>
+        </field>
+        <field name="street" position="attributes">
+          <attribute name="attrs">{'required': [('salary_relevant','=',True)]}</attribute>
+        </field>
+        <field name="company_type" position="attributes">
+          <attribute name="readonly">context.get('from_change_address_wizard')</attribute>
+        </field>
+        <xpath expr="//notebook" position="attributes">
+          <attribute name="invisible">context.get('from_change_address_wizard')</attribute>
+        </xpath>
+        <field name="salary_relevant" position="after">
+          <field name="valid_from" readonly="1" attrs="{'invisible':['|', ('active', '!=', False), '|', ('salary_relevant', '=', False), ('valid_until', '!=', False)]}"/>
+          <field name="valid_until" readonly="1" attrs="{'invisible':[('valid_until', '=', False)]}"/>
+          <field name="update_parent_done" readonly="1" attrs="{'invisible':['|', ('salary_relevant', '=', False), ('active', '!=', False)]}"/>
+        </field>
+      </field>
+    </record>
+
+    <!-- Partner -->
+    <record id="view_partner_tree_ext" model="ir.ui.view">
+        <field name="name">res.partner.tree.ext</field>
+        <field name="model">res.partner</field>
+        <field eval="8" name="priority"/>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+              <field name="street"/>
+              <field name="zip"/>
+              <field name="city"/>
+              <field name="state_id"/>
+              <field name="country_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_partner_form_no_flag" model="ir.ui.view">
+        <field name="name">res.partner.form.no_flag</field>
+        <field name="model">res.partner</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="bt_swissdec.view_partner_form_ext"/>
+        <field name="priority">10000</field>
+        <field name="arch" type="xml">
+            <widget name="web_ribbon" position="attributes">
+                <attribute name="attrs">{}</attribute>
+                <attribute name="invisible">1</attribute>
+            </widget>
+        </field>
+    </record>
+
+</odoo>

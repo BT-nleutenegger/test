@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Create First Company Year -->
+        
+        <record id="res_company_year_2012" model="res.company.year.template">
+            <field name="name">2012</field>
+            <field name="ahv_freigrenze_monat">1400</field>
+            <field name="ahv_alv_untergrenze_jahr">2300.00</field>
+            <field name="beginn_ahv">18</field>
+            <field name="beginn_rentenalter_m">65</field>
+            <field name="beginn_rentenalter_f">64</field>
+            <field name="ahv_arbeitnehmer_beitrag">5.15</field>
+            <field name="alv_hoechstlohn_monat">10500</field>
+            <field name="alv_arbeitnehmer_beitrag">1.10</field>
+            <field name="alvz_hoechstlohn_monat">26250</field>
+            <field name="alvz_arbeitnehmer_beitrag">0.50</field>
+        </record>
+
+        <record id="res_company_year_2013" model="res.company.year.template">
+            <field name="name">2013</field>
+            <field name="ahv_freigrenze_monat">1400</field>
+            <field name="ahv_alv_untergrenze_jahr">2300.00</field>
+            <field name="beginn_ahv">18</field>
+            <field name="beginn_rentenalter_m">65</field>
+            <field name="beginn_rentenalter_f">64</field>
+            <field name="ahv_arbeitnehmer_beitrag">5.15</field>
+            <field name="alv_hoechstlohn_monat">10500</field>
+            <field name="alv_arbeitnehmer_beitrag">1.10</field>
+            <field name="alvz_hoechstlohn_monat">26250</field>
+            <field name="alvz_arbeitnehmer_beitrag">0.50</field>
+        </record>
+        
+        <record id="res_company_year_2014" model="res.company.year.template">
+            <field name="name">2014</field>
+            <field name="ahv_freigrenze_monat">1400</field>
+            <field name="ahv_alv_untergrenze_jahr">2300.00</field>
+            <field name="beginn_ahv">18</field>
+            <field name="beginn_rentenalter_m">65</field>
+            <field name="beginn_rentenalter_f">64</field>
+            <field name="ahv_arbeitnehmer_beitrag">5.15</field>
+            <field name="alv_hoechstlohn_monat">10500</field>
+            <field name="alv_arbeitnehmer_beitrag">1.10</field>
+            <field name="alvz_hoechstlohn_monat">999999999</field>
+            <field name="alvz_arbeitnehmer_beitrag">0.50</field>
+        </record>
+
+    </data>
+</odoo>

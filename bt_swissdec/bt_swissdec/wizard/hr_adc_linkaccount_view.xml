@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_hr_adc_linkaccount" model="ir.ui.view">
+            <field name="name">hr.adc.linkaccount.form</field>
+            <field name="model">hr.adc.linkaccount</field>
+            <field name="arch" type="xml">
+                <form string="Link account to category">
+                    <group colspan="4">
+                        <field name="valid_from_new" colspan="4" attrs="{'invisible':[('fields_not_linked','!=',False)]}" options="{'showInitDate': False, 'useCurrent': False}"/>
+                        <newline/>
+                        <field name="fields_not_linked" colspan="4" attrs="{'invisible':[('fields_not_linked','=',False)]}"/>
+                    </group>
+                    <footer>
+                        <button string="Link account to category" name="link_account" type="object" attrs="{'invisible':[('fields_not_linked','!=',False)]}" class="btn-primary"/>
+                        <button string="Close" class="btn-default" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_hr_adc_linkaccount" model="ir.actions.act_window">
+            <field name="name">Link account to category</field>
+            <field name="res_model">hr.adc.linkaccount</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_hr_allounce_deduction_categoty" />
+            <field name="binding_type">action</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_swissdec_report_form" model="ir.ui.view">
+			<field name="name">swissdec.report.form</field>
+			<field name="model">bt_swissdec.report</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Swissdec Reports">
+					<header>
+						<button class="oe_highlight" string="Next" name="compute_next"
+							type="object"
+							attrs="{'invisible': ['|',('state', 'not in', ['initial']), ('internal_state', '=', 'import_xml')]}" />
+						<button class="oe_highlight" string="Go Back" name="compute_back"
+							type="object" states="generate_pdf" />
+						<button class="oe_highlight" string="Create Reports"
+							name="compute_report_button" type="object"
+							attrs="{'invisible': ['|', ('state', 'not in', ['generate_pdf']), '&amp;', '&amp;', '&amp;', '&amp;', '&amp;', '&amp;', '&amp;', '&amp;', '&amp;', '&amp;', '&amp;', '&amp;',
+							('state', 'in', ['generate_pdf']),
+							('option_ahv_avs', '=', False),
+							('option_cantonal_tax_administration', '=', False),
+							('option_cantonal_tax_administration_as_beleg', '=', False),
+							('option_fak_caf', '=', False),
+							('option_fak_report_with_detail', '=', False),
+							('option_ktg_amc', '=', False),
+							('option_uvg_laa', '=', False),
+							('option_uvgz_laac', '=', False),
+							('option_bvg_lpp', '=', False),
+							('option_sync_contract', '=', False),
+							('option_swiss_federal_statistical_office', '=', False),
+							('option_get_ahv_proof_of_insuranceReport', '=', False),
+							]}"/>
+
+						<button class="oe_highlight" string="Create Reports"
+							name="compute_report_button" type="object"
+							attrs="{'invisible': ['|',('state', 'not in', ['initial']), ('internal_state', '!=', 'import_xml')]}" />
+
+						<button class="oe_highlight" string="Report to brain-tec AG"
+							name="compute_report_to_braintec" type="object" states="incorrect" />
+
+						<button string="Compare XML" name="compare_xml" type="object"
+							groups="bt_swissdec.bt_swissdec_admin" />
+
+						<field name="state" widget="statusbar" statusbar_visible="initial,generate_pdf,done" />
+
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="%(bt_tutorial.action_tutorial_link_to_use_in_other_modules)d" class="oe_stat_button" icon="fa-youtube" string="Tutorials" type="action" context="{'model_name': 'bt_swissdec.report'}"/>
+						</div>
+						<field name="manual" invisible="1" />
+						<notebook>
+							<page string="Errors"
+								attrs="{'invisible': [('state', 'not in', ['incorrect'])]}">
+								<group colspan="2" col="8">
+									<field name="errors_text" />
+								</group>
+							</page>
+							<page string="Configuration"
+								attrs="{'invisible': [('state', 'not in', ['initial', 'incorrect', 'done'])]}">
+								<group colspan="4">
+									<field name="name" />
+									<field name="year_id"
+										options='{"no_open": True, "no_create": True}'
+										attrs="{'invisible': [('internal_state', '!=', 'generate_xml_year'),('year_id', '=', False)],
+												'readonly': [('state', 'in', ['generate_pdf', 'incorrect', 'done'])],}"
+										force_save="1"
+										required="1" />
+									<field name="comment_for_all_institutions"
+										attrs="{'readonly': [('state', 'in', ['generate_pdf', 'incorrect', 'done'])],}" />
+
+									<field name="internal_state" widget="radio" groups="bt_swissdec.bt_swissdec_admin"
+										attrs="{'readonly': [('state', 'in', ['generate_pdf', 'incorrect', 'done'])],}" />
+									<field name="transmitter_configuration_id" options='{"no_open": True, "no_create": True}'
+										groups="bt_swissdec.bt_swissdec_admin"
+										attrs="{'readonly': [('state', 'in', ['generate_pdf', 'incorrect', 'done'])],}" />
+									<field name="bvg_basis_id" options='{"no_open": True, "no_create": True}'
+										invisible="1"
+										attrs="{'invisible': [('internal_state', '=', 'import_xml')],
+												'readonly': [('state', '!=', 'generate_pdf')],}" />
+								</group>
+								<!-- <group colspan="4" attrs="{'invisible': ['|',('internal_state', 
+									'!=', 'import_xml'),('state','=', 'generate_pdf')] }"> -->
+								<field name="data" string="XML data" filename="data_name"
+									groups="bt_swissdec.bt_swissdec_admin"
+									attrs="{'invisible': [('internal_state', '!=', 'import_xml')],
+											'required': [('internal_state', '=', 'import_xml'),('state','=', 'generate_pdf')],
+												'readonly': [('state', 'in', ['generate_pdf', 'incorrect', 'done'])],	}" />
+
+								<field name="data_signed" string="XML Signed data"
+									filename="data_signed_name" readonly="1"
+									attrs="{'invisible': ['|',('state', 'not in', ['done']),('exists_one_correct_report', '=', False)]}" />
+								<field name="data_signed_name" invisible="1" />
+
+								<field name="data_name" invisible="1" groups="bt_swissdec.bt_swissdec_admin" />
+
+								<group
+									attrs="{'invisible': [('exists_one_correct_report', '=', True)]}"
+									colspan="4">
+									<h1>There are some errors...</h1>
+									<br />
+
+									<button name="action_brain_tec_send" string="Report Error by Mail to brain-tec"
+										type="object" class="oe_highlight" />
+									<field name="last_mail_id_text" colspan="4" nolabel="1"/>
+								</group>
+								<!-- </group> -->
+							</page>
+							<page string="Pdf"
+								attrs="{'invisible': [('state', 'not in', ['done'])]}">
+								<field name="exists_one_correct_report" invisible="1" />
+								<group colspan="2" col="8" fill="2" states="done">
+									<field name="zip_file_data" string="All (ZIP)" filename="zip_file_name"
+										readonly="1" attrs="{'invisible': [('exists_one_correct_report', '=', False)]}"/>
+									<field name="zip_file_name" invisible="1" attrs="{'invisible': [('exists_one_correct_report', '=', False)]}"/>
+									<separator string="Reports" colspan="8" />
+									<field name="report_data_ids" readonly="1"
+										domain="[('state','=', 'done')]" />
+
+								</group>
+							</page>
+
+							<page string="Employees"
+								attrs="{'invisible': ['|',('state', 'not in', ['generate_pdf','incorrect', 'done']), ('internal_state', '=', 'import_xml')]}">
+								<group colspan="4" col="2">
+									<button icon="fa-check-square-o" string="All"
+										states="generate_pdf" name="change_report_line_ids_all" type="object" />
+									<button icon="fa-square-o" string="Disable" states="generate_pdf"
+										name="change_report_line_ids_none" type="object" />
+
+									<field name="report_line_ids" colspan="4" nolabel="1" />
+								</group>
+							</page>
+
+							<page string="Flag Options"
+								attrs="{'invisible': ['|',('state', 'not in', ['generate_pdf','incorrect', 'done']), ('internal_state', '=', 'import_xml')]}">
+								<group colspan="4" col="4">
+
+									<button icon="fa-check-square-o" string="All"
+										states="generate_pdf" name="change_flag_all" type="object" colspan="2"/>
+									<button icon="fa-square-o" string="Disable" states="generate_pdf"
+										name="change_flag_none" type="object" colspan="2"/>
+
+
+									<field name="option_ahv_avs"
+										attrs="{'readonly': [('state', 'not in', ['generate_pdf', 'incorrect'])],}" colspan="4"/>
+
+									<field name="option_cantonal_tax_administration"
+										attrs="{'readonly': [('state', 'not in', ['generate_pdf', 'incorrect'])],}" colspan="2"/>
+									<field name="option_cantonal_tax_administration_as_beleg"
+										attrs="{'readonly': [('state', 'not in', ['generate_pdf', 'incorrect'])],
+												'invisible': [('option_cantonal_tax_administration', '=', False)]}" colspan="2"/>
+									<field name="option_fak_caf"
+										attrs="{'readonly': [('state', 'not in', ['generate_pdf', 'incorrect'])],
+												'invisible': [('has_fak_ids', '=', False)]}" colspan="4"/>
+									<field name="option_fak_report_with_detail"
+										attrs="{'readonly': [('state', 'not in', ['generate_pdf', 'incorrect'])],
+											    'invisible': [('has_fak_ids', '=', False)]}" colspan="4"/>
+									<field name="option_ktg_amc"
+										attrs="{'readonly': [('state', 'not in', ['generate_pdf', 'incorrect'])],
+												'invisible': [('has_ktg_ids', '=', False)]}" colspan="4"/>
+									<field name="option_uvg_laa"
+										attrs="{'readonly': [('state', 'not in', ['generate_pdf', 'incorrect'])],
+												'invisible': [('has_uvg_ids', '=', False)]}" colspan="4"/>
+									<field name="option_uvgz_laac"
+										attrs="{'readonly': [('state', 'not in', ['generate_pdf', 'incorrect'])],
+												'invisible': [('has_uvgz_ids', '=', False)]}" colspan="4"/>
+
+									<field name="option_bvg_lpp" groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+									<field name="option_sync_contract" groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+									<field name="option_swiss_federal_statistical_office" colspan="4"/>
+									<field name="option_get_ahv_proof_of_insuranceReport"
+										groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+									<field name="has_fak_ids" groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+									<field name="has_ktg_ids" groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+									<field name="has_uvg_ids" groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+									<field name="has_uvgz_ids" groups="bt_swissdec.bt_swissdec_admin" colspan="4"/>
+								</group>
+							</page>
+							<page string="Compare To" groups="bt_swissdec.bt_swissdec_admin">
+								<group colspan="4">
+									<field name="bt_swissdec_report_compare_id" />
+									<field name="compare_description" />
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_swissdec_report_tree" model="ir.ui.view">
+			<field name="name">swissdec.report.tree</field>
+			<field name="model">bt_swissdec.report</field>
+			<field name="arch" type="xml">
+				<tree string="Swissdec Reports"
+					  decoration-success="state=='generate_pdf'"
+                      decoration-danger="state=='incorrect'"
+                      decoration-info="state=='initial'"
+					  decoration-muted="state=='done'">
+					<field name="name" />
+					<field name="create_date" />
+					<field name="state" />
+					<field name="internal_state" />
+					<field name="transmitter_configuration_id" groups="bt_swissdec.bt_swissdec_admin" />
+
+					<field name="bvg_basis_id"
+						attrs="{'invisible': [('internal_state', '=', 'generate_xml_year')]}" />
+
+					<field name="year_id" />
+					<field name="option_ahv_avs" />
+					<field name="option_bvg_lpp" />
+					<field name="option_cantonal_tax_administration" />
+					<field name="option_cantonal_tax_administration_as_beleg" />
+					<field name="option_fak_caf" />
+					<field name="option_fak_report_with_detail" />
+					<field name="option_ktg_amc" />
+					<field name="option_uvg_laa" />
+					<field name="option_uvgz_laac" />
+					<field name="option_swiss_federal_statistical_office" />
+
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="view_swissdec_report_search" model="ir.ui.view">
+			<field name="name">swissdec.report.search</field>
+			<field name="model">bt_swissdec.report</field>
+			<field name="arch" type="xml">
+				<search string="Swissdec Reports">
+					<field name="name" />
+					<field name="create_date" />
+					<field name="state" />
+					<field name="internal_state" />
+					<field name="transmitter_configuration_id" />
+					<field name="bvg_basis_id" />
+					<field name="year_id" />
+					<field name="option_ahv_avs" />
+					<field name="option_bvg_lpp" />
+					<field name="option_cantonal_tax_administration" />
+					<field name="option_cantonal_tax_administration_as_beleg" />
+					<field name="option_fak_caf" />
+					<field name="option_fak_report_with_detail" />
+					<field name="option_ktg_amc" />
+					<field name="option_uvg_laa" />
+					<field name="option_uvgz_laac" />
+					<field name="option_swiss_federal_statistical_office" />
+					<group expand="0" string="Group By...">
+						<filter string="Manual" domain="[('manual', '=', True)]"
+							name="group_by_manual" context="{}" />
+					</group>
+
+				</search>
+			</field>
+		</record>
+
+
+		<record id="view_bt_swissdec_report_data_tree" model="ir.ui.view">
+			<field name="name">swissdec.bt_swissdec_report_data.tree</field>
+			<field name="model">bt_swissdec.bt_swissdec_report_data</field>
+			<field name="arch" type="xml">
+				<tree string="Swissdec Reports"
+                      decoration-danger="state=='incorrect'"
+                      decoration-info="state=='done'">
+					<field name="pdf_name" />
+					<field name="state" />
+					<field name="name" invisible="1"/>
+					<button  icon="fa-download" string="Save TaxAccountingReport in each employee"
+				             attrs="{'invisible': ['|', ('name', '!=', 'TaxAccountingReport'), ('state', '!=', 'done')]}" 
+				             name="save_taxaccountingreport_in_employee" type="object" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_bt_swissdec_report_data_form" model="ir.ui.view">
+			<field name="name">swissdec.bt_swissdec_report_data.form</field>
+			<field name="model">bt_swissdec.bt_swissdec_report_data</field>
+			<field name="arch" type="xml">
+				<form string="Swissdec Reports">
+					<header>
+						<field name="state" widget="statusbar" />
+					</header>
+					<sheet>
+						<group colspan="4" states="done">
+							<field name="pdf_data" filename="pdf_name" />
+							<field name="pdf_name" />
+							<field name="name" insivible="1"/>
+						</group>
+						<group colspan="4" states="incorrect">
+							<field name="log_file" />
+						</group>
+					</sheet>
+					<footer>
+						<button icon="fa-download" class="oe_highlight" string="Save TaxAccountingReport in each employee"
+						             attrs="{'invisible': ['|', ('name', '!=', 'TaxAccountingReport'), ('state', '!=', 'done')]}"
+						             name="save_taxaccountingreport_in_employee" type="object" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="action_swissdec_reports_view_gen" model="ir.actions.act_window">
+			<field name="name">Swissdec Reports</field>
+			<field name="res_model">bt_swissdec.report</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_group_by_manual':1,
+				'default_manual':True}
+			</field>
+			<field name="domain"></field>
+		</record>
+		<!-- <menuitem action="bt_swissdec.action_swissdec_reports_view_gen" id="menu_hr_monthly_reports_view_gen" 
+			parent="bt_swissdec.menu_swissdec_report" groups="hr.group_hr_manager" 
+			sequence="4" string="Swissdec Report" /> -->
+	</data>
+</openerp>

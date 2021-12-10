@@ -1,0 +1,256 @@
+<openerp>
+	<data>
+		<record id="bvg_import_tree_view" model="ir.ui.view">
+			<field name="name">bvg_import_tree_view</field>
+			<field name="model">bvg_import_data</field>
+			<field name="arch" type="xml">
+				<tree string="Salary Declaration Line"
+					  decoration-success="state=='automatic_import'"
+                      decoration-warning="state=='manual_import'"
+                      decoration-info="state=='done'">
+					<field name="employee_id" />
+					<!-- <field name="new_res_company_bvg_code_id" /> -->
+					<field name="new_value" />
+					<field name="bvg_beitrag_an" />
+					<field name="bvg_beitrag_ag" />
+					<field name="bvg_beitrag_dritte" />
+					<field name="state" />
+					<field name="imported_date" />
+					<field name="valid_from" />
+					<field name="valid_to" />
+					<!-- <field name="group_bvg_id" /> -->
+					<field name="operation" />
+					<button name="do_operation" string="Open Manual import"
+						type="object" states="manual_import" />
+					<button name="do_operation_manual" string="Mark Manual import as done"
+						type="object" states="manual_import" />
+
+				</tree>
+			</field>
+		</record>
+		<record id="bvg_import_search_view" model="ir.ui.view">
+			<field name="name">bvg_import_search_view</field>
+			<field name="model">bvg_import_data</field>
+			<field name="arch" type="xml">
+				<search string="Salary Declaration Line">
+					<field name="company_id" />
+					<field name="company_year_id" />
+					<field name="employee_id" />
+					<field name="company_year_name" invisible="1" />
+					<field name="hr_employee_year_id"
+						domain="[('employee_id', '=', employee_id),('name', '=', company_year_name)]" />
+					<field name="extra_information" />
+					<field name="bvg_id" />
+					<field name="new_res_company_bvg_code_id" />
+					<field name="new_value" />
+					<field name="bvg_beitrag_an" />
+					<field name="bvg_beitrag_ag" />
+					<field name="bvg_beitrag_dritte" />
+					<field name="state" />
+					<field name="imported_date" />
+					<field name="valid_from" />
+					<field name="valid_to" />
+					<field name="group_bvg_id" />
+				</search>
+			</field>
+		</record>
+
+
+		<record id="bvg_import_tree_view_active" model="ir.ui.view">
+			<field name="name">bvg_import_tree_view</field>
+			<field name="model">bvg_import_data</field>
+			<field name="arch" type="xml">
+				<tree string="Salary Declaration Line" create="false"
+					  decoration-success="state=='automatic_import'"
+                      decoration-warning="state=='manual_import'"
+                      decoration-info="state=='done'">
+					<field name="extra_information" />
+					<field name="bvg_id" />
+					<field name="new_res_company_bvg_code_id" />
+					<field name="new_value" />
+					<field name="bvg_beitrag_an" />
+					<field name="bvg_beitrag_ag" />
+					<field name="bvg_beitrag_dritte" />
+					<field name="state" invisible="1" />
+					<field name="imported_date" />
+					<field name="valid_from" />
+					<field name="valid_to" />
+					<field name="group_bvg_id" />
+				</tree>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="search_bvg_import_data">
+			<field name="name">BVG Import</field>
+			<field name="res_model">bvg_import_data</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('hr_employee_year_id', '=', active_id)]</field>
+			<field name="target">new</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('bvg_import_tree_view_active')}),
+                (0, 0, {'view_mode': 'form', 'view_id': False}),
+                ]" />
+		</record>
+
+		<record id="bvg_import_form_view" model="ir.ui.view">
+			<field name="name">bvg_import_form_view</field>
+			<field name="model">bvg_import_data</field>
+			<field name="arch" type="xml">
+				<form string="Salary Declaration Line" create="false">
+					<sheet>
+						<group>
+							<field name="extra_information" />
+							<field name="new_value" />
+							<field name="bvg_beitrag_an" />
+							<field name="bvg_beitrag_ag" />
+							<field name="bvg_beitrag_dritte" />
+							<field name="valid_from" />
+							<field name="valid_to" />
+						</group>
+						<notebook>
+							<page string="Year information">
+								<group>
+									<field name="operation" />
+									<field name="company_id" />
+									<field name="company_year_id" />
+									<field name="employee_id" />
+									<field name="company_year_name" />
+									<field name="hr_employee_year_id"
+										domain="[('employee_id', '=', employee_id),('name', '=', company_year_name)]" />
+								</group>
+							</page>
+							<page string="BVG">
+								<group>
+									<field name="bvg_id" />
+									<field name="group_bvg_id" />
+									<field name="calculationparameter_bvg_id" readonly="1" />
+									<field name="new_res_company_bvg_code_id" />
+								</group>
+							</page>
+						</notebook>
+						<group>
+							<field name="state" />
+							<field name="imported_date" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_import_tree" model="ir.actions.act_window">
+			<field name="name">BVG Import Data</field>
+			<field name="res_model">bvg_import_data</field>
+			<field name="domain" />
+			<field name="context">{}</field>
+			<field name="search_view_id" ref="bvg_import_search_view" />
+			<field name="view_mode">tree,form</field>
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('bvg_import_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('bvg_import_form_view')}),
+                ]" />
+
+
+		</record>
+
+		<record id="bvg_import_tree_view_admin" model="ir.ui.view">
+			<field name="name">bvg_import_tree_view_admin</field>
+			<field name="model">bvg_import_data</field>
+			<field name="arch" type="xml">
+				<tree string="Salary Declaration Line"
+					  decoration-success="state=='automatic_import'"
+                      decoration-warning="state=='manual_import'"
+                      decoration-info="state=='done'">
+					<field name="company_year_id" />
+					<field name="hr_employee_year_id" />
+
+					<field name="extra_information" />
+					<field name="bvg_id" />
+					<field name="new_res_company_bvg_code_id" />
+					<field name="new_value" />
+					<field name="bvg_beitrag_an" />
+					<field name="bvg_beitrag_ag" />
+					<field name="bvg_beitrag_dritte" />
+					<field name="state" />
+					<field name="imported_date" />
+					<field name="valid_from" />
+					<field name="valid_to" />
+					<field name="group_bvg_id" />
+					<field name="operation" />
+					<button name="do_operation" string="Import" type="object"
+						attrs="{'invisible':[('state','=','done') ]}" />
+				</tree>
+			</field>
+		</record>
+		<record id="bvg_import_form_view_admin" model="ir.ui.view">
+			<field name="name">bvg_import_form_view_admin</field>
+			<field name="model">bvg_import_data</field>
+			<field name="arch" type="xml">
+				<form string="Salary Declaration Line">
+					<header>
+						<button name="do_test" string="Test" type="object" />
+						<button name="do_test_allowance" string="Test Allowance"
+							type="object" />
+
+						<field name="valid_test" />
+						<group attrs="{'invisible': [('state','=','done')]}">
+							<button name="do_operation" string="Import" type="object"
+								states="automatic_import" />
+							<button name="do_operation" string="Open Year" type="object"
+								states="manual_import" />
+							<button name="do_operation_manual" string="Mark as Imported"
+								type="object" states="manual_import" />
+						</group>
+					</header>
+					<sheet>
+						<group>
+							<field name="extra_information" />
+							<field name="new_value" />
+							<field name="bvg_beitrag_an" />
+							<field name="bvg_beitrag_ag" />
+							<field name="bvg_beitrag_dritte" />
+							<field name="valid_from" />
+							<field name="valid_to" />
+						</group>
+						<notebook>
+							<page string="Year information">
+								<field name="operation" />
+								<field name="company_id" />
+								<field name="company_year_id" />
+								<field name="employee_id" />
+								<field name="company_year_name" />
+								<field name="hr_employee_year_id"
+									domain="[('employee_id', '=', employee_id),('name', '=', company_year_name)]" />
+							</page>
+							<page string="BVG">
+								<field name="bvg_id" />
+								<field name="group_bvg_id" />
+								<field name="calculationparameter_bvg_id" readonly="1" />
+								<field name="new_res_company_bvg_code_id" />
+							</page>
+						</notebook>
+						<group>
+							<field name="state" />
+							<field name="imported_date" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="action_import_tree_admin" model="ir.actions.act_window">
+			<field name="name">BVG Import Data</field>
+			<field name="res_model">bvg_import_data</field>
+			<field name="domain" />
+			<field name="context">{}</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('bvg_import_tree_view_admin')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('bvg_import_form_view_admin')}),
+                ]" />
+		</record>
+
+	</data>
+</openerp>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_swissdec_report_line_tree" model="ir.ui.view">
+        <field name="name">swissdec.report.line.tree</field>
+        <field name="model">bt_swissdec.report.line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Swissdec Reports" delete="false"
+                  create="false" editable="top"
+                  decoration-info="state=='on'"
+                  decoration-danger="state=='off'">
+                <button icon="fa-check-square-o" string="On"
+                    attrs="{'invisible':['|',('state','in',['off', 'disabled']),('internal_state', '=', 'done')]}"
+                    name="change_state" type="object" />
+                <button icon="fa-square-o" string="Off"
+                    attrs="{'invisible':['|',('state','in',['on', 'disabled']),('internal_state', '=', 'done')]}"
+                    name="change_state" type="object" />
+                <field name="sequence" invisible="1"/>
+                <field name="identification_id_bt" readonly="1" />
+                <field name="firstname" readonly="1" />
+                <field name="name" readonly="1" />
+                <field name="birthday" readonly="1" />
+                <field name="state" invisible="1" />
+                <field name="internal_state" invisible="1" />
+                <field name="employee_id" invisible="1" />
+            </tree>
+        </field>
+    </record>
+</odoo>

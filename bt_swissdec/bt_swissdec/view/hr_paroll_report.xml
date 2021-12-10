@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <delete model="ir.actions.report"
+            search="[('report_name','=','hr_payroll.report_contributionregister')]" />
+        <delete model="ir.actions.report"
+            search="[('report_name','=','hr_payroll.report_payslip')]" />
+        <delete model="ir.actions.report"
+            search="[('report_name','=','hr_payroll.report_payslipdetails')]" />
+
+        <record id="hr_payroll.action_report_payslip" model="ir.actions.report">
+            <field name="binding_model_id"></field>
+        </record>
+
+        <!-- report_payslip -->
+
+        <record id="action_report_payslip" model="ir.actions.report">
+            <field name="name">Employee PaySlip</field>
+            <field name="model">hr.payslip</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_payslip</field>
+            <field name="report_file">bt_swissdec.report_payslip</field>
+            <field name="print_report_name">(object.name or '').replace('/','')+'.pdf'</field>
+            <field name="binding_model_id" ref="model_hr_payslip"/>
+        </record>
+
+        <record id="action_report_payslip_register" model="ir.actions.report">
+            <field name="name">Employee PaySlips</field>
+            <field name="model">hr.payroll.register</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_payslip_register</field>
+            <field name="report_file">bt_swissdec.report_payslip_register</field>
+            <field name="binding_model_id" ref="model_hr_payroll_register"/>
+        </record>
+
+        <!-- report_payslip_account_move_lines -->
+        <record id="action_report_payslip_account_move_lines" model="ir.actions.report">
+            <field name="name">Employee PaySlip Account Move Lines</field>
+            <field name="model">hr.payslip</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_payslip_account_move_lines</field>
+            <field name="report_file">bt_swissdec.report_payslip_account_move_lines</field>
+            <field name="binding_model_id" ref="model_hr_payslip"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <record id="action_report_payslip_account_move_lines_register" model="ir.actions.report">
+            <field name="name">Employee PaySlips Account Move Lines</field>
+            <field name="model">hr.payroll.register</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_payslip_account_move_lines_register</field>
+            <field name="report_file">bt_swissdec.report_payslip_account_move_lines_register</field>
+            <field name="binding_model_id" ref="model_hr_payroll_register"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <!-- report_payslip_voucher -->
+        <record id="action_report_payslip_voucher" model="ir.actions.report">
+            <field name="name">Employee PaySlip Voucher</field>
+            <field name="model">hr.payslip</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_payslip_voucher</field>
+            <field name="report_file">bt_swissdec.report_payslip_voucher</field>
+            <field name="binding_model_id" ref="model_hr_payslip"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <record id="action_report_payslip_voucher_register" model="ir.actions.report">
+            <field name="name">Employee PaySlips Voucher</field>
+            <field name="model">hr.payroll.register</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_payslip_voucher_register</field>
+            <field name="report_file">bt_swissdec.report_payslip_voucher_register</field>
+            <field name="binding_model_id" ref="model_hr_payroll_register"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <!-- report_payslip_voucher_kst -->
+        <record id="action_report_payslip_voucher_kst" model="ir.actions.report">
+            <field name="name">Employee PaySlip Voucher Analytic Account</field>
+            <field name="model">hr.payslip</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_payslip_voucher_kst</field>
+            <field name="report_file">bt_swissdec.report_payslip_voucher_kst</field>
+            <field name="binding_model_id" ref="model_hr_payslip"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <record id="action_report_payslip_voucher_kst_register" model="ir.actions.report">
+            <field name="name">Employee PaySlips Voucher Analytic Accounts</field>
+            <field name="model">hr.payroll.register</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_payslip_voucher_kst_register</field>
+            <field name="report_file">bt_swissdec.report_payslip_voucher_kst_register</field>
+            <field name="binding_model_id" ref="model_hr_payroll_register"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <!-- report_register_statement -->
+        <record id="action_report_register_statement" model="ir.actions.report">
+            <field name="name">Register Statement</field>
+            <field name="model">hr.payroll.register</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_register_statement</field>
+            <field name="report_file">bt_swissdec.report_register_statement</field>
+            <field name="print_report_name">(object.name or '').replace('/','')+'.pdf'</field>
+            <field name="binding_model_id" ref="model_hr_payroll_register"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports"/>
+        </record>
+
+        <!-- report_hr_wagetypesrecap -->
+        <record id="action_report_hr_wagetypesrecap" model="ir.actions.report">
+            <field name="name">Wage types recapitulation</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_hr_wagetypesrecap</field>
+            <field name="report_file">bt_swissdec.report_hr_wagetypesrecap</field>
+            <field name="binding_model_id" ref="model_hr_monthly_reports"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+
+        <!-- report_hr_recap_employees_per_wagetypes -->
+        <record id="action_report_hr_recap_employees_per_wagetypes" model="ir.actions.report">
+            <field name="name">Employees per wage type recapitulation</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_hr_recap_employees_per_wagetypes</field>
+            <field name="report_file">bt_swissdec.report_hr_recap_employees_per_wagetypes</field>
+            <field name="binding_model_id" ref="model_hr_monthly_reports"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <!-- report_hr_matrix for hr.monthly.reports -->
+        <record id="action_report_hr_matrix" model="ir.actions.report">
+            <field name="name">Wage type master</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_hr_matrix</field>
+            <field name="report_file">bt_swissdec.report_hr_matrix</field>
+            <field name="binding_model_id" ref="model_hr_monthly_reports"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <!-- report_hr_matrix for hr.allounce.deduction.categoty -->
+        <record id="action_report_hr_matrix_adc" model="ir.actions.report">
+            <field name="name">Wage type master</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_hr_matrix</field>
+            <field name="report_file">bt_swissdec.report_hr_matrix</field>
+            <field name="binding_model_id" ref="model_hr_monthly_reports"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <!-- report_hr_yearlyrecap_xlsx -->
+        <record id="action_report_hr_yearlyrecap_xlsx" model="ir.actions.report">
+            <field name="name">Payroll account recapitulation</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">bt_swissdec.report_hr_yearlyrecap_xlsx</field>
+            <field name="report_file">Rekapitulation Lohnkonto</field>
+            <field name="binding_model_id" ref="model_hr_monthly_reports"/>
+        </record>
+
+        <!-- report_hr_yearlyrecap -->
+        <record id="action_report_hr_yearlyrecap" model="ir.actions.report">
+            <field name="name">Payroll account recapitulation</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_hr_yearlyrecap</field>
+            <field name="report_file">bt_swissdec.report_hr_yearlyrecap</field>
+            <field name="binding_model_id" ref="model_hr_monthly_reports"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports"/>
+        </record>
+
+        <!-- report_hr_yearlyrecap_qst -->
+        <record id="action_report_hr_yearlyrecap_qst" model="ir.actions.report">
+            <field name="name">Payroll account recapitulation QST</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_hr_yearlyrecap_qst</field>
+            <field name="report_file">bt_swissdec.report_hr_yearlyrecap_qst</field>
+            <field name="binding_model_id" ref="model_hr_monthly_reports"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports"/>
+        </record>
+
+        <!-- report_hr_company -->
+        <record id="action_report_hr_company" model="ir.actions.report">
+            <field name="name">Company year parameters</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_hr_company</field>
+            <field name="report_file">bt_swissdec.report_hr_company</field>
+            <field name="binding_model_id" ref="model_hr_monthly_reports"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <!-- report_hr_employee -->
+        <record id="action_report_hr_employee" model="ir.actions.report">
+            <field name="name">Employee year parameters</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_hr_employee</field>
+            <field name="report_file">bt_swissdec.report_hr_employee</field>
+            <field name="binding_model_id" ref="model_hr_monthly_reports"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+        <record id="action_report_bvg_declaration" model="ir.actions.report">
+            <field name="name">Report BVG declaration</field>
+            <field name="model">hr.bvg.basis</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bt_swissdec.report_bvg_declaration</field>
+            <field name="report_file">bt_swissdec.report_bvg_declaration</field>
+            <field name="binding_model_id" ref="model_hr_bvg_basis"/>
+            <field name="paperformat_id" ref="paperformat_swissdec_reports_portrait"/>
+        </record>
+
+    </data>
+</openerp>

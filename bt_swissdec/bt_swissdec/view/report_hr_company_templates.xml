@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_hr_company_document">
+    <t t-call="web.internal_layout">
+        <t t-set="o" t-value="o.with_context({'lang':lang_set})"/>
+        <t t-set="style_tr" t-value="'background-color: #F5F5DC; border: 1px solid white'"/>
+        <t t-set="style_tr_head" t-value="'background-color: #1E90FF; color: white; border: 1px solid white'"/>
+        <t t-set="style_td" t-value="'padding-top: 0.08cm; padding-bottom: 0.08cm; border: 1px solid white; width: 50%'"/>
+        <t t-set="style_table" t-value="'font-size: 75%; page-break-inside:avoid; border: 1px solid white'"/>
+        <div class="page">
+            <section class="oe_mb16">
+                <h4 style="text-align: center"><strong>Company parameters</strong></h4>
+            </section>
+            <table class="table" style="font-size: 75%;">
+                <thead>
+                    <tr>
+                        <th t-att-style="style_td">Jahr</th>
+                        <th t-att-style="style_td"><span t-field="o.name"/></th>
+                    </tr>
+                </thead>
+                <tr t-att-style="style_tr_head">
+                    <td t-att-style="style_td">Firma</td>
+                    <td t-att-style="style_td"></td>
+                </tr>
+                <tr t-att-style="style_tr">
+                    <td t-att-style="style_td">
+                        Name<br/>
+                        Strasse<br/>
+                        Postleitzahl<br/>
+                        Ort<br/>
+                        Land
+                    </td>
+                    <td t-att-style="style_td">
+                        <span t-field="o.company_name"/><br/>
+                        <span t-field="o.company_address_id.street"/><br/>
+                        <span t-field="o.company_address_id.zip"/><br/>
+                        <span t-field="o.company_address_id.city"/><br/>
+                        <span t-field="o.company_address_id.country_id.name"/>
+                    </td>
+                </tr>
+                <tr t-att-style="style_tr">
+                    <td t-att-style="style_td">
+                        Handelsregisternummer<br/>
+                        Unternehmensidentifikation<br/>
+                        Kontaktperson<br/>
+                        E-Mail<br/>
+                        Telefonnummer
+                    </td>
+                    <td t-att-style="style_td">
+                        <span t-field="o.uid_ehra"/><br/>
+                        <span t-field="o.uid_bfs"/><br/>
+                        <span t-field="o.company_id.salary_contact_name"/><br/>
+                        <span t-field="o.company_id.salary_contact_email"/><br/>
+                        <span t-field="o.company_id.salary_contact_phone"/>
+                    </td>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Sozialversicherungsanstalten</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                AHV-Mitgliednummer<br/>
+                                Nummer der Ausgleichskasse
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="o.ahv_mitgliednummer"/><br/>
+                                <span t-field="o.nummer_ausgleichskasse"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Beginn AHV-Rentenalter Männer<br/>
+                                Beginn AHV-Rentenalter Frauen
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="o.beginn_rentenalter_m"/><br/>
+                                <span t-field="o.beginn_rentenalter_f"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                AHV-Freigrenze Monat<br/>
+                                ALV-Höchstlohn Monat<br/>
+                                ALVZ-Höchstlohn Monat
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="o.ahv_freigrenze_monat"/><br/>
+                                <span t-field="o.alv_hoechstlohn_monat"/><br/>
+                                <span t-field="o.alvz_hoechstlohn_monat"/>
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                AHV-Arbeitnehmerbeiträge<br/>
+                                AHV-Arbeitgeberbeiträge
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="o.ahv_arbeitnehmer_beitrag"/>%<br/>
+                                <span t-field="o.ahv_arbeitgeber_beitrag"/>%
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td" stlye="border: 1px solid white; " >
+                                ALV-Arbeitnehmerbeiträge<br/>
+                                ALV-Arbeitgeberbeiträge
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="o.alv_arbeitnehmer_beitrag"/>%<br/>
+                                <span t-field="o.alv_arbeitgeber_beitrag"/>%
+                            </td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                ALVZ-Arbeitnehmerbeiträge<br/>
+                                ALVZ-Arbeitgeberbeiträge
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="o.alvz_arbeitnehmer_beitrag"/>%<br/>
+                                <span t-field="o.alvz_arbeitgeber_beitrag"/>%
+                            </td>
+                        </tr>
+                        <tr t-foreach="o.fak_ids" t-as="f" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                FAK-Mitgliednummer<br/>
+                                Nummer der FAK<br/>
+                                Arbeitsplatzkanton<br/>
+                                Ansätze: KIZU / Ausbildungszulage<div t-if="f.valid_from_child_number_active">
+                                Ansätze: KIZU / Ausbildungszulage ab Kind <span t-field="f.valid_from_child_number"/></div><br/>
+                                Ansätze: KIZU / Ausbildungszulage (überogligatorisch)<div t-if="f.valid_from_child_number_active">
+                                Ansätze: KIZU / Ausbildungszulage ab Kind (überogligatorisch) <span t-field="f.valid_from_child_number"/></div>
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="f.mitgliednummer"/><br/>
+                                <span t-field="f.nummer"/> <span t-field="f.address_fak_id.name"/><br/>
+                                <span t-field="f.state_id.code"/><br/>
+                                <span t-esc="get_kizu(f)"/><div t-if="f.valid_from_child_number_active">
+                                <span t-esc="get_kizu_extended(f)"/></div><br/>
+                                <span t-esc="get_kizu_supplementary(f)"/><div t-if="f.valid_from_child_number_active">
+                                <span t-esc="get_kizu_extended_supplementary(f)"/></div>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Unfallversicherer UVG</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+                        <tr t-foreach="o.uvg_ids" t-as="u" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Name des UVG-Versicherers<br/>
+                                UVG-Versicherernummer<br/>
+                                UVG-Kundennummer<br/>
+                                UVG-Vertragsnummer/Subnummer<br/>
+                                UVG-Höchstlohn Monat
+                                <div t-foreach="u.uvg_part_ids" t-as="up"><strong>NBUV-Beitrag Betriebsteil <span t-field="up.name"/></strong></div>
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="u.name"/><br/>
+                                <span t-field="u.versicherer_nr"/><br/>
+                                <span t-field="u.kundennr"/><br/>
+                                <span t-field="u.vertragsnr"/><br/>
+                                <span t-field="o.uvg_hoechstlohn_monat"/>
+                                <div t-foreach="u.uvg_part_ids" t-as="up"><strong><span t-field="up.nbuv_mf"/>%</strong></div>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Unfallversicherer UVGZ</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+                        <tr t-foreach="o.uvgz_ids" t-as="uz" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Name des UVGZ-Versicherers<br/>
+                                UVGZ-Versicherernummer<br/>
+                                UVGZ-Kundennummer<br/>
+                                UVGZ-Vertragsnummer
+                                <div t-foreach="uz.uvgz_code_ids" t-as="uzp">
+                                    <strong>Personengruppe <span t-esc="uzp.name[0]"/>, Kategorie <span t-esc="uzp.name[1]"/></strong><br/>
+                                    UVGZ-Höchstlohn von<br/>
+                                    UVGZ-Höchstlohn bis<br/>
+                                    UVGZ-Beiträge Männer<br/>
+                                    UVGZ-Beiträge Frauen<br/>
+                                    UVGZ-Beiträge Männer Arbeitgeber<br/>
+                                    UVGZ-Beiträge Frauen Arbeitgeber
+                                </div>
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="uz.address_uvgz_id.name"/><br/>
+                                <span t-field="uz.vers_nr"/><br/>
+                                <span t-field="uz.kundennummer"/><br/>
+                                <span t-field="uz.vertragsnr"/>
+                                <div t-foreach="uz.uvgz_code_ids" t-as="uzp">
+                                    <strong><span t-field="uzp.beschreibung"/></strong><br/>
+                                    <span t-field="uzp.uvgz_lohn_ab"/><br/>
+                                    <span t-field="uzp.uvgz_hoechstlohn_bis"/><br/>
+                                    <span t-field="uzp.uvgz_beitrag_m"/>%<br/>
+                                    <span t-field="uzp.uvgz_beitrag_f"/>%<br/>
+                                    <span t-field="uzp.uvgz_beitrag_m_employer"/>%<br/>
+                                    <span t-field="uzp.uvgz_beitrag_f_employer"/>%
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Krankenversicherer</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+
+                        <tr t-foreach="o.ktg_ids" t-as="k" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Name des KTG-Versicherers<br/>
+                                KTG-Versicherernummer<br/>
+                                KTG-Kundennummer<br/>
+                                KTG-Vertragsnummer
+                                <div t-foreach="k.ktg_code_ids" t-as="kp">
+                                    <strong>Personengruppe <span t-esc="kp.name[0]"/>, Kategorie <span t-esc="kp.name[1]"/></strong><br/>
+                                    KTG-Höchstlohn von<br/>
+                                    KTG-Höchstlohn bis<br/>
+                                    KTG-Beiträge Männer<br/>
+                                    KTG-Beiträge Frauen<br/>
+                                    KTG-Beiträge Männer Arbeitgeber<br/>
+                                    KTG-Beiträge Frauen Arbeitgeber
+                                </div>
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="k.address_ktg_id.name"/><br/>
+                                <span t-field="k.vers_nr"/><br/>
+                                <span t-field="k.kundennummer"/><br/>
+                                <span t-field="k.vertragsnr"/>
+                                <div t-foreach="k.ktg_code_ids" t-as="kp">
+                                    <strong><span t-field="kp.beschreibung"/></strong><br/>
+                                    <span t-field="kp.ktg_lohn_ab"/><br/>
+                                    <span t-field="kp.ktg_hoechstlohn_bis"/><br/>
+                                    <span t-field="kp.ktg_beitrag_m"/>%<br/>
+                                    <span t-field="kp.ktg_beitrag_f"/>%<br/>
+                                    <span t-field="kp.ktg_beitrag_m_employer"/>%<br/>
+                                    <span t-field="kp.ktg_beitrag_f_employer"/>%
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Pensionskasse</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+                        <tr t-foreach="o.bvg_ids" t-as="b" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Name des BVG-Versicherers<br/>
+                                BVG-Versicherungsnummer<br/>
+                                BVG-Kundennummer<br/>
+                                BVG-Vertragsnummer
+                                <div><strong>Codebeschreibung</strong></div>
+                                <div t-foreach="b.bvg_code_ids" t-as="bp">
+                                    <span t-esc="bp.code"/> <span t-esc="bp.name"/>
+                                </div>
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="b.address_bvg_id.name"/><br/>
+                                <span t-field="b.vers_nr"/><br/>
+                                <span t-field="b.kundennummer"/><br/>
+                                <span t-field="b.vertragsnr"/>
+                                <div style="color: #F5F5DC;"><strong>-</strong></div>
+                                <div t-foreach="b.bvg_code_ids" t-as="bp">
+                                    Buchungskreis <span t-esc="bp.group_bvg_id.name"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Lohnausweis</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Weitere Gehaltsnebenleistungen
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="get_lohnausweis_nebenleistung_ids_note(o.lohnausweis_nebenleistung_ids)"/>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Lohnstrukturerhebung</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+                        <tr t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Lohnvereinbarung
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-esc="get_pay_agreement(o.pay_agreement)"/>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Arbeitsstätten</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+
+                        <tr t-foreach="o.bur_ids" t-as="bur" t-att-style="style_tr">
+                            <tr t-att-style="style_tr_head">
+                                <td t-att-style="style_td">Filiale</td>
+                                <td t-att-style="style_td"><span t-field="bur.name"/></td>
+                            </tr>
+                            <tr t-att-style="style_tr">
+                                <td t-att-style="style_td">
+                                    <strong>Bezeichnung</strong><br/>
+                                    Adresse<br/>
+                                    Ort<br/>
+                                    Land<br/>
+                                    Kanton<br/>
+                                    Gemeinde-Nr.<br/>
+                                    BUR-Nummer<br/>
+                                    Wochenstunden<br/>
+                                    Anzahl Lektionen
+                                </td>
+                                <td t-att-style="style_td">
+                                    <strong><span t-field="bur.description"/></strong><br/>
+                                    <span t-field="bur.street"/><br/>
+                                    <span t-field="bur.zip"/> <span t-field="bur.city"/><br/>
+                                    <span t-field="bur.country_id.name"/><br/>
+                                    <span t-field="bur.state_id.code"/><br/>
+                                    <span t-field="bur.municipality"/><br/>
+                                    <span t-field="bur.bur_ree_number"/><br/>
+                                    <span t-field="bur.weeklyhours_bur"/><br/>
+                                    <span t-field="bur.weeklylessons_bur"/>
+                                </td>
+                            </tr>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Quellensteuer</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+
+                        <tr t-foreach="o.qst_ids" t-as="q" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                Kanton<br/>
+                                Kundennummer QST<br/>
+                                Bezugsprovision/Kommission<br/>
+                                VR Honorar an Personen mit Wohnsitz im Ausland<br/>
+                                Geldwerte Leistungen an Personen mit Ansässigkeit im Ausland<br/>
+                                QST-Ausgleich
+                            </td>
+                            <td t-att-style="style_td">
+                                <span t-field="q.state_id.code"/><br/>
+                                <span t-field="q.kundennummer_qst"/><br/>
+                                <span t-field="q.qst_kommission"/>%<br/>
+                                <span t-esc="q.qst_vr_honorar or '0'"/>%<br/>
+                                <span t-esc="q.qst_geldwerte_leistungen or '0'"/>%<br/>
+                                <span t-esc="get_qst_compensation_text(q.qst_compensation)"/>
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table" t-att-style="style_table">
+                        <tr t-att-style="style_tr_head">
+                            <td t-att-style="style_td">Berufe</td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+                        <tr t-foreach="get_jobs(o)" t-as="job" t-att-style="style_tr">
+                            <td t-att-style="style_td">
+                                <span t-esc="job"/>
+                            </td>
+                            <td t-att-style="style_td"></td>
+                        </tr>
+                    </table>
+                </tr>
+            </table>
+        </div>
+    </t>
+</template>
+
+<template id="report_hr_company">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_hr_company_document" t-lang="lang_set"/>
+        </t>
+    </t>
+</template>
+</odoo>

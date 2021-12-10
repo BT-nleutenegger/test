@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+        <record model="ir.ui.view" id="yes_no_popup_form">
+          <field name="name">yes.no.popup.form</field>
+          <field name="model">yes.no.popup</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+            <form string="Confirm dialog">
+              <field name="yes_no" readonly="1" />
+                <footer>
+                  <button class="oe_highlight" name="yes" string="Yes" type="object" />
+                  <button class="oe_highlight" name="no" string="No, but continue anyway" type="object" />
+                    <button class="oe_highlight" name="cancel" string="Cancel" type="object" />
+                </footer>
+            </form>
+          </field>
+        </record>
+    </data>
+</openerp>

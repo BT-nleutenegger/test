@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Print Employees Timesheets -->
+        <record id="view_hr_monthly_reports" model="ir.ui.view">
+            <field name="name">hr.monthly.reports.form</field>
+            <field name="model">hr.monthly.reports</field>
+            <field name="arch" type="xml">
+                <form string="HR Reports">
+                    <group height="460" width="660">
+                        <group colspan="2">
+                            <group colspan="2" col="2">
+                                <field name="report"/>
+                                <field name="payslip_selection"
+                                       attrs="{'invisible':[('report','not in',['1', '18'])]}"/>
+                                <field name="company_id" options='{"no_open": True, "no_create": True}'
+                                       attrs="{'invisible':[('report','not in',['14'])], 'required':[('report','in','14')]}"/>
+                                <field name="year" options='{"no_open": True, "no_create": True}' attrs="{'invisible':['|', ('payslip_selection','=',True), ('report','in',['14'])], 'required':[('payslip_selection','=',False), ('report','not in','14')]}"/>
+                                <field name="month" attrs="{'invisible':['|', ('payslip_selection','=',True), ('report','not in',('1','15','18'))]}"/>
+                                <field name="month_to" attrs="{'invisible':['|', ('payslip_selection','=',True), ('report','not in',('1','15','18'))]}"/>
+                                <field name="qst_id" options='{"no_open": True, "no_create": True}' attrs="{'invisible':['|', ('payslip_selection','=',True), ('report','not in',('15'))]}" domain="[('year_id','=',year)]" />
+                                <field name="due_date" attrs="{'invisible':['|', ('payslip_selection','=',True), ('report','not in',('14'))]}"/>
+                                <field name="employer_deductions_incl" attrs="{'invisible':[('report','not in',('1','2','16','17','18'))]}"/>
+                            </group>
+                            <group colspan="4" attrs="{'invisible':['|', ('payslip_selection','=',True), ('report','not in',('2','5'))]}">
+                                <separator string="Employees" colspan="4"/>
+                                <field name="employee_ids" colspan="4" options='{"no_create": True}' nolabel="1" attrs="{'required':[('payslip_selection','=',False), ('report','in',('2','5'))]}" context="{'active_test':False}">
+                                    <tree editable="bottom" string="Employees">
+                                        <field name="identification_id_bt" readonly="1"/>
+                                        <field name="name" readonly="1"/>
+                                        <field name="firstname" readonly="1"/>
+                                        <field name="birthday" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group colspan="4" attrs="{'invisible':[('report','not in',('2','16','17','18'))]}">
+                                <separator string="Categories" colspan="4"/>
+                                <field name="category_adc_ids" colspan="4" options='{"no_create": True}' nolabel="1">
+                                    <tree editable="bottom" string="Categories">
+                                        <field name="matrix_nr" readonly="1"/>
+                                        <field name="name" readonly="1"/>
+                                        <field name="company_id" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group colspan="4" attrs="{'invisible':[('payslip_selection','=',False)]}">
+                                <separator string="Payslips" colspan="4"/>
+                                <field name="payslip_ids" colspan="4" options='{"no_create": True}' nolabel="1">
+                                    <tree editable="bottom" string="Categories">
+                                        <field name="number" readonly="1"/>
+                                        <field name="employee_id" readonly="1"/>
+                                        <field name="name" readonly="1"/>
+                                        <field name="register_id" readonly="1"/>
+                                        <field name="date" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <field invisible="1" name="state"/>
+                        </group>
+                        <separator colspan="4"/>
+                        <group col="3" fill="0" states="get">
+                            <separator colspan="3" string="Export done"/>
+                            <field name="name" invisible="1" width="100"/>
+                            <field name="data" nolabel="1" readonly="1" width="100" filename="name"/>
+                            <field name="warning_text" colspan="4" attrs="{'invisible':[('show_warnings','=',False)]}" />
+                            <field name="show_warnings" invisible="1"/>
+                        </group>
+                        <footer>
+                            <button string="Print" name="print_report" type="object" context="{'active_test':False}" class="btn-primary"/>
+                            <button string="XLSX" name="print_report" type="object" attrs="{'invisible':[('report','not in',('2', '16', '17'))]}" context="{'active_test':False, 'report_type': 'xlsx'}" class="btn-primary"/>
+                            <button string="Cancel" class="btn-default" special="cancel"/>
+                        </footer>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_monthly_reports" model="ir.actions.act_window">
+            <field name="name">HR Reports</field>
+            <field name="res_model">hr.monthly.reports</field>
+            <field name="view_mode">tree,form</field>
+           <field name="view_id" ref="view_hr_monthly_reports"/>
+           <field name="target">new</field>
+        </record>
+
+        <menuitem 
+            action="action_hr_monthly_reports"
+            id="menu_hr_monthly_reports"
+            parent="hr.hr_menu_hr_reports"
+            groups="hr.group_hr_manager" sequence="3"/>
+
+
+     </data>
+</openerp>

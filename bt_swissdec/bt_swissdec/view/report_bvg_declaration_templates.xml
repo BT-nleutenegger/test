@@ -1,0 +1,446 @@
+<odoo>
+    <data>
+
+        <template id="template_header">
+            <div class="header">
+
+                <table style="width:100%; cellpadding=4; cellspacing=0;">
+
+                    <tr style="valign:top">
+                        <td style="width:40%; background-color:#DBEEF3 !important; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                            <p t-if="o.type == 'synchronize_contract'"
+                               style="font-family: 'Arial, sans-serif'; font-size: 8pt; font-weight: bold;">Vorabgleich
+                                ab
+                                <span t-field="o.validasof_date"/>
+                            </p>
+                            <p t-else=""
+                               style="font-family: 'Arial, sans-serif'; font-size: 8pt; font-weight: bold;">Lohnmeldung
+                                ab
+                                <span t-field="o.validasof_date"/>
+                            </p>
+                        </td>
+
+                        <td style="width:20%; background-color:#DBEEF3 !important; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                            <p style="font-family: 'Arial, sans-serif'; font-size: 8pt; font-weight: bold; text-align:center">
+                                Datum
+                                <span t-esc="get_current_date()"/>
+                            </p>
+                        </td>
+                        <td style="width:30%; background-color:#DBEEF3 !important; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                            <p style="font-family: 'Arial, sans-serif'; font-size: 8pt; font-weight: bold; text-align:right">
+                                Seite:
+                                <span class="page"/>
+                            </p>
+                        </td>
+                        <td style="width:10%; background-color:#DBEEF3 !important; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                            <p style="font-family: 'Arial, sans-serif'; font-size: 8pt; font-weight: bold; text-align:left">
+                                /
+                                <span class="topage"/>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table style="width:100%; cellpadding=4; cellspacing=0; background-color:#EDF8F9 !important;">
+                    <tr style="valign:top">
+                        <td style="width:33%; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                            <p style="font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                               t-esc="o.company_id.name or ''"/>
+                        </td>
+                        <td style="width:16%; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                            <p style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 8pt; font-weight: bold;">
+                                Versicherer
+                            </p>
+                        </td>
+                        <td style="width:51%; border: none; padding: 0.1cm">
+                            <p style="font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                <p style="font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                   t-esc="o.bvg_id.address_bvg_id.name or ''"/>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr style="valign:top">
+                        <td style="width:33%; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+                            <p style="font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                               t-esc="get_street(o)"/>
+                        </td>
+                        <td style="width:16%; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+                            <p style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;;">
+                                Vertrags-Nr.
+                            </p>
+                        </td>
+                        <td style="width:51%; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm;">
+                            <p style="font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                               t-esc="o.bvg_id.vertragsnr or ''"/>
+                        </td>
+                    </tr>
+
+                    <tr style="valign:top">
+                        <td style="width:33%; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+                            <p style="font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                               t-esc="get_code_city(o)"/>
+                        </td>
+                        <td style="width:16%; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+                            <p style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;;">
+                                Buchungskreis
+                            </p>
+                        </td>
+                        <td style="width:51%; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm;">
+
+                            <p t-foreach="o.group_bvg_id" t-as="id" t-esc="id.name or ''"
+                               style="font-family: 'Arial, sans-serif'; font-size: 7pt;"/>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </template>
+
+        <template id="report_bvg_declaration_document">
+
+            <t t-call="bt_swissdec.template_header"/>
+            <t t-call="web.internal_layout">
+
+                <div class="page">
+
+                    <p style="margin-bottom: 0.1cm">
+                        <br/>
+                    </p>
+
+                    <table style="width:100%; cellpadding=4; cellspacing=0;">
+
+                        <tr style="valign:top; background-color:#DBEEF3 !important">
+                            <td style="width:7%; border-left:1px solid white; border-right:1px solid white; border-top:1px solid white; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    Pers-Nr.
+                                </p>
+                            </td>
+                            <td style="width:14%; border-left:1px solid white; border-right:1px solid white; border-top:1px solid white; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    Name und Vorname
+                                </p>
+                            </td>
+                            <td style="width:9%; border-left:1px solid white; border-right:1px solid white; border-top:1px solid white; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    BVG-Code
+                                </p>
+                            </td>
+                            <td style="width:14%; border-left:1px solid white; border-right:1px solid white; border-top:1px solid white; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    Beschäftigungsgrad
+                                </p>
+                            </td>
+                            <td colspan="2"
+                                style="width:18%; border-left:1px solid white; border-right:1px solid white; border-top:1px solid white; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    Bezugsperiode
+                                </p>
+                            </td>
+                            <td style="width:10%; border-left:1px solid white; border-right:1px solid white; border-top:1px solid white; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    Monat
+                                </p>
+                            </td>
+                            <td style="width:6%; border-left:1px solid white; border-right:1px solid white; border-top:1px solid white; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    Faktor
+                                </p>
+                            </td>
+                            <td style="width:10%; border-left:1px solid white; border-right:1px solid white; border-top:1px solid white; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    Jahr
+                                </p>
+                            </td>
+                            <td style="width:12%; border-left:1px solid white; border-right:1px solid white; border-top:1px solid white; padding: 0.1cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    BVG-Basis
+                                </p>
+                            </td>
+                        </tr>
+                        <tr style="valign:top; background-color:#DBEEF3 !important">
+                            <td colspan="4"
+                                style="width:44%; border-left:1px solid white; border-right:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0cm; padding-right: 0cm">
+                                <p style="text-align:center;"/>
+                            </td>
+                            <td style="width:9%; border-left:1px solid white; border-right:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    von
+                                </p>
+                            </td>
+                            <td style="width:9%; border-left:1px solid white; border-right:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    bis
+                                </p>
+                            </td>
+                            <td style="width:10%; border-left:1px solid white; border-right:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0cm; padding-right: 0cm">
+                                <p style="text-align:center;"/>
+                            </td>
+                            <td style="width:6%; border-left:1px solid white; border-right:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0cm; padding-right: 0cm">
+                                <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                    Tage
+                                </p>
+                            </td>
+                            <td style="width:22%; border-left:1px solid white; border-right:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0cm; padding-right: 0cm"
+                                colspan="2">
+                                <p style="text-align:center;"/>
+                            </td>
+                        </tr>
+
+                        <t t-foreach="o.basis_line_ids" t-as="line">
+
+                            <div style="page-break-inside: avoid">
+
+                                <tr style="valign:top; background-color:#DBEEF3 !important">
+                                    <td style="width:7%; border-left:1px solid white; border-top:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                        <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;"
+                                           t-field="line.employee_identification_id_bt"/>
+                                    </td>
+                                    <td style="width:14%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                        <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;"
+                                           t-field="line.employee_name"/>
+                                    </td>
+                                    <td style="width:9%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                        <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                           t-field="line.employee_bvg_code"/>
+                                    </td>
+                                    <td style="width:14%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                        <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                           t-field="line.employee_besch_degree"/>
+                                    </td>
+                                    <td colspan="6"
+                                        style="width:56%; border-top:1px solid white; border-bottom:1px solid white; border-right:1px solid white; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0.1cm;">
+                                        <p style="text-align:center;"/>
+                                    </td>
+                                </tr>
+
+                                <t t-foreach="line.detail_ids" t-as="detail">
+
+                                    <tr style="valign:top; background-color:#EDF8F9 !important">
+
+                                        <td style="width:7%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                            <p style="text-align:center;"/>
+                                        </td>
+                                        <td style="width:14%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                            <p style="text-align:left; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                               t-field="detail.name"/>
+                                        </td>
+                                        <td style="width:9%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                            <p style="text-align:center;"/>
+                                        </td>
+                                        <td style="width:14%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                            <p style="text-align:center;"/>
+                                        </td>
+
+                                        <td style="width:9%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                            <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                               t-field="detail.bezug_von"/>
+                                        </td>
+                                        <td style="width:9%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                            <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                               t-field="detail.bezug_bis"/>
+                                        </td>
+
+                                        <td style="width:10%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                            <p t-if="detail.amount_month == 'Austritt' or detail.amount_month == ''"
+                                               style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                               t-field="detail.amount_month"/>
+                                            <p t-elif="o.type == 'synchronize_contract'"
+                                               style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                                0.00
+                                            </p>
+                                            <p t-elif="detail.amount_month_float"
+                                               style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                               t-esc="s(detail.amount_month_float)"/>
+                                            <p t-else=""
+                                               style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;"/>
+
+                                        </td>
+
+                                        <td style="width:6%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                            <p style="text-align:center; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                               t-field="detail.factor"/>
+                                        </td>
+
+                                        <td style="width:10%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                            <p t-if="o.type == 'synchronize_contract'"
+                                               style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                                0.00
+                                            </p>
+                                            <p t-else=""
+                                               style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                               t-esc="s(detail.amount_year) or 0.00"/>
+                                        </td>
+                                        <td style="width:12%; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0.1cm; padding-right: 0.1cm;">
+                                            <p t-if="o.type == 'synchronize_contract'"
+                                               style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                                0.00
+                                            </p>
+                                            <p t-else=""
+                                               style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                               t-esc="detail['bvg_basis'] or 0.00"/>
+                                        </td>
+                                    </tr>
+
+                                </t>
+
+                                <tr style="valign:top; background-color:#DBEEF3 !important">
+
+                                    <td colspan="9"
+                                        style="width:88%; border-left:1px solid white; border-top:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                        <p style="text-align:left; font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                            Total
+                                            BVG-Basis
+                                            errechnet
+                                        </p>
+                                    </td>
+                                    <td style="width:12%; border-top:1px solid white; border-bottom:1px solid white; border-right:1px solid white; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm;">
+                                        <p t-if="o.type == 'synchronize_contract'"
+                                           style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                            0.00
+                                        </p>
+                                        <p t-else=""
+                                           style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;"
+                                           t-esc="line.amount_calculated_line or 0.00"/>
+                                    </td>
+                                </tr>
+
+                                <tr style="valign:top; background-color:#DBEEF3 !important">
+
+                                    <td colspan="9"
+                                        style="width:88%; border-left:1px solid white; border-top:1px solid white; border-bottom:1px solid black; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                        <p style="text-align:left; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;">
+                                            <font color="blue">Total BVG-Basis übermittelt</font>
+                                        </p>
+                                    </td>
+
+                                    <td t-if="line.amount_transmitted_line == line.amount_calculated_line"
+                                        style="width:12%; border-top:1px solid white; border-bottom:1px solid black; border-right:1px solid white; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm;">
+
+                                        <p t-if="o.type == 'synchronize_contract'"
+                                           style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                            0.00
+                                        </p>
+                                        <p t-else=""
+                                           style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;"
+                                           t-esc="line.amount_transmitted_line or 0.00">
+                                            <font color="blue"/>
+                                        </p>
+
+                                    </td>
+
+                                    <td t-else=""
+                                        style="width:12%; border-top:1px solid white; border-bottom:1px solid black; border-right:1px solid white; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm;">
+
+                                        <p t-if="o.type == 'synchronize_contract'"
+                                           style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                            0.00
+                                        </p>
+                                        <p t-else=""
+                                           style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;"
+                                           t-esc="line.amount_transmitted_line or 0.00">
+                                            <font color="red"/>
+                                        </p>
+
+                                    </td>
+
+                                </tr>
+                            </div>
+                        </t>
+
+                        <tr style="valign:top;">
+                            <td colspan="10"
+                                style="width:100%; border-left:1px solid white; border-top:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                <p style="text-align:center;"/>
+                            </td>
+                        </tr>
+
+                        <tr style="valign:top; background-color:#DBEEF3 !important">
+
+                            <td colspan="9"
+                                style="width:88%; border-left:1px solid white; border-top:1px solid white; border-bottom:1px solid white; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                <p style="text-align:left; font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                    Gesamttotal
+                                    BVG-Basis errechnet
+                                </p>
+                            </td>
+
+                            <td style="width:12%; border-top:1px solid white; border-bottom:1px solid black; border-right:1px solid white; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm;">
+
+                                <p t-if="o.type == 'synchronize_contract'"
+                                   style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;">0.00
+                                </p>
+                                <p t-else=""
+                                   style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;"
+                                   t-esc="o.amount_calculated or 0.00">
+                                    <font color="red"/>
+                                </p>
+
+                            </td>
+
+                        </tr>
+
+                        <tr style="valign:top; background-color:#DBEEF3 !important">
+
+                            <td colspan="9"
+                                style="width:88%; border-left:1px solid white; border-top:1px solid white; border-bottom:1px solid black; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+                                <p style="text-align:left; font-family: 'Arial, sans-serif'; font-size: 7pt;">
+                                    Gesamttotal
+                                    BVG-Basis übermittelt
+                                </p>
+                            </td>
+
+                            <td t-if="o.amount_transmitted == o.amount_calculated"
+                                style="width:12%; border-top:1px solid white; border-bottom:1px solid black; border-right:1px solid white; padding-top: 0cm; padding-bottom: 0.1cm; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+
+                                <p t-if="o.type == 'synchronize_contract'"
+                                   style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;">0.00
+                                </p>
+                                <p t-else=""
+                                   style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;"
+                                   t-esc="o.amount_transmitted or 0.00">
+                                    <font color="blue"/>
+                                </p>
+
+                            </td>
+
+                            <td t-else=""
+                                style="width:12%; border-top:1px solid white; border-bottom:1px solid black; border-right:1px solid white; padding-top: 0cm; padding-bottom: 0.1cm; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm;">
+
+                                <p t-if="o.type == 'synchronize_contract'"
+                                   style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt;">0.00
+                                </p>
+                                <p t-else=""
+                                   style="text-align:right; font-family: 'Arial, sans-serif'; font-size: 7pt; font-weight: bold;"
+                                   t-esc="o.amount_transmitted or 0.00">
+                                    <font color="red"/>
+                                </p>
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+            </t>
+
+        </template>
+
+        <template id="report_bvg_declaration">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="bt_swissdec.report_bvg_declaration_document" t-lang="lang_set"/>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_report_bvg_declaration" model="ir.actions.report">
+            <field name="print_report_name">(object.name or '').replace('/','')+'.pdf'</field>
+            <!--&lt;!&ndash;<field name="paperformat_id" ref="bt_swissdec.paperformat_bvg_report"/>&ndash;&gt;-->
+        </record>
+
+    </data>
+</odoo>

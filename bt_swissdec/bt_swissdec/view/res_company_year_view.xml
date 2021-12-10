@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="res_company_year_tree" model="ir.ui.view">
+            <field name="name">res.company.year.tree</field>
+            <field name="model">res.company.year</field>
+            <field name="arch" type="xml">
+                <tree string="Years">
+                    <field name="name" />
+                    <button name="%(action_report_hr_company)d" string="Print company parameters"
+                        icon="fa-print" type="action" />
+                    <field name="state" invisible="1" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="res_company_year_form" model="ir.ui.view">
+            <field name="name">res.company.year.form</field>
+            <field name="model">res.company.year</field>
+            <field name="arch" type="xml">
+                <form string="Years">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="name" />
+                            <field name="state" invisible="1" />
+                            <field name="company_id" invisible="1" />
+                            <field name="partner_id" invisible="1" />
+                            <field name="id" invisible="1" />
+                            <newline />
+                            <field name="company_name" />
+                            <field name="company_address_id"
+                                domain="['|',('parent_id','=',partner_id),('id','=',partner_id)]" />
+                            <newline />
+                            <field name="weeklyhours_or_lessons" required="1"/>
+                            <field name="weeklyhours_or_lessons_default"
+                                   attrs="{'invisible':[('weeklyhours_or_lessons','!=','has_weeklyhoursandlessons')],
+                                   'required':[('weeklyhours_or_lessons','=','has_weeklyhoursandlessons')]}" />
+                            <newline />
+                            <field name="uid_ehra" />
+                            <field name="uid_bfs" />
+                            <separator string="Workplaces" colspan="4" />
+                        </group>
+                        <group col="4" colspan="4" groups="bt_swissdec.bt_swissdec_admin">
+                            <field name="set_uvgz_readonly_group_uvgz_ids" />
+                            <newline />
+                            <field name="set_ktg_readonly_group_ktg_ids" />
+                            <newline />
+                            <field name="set_bvg_readonly_group_bvg_ids" />
+                            <newline />
+                        </group>
+                        <group col="2" colspan="2">
+                            <field name="bur_ids" colspan="4" nolabel="1" height="150" context="{'year_id': id}">
+                                <form string="Workplaces">
+                                    <group col="2" colspan="2">
+                                        <field name="name" />
+                                        <field name="is_inhouseid"/>
+                                        <field name="bur_ree_number"/>
+                                        <field name="weeklyhours_bur"
+                                            attrs="{'invisible':[('parent.weeklyhours_or_lessons','=','has_weeklylessons')], 'required':[('parent.weeklyhours_or_lessons','!=','has_weeklylessons')]}" />
+                                        <field name="weeklylessons_bur"
+                                            attrs="{'invisible':[('parent.weeklyhours_or_lessons','=','has_weeklyhours')], 'required':[('parent.weeklyhours_or_lessons','!=','has_weeklyhours')]}" />
+                                        <field name="description" />
+                                        <field name="street" />
+                                        <field name="post_box" />
+                                        <field name="zip" />
+                                        <field name="city" />
+                                        <field name="state_id" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="country_id" invisible="1" />
+                                        <field name="municipality" context="{'change_municipality': 1}"/>
+                                        <field name="year_id_int" invisible="1" />
+                                    </group>
+                                </form>
+                                <tree string="Workplaces">
+                                    <field name="sequence" invisible="1" />
+                                    <field name="name" />
+                                    <field name="is_inhouseid" />
+                                    <field name="bur_ree_number" />
+                                    <field name="weeklyhours_bur"
+                                        attrs="{'invisible':[('parent.weeklyhours_or_lessons','=','has_weeklylessons')], 'required':[('parent.weeklyhours_or_lessons','!=','has_weeklylessons')]}" />
+                                    <field name="weeklylessons_bur"
+                                        attrs="{'invisible':[('parent.weeklyhours_or_lessons','=','has_weeklyhours')], 'required':[('parent.weeklyhours_or_lessons','!=','has_weeklyhours')]}" />
+                                    <field name="description" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group col="4" colspan="4">
+                            <!--<page string="Lohnstammdaten"> -->
+                            <notebook colspan="4">
+                                <page string="AHV">
+                                    <group col="4" colspan="4">
+                                        <group col="2" colspan="2">
+                                            <separator colspan="2" string="Ansätze und Beiträge" />
+                                            <field name="ahv_freigrenze_monat" readonly="1" />
+                                            <field name="ahv_alv_untergrenze_jahr" readonly="1" />
+                                            <field name="ahv_arbeitnehmer_beitrag" />
+                                            <field name="ahv_arbeitgeber_beitrag" />
+                                            <field name="beginn_ahv" readonly="1" />
+                                            <field name="beginn_rentenalter_m" readonly="1" />
+                                            <field name="beginn_rentenalter_f" readonly="1" />
+                                        </group>
+                                        <group col="2" colspan="2">
+                                            <separator colspan="2" string="Angaben AHV-Ausgleichskasse" />
+                                            <field name="ahv_mitgliednummer" required="1" />
+                                            <field name="nummer_ausgleichskasse" required="1"/>
+                                            <field name="address_ahv_id" />
+                                            <div colspan="2">
+                                                <h2 style="color:red">A canton change of the ahv institution is only allowed
+                                                    at the beginning of the new calendar year.</h2>
+                                            </div>
+                                        </group>
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Das <strong><em>AHV Mitgliednummer</em></strong> wird von der AHV-Ausgleichskasse erteilt (Mitglieds- oder Abrechnungsnummer). Sie dient der genauen Identifikation des Mitglieds (Unternehmens).<br/><br/>Hier erfahren Sie, wie Sie am besten zu den Daten des Versicherers gelangen <a target="_blank" rel="noopener noreferrer" href="http://www.swissdec.ch/de/anwender/swissdec-einfuehren/grunddaten-und-versicherungsprofil/">(Link).</a><br/><br/>Für die <strong><em>Nummer Ausgleichskasse</em></strong> ist das Format <strong><em>nnn.nnn</em></strong> zwingend (wobei n eine Ziffer von 0 bis 9 ist). Die Ausgleichskasse 22.4 z.B. ist als 022.004 zu erfassen. Weitere Informationen und alle Nummern finden sie auf der Webseite <a target="_blank" rel="noopener noreferrer" href="https://www.ahv-iv.ch/de/Kontakte/Kantonale-Ausgleichskassen">www.ahv-iv.ch</a>.<br/><br/>Wird das Feld <strong><em>AHV Arbeitgeber Beitrag in %</em></strong> leer gelassen, werden die Abzüge für den Arbeitgeber bei der Mitarbeiterabrechnung nicht berechnet und somit auch nicht gebucht.<br/><br/>Ein Kantonswechsel bei der Ausgleichskasse is nur auf Beginn des neuen Kalenderjahres möglich.<strong> Dies muss also zwingend zu Beginn des Jahres angepasst werden.</strong></p>
+                                    </div>
+                                </page>
+                                <page string="ALV">
+                                    <group col="2" colspan="2">
+                                        <separator colspan="2" string="Ansätze und Beiträge" />
+                                        <field name="alv_hoechstlohn_monat" readonly="1" />
+                                        <field name="alvz_hoechstlohn_monat" readonly="1" />
+                                        <field name="alv_arbeitnehmer_beitrag" />
+                                        <field name="alv_arbeitgeber_beitrag" />
+                                        <field name="alvz_arbeitnehmer_beitrag" />
+                                        <field name="alvz_arbeitgeber_beitrag" />
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Die Felder sind selbsterklärend. Hier gilt ebenfalls, werden die Felder <strong><em>ALV Arbeitgeber Beitrag in %</em></strong> und <strong><em>ALVZ Arbeitgeber Beitrag in %</em></strong> leer gelassen, werden die Abzüge für den Arbeitgeber bei der Mitarbeiterabrechnung nicht berechnet.</p>
+                                    </div>
+                                </page>
+                                <page string="FAK">
+                                    <group col="4" colspan="4">
+                                        <separator colspan="4" string="Angaben" />
+                                        <field name="has_verbandsausgleichskasse" />
+                                        <newline />
+                                        <field name="fak_ids" colspan="4" nolabel="1" height="150">
+                                            <form string="FAK">
+                                                <group col="4" colspan="4">
+                                                    <group col="4" colspan="4">
+                                                        <field name="address_fak_id"
+                                                            context="{'show_address': 1}" options="{'always_reload': True}" />
+                                                        <field name="state_id" options='{"no_open": True, "no_create": True}'/>
+                                                        <newline />
+                                                        <field name="mitgliednummer" />
+                                                        <field name="subnummer" />
+                                                        <field name="nummer" />
+                                                        <newline />
+                                                        <field name="fak_beitrag_an" />
+                                                        <field name="fak_beitrag_ag" />
+                                                        <field name="country_id" invisible="1" />
+                                                        <newline />
+                                                    </group>
+                                                    <group col="4" colspan="4">
+                                                        <field name="fak_part_ids" colspan="4" nolabel="1"
+                                                            height="150">
+                                                            <form string="FAK Bezugsberechtigungen">
+                                                                <group col="4" colspan="4">
+                                                                    <field name="name" />
+                                                                    <newline />
+                                                                    <field name="alter_von" />
+                                                                    <field name="alter_bis" />
+                                                                    <newline />
+                                                                    <field name="is_kizu" />
+                                                                    <newline />
+                                                                    <field name="betrag_zulage" />
+                                                                    <field name="betrag_zulage_supplementary" />
+                                                                </group>
+                                                            </form>
+                                                            <tree string="FAK Bezugsberechtigungen">
+                                                                <field name="name" />
+                                                                <field name="alter_von" />
+                                                                <field name="alter_bis" />
+                                                                <field name="betrag_zulage" />
+                                                                <field name="betrag_zulage_supplementary" />
+                                                                <field name="is_kizu" />
+                                                            </tree>
+                                                        </field>
+                                                        <newline />
+                                                    </group>
+                                                    <group col="4" colspan="4">
+                                                        <group colspan="4" col="6">
+                                                            <div>
+                                                                <field name="valid_from_child_number_active"
+                                                                    nolabel="1" class="oe_inline" />
+                                                                Gilt ab Kind:
+                                                                <field name="valid_from_child_number" nolabel="1"
+                                                                    class="oe_inline"
+                                                                    attrs="{'invisible':[('valid_from_child_number_active','=',False)], 'required':[('valid_from_child_number_active','=',True)]}" />
+                                                            </div>
+                                                        </group>
+                                                    </group>
+                                                    <group col="4" colspan="4">
+                                                        <field name="fak_part_extended_ids" colspan="4"
+                                                            nolabel="1" height="150"
+                                                            attrs="{'invisible':[('valid_from_child_number_active','=',False)]}">
+                                                            <form string="FAK Bezugsberechtigungen (Erweitert)">
+                                                                <group col="4" colspan="4">
+                                                                    <field name="name" />
+                                                                    <newline />
+                                                                    <field name="alter_von" />
+                                                                    <field name="alter_bis" />
+                                                                    <newline />
+                                                                    <field name="is_kizu" />
+                                                                    <newline />
+                                                                    <field name="betrag_zulage" />
+                                                                    <field name="betrag_zulage_supplementary" />
+                                                                </group>
+                                                            </form>
+                                                            <tree string="FAK Bezugsberechtigungen (Erweitert)">
+                                                                <field name="name" />
+                                                                <field name="alter_von" />
+                                                                <field name="alter_bis" />
+                                                                <field name="betrag_zulage" />
+                                                                <field name="betrag_zulage_supplementary" />
+                                                                <field name="is_kizu" />
+                                                            </tree>
+                                                        </field>
+                                                    </group>
+                                                </group>
+                                                <div>
+                                                    <p class="oe_grey">Unter den <strong><em>Bezugsberechtigungen</em></strong> sind die einzelnen Zulagen zu erfassen, die je nach Alter gewährt werden. Das Feld <strong><em>Ist Kinderzulage</em></strong> gibt an, ob es sich um eine Kinder- oder Ausbildungszulage handelt, was die Auswahl einer unterschiedlichen Lohnart in der Lohnabrechnung zur Folge hat.<br/><br/>Zusätzlich gibt es die Möglichkeit mittels dem Feld <strong><em>Betrag Zulage überobligatorisch (freiwillig)</em></strong> eine zusätzliche Zulage zu erfassen.<br/><br/>Ebenfalls kann für eine spezielle Handhabung ab dem „x"-ten Kind, das Häkchen bei <strong><em>Gilt ab Kind</em></strong> gesetzt werden und im neu erscheinenden Feld die Angabe ab welchem Kind diese Tabelle Gültigkeit hat erfasst werden. Für die Berechnungen wird diese Tabelle gleich gehandhabt wie die Vorige.<br/><br/>Hier erfahren Sie, wie Sie am besten zu den Daten des Versicherers gelangen <a target="_blank" rel="noopener noreferrer" href="http://www.swissdec.ch/de/anwender/swissdec-einfuehren/grunddaten-und-versicherungsprofil/">(Link).</a></p>
+                                                </div>
+                                            </form>
+                                            <tree string="FAK">
+                                                <field name="address_fak_id" />
+                                                <field name="mitgliednummer" />
+                                                <field name="subnummer" />
+                                                <field name="nummer" />
+                                                <field name="fak_beitrag_an" />
+                                                <field name="fak_beitrag_ag" />
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Hier können verschiedene Familienausgleichskassen erfasst werden. Ebenfalls kann hier angegeben werden, ob man einer Verbandsausgleichskasse angeschlossen ist. Somit werden alle FAK-Kantone mit der gleichen Institution abgerechnet. Es kann bei allen FAK-Institutionen dieselben Detailangaben gemacht werden.</p>
+                                    </div>
+                                </page>
+                                <page string="UVG">
+                                    <group col="4" colspan="4">
+                                        <separator colspan="4" string="Angaben" />
+                                        <group col="4" colspan="4">
+                                            <field name="uvg_hoechstlohn_monat" attrs="{'required':[('uvg_ids','!=',False)]}" />
+                                        </group>
+                                        <group col="4" colspan="4">
+                                            <field name="uvg_ids" colspan="4" nolabel="1" height="150"
+                                                context="{'year_id': id}">
+                                                <form string="UVG">
+                                                    <group col="4" colspan="4">
+                                                        <field name="name" />
+                                                        <newline />
+                                                        <field name="versicherer_nr" />
+                                                        <field name="kundennr" />
+                                                        <field name="vertragsnr" />
+                                                        <field name="address_id" />
+                                                        <newline />
+                                                        <field name="uvg_part_ids" colspan="4" nolabel="1"
+                                                            height="150">
+                                                            <form string="UVG Betriebsteile">
+                                                                <group col="4" colspan="4">
+                                                                    <field name="name" />
+                                                                    <field name="beschreibung" />
+                                                                    <newline />
+                                                                    <field name="buv_mf" />
+                                                                    <field name="nbuv_mf" />
+                                                                </group>
+                                                            </form>
+                                                            <tree string="UVG Betriebsteile">
+                                                                <field name="name" />
+                                                                <field name="beschreibung" />
+                                                                <field name="buv_mf" />
+                                                                <field name="nbuv_mf" />
+                                                            </tree>
+                                                        </field>
+                                                    </group>
+                                                    <div>
+                                                        <p class="oe_grey">In der Detailmaske können die Betriebsteile mit den dazugehörigen Beiträgen erfasst werden.<br/><br/>Hier erfahren Sie, wie Sie am besten zu den Daten des Versicherers gelangen <a target="_blank" rel="noopener noreferrer" href="http://www.swissdec.ch/de/anwender/swissdec-einfuehren/grunddaten-und-versicherungsprofil/">(Link).</a></p>
+                                                    </div>
+                                                </form>
+                                                <tree string="UVG">
+                                                    <field name="name" />
+                                                    <field name="versicherer_nr" />
+                                                    <field name="kundennr" />
+                                                    <field name="vertragsnr" />
+                                                    <field name="address_id" />
+                                                </tree>
+                                            </field>
+                                        </group>
+                                    </group>
+                                    <div colspan="4">
+                                        <p class="oe_grey">Hier können verschiedene UVG Versicherungen erfasst werden.</p>
+                                    </div>
+                                </page>
+                                <page string="Personengruppen">
+                                    <notebook colspan="4">
+                                        <page string="UVGZ Personengruppen">
+                                            <group col="4" colspan="4">
+                                                <field name="group_uvgz_ids" colspan="4" nolabel="1"
+                                                    height="150" context="{'year_id': id, 'group_uvgz_ids': group_uvgz_ids}">
+                                                    <form string="UVGZ">
+                                                        <group col="4" colspan="4">
+                                                            <field name="code" />
+                                                            <field name="name" />
+                                                            <field name="anmerkung" />
+                                                        </group>
+                                                    </form>
+                                                    <tree string="UVGZ">
+                                                        <field name="code" />
+                                                        <field name="name" />
+                                                        <field name="anmerkung" />
+                                                    </tree>
+                                                </field>
+                                            </group>
+                                        </page>
+                                        <page string="KTG Personengruppen">
+                                            <group col="4" colspan="4">
+                                                <field name="group_ktg_ids" colspan="4" nolabel="1"
+                                                    height="150" context="{'year_id': id, 'group_ktg_ids': group_ktg_ids}">
+                                                    <form string="KTG">
+                                                        <group col="4" colspan="4">
+                                                            <field name="code" />
+                                                            <field name="name" />
+                                                            <field name="anmerkung" />
+                                                        </group>
+                                                    </form>
+                                                    <tree string="KTG">
+                                                        <field name="code" />
+                                                        <field name="name" />
+                                                        <field name="anmerkung" />
+                                                    </tree>
+                                                </field>
+                                            </group>
+                                        </page>
+                                    </notebook>
+                                    <div>
+                                        <p class="oe_grey">Personengruppen werden für UVGZ und KTG verwendet. Nach dem erstmaligen Erfassen müssen die Unternehmensdaten gespeichert werden, damit Sie in den weiterführenden Masken zur Auswahl bereit stehen.</p>
+                                    </div>
+                                </page>
+                                <page string="Buchungskreis">
+                                    <group col="4" colspan="4">
+                                        <field name="id" invisible="1" />
+                                        <field name="group_bvg_id" string="Set default" domain="[('year_id','=',id)]"
+                                            options='{"no_open": True, "no_create": True}' />
+                                        <field name="group_bvg_ids" colspan="4" nolabel="1"
+                                            height="150" context="{'year_id': id, 'group_bvg_ids': group_bvg_ids}">
+                                            <form string="Buchungskreis">
+                                                <group col="4" colspan="4">
+                                                    <!--field name="code"/ -->
+                                                    <field name="name" />
+                                                    <field name="anmerkung" />
+                                                </group>
+                                            </form>
+                                            <tree string="Buchungskreis">
+                                                <!--field name="code"/ -->
+                                                <field name="name" />
+                                                <field name="anmerkung" />
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Buchungskreise werden für das BVG verwendet und weisen im Gegensatz zu Personengruppen keinen <strong><em>Code</em></strong> auf. Nach dem erstmaligen Erfassen müssen die Unternehmensdaten gespeichert werden, damit Sie in den weiterführenden Masken zur Auswahl bereit stehen.</p>
+                                    </div>
+                                </page>
+                                <page string="UVGZ">
+                                    <group col="4" colspan="4">
+                                        <separator colspan="4" string="Angaben" />
+                                        <field name="uvgz_ids" colspan="4" nolabel="1" height="150"
+                                            context="{'year_id': id, 'uvgz_ids': uvgz_ids}"
+                                            attrs="{'readonly':['|', ('set_uvgz_readonly_group_uvgz_ids','=',True), ('state','=','closed')]}">
+                                            <form string="UVGZ">
+                                                <group col="4" colspan="4">
+                                                    <field name="group"
+                                                        options='{"no_open": True, "no_create": True}' />
+                                                    <field name="address_uvgz_id"
+                                                        context="{'show_address': 1}" options="{'always_reload': True}" />
+                                                    <newline />
+                                                    <field name="vertragsnr" />
+                                                    <field name="kundennummer" />
+                                                    <field name="vers_nr" />
+                                                    <newline />
+                                                    <field name="at_least_two_entries_uvgz_code_ids_ok"
+                                                        invisible="1" />
+                                                    <field name="help_field_save_uvgz_code_ids_not_allowed"
+                                                        attrs="{'required':[('at_least_two_entries_uvgz_code_ids_ok','=',False)]}"
+                                                        invisible="1" />
+                                                    <field name="year_id" invisible="1" />
+                                                    <field name="company_id" invisible="1" />
+                                                    <field name="uvgz_code_ids" colspan="4" nolabel="1"
+                                                        height="150">
+                                                        <form string="UVGZ Codes">
+                                                            <group col="4" colspan="4">
+                                                                <field name="is_default" />
+                                                                <newline/>
+                                                                <field name="name"
+                                                                    context="{'uvgz_code_ids': parent.uvgz_code_ids}" />
+                                                                <field name="beschreibung" />
+                                                                <field name="category_beitrag_id"
+                                                                    domain="[('company_id', '=', parent.company_id)]"
+                                                                    attrs="{'invisible':[('id','=',False)], 'readonly':[('id','!=',False)]}"
+                                                                    options='{"no_open": True, "no_create": True}' groups="bt_swissdec.bt_swissdec_admin" />
+                                                                <field name="category_salary_id"
+                                                                    domain="[('company_id', '=', parent.company_id)]"
+                                                                    attrs="{'invisible':[('id','=',False)], 'readonly':[('id','!=',False)]}"
+                                                                    options='{"no_open": True, "no_create": True}' groups="bt_swissdec.bt_swissdec_admin" />
+                                                                <newline />
+                                                                <field name="taggeld" />
+                                                                <field name="tod" />
+                                                                <newline />
+                                                                <field name="invaliditaet" />
+                                                                <field name="andere" />
+                                                                <newline />
+                                                                <field name="uvgz_lohn_ab" />
+                                                                <field name="uvgz_hoechstlohn_bis" />
+                                                                <newline />
+                                                                <field name="uvgz_beitrag_m" />
+                                                                <field name="uvgz_beitrag_f" />
+                                                                <newline />
+                                                                <field name="uvgz_beitrag_m_employer" />
+                                                                <field name="uvgz_beitrag_f_employer" />
+                                                                <field name="id" invisible="1" />
+                                                            </group>
+                                                        </form>
+                                                        <tree string="UVGZ Codes">
+                                                            <field name="is_default" />
+                                                            <field name="name" />
+                                                            <field name="beschreibung" />
+                                                            <field name="category_beitrag_id" groups="bt_swissdec.bt_swissdec_admin" />
+                                                            <field name="category_salary_id" groups="bt_swissdec.bt_swissdec_admin" />
+                                                            <field name="uvgz_lohn_ab" />
+                                                            <field name="uvgz_hoechstlohn_bis" />
+                                                            <field name="uvgz_beitrag_m" />
+                                                            <field name="uvgz_beitrag_f" />
+                                                            <field name="uvgz_beitrag_m_employer" />
+                                                            <field name="uvgz_beitrag_f_employer" />
+                                                        </tree>
+                                                    </field>
+                                                </group>
+                                                <div>
+                                                    <p class="oe_grey">In der Tabelle <strong><em>UVGZ Codes</em></strong>, bzw. <strong><em>KTG Codes</em></strong> werden nach Lohngrenzen die Beiträge erfasst.<br/><br/>Hier erfahren Sie, wie Sie am besten zu den Daten des Versicherers gelangen <a target="_blank" rel="noopener noreferrer" href="http://www.swissdec.ch/de/anwender/swissdec-einfuehren/grunddaten-und-versicherungsprofil/">(Link).</a></p>
+                                                </div>
+                                            </form>
+                                            <tree string="UVGZ">
+                                                <field name="group" />
+                                                <field name="address_uvgz_id" />
+                                                <field name="vertragsnr" />
+                                                <field name="kundennummer" />
+                                                <field name="vers_nr" />
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Nachdem die Personengruppen erfasst sind, können UVGZ und KTG erfasst werden. Dort befindet sich das Feld <strong><em>Personengruppe</em></strong>.</p>
+                                    </div>
+                                </page>
+                                <page string="KTG">
+                                    <group col="4" colspan="4">
+                                        <separator colspan="4" string="Angaben" />
+                                        <field name="ktg_ids" colspan="4" nolabel="1" height="150"
+                                            context="{'year_id': id, 'ktg_ids': ktg_ids}"
+                                            attrs="{'readonly':['|', ('set_ktg_readonly_group_ktg_ids','=',True), ('state','=','closed')]}">
+                                            <form string="KTG">
+                                                <group col="4" colspan="4">
+                                                    <field name="group"
+                                                        options='{"no_open": True, "no_create": True}' />
+                                                    <field name="address_ktg_id"
+                                                        context="{'show_address': 1}" options="{'always_reload': True}" />
+                                                    <newline />
+                                                    <field name="vertragsnr" />
+                                                    <field name="kundennummer" />
+                                                    <field name="vers_nr" />
+                                                    <newline />
+                                                    <field name="at_least_two_entries_ktg_code_ids_ok"
+                                                        invisible="1" />
+                                                    <field name="help_field_save_ktg_code_ids_not_allowed"
+                                                        attrs="{'required':[('at_least_two_entries_ktg_code_ids_ok','=',False)]}"
+                                                        invisible="1" />
+                                                    <field name="year_id" invisible="1" />
+                                                    <field name="company_id" invisible="1" />
+                                                    <field name="ktg_code_ids" colspan="4" nolabel="1"
+                                                        height="150">
+                                                        <form string="KTG Codes">
+                                                            <group col="4" colspan="4">
+                                                                <field name="is_default"/>
+                                                                <newline/>
+                                                                <field name="name"
+                                                                    context="{'ktg_code_ids': parent.ktg_code_ids}" />
+                                                                <field name="beschreibung" />
+                                                                <field name="category_beitrag_id"
+                                                                    domain="[('company_id', '=', parent.company_id)]"
+                                                                    attrs="{'invisible':[('id','=',False)], 'readonly':[('id','!=',False)]}"
+                                                                    options='{"no_open": True, "no_create": True}' groups="bt_swissdec.bt_swissdec_admin" />
+                                                                <field name="category_salary_id"
+                                                                    domain="[('company_id', '=', parent.company_id)]"
+                                                                    attrs="{'invisible':[('id','=',False)], 'readonly':[('id','!=',False)]}"
+                                                                    options='{"no_open": True, "no_create": True}' groups="bt_swissdec.bt_swissdec_admin" />
+                                                                <newline />
+                                                                <field name="dienstleistung" />
+                                                                <newline />
+                                                                <field name="ktg_lohn_ab" />
+                                                                <field name="ktg_hoechstlohn_bis" />
+                                                                <newline />
+                                                                <field name="ktg_beitrag_m" />
+                                                                <field name="ktg_beitrag_f" />
+                                                                <newline />
+                                                                <field name="ktg_beitrag_m_employer" />
+                                                                <field name="ktg_beitrag_f_employer" />
+                                                                <field name="id" invisible="1" />
+                                                            </group>
+                                                        </form>
+                                                        <tree string="KTG Codes">
+                                                            <field name="is_default" />
+                                                            <field name="name" />
+                                                            <field name="beschreibung" />
+                                                            <field name="category_beitrag_id" groups="bt_swissdec.bt_swissdec_admin" />
+                                                            <field name="category_salary_id" groups="bt_swissdec.bt_swissdec_admin" />
+                                                            <field name="ktg_lohn_ab" />
+                                                            <field name="ktg_hoechstlohn_bis" />
+                                                            <field name="ktg_beitrag_m" />
+                                                            <field name="ktg_beitrag_f" />
+                                                            <field name="ktg_beitrag_m_employer" />
+                                                            <field name="ktg_beitrag_f_employer" />
+                                                        </tree>
+                                                    </field>
+                                                </group>
+                                                <div>
+                                                    <p class="oe_grey">In der Tabelle <strong><em>UVGZ Codes</em></strong>, bzw. <strong><em>KTG Codes</em></strong> werden nach Lohngrenzen die Beiträge erfasst.<br/><br/>Hier erfahren Sie, wie Sie am besten zu den Daten des Versicherers gelangen <a target="_blank" rel="noopener noreferrer" href="http://www.swissdec.ch/de/anwender/swissdec-einfuehren/grunddaten-und-versicherungsprofil/">(Link).</a></p>
+                                                </div>
+                                            </form>
+                                            <tree string="KTG">
+                                                <field name="group" />
+                                                <field name="address_ktg_id" />
+                                                <field name="vertragsnr" />
+                                                <field name="kundennummer" />
+                                                <field name="vers_nr" />
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Nachdem die Personengruppen erfasst sind, können UVGZ und KTG erfasst werden. Dort befindet sich das Feld <strong><em>Personengruppe</em></strong>.</p>
+                                    </div>
+                                </page>
+                                <page string="BVG">
+                                    <group col="4" colspan="4">
+                                        <separator colspan="4" string="Angaben" />
+                                        <!--field name="bvg_ids" colspan="4" nolabel="1" height="150" -->
+                                        <field name="bvg_ids" colspan="4" nolabel="1" height="150"
+                                            context="{'year_id': id, 'bvg_ids': bvg_ids}"
+                                            attrs="{'readonly':['|', ('set_bvg_readonly_group_bvg_ids','=',True), ('state','=','closed')]}">
+                                            <form string="BVG">
+                                                <group col="4" colspan="4">
+                                                    <group col="4" colspan="4">
+                                                        <field name="sequence" />
+                                                        <field name="address_bvg_id"
+                                                            context="{'show_address': 1}" options="{'always_reload': True}" />
+                                                        <field name="year_id" invisible="1" />
+                                                        <newline />
+                                                        <field name="vertragsnr" />
+                                                        <field name="kundennummer" />
+                                                        <field name="vers_nr" />
+                                                        <newline />
+                                                        <field name="bvg_minimallohn" />
+                                                        <field name="bvg_hoechstlohn" />
+                                                        <field name="koord_bvg_lohn" />
+                                                        <newline />
+                                                        <field name="bvg_code_ids" colspan="4" nolabel="1"
+                                                            height="150" context="{'year_id': year_id}" />
+
+                                                        <newline />
+                                                    </group>
+                                                    <group col="4" colspan="4">
+                                                        <field name="use_bvg_matrix_ag_an" />
+                                                    </group>
+                                                    <newline />
+                                                    <group col="4" colspan="4">
+                                                        <field name="bvg_matrix_percentage_of_salary"
+                                                            attrs="{'invisible':[('use_bvg_matrix_ag_an','=',False)]}" />
+                                                        <newline />
+                                                        <field name="bvg_matrix_calc_until_age_male"
+                                                            attrs="{'invisible':[('use_bvg_matrix_ag_an','=',False)]}" />
+                                                        <newline />
+                                                        <field name="bvg_matrix_calc_until_age_female"
+                                                            attrs="{'invisible':[('use_bvg_matrix_ag_an','=',False)]}" />
+                                                    </group>
+                                                    <group col="4" colspan="4">
+                                                        <field name="bvg_matrix_an_ag_ids" colspan="4"
+                                                            nolabel="1" height="150"
+                                                            attrs="{'invisible':[('use_bvg_matrix_ag_an','=',False)]}">
+                                                            <form string="Company BVG Matrix Employer/Employee">
+                                                                <group col="4" colspan="4">
+                                                                    <field name="age" />
+                                                                    <newline />
+                                                                    <field name="percentage_employee" />
+                                                                    <field name="percentage_employer" />
+                                                                    <field name="valid_from" />
+                                                                    <field name="valid_to" />
+                                                                </group>
+                                                            </form>
+                                                            <tree string="Company BVG Matrix Employer/Employee">
+                                                                <field name="age" />
+                                                                <field name="percentage_employee" />
+                                                                <field name="percentage_employer" />
+                                                                <field name="valid_from" />
+                                                                <field name="valid_to" />
+                                                            </tree>
+                                                        </field>
+                                                    </group>
+                                                </group>
+                                                <div>
+                                                    <p class="oe_grey">Mit der Reihenfolge legen Sie die Reihenfolge fest, in der die Pensionskassen berücksichtigt werden. In der Tabelle BVG Codes können verschiedene BVG Codes erfasst werden. Möchten Sie den BVG Abzug via Matrix steuern, dann setzen Sie bei <strong><em>Verwende BVG Matrix für die Arbeitgeber und Arbeitnehmer Abzüge</em></strong> den Hacken.<br/><br/>Dann erscheint die Tabelle <strong><em>BVG Matrix Arbeitgeber/Arbeitnehmer</em></strong>. Dort können die Arbeitgeber- und Arbeitnehmerbeiträge nach Alter erfasst werden. Die Daten geben an, in welchem Zeitraum die Regelung gültig ist. Ebenfalls kann festgelegt werden, was der BVG relevante Lohn ist (x Prozent des Lohnes).</p>
+                                                </div>
+                                            </form>
+                                            <tree string="BVG">
+                                                <field name="address_bvg_id" />
+                                                <field name="vertragsnr" />
+                                                <field name="kundennummer" />
+                                                <field name="vers_nr" />
+                                                <field name="bvg_minimallohn" />
+                                                <field name="bvg_hoechstlohn" />
+                                                <field name="koord_bvg_lohn" />
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Hier können verschiedene BVG Versicherungen erfasst werden.<br/><br/>Hier erfahren Sie, wie Sie am besten zu den Daten des Versicherers gelangen <a target="_blank" rel="noopener noreferrer" href="http://www.swissdec.ch/de/anwender/swissdec-einfuehren/grunddaten-und-versicherungsprofil/">(Link).</a></p>
+                                    </div>
+                                </page>
+                                <page string="QST">
+                                    <group col="4" colspan="4">
+                                        <separator colspan="4" string="Angaben" />
+                                        <group col="4" colspan="4">
+                                            <field name="use_qst_transmission" />
+                                        </group>
+                                        <group col="4" colspan="4">
+                                            <field name="workdays_ch_per_default_20"/>
+                                            <field name="qst_ids" colspan="4" nolabel="1" height="150"
+                                                context="{'year_id': id}">
+                                                <form string="QST">
+                                                    <group col="4" colspan="4">
+                                                        <field name="state_id" options='{"no_open": True, "no_create": True}'/>
+                                                        <field name="kundennummer_qst" />
+                                                        <field name="address_qst_id" />
+                                                        <field name="group" options='{"no_open": True, "no_create": True}'/>
+                                                        <newline />
+                                                        <field name="country_id" invisible="1" />
+                                                    </group>
+                                                    <group col="4" colspan="4">
+                                                        <field name="qst_kommission" />
+                                                        <newline />
+                                                        <field name="qst_vr_honorar" />
+                                                        <newline />
+                                                        <field name="qst_geldwerte_leistungen" />
+                                                        <newline />
+                                                        <field name="qst_compensation" />
+                                                    </group>
+                                                    <group col="4" colspan="4" string="Canton defaults">
+                                                        <field name="canton_default_ids" colspan="4" nolabel="1" readonly="1">
+                                                            <tree string="Canton defaults">
+                                                                <field name="name"/>
+                                                                <field name="description"/>
+                                                                <field name="qst_compensation"/>
+                                                            </tree>
+                                                        </field>
+                                                    </group>
+                                                    <div>
+                                                        <p class="oe_grey">Beim <strong><em>QST-Ausgleich</em></strong> gibt es die Auswahlmöglichkeiten <strong><em>Monatlich</em></strong> oder <em><strong>Jährlich</strong></em>.<br/><br/>Bei welchem Kanton welche Einstellungen vorzunehmen sind kann via diesem Link (Stand 23.07.2015) eingesehen werden <a target="_blank" rel="noopener noreferrer" href="https://www.weka.ch/themen/personal/internationales-hrm/quellensteuer/article/quellensteuerberechnung-berechungsarten-in-den-kantonen/">(Link).</a> Diese müssten jedoch auf die Korrektheit überprüft werden.<br/><br/>Hier erfahren Sie, wie Sie am besten zu den Daten des Versicherers gelangen <a target="_blank" rel="noopener noreferrer" href="http://www.swissdec.ch/de/anwender/swissdec-einfuehren/grunddaten-und-versicherungsprofil/">(Link).</a></p>
+                                                    </div>
+                                                </form>
+                                                <tree string="QST">
+                                                    <field name="state_id" />
+                                                    <field name="kundennummer_qst" />
+                                                    <field name="group" />
+                                                    <field name="qst_kommission" />
+                                                    <field name="qst_vr_honorar" />
+                                                    <field name="qst_geldwerte_leistungen" />
+                                                    <field name="qst_compensation" />
+                                                </tree>
+                                            </field>
+                                        </group>
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Hier werden die <strong><em>Kantone</em></strong> mit den Detailangaben erfasst, bei denen Quellensteuer abgerechnet wird.</p>
+                                    </div>
+                                </page>
+                                <page string="Lohnvereinbarung">
+                                    <group col="4" colspan="4">
+                                        <field name="pay_agreement" />
+                                        <newline/>
+                                        <field name="pay_agreement_note" colspan="4" nolabel="1"/>
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Die Auswahl der <strong><em>Lohnvereinbarung</em></strong> ist für das BFS notwendig.</p>
+                                    </div>
+                                </page>
+                                <page string="Lohnausweis">
+                                    <group col="12" colspan="4">
+                                        <separator colspan="12" string="Allgemein" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="spesen_stv" colspan="6"
+                                            string="Spesenreglement durch die Steuerverwaltung bewilligt" />
+                                        <field name="spesen_stv" colspan="1" nolabel="1" />
+                                        <field name="spesen_stv_all" colspan="5" />
+                                        <label colspan="5" string="" for="spesen_stv_datum" class="o_form_label"/>
+                                        <field name="spesen_stv_datum" attrs="{'invisible':[('spesen_stv','=',False)]}" />
+                                        <field name="spesen_stv_state_id" options='{"no_open": True, "no_create": True}'
+                                            attrs="{'invisible':[('spesen_stv','=',False)]}" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="bedingungen_rz52" colspan="6"
+                                            string="Bedingungen von Rz 52 werden eingehalten" />
+                                        <field name="bedingungen_rz52" colspan="1" nolabel="1" />
+                                        <field name="bedingungen_rz52_all" colspan="5" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="privat_fz" colspan="6"
+                                            string="Privatanteil für Geschäftswagen durch die STV genehmigt (&lt;0.8%)" />
+                                        <field name="privat_fz" colspan="1" nolabel="1" />
+                                        <field name="privat_fz_all" colspan="5" />
+                                        <label colspan="5" string="" for="privat_fz_datum" class="o_form_label"/>
+                                        <field name="privat_fz_datum" attrs="{'invisible':[('privat_fz','=',False)]}" />
+                                        <field name="privat_fz_state_id" options='{"no_open": True, "no_create": True}'
+                                            attrs="{'invisible':[('privat_fz','=',False)]}" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="privat_dienstauto" colspan="6"
+                                            string="Privatanteil Geschäftswagen im Veranlagungsverfahren abzuklären" />
+                                        <field name="privat_dienstauto" colspan="1" nolabel="1" />
+                                        <field name="privat_dienstauto_all" colspan="5" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <separator colspan="12" string="Mitarbeiterbeteiligung" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="verkehrswert_stv_ok" colspan="6"
+                                            string="Verkehrswert durch die Steuerverwaltung genehmigt" />
+                                        <field name="verkehrswert_stv_ok" colspan="1" nolabel="1" />
+                                        <field name="verkehrswert_stv_ok_all" colspan="5" />
+                                        <label colspan="5" string="" for="verkehrswert_stv_ok_datum" class="o_form_label"/>
+                                        <field name="verkehrswert_stv_ok_datum"
+                                            attrs="{'invisible':[('verkehrswert_stv_ok','=',False)]}" />
+                                        <field name="verkehrswert_stv_ok_state_id" options='{"no_open": True, "no_create": True}'
+                                            attrs="{'invisible':[('verkehrswert_stv_ok','=',False)]}" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="ma_beteiligung" colspan="6"
+                                            string="Mitarbeiterbeteiligung noch ohne steuerbares Einkommen" />
+                                        <field name="ma_beteiligung" colspan="1" nolabel="1" />
+                                        <field name="ma_beteiligung_all" colspan="5" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="anwartschaftliche_rechte" colspan="6"
+                                            string="Anwartschaftliche Rechte (Optionen, Aktien etc.)" />
+                                        <field name="anwartschaftliche_rechte" colspan="6"
+                                            attrs="{'readonly':[('ma_beteiligung','=',False)]}" nolabel="1" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="verausserungssperre" colspan="6"
+                                            string="Veräusserungssperre mehr als 10 Jahre" />
+                                        <field name="verausserungssperre" colspan="6"
+                                            attrs="{'readonly':[('ma_beteiligung','=',False)]}" nolabel="1" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="nicht_bewertbare_optionen" colspan="6"
+                                            string="Bei der Ausgabe nicht bewertbare Optionen" />
+                                        <field name="nicht_bewertbare_optionen" colspan="6"
+                                            attrs="{'readonly':[('ma_beteiligung','=',False)]}" nolabel="1" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <label for="gesperrte_ma_optionen" colspan="6"
+                                            string="Nicht börsenkotierte oder gesperrte Mitarbeiteroptionen" />
+                                        <field name="gesperrte_ma_optionen" colspan="6"
+                                            attrs="{'readonly':[('ma_beteiligung','=',False)]}" nolabel="1" />
+                                        <hr width="100%"
+                                            style="padding:0px;margin:1px;height:1px;border:none;color:#333;background-color:#333;"
+                                            colspan="12" />
+                                        <field name="ma_beteiligung_yes_and_reason_is_selected" invisible="1"
+                                            attrs="{'required':[('ma_beteiligung','=','yes')]}"/>
+
+                                        <separator colspan="12" string="Lohnausweis Nebenleistungen" />
+                                        <field name="lohnausweis_nebenleistung_ids" colspan="12"
+                                            nolabel="1" height="150">
+                                            <form string="Nebenleistungen">
+                                                <group col="4" colspan="4">
+                                                    <field name="note" />
+                                                </group>
+                                            </form>
+                                            <tree string="Nebenleistungen">
+                                                <field name="note" />
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Hinter jeder Angabe kann gewählt werden, ob die Angabe ausnahmslos für alle Mitarbeiter des Unternehmens gilt. Wird das Häkchen gesetzt, kann für die betreffende Angabe keine Änderung beim Mitarbeiter gemacht werden. Sollte also auch nur ein Mitarbeiter eine andere Angabe benötigen, sollte das Häkchen nicht gesestzt werden.<br/><br/>Auch wenn das Häkchen nicht gesetzt ist, muss die betreffende Angabe nicht für jeden Mitarbeiter eingegeben werden. Beim Mitarbeiter können für diese Felder die Unternehmensdaten ausgewählt werden.</p>
+                                    </div>
+                                </page>
+                                <page string="Diverses">
+                                    <group col="4" colspan="4">
+                                        <field name="aufwandsentschaedigung_percent" />
+                                        <field name="category_aufwandsentschaedigung_id" domain="[('company_id', '=', company_id)]"
+                                            options='{"no_open": True, "no_create": True}'
+                                            attrs="{'invisible':[('aufwandsentschaedigung_percent','=',0)], 'required':[('aufwandsentschaedigung_percent','>',0)]}" />
+                                        <newline />
+                                        <field name="yearlyholidays_company" />
+                                        <field name="salary_consolidated_lines" />
+                                    </group>
+                                    <div>
+                                        <p class="oe_grey">Unter Personal &gt; Konfiguration &gt; Swissdec &gt; Lohnartenverwaltung kann bei jeder Lohnart das Flag <strong><em>Berechne Aufwandsentschädigung</em></strong> gesetzt werden. Mit dem Feld <strong><em>Aufwandsentschädigung in %</em></strong> wird festgelegt, wieviel Prozent vom Total aller Lohnarten für die Aufwandsentschädigung berechnet werden soll. Ist dieser Wert &gt; 0, kann mittels der <strong><em>Lohnart Aufwandsentschädigung</em></strong> gesteuert werden, welche Lohnart in der Mitarbeiterabrechnung erstellt werden soll.</p>
+                                    </div>
+                                </page>
+                            </notebook>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                <!-- set fields to readonly except if it is bt_swissdec.bt_swissdec_admin -->
+        <record id="res_company_year_form_readonly" model="ir.ui.view">
+            <field name="name">res.company.year.form.readonly</field>
+            <field name="model">res.company.year</field>
+            <field name="inherit_id" ref="res_company_year_form"/>
+            <field name="groups_id" eval="[(6, 0, [ref('bt_swissdec.bt_swissdec_admin') ])]"/>
+            <field name="arch" type="xml">
+                <field name='ahv_freigrenze_monat' position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name='ahv_alv_untergrenze_jahr' position="attributes">
+		            <attribute name="readonly">0</attribute>
+		        </field>
+                <field name='beginn_ahv' position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name='beginn_rentenalter_m' position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name='beginn_rentenalter_f' position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name='alv_hoechstlohn_monat' position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+                <field name='alvz_hoechstlohn_monat' position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

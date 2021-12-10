@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_rule_transmitter_configuration_multi_company" model="ir.rule">
+        <field name="name">transmitter configuration: Only allowed companies</field>
+        <field name="model_id" ref="model_transmitter_configuration"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record id="ahv_mutation_table_tree_view" model="ir.ui.view">
+			<field name="name">ahv_mutation_table_tree_view</field>
+			<field name="model">ahv_mutation_table</field>
+			<field name="arch" type="xml">
+				<tree string="Salary Declaration Line"  create="false"
+					  decoration-success="process=='finished'"
+					  decoration-danger="process=='reject'"
+					  decoration-warning="process=='manual'">
+					<field name="identification_id_bt" />
+					<field name="employee_id" />
+					<field name="entry_date" />
+					<field name="withdrawal_date" />
+					<field name="process" />
+					<field name="processed_notification" />
+					<field name="contains_attachment" />
+					<field name="transmission_date" />
+                    <field name="company_id" invisible="1"/>
+					<button name="print_report" icon="fa-print" string="Print"
+						type="object" attrs="{'invisible':[('contains_attachment','=',False) ]}" />
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="ahv_mutation_table_tree_admin" model="ir.ui.view">
+			<field name="name">ahv_mutation_table_tree_admin</field>
+			<field name="model">ahv_mutation_table</field>
+			<field name="arch" type="xml">
+				<tree string="Salary Declaration Line" editable="top"
+					  decoration-success="process=='finished'"
+					  decoration-danger="process=='reject'"
+					  decoration-warning="process=='manual'">
+					<field name="identification_id_bt" />
+					<field name="employee_id" />
+					<field name="entry_date" />
+					<field name="withdrawal_date" />
+
+					<field name="process" />
+					<field name="processed_notification" />
+					<field name="contains_attachment" />
+
+					<field name="warning" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="was_removed" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="state" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="review" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="transmission_date" />
+                    <field name="company_id" groups="base.group_multi_company"/>
+					<button name="print_report" icon="fa-print" string="Print"
+						type="object" attrs="{'invisible':[('contains_attachment','=',False) ]}" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="ahv_mutation_table_form_view" model="ir.ui.view">
+			<field name="name">ahv_mutation_table_form_view</field>
+			<field name="model">ahv_mutation_table</field>
+			<field name="arch" type="xml">
+				<form string="Salary Declaration Line">
+					<header>
+						<button name="action_review" type="object" string="Review" />
+					</header>
+					<sheet>
+						<group colspan="8" col="4">
+							<field name="identification_id_bt" />
+							<field name="employee_id" />
+							<field name="entry_date" />
+							<field name="withdrawal_date" />
+							<field name="state" />
+							<field name="warning" readonly="1" />
+							<field name="was_removed" readonly="1" />
+							<field name="warning_description" />
+                            <field name="company_id" invisible="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="bt_swissdec_amt_admin" model="ir.actions.act_window">
+			<field name="name">AHV Mutation Table (admin)</field>
+			<field name="res_model">ahv_mutation_table</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{}</field>
+			<field name="domain" />
+			<field name="view_ids"
+					eval="[(5, 0, 0),
+	                (0, 0, {'view_mode': 'tree', 'view_id': ref('ahv_mutation_table_tree_admin')}),
+	                (0, 0, {'view_mode': 'form', 'view_id': False}),
+	                ]" />
+
+		</record>
+		<record id="action_amt_user_sent" model="ir.actions.act_window">
+			<field name="name">AHV Mutation Table</field>
+			<field name="res_model">ahv_mutation_table</field>
+			<field name="view_mode">tree</field>
+			<field name="context">{}</field>
+			<field name="domain">[('state', '=', 'sent'), ('company_id', '=', context.get('company_id'))]</field>
+			<field name="view_ids"
+					eval="[(5, 0, 0),
+	                (0, 0, {'view_mode': 'tree', 'view_id': ref('ahv_mutation_table_tree_view')}),
+	                ]" />
+
+		</record>
+
+		<record id="action_amt_user_to_send" model="ir.actions.act_window">
+			<field name="name">AHV Mutation Table</field>
+			<field name="res_model">ahv_mutation_table</field>
+			<field name="view_mode">tree</field>
+			<field name="context">{}</field>
+			<field name="domain">[('state', '=', 'to_send'), ('company_id', '=', context.get('company_id'))]</field>
+			<field name="view_ids"
+					eval="[(5, 0, 0),
+	                (0, 0, {'view_mode': 'tree', 'view_id': ref('ahv_mutation_table_tree_view')}),
+	                ]" />
+
+		</record>
+
+	</data>
+</openerp>

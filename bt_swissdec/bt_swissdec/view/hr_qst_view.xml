@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- ======================= Quellensteuer ======================= -->
+
+		<record id="hr_qst_tree" model="ir.ui.view">
+			<field name="name">hr.qst.tree</field>
+			<field name="model">hr.qst</field>
+			<field name="arch" type="xml">
+				<tree string="Quellensteuer">
+					<field name="name" />
+					<field name="description" />
+					<field name="kanton" />
+					<field name="active" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="hr_qst_form" model="ir.ui.view">
+			<field name="name">hr.qst.form</field>
+			<field name="model">hr.qst</field>
+			<field name="arch" type="xml">
+				<form string="Quellensteuer">
+					<sheet>
+						<group col="8" colspan="4">
+							<field name="name" colspan="2"/>
+							<field name="description" colspan="2"/>
+                            <newline/>
+							<field name="kanton" colspan="2"/>
+							<field name="active" colspan="2"/>
+							<label colspan="2" string="" for="kanton" class="o_form_label"/>
+							<field name="line_ids" colspan="8">
+								<tree string="Quellensteuer Detail">
+									<field name="steuerbares_einkommen_ab_chf" readonly="1"/>
+									<field name="steuer_in_chf" readonly="1"/>
+									<field name="steuer_prozent_satz" readonly="1"/>
+									<field name="datum_gueltig_ab" readonly="1"/>
+									<field name="datum_gueltig_bis" readonly="1"/>
+								</tree>
+							</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_country_state_tree_qst_admin" model="ir.ui.view">
+            <field name="name">res.country.state.tree.qst.admin</field>
+            <field name="model">res.country.state</field>
+            <field name="arch" type="xml">
+                <tree string="State">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+		
+		<record id="view_country_state_form_qst_admin" model="ir.ui.view">
+            <field name="name">res.country.state.form.qst.admin</field>
+            <field name="model">res.country.state</field>
+            <field name="arch" type="xml">
+                <form string="State">
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="country_id" options='{"no_open": True}'/>
+                        <field name="qst_ids" colspan="4" />
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        
+        <record id="view_country_state_tree_qst_user" model="ir.ui.view">
+            <field name="name">res.country.state.tree.qst.user</field>
+            <field name="model">res.country.state</field>
+            <field name="arch" type="xml">
+                <tree string="State" create="false" >
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+		
+		<record id="view_country_state_form_qst_user" model="ir.ui.view">
+            <field name="name">res.country.state.form.qst.user</field>
+            <field name="model">res.country.state</field>
+            <field name="arch" type="xml">
+                <form string="State" create="false">
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="code" readonly="1"/>
+                        <field name="qst_ids" colspan="4" readonly="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+		<record id="action_country_state_ch_admin" model="ir.actions.act_window">
+            <field name="name">CH States with QST-Tarif (Admin)</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.country.state</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('country_id.code', '=', 'CH'),('code', '!=', 'EX'),('qst_ids','!=',False)]</field>
+            <field name="view_ids"
+				eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_country_state_tree_qst_admin')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_country_state_form_qst_admin')}),
+                ]" />
+            <field name="help">Show all states of switzerland where we have QST imported.</field>
+        </record>
+
+
+		
+		<record id="action_country_state_ch_user" model="ir.actions.act_window">
+            <field name="name">CH States with QST-Tarif</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.country.state</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'from_menu_ch_states_with_qst_tarif': True}</field>
+            <field name="domain">[('country_id.code', '=', 'CH'),('code', '!=', 'EX'),('qst_ids','!=',False)]</field>
+            <field name="view_ids"
+				eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_country_state_tree_qst_user')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_country_state_form_qst_user')}),
+                ]" />
+            <field name="help">Show all states of switzerland where we have QST imported.</field>
+        </record>
+
+
+
+	</data>
+</openerp>

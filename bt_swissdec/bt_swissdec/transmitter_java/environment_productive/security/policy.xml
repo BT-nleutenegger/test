@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 1996-2010 itServe AG. All rights reserved.
+  ~
+  ~ This software is the proprietary information of itServe AG, Bern Switzerland.
+  ~ Use is subject to license terms.
+  -->
+
+<wsp:Policy wsu:Id="SalaryDeclarationServicePolicy"
+            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+            xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702 http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/ws-securitypolicy-1.2.xsd">
+
+    <wsp:ExactlyOne>
+        <wsp:All>
+            <!--
+            The AsymmetricBinding assertion is used in scenarios in which message protection is provided by means
+            defined in WSS: SOAP Message Security using asymmetric key (Public Key) technology.
+            -->
+            <sp:AsymmetricBinding>
+                <wsp:Policy>
+                    <sp:InitiatorToken>
+                        <wsp:Policy>
+                            <!-- All the messages should include the token. Internal reference mechanisms can be used to reference the token. -->
+                            <sp:X509Token
+                                    sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Always">
+                                <wsp:Policy>
+                                    <sp:WssX509V3Token10/>
+                                </wsp:Policy>
+                            </sp:X509Token>
+                        </wsp:Policy>
+                    </sp:InitiatorToken>
+                    <sp:RecipientToken>
+                        <wsp:Policy>
+                            <!-- Token should not be included in any messages. It should be externally referenced
+                   using a suitable referencing mechanism according to the policy. -->
+                            <sp:X509Token
+                                    sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+                                <wsp:Policy>
+                                    <sp:WssX509V3Token10/>
+                                </wsp:Policy>
+                            </sp:X509Token>
+                        </wsp:Policy>
+                    </sp:RecipientToken>
+                    <sp:AlgorithmSuite>
+                        <wsp:Policy>
+                            <!--
+                            Folgende Wahl der Algorithmen wird empfohlen:
+                            Canonicalization  http://www.w3.org/2001/10/xml-exc-c14n#
+                            Signature  http://www.w3.org/2000/09/xmldsig#rsa-sha1
+                            Digest  http://www.w3.org/2000/09/xmldsig#rsa
+                            -->
+                            <!--Algorithm Suite [Dig] [Enc] [Sym KW] [Asym KW] [Enc KD] [Sig KD] [Min SKL]-->
+                            <!--Basic256 Sha1 Aes256 KwAes256 KwRsaOaep PSha1L256 PSha1L192 256-->
+                            <sp:Basic256Sha256/>
+                            <!--<wsp:ExactlyOne>-->
+                            <!--<sp:Basic256Rsa15/>-->
+                            <!-- <sp:Basic256Sha256/> -->
+                            <!--<sp:Basic256Sha256Rsa15/>-->
+                            <!--</wsp:ExactlyOne>-->
+                        </wsp:Policy>
+                    </sp:AlgorithmSuite>
+                    <sp:Layout>
+                        <wsp:Policy>
+                            <!--Items are added to the security header in any order that conforms to WSS: SOAP Message Security-->
+                            <sp:Lax/>
+                        </wsp:Policy>
+                    </sp:Layout>
+
+                    <!--
+                    This boolean property specifies whether a wsu:Timestamp element is present in the wsse:Security
+                    header. If the value is 'true', the timestamp element MUST be present and MUST be integrity protected
+                    either by transport or message level security. If the value is 'false', the timestamp element MUST NOT be
+                    present. The default value for this property is 'false'.
+                    -->
+                    <sp:IncludeTimestamp/>
+                    <sp:Strict/>
+                </wsp:Policy>
+            </sp:AsymmetricBinding>
+
+            <!-- Wegen einer Mehrfachverwendung in "RampartUtil.getSignedParts(RampartMessageData rmd)" müssen wir für
+                 unsere Belange Optional auf false setzen.-->
+            <sp:SignedParts wsp:Optional="false">
+                <sp:Body/>
+                <sp:Header
+                        Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                        Name="Timestamp"/>
+            </sp:SignedParts>
+
+            <!-- This element contains a string specifying an XPath expression that identifies the nodes to be
+            confidentiality protected. The XPath expression is evaluated against the SOAP Envelope
+            element node of the message. Multiple instances of this element may appear within this
+            assertion and should be treated as separate references. -->
+            <!--
+                        <sp:EncryptedElements wsp:Optional="true">
+                            <sp:XPath xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                                      xmlns:st="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationServiceTypes"
+                                      xmlns:ct="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationContainer"
+                                      xmlns:sd="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclaration">
+                                /soapenv:Envelope/soapenv:Body/st:DeclareSalary/ct:SalaryDeclaration/sd:Company/sd:CompanyDescription
+                            </sp:XPath>
+                        </sp:EncryptedElements>
+            -->
+
+            <!-- Wegen einer Mehrfachverwendung in "RampartUtil.getEncryptedParts(RampartMessageData rmd)" müssen wir
+                 für unsere Belange Optional auf false setzen.-->
+            <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+                               wsp:Optional="false">
+                <sp:Body/>
+            </sp:EncryptedParts>
+
+            <!--The Wss10 assertion allows you to specify which WSS: SOAP Message Security 1.0 -->
+            <!--options are supported. -->
+            <sp:Wss10>
+                <wsp:Policy>
+                    <sp:MustSupportRefKeyIdentifier/>
+                    <sp:MustSupportRefEmbeddedToken/>
+                    <sp:RequireKeyIdentifierReference/>
+                    <sp:RequireEmbeddedTokenReference/>
+                </wsp:Policy>
+            </sp:Wss10>
+
+            <!--
+            Proprietary Axis Rampart Configuration
+            -->
+            <ramp:RampartConfig xmlns:ramp="http://ws.apache.org/rampart/policy">
+                <ramp:user>test</ramp:user>
+                <ramp:signatureCrypto>
+                    <ramp:crypto provider="org.apache.ws.security.components.crypto.Merlin">
+                        <ramp:property name="org.apache.ws.security.crypto.merlin.keystore.type">jks</ramp:property>
+                        <ramp:property name="org.apache.ws.security.crypto.merlin.file">security/transmitter.jks
+                        </ramp:property>
+                        <ramp:property name="org.apache.ws.security.crypto.merlin.keystore.alias">test</ramp:property>
+                        <ramp:property name="org.apache.ws.security.crypto.merlin.keystore.password">[[DISTRIBUTOR_PASSWORD]]
+                        </ramp:property>
+                    </ramp:crypto>
+                </ramp:signatureCrypto>
+
+                <ramp:encryptionUser>[[DISTRIBUTOR_NAME]]</ramp:encryptionUser>
+                <ramp:encryptionCypto>
+                    <ramp:crypto provider="org.apache.ws.security.components.crypto.Merlin">
+                        <ramp:property name="org.apache.ws.security.crypto.merlin.keystore.type">jks</ramp:property>
+                        <ramp:property name="org.apache.ws.security.crypto.merlin.file">security/transmitter.jks
+                        </ramp:property>
+                        <ramp:property name="org.apache.ws.security.crypto.merlin.keystore.alias">test</ramp:property>
+                        <ramp:property name="org.apache.ws.security.crypto.merlin.keystore.password">[[DISTRIBUTOR_PASSWORD]]
+                        </ramp:property>
+                    </ramp:crypto>
+                </ramp:encryptionCypto>
+
+                <ramp:passwordCallbackClass>ch.swissdec.samples.transmitter.wss.PasswordCallback
+                </ramp:passwordCallbackClass>
+                <ramp:policyValidatorCbClass>ch.swissdec.samples.transmitter.wss.PolicyValidatorCallback
+                </ramp:policyValidatorCbClass>
+                <ramp:timestampPrecisionInMilliseconds>true</ramp:timestampPrecisionInMilliseconds>
+                <ramp:timestampTTL>900</ramp:timestampTTL>
+                <ramp:timestampMaxSkew>500</ramp:timestampMaxSkew>
+                <!--<ramp:tokenStoreClass>org.apache.rahas.StorageImpl</ramp:tokenStoreClass>-->
+            </ramp:RampartConfig>
+        </wsp:All>
+    </wsp:ExactlyOne>
+</wsp:Policy>

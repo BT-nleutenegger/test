@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_qst_cy0" model="hr.qst">
+            <field name="description">Doppelverdienende Person</field>
+            <field name="kanton" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field name="name">C0Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_0" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_cy0"/>
+            <field name="qst_code">C0Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="9999999.99" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','AG'), ('country_id.code','=','CH')]"/>
+            <field eval="8.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_ay0" model="hr.qst">
+            <field name="description">Alleinstehende Person ohne ihre Kinder im Haushalt</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">A0Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_1" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_ay0"/>
+            <field name="qst_code">A0Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="9999.0" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field eval="9.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_line_2" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_ay0"/>
+            <field name="qst_code">A0Y</field>
+            <field eval="10000.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="989999.0" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field eval="13.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_by0" model="hr.qst">
+            <field name="description">Alleinverdienende verheiratete Person</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">B0Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_3" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_by0"/>
+            <field name="qst_code">B0Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="989999.0" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field eval="7.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_by1" model="hr.qst">
+            <field name="description">Alleinverdienende verheiratete Person</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">B1Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_4" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_by1"/>
+            <field eval="1" name="anzahl_kinder"/>
+            <field name="qst_code">B1Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="999999.0" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field eval="6.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_by2" model="hr.qst">
+            <field name="description">Alleinverdienende verheiratete Person</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">B2Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_5" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_by2"/>
+            <field eval="2" name="anzahl_kinder"/>
+            <field name="qst_code">B2Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="999999.0" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field eval="5.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_cy1" model="hr.qst">
+            <field name="description">Doppelverdienende Person</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">C0Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_6" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_cy1"/>
+            <field name="qst_code">C0Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="999999.0" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field eval="8.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_cy2" model="hr.qst">
+            <field name="description">Doppelverdienende Person</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">C1Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_7" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_cy2"/>
+            <field eval="1" name="anzahl_kinder"/>
+            <field name="qst_code">C1Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="999999.0" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field eval="7.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_dy0" model="hr.qst">
+            <field name="description">Person mit Nebenerwerb</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field name="name">D0Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_8" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_dy0"/>
+            <field name="qst_code">D0Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="999999.0" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','BE'), ('country_id.code','=','CH')]"/>
+            <field eval="10.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_ay1" model="hr.qst">
+            <field name="description">Alleinstehende Person ohne ihre Kinder im Haushalt</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="name">A0Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_9" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_ay1"/>
+            <field name="qst_code">A0Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="9999999.99" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field eval="8.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_by3" model="hr.qst">
+            <field name="description">Alleinverdienende verheiratete Person</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="name">B0Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_10" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_by3"/>
+            <field name="qst_code">B0Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="9999999.99" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field eval="6.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_by4" model="hr.qst">
+            <field name="description">Alleinverdienende verheiratete Person</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="name">B1Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_11" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_by4"/>
+            <field eval="1" name="anzahl_kinder"/>
+            <field name="qst_code">B1Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="9999999.99" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field eval="5.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_by5" model="hr.qst">
+            <field name="description">Alleinverdienende verheiratete Person</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="name">B2Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_12" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_by5"/>
+            <field eval="2" name="anzahl_kinder"/>
+            <field name="qst_code">B2Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="9999999.99" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field eval="4.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_cy3" model="hr.qst">
+            <field name="description">Doppelverdienende Person</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="name">C0Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_13" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_cy3"/>
+            <field name="qst_code">C0Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="9999999.99" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field eval="7.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+        <record id="hr_qst_cy4" model="hr.qst">
+            <field name="description">Doppelverdienende Person</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field name="name">C1Y</field>
+            <field name="company_id" ref="second_company" />
+        </record>
+        <record id="hr_qst_line_14" model="hr.qst.line">
+            <field name="qst_id" ref="hr_qst_cy4"/>
+            <field eval="1" name="anzahl_kinder"/>
+            <field name="qst_code">C1Y</field>
+            <field eval="1.0" name="steuerbares_einkommen_ab_chf"/>
+            <field name="recordart">06</field>
+            <field eval="9999999.99" name="tarifschritt_in_chf"/>
+            <field name="code_geschlecht"> </field>
+            <field name="transaktionsart">01</field>
+            <field name="kanton" search="[('code','=','LU'), ('country_id.code','=','CH')]"/>
+            <field eval="6.0" name="steuer_prozent_satz"/>
+            <field name="datum_gueltig_ab">2013-01-01</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_company_inherit_form">
+            <field name="name">res.company.form.inherit.swissdec</field>
+            <field name="inherit_id" ref="base.view_company_form" />
+            <field name="model">res.company</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/field[@name='logo']" position="before">
+                    <div class="oe_button_box" name="button_box" attrs="{'invisible':[('company_used_for_bt_swissdec','!=',True)]}">
+                        <button name="%(bt_tutorial.action_tutorial_link_to_use_in_other_modules)d" class="oe_stat_button" icon="fa-youtube" string="Tutorials" type="action" context="{'model_name': 'res.company'}"/>
+                    </div>
+                </xpath>
+                <xpath expr="/form/sheet/notebook" position="before">
+                    <group groups="base.group_system">
+                        <group>
+                            <field name="company_used_for_bt_swissdec" readonly="1"/>
+                        </group>
+                        <group>
+                            <button name="set_bt_swissdec_flag" string="Enable brain-tec Odoo Salary" type="object"
+                                    attrs="{'invisible': [('company_used_for_bt_swissdec', '=', True)]}"
+                                    class="oe_highlight"/>
+                        </group>
+                    </group>
+                    <group col="2" colspan="4" attrs="{'invisible':[('company_used_for_bt_swissdec','!=',True)]}">
+                        <newline />
+                        <field name="salary_contact_name" attrs="{'required':[('company_used_for_bt_swissdec','=',True)]}" />
+                        <newline />
+                        <field name="salary_contact_email" attrs="{'required':[('company_used_for_bt_swissdec','=',True)]}" />
+                        <newline />
+                        <field name="salary_contact_phone" attrs="{'required':[('company_used_for_bt_swissdec','=',True)]}" />
+                        <newline />
+                        <field name="owner_id" options='{"no_open": True, "no_create": True}' />
+                        <newline />
+                    </group>
+                </xpath>
+                <!--xpath expr="/form/sheet/notebook/page[0]" position="before"-->
+                <xpath expr="//page[descendant-or-self::field[@name='website']]" position="after">
+                    <page name="configuration_salary" string="Configuration salary" attrs="{'invisible':[('company_used_for_bt_swissdec','!=',True)]}">
+                        <notebook>
+                            <page string="Years">
+                                <separator string="Years" colspan="4" />
+                                <field name="has_years" invisible="1" />
+                                <field name="id" colspan="2" invisible="1" />
+                                <group col="4" colspan="4"
+                                    attrs="{'invisible': [('has_years', '=', False)]}">
+                                    <button string="Create new year (makes a copy of last year)"
+                                        name="create_year" icon="fa-plus" type="object"
+                                        confirm="Are you sure to create a new year? It will be also create a new year for each employee." />
+                                    <!--label colspan="6" string="" for=""/>
+                                    <newline />
+                                    <label colspan="8" string="" for=""/-->
+                                </group>
+                                <!-- v10 TEST -->
+                                <group col="4" colspan="4"
+                                    attrs="{'invisible': [('has_years', '=', True)]}">
+                                    <button name="%(wizard_companyyear_copy)d" icon="fa-plus"
+                                        string="Create new year" type="action" colspan="2" />
+                                    <!--label colspan="6" string="" for=""/>
+                                    <newline />
+                                    <label colspan="8" string="" for=""/-->
+                                </group>
+                                <newline />
+
+                                <field name="reset_year_ids" groups="bt_swissdec.bt_swissdec_admin" />
+                                <field name="year_ids_to_set" groups="bt_swissdec.bt_swissdec_admin" />
+                                <group col="4" colspan="4">
+                                    <div attrs="{'invisible':[('reset_year_ids','=',False)]}"
+                                        colspan="4">
+                                        <h2 style="color:red">This entry cannot be deleted, because it relates
+                                            to an employee year. You need to click on the flag 'RESET' in
+                                            order to refresh the page.
+                                        </h2>
+                                    </div>
+                                    <field name="do_reset_year_ids"
+                                        context="{'company_id': id, 'year_ids': year_ids, 'year_ids_to_set': year_ids_to_set}"
+                                        attrs="{'invisible':[('reset_year_ids','=',False)]}" colspan="2" />
+                                    <label colspan="2" string="" for="do_reset_year_ids" class="o_form_label"/>
+                                </group>
+                                <field colspan="2" name="year_ids" nolabel="1"
+                                    options='{"no_create": True}'
+                                    domain="[('company_id', '=', id)]" attrs="{'readonly':[('reset_year_ids','=',True)]}"
+                                    context="{'company_id':id, 'year_ids': year_ids}" />
+                            </page>
+                            <page string="Configuration" colspan="4">
+                                <group col="4">
+                                    <group col="4" colspan="2">
+                                        <group name="salary_grp" string="General" col="2" colspan="4">
+                                            <field name="check_states" groups="bt_swissdec.bt_swissdec_admin"/>
+                                            <field name="default_journal_id" domain="[('company_id', '=', id)]"
+                                               options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="default_booking_salary_payment" />
+                                            <field name="default_payment_journal_id" domain="[('type', '=', 'bank'), ('outbound_payment_method_ids', '!=', False), ('company_id', '=', id)]"
+                                               options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True), ('default_booking_salary_payment', '=', True)]}" />
+                                            <field name="manual_employee_selection_enabled" />
+                                            <field name="pay_13ml_in_november" />
+                                            <field name="default_is_freelancer" />
+                                            <field name="address_user_same_do_check" />
+                                            <field name="default_nettolohnausgleich" />
+                                            <field name="default_zusatzmonatslohn" />
+                                        </group>
+                                        <group name="salary_grp_payslip_report" string="Payslip Report" col="2" colspan="4">
+                                            <field name="offset_left_address_payslip" options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="margin_top_address_payslip" options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="margin_bottom_address_payslip" options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <!--button name="migrate_addresses" string="Adressen migrieren"
+                                                type="object" icon="gtk-apply" colspan="1" groups="base.group_no_one" context="{'update':False}"/ -->
+                                            <!--button name="migrate_addresses_txt" string="Adressen migrieren"
+                                                type="object" icon="gtk-apply" colspan="1" groups="base.group_no_one" context="{'update':False}"/ -->
+                                            <!--newline/> <field name="addresses_migration_result" colspan="4"
+                                                attrs="{'invisible':[('addresses_migration_result','=',False)]}"/> <newline/ -->
+                                            <!--button name="migrate_addresses" string="Update der gemapten
+                                                Adressen" type="object" icon="gtk-apply" colspan="1" groups="base.group_no_one"
+                                                context="{'update':True}" attrs="{'invisible':[('addresses_migration_result','=',False)]}"/ -->
+                                            <!--button name="migrate_addresses_txt" string="Update der gemapten
+                                                Adressen" type="object" icon="gtk-apply" colspan="1" groups="base.group_no_one"
+                                                context="{'update':True}" attrs="{'invisible':[('addresses_migration_result','=',False)]}"/ -->
+                                            <!--button name="create_empfaengerliste_xml" string="Erstelle Empängerliste
+                                                XML" type="object" icon="gtk-apply" colspan="1" groups="base.group_no_one"/ -->
+                                        </group>
+                                    </group>
+                                    <group col="4" colspan="2">
+                                        <group name="salary_grp_categories" string="Categories" col="2" colspan="4">
+                                            <field name="uvgz_default_account_id"
+                                                domain="[('company_id', '=', id)]"
+                                                options='{"no_open": True, "no_create": True}' />
+                                            <field name="ktg_default_account_id"
+                                                domain="[('company_id', '=', id)]"
+                                                options='{"no_open": True, "no_create": True}' />
+                                            <newline />
+                                            <field name="category_bvg_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_ahv_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_alv_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_alvz_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_qst_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_qst_correction_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_uvg_nbuv_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_uvg_buv_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' />
+                                            <field name="category_nettolohnausgleich_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_zusatzmonatslohn_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' />
+                                            <newline />
+                                            <field name="category_fak_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' />
+                                            <field name="category_kizu_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_kizu_supplementary_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}'/>
+                                            <field name="category_ausbzu_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_ausbzu_supplementary_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}'/>
+                                            <field name="category_famzu_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_hauszu_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_gebzu_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_heiratzu_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                            <field name="category_betreuungzu_id" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]"
+                                                options='{"no_open": True, "no_create": True}' attrs="{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}" />
+                                        </group>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Allowance Deduction Categories">
+                                <notebook>
+                                    <page string="Editable Allowance Deduction Categories">
+                                        <field name="adc_ids" colspan="4" nolabel="1" widget="many2many" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]" />
+                                    </page>
+                                    <page string="Allowance Deduction Categories must be linked to children">
+                                        <field name="adc_child_link_ids" colspan="4" nolabel="1"
+                                            widget="many2many" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]" />
+                                    </page>
+                                    <page string="Allowance Deduction Categories must be linked to children correction month">
+                                        <field name="adc_child_correction_link_ids" colspan="4" nolabel="1"
+                                            widget="many2many" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]" />
+                                    </page>
+                                    <page string="Allowance Deduction Categories which will not be booked">
+                                        <field name="adc_will_not_booked_link_ids" colspan="4"
+                                            nolabel="1" widget="many2many" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]" />
+                                    </page>
+                                    <page string="Allowance Deduction Categories for quellensteuer report">
+                                        <field name="adc_qst_link_ids" colspan="4" nolabel="1"
+                                            widget="many2many" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]" />
+                                    </page>
+                                    <page string="Allowance Deduction Categories for nettolohnausgleich calculation">
+                                        <field name="adc_nettolohnausgleich_link_ids" colspan="4" nolabel="1"
+                                            widget="many2many" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]" />
+                                    </page>
+                                    <page
+                                        string="Allowance Deduction Categories for 13. Monatslohn calculation">
+                                        <field name="adc_zusatzmonatslohn_link_ids" colspan="4"
+                                            nolabel="1" widget="many2many" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]" />
+                                    </page>
+                                    <page
+                                        string="Allowance Deduction Categories for QST Salary calculation which are yearly payments">
+                                        <field name="adc_qst_salary_yearly_payment_link_ids" colspan="4"
+                                            nolabel="1" widget="many2many" domain="[('company_id', '=', id), ('type', '!=', 'grosswage')]" />
+                                    </page>
+                                </notebook>
+                            </page>
+                            <page string="Allowance Deduction Other Categories">
+                                <notebook>
+                                    <page string="Company Groups">
+                                        <field name="group_ids" colspan="4" nolabel="1" height="150">
+                                            <form string="Company Groups">
+                                                <group col="4" colspan="4">
+                                                    <field name="name" />
+                                                    <field name="anmerkung" />
+                                                    <field name="contract_ids" colspan="4" domain="[('company_id', '=', parent.id)]" />
+                                                </group>
+                                            </form>
+                                        </field>
+                                    </page>
+                                    <page string="Definition Allowance Deduction Other Categories">
+                                        <field name="allowance_deduction_other_ids" colspan="4" nolabel="1" height="150" domain="[('company_id', '=', id)]" />
+                                    </page>
+                                </notebook>
+                            </page>
+                        </notebook>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="attrs">{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='country_id']" position="attributes">
+                    <attribute name="attrs">{'required':[('id','!=',False),('company_used_for_bt_swissdec','=',True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

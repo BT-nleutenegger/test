@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="transmitter_transmitter_institution_tree"
+			model="ir.ui.view">
+			<field name="name">transmitter_get_status_declare_salary_tree</field>
+			<field name="model">bt_swissdec.transmitter_institution</field>
+			<field name="arch" type="xml">
+				<tree string="Transmitter Institution">
+					<field name="name" />
+					<field name="institution_name" />
+				</tree>
+			</field>
+		</record>
+		<record id="transmitter_transmitter_institution_form"
+			model="ir.ui.view">
+			<field name="name">transmitter_get_status_declare_salary_form</field>
+			<field name="model">bt_swissdec.transmitter_institution</field>
+			<field name="arch" type="xml">
+				<form string="Transmitter Institution">
+					<header>
+						<field name="state" invisible="1" />
+					</header>
+					<group colspan="4">
+						<field name="name" />
+						<field name="institution_name" />
+						<field name="canton_id" />
+					</group>
+					<group colspan="4" states="branch">
+						<field name="branch_number" />
+						<field name="customer_number" />
+					</group>
+					<group colspan="4" states="no_branch">
+						<field name="insuranceid" />
+						<field name="insurance_company_name" />
+						<field name="customer_identity" />
+						<field name="contract_identity" />
+					</group>
+
+
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

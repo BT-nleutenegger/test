@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="hr_employee_public_view_form" model="ir.ui.view">
+            <field name="name">hr.employee.public.form</field>
+            <field name="model">hr.employee.public</field>
+            <field name="inherit_id" ref="hr.hr_employee_public_view_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='name']" position="after">
+                        <label string=" " for="firstname" class="o_form_label"/><field name="firstname" placeholder="First Name"/>
+                    </xpath>
+                    <xpath expr="//field[@name='name']" position="attributes">
+                        <attribute name="placeholder">Last Name</attribute>
+                    </xpath>
+                    <xpath expr="//notebook[1]" position="inside">
+                        <page string="Tax Accounting Reports">
+                            <field name="tax_account_report_ids" nolabel="1" colspan="4" readonly="1" groups="bt_swissdec.user_swissdec">
+                                <form string="Tax Accounting Reports">
+                                    <group col="2" colspan="2">
+                                        <field name="pdf_name" />
+                                        <field name="pdf_data" filename="pdf_name" />
+                                    </group>
+                                </form>
+                                <tree string="Tax Accounting Reports" create="false">
+                                        <field name="year_name" />
+                                    </tree>
+                            </field>
+                            <div>
+                                <p class="oe_grey">Der Mitarbeiter kann hier alle für ihn erstellten <strong><em>Lohnausweise</em></strong> herunterladen.</p>
+                            </div>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- Replaced Changed so that firstname and identification_id_bt is visible -->
+        <record id="hr_employee_public_view_kanban" model="ir.ui.view">
+            <field name="name">hr.employee.kanban</field>
+            <field name="model">hr.employee.public</field>
+            <field name="type">kanban</field>
+            <field name="inherit_id" ref="hr.hr_employee_public_view_kanban" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="id" position="after">
+                        <field name="identification_id_tree_view"/>
+                    </field>
+                    <field name="name" position="replace">
+                        <field name="firstname"/>
+                        <field name="name"/>
+                    </field>
+                    <xpath expr="//li[@id='last_login']" position="inside">
+                        <span t-if="record.identification_id_tree_view.raw_value" style="font-size: 100%">
+                            Identification Id: <field name="identification_id_tree_view"/>
+                        </span>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- Changed so that firstname is visibile -->
+        <record id="hr_employee_public_view_tree" model="ir.ui.view">
+            <field name="name">hr.employee.tree</field>
+            <field name="model">hr.employee.public</field>
+            <field eval="20" name="priority" />
+            <field name="inherit_id" ref="hr.hr_employee_public_view_tree" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="replace">
+                        <field name="identification_id_tree_view" />
+                        <field name="firstname" />
+                        <field name="name" />
+                    </field>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>

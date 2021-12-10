@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<odoo>
+	<data noupdate="1">
+		<record id="tutorial_link_1" model="tutorial.link">
+            <field name="name">Adressänderung nicht QST-pflichtiger Mitarbeiter</field>
+            <field name="description">Dieses Video beschreibt die Adressänderung bei einem nicht QST-pflichtigen Mitarbeiter</field>
+            <field name="url">https://www.youtube.com/watch?v=mP4H4LPtOwg</field>
+            <field name="model_id" ref="bt_swissdec.model_hr_employee"/>
+            <field name="type">video</field>
+		</record>
+		<record id="tutorial_link_2" model="tutorial.link">
+            <field name="name">QST Tarife Import</field>
+            <field name="description">Dieses Video beschreibt den Import der aktuellen QST Tarife</field>
+            <field name="url">https://www.youtube.com/watch?v=PtxtPxdRT8Y</field>
+            <field name="model_id" ref="bt_swissdec.model_qst_import"/>
+            <field name="type">video</field>
+		</record>
+		<record id="tutorial_link_3" model="tutorial.link">
+            <field name="name">Adressänderung QST-pflichtiger Mitarbeiter</field>
+            <field name="description">Dieses Video beschreibt die Adressänderung bei einem QST-pflichtigen Mitarbeiter inkl. Kantonswechsel und Änderung des QST-Codes</field>
+            <field name="url">https://www.youtube.com/watch?v=M1ejdi4psKs</field>
+            <field name="model_id" ref="bt_swissdec.model_hr_employee"/>
+            <field name="type">video</field>
+		</record>
+		<record id="tutorial_link_4" model="tutorial.link">
+            <field name="name">Quellensteuerübermittlung</field>
+            <field name="description">Dieses Video beschreibt die Quellensteuerübermittlung</field>
+            <field name="url">https://www.youtube.com/watch?v=wOBhw0uOmyg</field>
+            <field name="model_id" ref="bt_swissdec.model_gui_tax_at_source_transmission"/>
+            <field name="type">video</field>
+		</record>
+		<record id="tutorial_link_5" model="tutorial.link">
+            <field name="name">Berichte Swissdec</field>
+            <field name="description">Dieses Video beschreibt die Erstellung der "Berichte Swissdec"</field>
+            <field name="url">https://www.youtube.com/watch?v=iykRbQJtDsw</field>
+            <field name="model_id" ref="bt_swissdec.model_bt_swissdec_report"/>
+            <field name="type">video</field>
+		</record>
+		<record id="tutorial_link_6" model="tutorial.link">
+            <field name="name">Lohnausweis bei Mitarbeiter ablegen</field>
+            <field name="description">Dieses Video beschreibt wie man die erstellten Lohnausweise beim Mitarbeiter ablegen kann</field>
+            <field name="url">https://www.youtube.com/watch?v=Rzw3nCdn0is</field>
+            <field name="model_id" ref="bt_swissdec.model_bt_swissdec_report"/>
+            <field name="type">video</field>
+		</record>
+		<record id="tutorial_link_7" model="tutorial.link">
+            <field name="name">Lohnmeldung inkl. Freigaben</field>
+            <field name="description">Dieses Video beschreibt das Erstellen der Lohnmeldung inklusive der Freigaben</field>
+            <field name="url">https://www.youtube.com/watch?v=DmFJd5iUBZ4</field>
+            <field name="model_id" ref="bt_swissdec.model_gui_salary_declaration"/>
+            <field name="type">video</field>
+		</record>
+        <record id="tutorial_link_8" model="tutorial.link">
+            <field name="name">Neues Unternehmensjahr</field>
+            <field name="description">Dieses Video beschreibt wie ein neues Unternehmensjahr erstellt werden kann</field>
+            <field name="url">https://www.youtube.com/watch?v=p4MCUW_jJiU</field>
+            <field name="model_id" ref="account.model_res_company"/>
+            <field name="type">video</field>
+		</record>
+        <record id="tutorial_link_9" model="tutorial.link">
+            <field name="name">Unternehmensjahr beenden</field>
+            <field name="description">Dieses Video beschreibt wie das Unternehmensjahr betreffend Lohnbuchhaltung beendet werden kann</field>
+            <field name="url">https://www.youtube.com/watch?v=jOcdd9gU8Qc</field>
+            <field name="model_id" ref="account.model_res_company"/>
+            <field name="type">video</field>
+		</record>
+        <record id="tutorial_link_10" model="tutorial.link">
+            <field name="name">Doku (DE)</field>
+            <field name="description">Dokumentation BT-Swissdec (DE)</field>
+            <field name="url">https://odoo.braintec-group.com/slides/slide/odoo-12-lohnbuchhaltung-19</field>
+            <field name="model_id" ref="account.model_res_company"/>
+            <field name="type">url</field>
+		</record>
+<!--        <record id="tutorial_link_11" model="tutorial.link">-->
+<!--            <field name="name">Doku (FR)</field>-->
+<!--            <field name="description">Dokumentation BT-Swissdec (FR)</field>-->
+<!--            <field name="url">https://odoo.braintec-group.com/slides/slide/odoo-10-comptabilite-salariale-15</field>-->
+<!--            <field name="model_id" ref="account.model_res_company"/>-->
+<!--            <field name="type">url</field>-->
+<!--		</record>-->
+        <record id="tutorial_link_12" model="tutorial.link">
+            <field name="name">Automatische Berechnung 13. Monatslohn</field>
+            <field name="description">Dieses Video beschreibt das automatische Berechnen des 13. Monatslohnes via Mitarbeiterabrechnung</field>
+            <field name="url">https://www.youtube.com/watch?v=PKoOpapQRe8</field>
+            <field name="model_id" ref="bt_swissdec.model_hr_employee"/>
+            <field name="type">video</field>
+		</record>
+        <record id="tutorial_link_13" model="tutorial.link">
+            <field name="name">Rückwirkende Änderung Mitarbeiter betreffend Quellensteuer</field>
+            <field name="description">Dieses Video beschreibt wie man eine rückwirkende Änderung betreffend der Quellensteuer macht und wie sich diese auf die nächste Mitarbeiterabrechnung und die Quellensteuerabrechnung auswirkt</field>
+            <field name="url">https://www.youtube.com/watch?v=u88aY8bwPp4</field>
+            <field name="model_id" ref="bt_swissdec.model_hr_employee"/>
+            <field name="type">video</field>
+		</record>
+        <record id="tutorial_link_14" model="tutorial.link">
+            <field name="name">Spezial Abzüge und Zulagen Beispiel Abgrenzung 13. ML inkl. Sozialversicherungsbeiträgen</field>
+            <field name="description">Dieses Video beschreibt die Verwendung der Spezial Abzüge und Zulagen anhand des Beispiels der Abgrenzung des 13. ML inkl. der Sozialversicherungsbeiträge</field>
+            <field name="url">https://www.youtube.com/watch?v=p_3EZmHIRVc</field>
+            <field name="model_id" ref="account.model_res_company"/>
+            <field name="type">video</field>
+		</record>
+        <record id="tutorial_link_15" model="tutorial.link">
+            <field name="name">Zweite Mitarbeiterabrechnung für denselben Monat (Workaround)</field>
+            <field name="description">Dieses Video beschreibt den Workaround um eine zweite Mitarbeiterabrechnung für denselben Monat zu erstellen</field>
+            <field name="url">https://www.youtube.com/watch?v=kQ6bMUWrCJs</field>
+            <field name="model_id" ref="bt_swissdec.model_hr_employee"/>
+            <field name="type">video</field>
+		</record>
+        <record id="tutorial_link_16" model="tutorial.link">
+            <field name="name">Abrechnen von Spesen via Mitarbeiterabrechnung</field>
+            <field name="description">Dieses Video beschreibt das Abrechnen von Spesen via Mitarbeiterabrechnung</field>
+            <field name="url">https://www.youtube.com/watch?v=o34fUBa01tk</field>
+            <field name="model_id" ref="bt_swissdec.model_hr_employee"/>
+            <field name="type">video</field>
+		</record>
+        <record id="tutorial_link_17" model="tutorial.link">
+            <field name="name">Jährlicher Ausgleich Quellensteuer</field>
+            <field name="description">Dieses Video beschreibt das Vorgehen um den jährlichen Ausgleich der Quellensteuer bei einer Mitarbeiterabrechnung anzuwenden. Dies kann mehrmals pro Jahr angewendet werden.</field>
+            <field name="url">https://www.youtube.com/watch?v=wmAj0kzBLzM</field>
+            <field name="model_id" ref="bt_swissdec.model_hr_employee"/>
+            <field name="type">video</field>
+		</record>
+	</data>
+</odoo>

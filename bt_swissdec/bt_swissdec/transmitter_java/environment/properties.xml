@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <!--
+    Referenzapplikation Receiver
+    -->
+    <entry key="endpoint.url">[[ENDPOINT]]</entry>
+
+    <!--
+    seucirty new Transmitter Receiver
+    -->
+    <entry key="messages.home"></entry>
+    <entry key="transmitter.endpointURL">[[ENDPOINT2]]</entry>
+    <entry key="transmitter.archivePath">[[TARGET_ARCHIVE_PATH]]</entry>
+    <entry key="org.apache.ws.security.crypto.provider">[[ORG_PROVIDER]]</entry>
+    <entry key="org.apache.ws.security.crypto.merlin.keystore.type">[[ORG_TYPE]]</entry>
+    <entry key="org.apache.ws.security.crypto.merlin.keystore.password">1234567890</entry>
+    <entry key="org.apache.ws.security.crypto.merlin.keystore.alias">receiver</entry>
+    <entry key="org.apache.ws.security.crypto.merlin.file">security/transmitter_test.jks</entry>
+    <entry key="xmlToSend">[[XML_ICHAGCOMPANY]]</entry>
+    <entry key="monitoringID">[[monitoringID]]</entry>
+    <entry key="distributor_name">[[DISTRIBUTOR_NAME]]</entry>
+    <!--
+    Milliseconds
+    -->
+    <entry key="socket.timeout">[[SOCKET]]</entry>
+    <!--
+    Siehe MonitoringID fuer Referenzapplikation
+    https://tst.itserve.ch/itserve/lohnstandard/testing/refapps2/receiver/20130514-0.0
+    -->
+    <entry key="monitoring.id">[[MONITORING_ID]]</entry>
+    <entry key="language">[[LANGUAGE]]</entry>
+    <!--<entry key="monitoring.id">tester</entry>-->
+    <entry key="testcase">[[TESTCASE]]</entry>
+
+    <entry key="interop.firstoperand">[[FIRSTOPERAND]]</entry>
+    <entry key="interop.secondoperand">[[SECONDOPERAND]]</entry>
+    <entry key="interop.umlautstring">[[UMLAUTSTRING]]</entry>
+    <entry key="ua.name">[[UANAME]]</entry>
+   <entry key="ua.complementaryLine">[[COMPLEMENTARYLINE]]</entry>
+    <entry key="ua.producer">[[UAPRODUCER]]</entry>
+    <entry key="ua.version">[[UAVERSION]]</entry>
+    <entry key="ua.certificate">[[CERTIFICATE]]</entry>
+    <entry key="ua.elmStdVersion">[[ELMSTDVERSION]]</entry>
+	<entry key="logging.archive">[[TMPFILE]]</entry>
+	
+	<entry key="status.jobkey">[[JOBKEY]]</entry>
+	
+	<!-- GET RESULT INFORMATION -->
+	<entry key="result.idtype">[[IDTYPE]]</entry>
+	<entry key="result.key">[[KEY]]</entry>
+	<entry key="result.password">[[PASSWORD]]</entry>
+	<!-- UVGLAAIdentificationType // BVGLPPIdentificationType // KTGAMCIdentificationType // UVGZLAACIdentificationType-->
+	<entry key="result.insuranceid">[[INSURANCE_ID]]</entry>
+	<entry key="result.comanyName">[[COMPANYNAME]]</entry>
+	<entry key="result.customerIdentity">[[CUSTOMERIDENTITY]]</entry>
+	<entry key="result.contractIdentity">[[CONTRACT_ID]]</entry>
+	<!-- AHVAVSIdentificationType -->
+	<entry key="result.akccBranchNumber">[[AKCCBRANCHNUMBER]]</entry>
+	<entry key="result.akccCustomerNumber">[[AKCCCUSTOMERNUMBER]]</entry>
+	<entry key="result.akccSubNumber">[[AKCCSUBNUMBER]]</entry>
+	<!-- FAKCAFIdentificationType -->
+	<entry key="result.fakcafBranchNumber">[[FAKCAFBRANCHNUMBER]]</entry>
+	<entry key="result.fakcafCustomerNumber">[[FAKCAFCUSTOMERNUMBER]]</entry>
+	<entry key="result.fakcafSubNumber">[[FAKCAFSUBNUMBER]]</entry>
+	<!-- TaxAtSourceIdentificationType (+result.customerIdentity) // TaxCustomerIdentificationConsumerType (CANTON)-->
+	<entry key="result.cantonID">[[CANTONID]]</entry>
+	<entry key="result.payrollUnit">[[PAYROLLUNIT]]</entry>
+</properties>

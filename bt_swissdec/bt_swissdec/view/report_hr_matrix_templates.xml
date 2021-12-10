@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_hr_matrix_document">
+    <t t-call="web.internal_layout">
+        <t t-set="o" t-value="o.with_context({'lang':lang_set})"/>
+        <div class="page">
+            <section class="oe_mb32">
+                <h4 style="text-align: center"><strong>Wage type master <span t-esc="get_company_name(o)"/><span t-esc="get_due_date(o)" t-options="{'widget': 'date'}"/></strong></h4>
+            </section>
+            <div class="row" style="font-size: 75%;">
+                <div class="col-4" style="border: 0px solid black">
+                    AC = Accounting
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                    E = KTG
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                    J = Withholding tax detail
+                </div>
+            </div>
+            <div class="row" style="font-size: 75%;">
+                <div class="col-4" style="border: 0px solid black">
+                    A = Gross wages
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                    F = BVG expected
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                    K = Salary certificate
+                </div>
+            </div>
+            <div class="row" style="font-size: 75%;">
+                <div class="col-4" style="border: 0px solid black">
+                    B = AVS/ALV
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                    G = Factor
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                    L = Statistic year
+                </div>
+            </div>
+            <div class="row" style="font-size: 75%;">
+                <div class="col-4" style="border: 0px solid black">
+                    C = LAA
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                    H = BVG retroactive
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                    M = Statistic October
+                </div>
+            </div>
+            <div class="row" style="font-size: 75%;">
+                <div class="col-4" style="border: 0px solid black">
+                    D = UVGZ
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                    I = Withholding tax
+                </div>
+                <div class="col-4" style="border: 0px solid black">
+                </div>
+            </div>
+            <table class="table table-condensed oe_mt32" style="font-size: 75%;">
+                <thead>
+                    <tr>
+                        <th style="background-color: #ababab">Nr.</th>
+                        <th>Description</th>
+                        <th style="background-color: #ababab">AC</th>
+                        <th>+/-</th>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>D</th>
+                        <th>E</th>
+                        <th style="background-color: #ababab">F</th>
+                        <th style="background-color: #ababab">G</th>
+                        <th style="background-color: #ababab">H</th>
+                        <th>I</th>
+                        <th>J</th>
+                        <th>K</th>
+                        <th>L</th>
+                        <th>M</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="count_bold" t-value="0"/>
+                    <tr t-foreach="doc_ids" t-as="line">
+                        <t t-set="style" t-value="'border-top: 1; padding-top: 0; padding-bottom:0; '"/>
+                        <p t-if="count_bold%2 == 0">
+                            <t t-set="style" t-value="style + ' background-color: #eeeeee;'"/>
+                        </p>
+                        <td t-att-style="style + 'background-color: #ababab'"><span t-field="line.matrix_nr"/></td>
+                        <td t-att-style="style"><span t-field="line.name"/></td>
+                        <td t-att-style="style + 'background-color: #ababab'"><span t-esc="get_string(o, line.id,'matrix_buchhaltung_account')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_plusminus')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_bruttolohn')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_ahvalv')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_uvg')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_uvgz')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_ktg')"/></td>
+                        <td t-att-style="style + 'background-color: #ababab'"><span t-esc="get_string(o, line.id,'matrix_bvg_voraussichtlich')"/></td>
+                        <td t-att-style="style + 'background-color: #ababab'"><span t-esc="get_string(o, line.id,'matrix_faktor')"/></td>
+                        <td t-att-style="style + 'background-color: #ababab'"><span t-esc="get_string(o, line.id,'matrix_bvg_rueckwirkend')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_quellensteuer')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_quellensteuer_detail')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_lohnausweis')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_statistik')"/></td>
+                        <td t-att-style="style"><span t-esc="get_string(o, line.id,'matrix_statistik_oktober')"/></td>
+                        <t t-set="count_bold" t-value="count_bold+1"/>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</template>
+
+<template id="report_hr_matrix">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bt_swissdec.report_hr_matrix_document" t-lang="lang_set"/>
+        </t>
+    </t>
+</template>
+</odoo>

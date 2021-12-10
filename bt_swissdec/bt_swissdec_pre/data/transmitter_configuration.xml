@@ -1,0 +1,21 @@
+<openerp>
+	<data>
+        <!-- IMPORTANT: If you modify any of these values, you may need to update the values used in the function
+                        create_transmitter_for_company_with_default_values() defined in the model
+                        "transmitter_configuration" too -->
+		<record id="transmitter_configuration_0005" model="transmitter_configuration">
+			<field name="name">[brain-tec] PRODUCTIVE-T</field>
+			<field name="description">Productive version 4 [brain-tec]</field>
+			<field name="jks_state">use_productive_jks</field>
+			<field name="group">identification_id_bt</field>
+			<field name="end_point">https://distributor.swissdec.ch/services/elm/SalaryDeclaration/20130514</field>
+			<field name="distributor_name">distributor</field>
+			<field name="password">default</field>
+			<field name="uaproducer">brain-tec AG</field>
+			<field name="uaversion">10.0</field>
+			<field name="uacertificate">1103.16</field>
+			<field name="elmstdversion">4.0</field>
+            <field name="company_id" ref="base.main_company"/>
+		</record>
+	</data>
+</openerp>

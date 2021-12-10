@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- ========== Employee ========== -->
+        <delete model="ir.ui.view" search="[('name','=','hr.hr.employee.view.form2')]" />
+
+        <record id="hr.open_view_employee_list_my" model="ir.actions.act_window">
+            <field name="context">{"default_firstname": False, "coming_from_employee_menu": True}</field>
+        </record>
+
+        <!-- <record id="view_employee_tree" model="ir.ui.view"> -->
+        <!-- <field name="name">hr.employee.tree</field> -->
+        <!-- <field name="model">hr.employee</field> -->
+        <!-- <field eval="15" name="priority"/> -->
+        <!-- <field name="arch" type="xml"> -->
+        <!-- <tree string="Employees"> -->
+        <!-- <field name="identification_id"/> -->
+        <!-- <field name="name"/> -->
+        <!-- <field name="firstname"/> -->
+        <!-- <field name="company_id" groups="base.group_multi_company"/> -->
+        <!-- <field name="department_id"/> -->
+        <!-- <field name="job_id"/> -->
+        <!-- <field name="parent_id"/> -->
+        <!-- <field name="coach_id" invisible="1" /> -->
+        <!-- </tree> -->
+        <!-- </field> -->
+        <!-- </record> -->
+
+        <!-- <record id="view_employee_filter" model="ir.ui.view"> -->
+        <!-- <field name="name">Employees</field> -->
+        <!-- <field name="model">hr.employee</field> -->
+        <!-- <field name="type">search</field> -->
+        <!-- <field name="arch" type="xml"> -->
+        <!-- <search string="Employees"> -->
+        <!-- <filter icon="terp-personal+" domain="[('active','=',True)]" name="active"
+            string="Active" groups="hr.group_hr_manager"/> -->
+        <!-- <separator orientation="vertical" /> -->
+        <!-- <field name="name"/> -->
+        <!-- <field name="department_id" options='{"no_open": True, "no_create": True}'> -->
+        <!-- <filter icon="terp-personal+" domain="[('department_id','=',context.get('department_id',False))]"
+            string="My Departments Employee"/> -->
+        <!-- </field> -->
+        <!-- <field name="job_id" options='{"no_open": True, "no_create": True}'/> -->
+        <!-- <field name="category_ids" groups="hr.group_hr_manager"/> -->
+        <!-- <field name="parent_id"/> -->
+        <!-- <newline /> -->
+        <!-- <group expand="0" string="Group By..."> -->
+        <!-- <filter string="Manager" icon="terp-personal" domain="[]" context="{'group_by':'parent_id'}"/> -->
+        <!-- <filter string="Coach" icon="terp-personal" domain="[]" context="{'group_by':'coach_id'}"
+            groups="hr.group_hr_manager"/> -->
+        <!-- <separator orientation="vertical" /> -->
+        <!-- <filter string="Department" icon="terp-personal+" domain="[]" context="{'group_by':'department_id'}"/> -->
+        <!-- <filter string="Job" icon="terp-gtk-select-all" domain="[]" context="{'group_by':'job_id'}"/> -->
+        <!-- <filter string="Company" icon="terp-go-home" domain="[]" context="{'group_by':'company_id'}"
+            groups="base.group_multi_company"/> -->
+        <!-- </group> -->
+        <!-- </search> -->
+        <!-- </field> -->
+        <!-- </record> -->
+
+        <!-- <record id="open_view_employee_tree" model="ir.actions.act_window"> -->
+        <!-- <field name="name">Employees Structure</field> -->
+        <!-- <field name="res_model">hr.employee</field> -->
+        <!-- <field name="view_mode">tree,form</field> -->
+        <!-- <field name="view_id" ref="view_employee_tree"/> -->
+        <!-- <field name="domain">[('parent_id','=',False),('user_id','=',uid)]</field> -->
+        <!-- <field name="search_view_id" ref="view_employee_filter"/> -->
+        <!-- </record> -->
+
+        <!-- ======================= Employee marital status ======================= -->
+
+
+
+        <!--menuitem action="action_hr_marital_status" id="hr_menu_marital_status"
+            parent="hr.menu_view_employee_category_configuration_form" sequence="3" groups="hr.group_hr_manager"/ -->
+
+
+        <!-- ======================= Employee family status ======================= -->
+
+
+
+        <!--menuitem action="action_hr_family_status" id="hr_menu_family_status"
+            parent="hr.menu_view_employee_category_configuration_form" sequence="3" groups="hr.group_hr_manager"/ -->
+
+        <!-- ======================= Employee architecture ======================= -->
+        <!-- <record id="view_partner_tree2" model="ir.ui.view"> -->
+        <!-- <field name="name">hr.employee.tree</field> -->
+        <!-- <field name="model">hr.employee</field> -->
+        <!-- <field name="field_parent">child_ids</field> -->
+        <!-- <field eval="20" name="priority"/> -->
+        <!-- <field name="arch" type="xml"> -->
+        <!-- <tree string="Employees"> -->
+        <!-- <field name="name"/> -->
+        <!-- <field name="ssnid"/> -->
+        <!-- <field name="user_id"/> -->
+        <!-- <field name="address_id"/> -->
+        <!-- </tree> -->
+        <!-- </field> -->
+        <!-- </record> -->
+
+        <!-- ============ Employee Category ============ -->
+        <!--record id="view_partner_address_tree1" model="ir.ui.view"> <field name="name">res.partner.address.tree</field>
+            <field name="inherit_id" ref="base.view_partner_address_tree"/> <field name="model">res.partner.address</field>
+            <field name="arch" type="xml"> <field name="email" position="after"> <field
+            name="street"/> </field> </field> </record -->
+
+        <!--record id="custom_res_partner_address_active" model="ir.ui.view">
+            <field name="name">custom_res_partner_address_active</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="priority" eval="20" />
+            <field name="arch" type="xml">
+                <data>
+                    <field name="type" position="before">
+                        <field name="active" />
+                        <newline />
+                    </field>
+                </data>
+            </field>
+        </record-->
+
+        <record id="view_company_bur_tree" model="ir.ui.view">
+            <field name="name">res.company.bur.tree</field>
+            <field name="model">res.company.bur</field>
+            <field name="field_parent">bur_ids</field>
+            <field name="arch" type="xml">
+                <tree string="Workplaces">
+                    <field name="name" />
+                    <field name="bur_ree_number" />
+                    <field name="is_inhouseid" />
+                    <field name="description" />
+                    <field name="state_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_res_company_uvg_form" model="ir.ui.view">
+            <field name="name">res.company.uvg.form</field>
+            <field name="model">res.company.uvg</field>
+            <field name="arch" type="xml">
+                <form string="UVG">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="name" readonly="1" />
+                            <newline />
+                            <field name="versicherer_nr" readonly="1" />
+                            <field name="kundennr" readonly="1" />
+                            <field name="vertragsnr" readonly="1" />
+                            <field name="address_id" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_res_company_uvg_tree" model="ir.ui.view">
+            <field name="name">res.company.uvg.tree</field>
+            <field name="model">res.company.uvg</field>
+            <field name="arch" type="xml">
+                <tree string="UVG">
+                    <field name="name" readonly="1" />
+                    <field name="versicherer_nr" readonly="1" />
+                    <field name="kundennr" readonly="1" />
+                    <field name="vertragsnr" readonly="1" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_res_company_uvg_part_form" model="ir.ui.view">
+            <field name="name">res.company.uvg.part.form</field>
+            <field name="model">res.company.uvg.part</field>
+            <field name="arch" type="xml">
+                <form string="UVG Part">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="name" readonly="1" />
+                            <field name="beschreibung" readonly="1" />
+                            <newline />
+                            <field name="buv_mf" readonly="1" />
+                            <field name="nbuv_mf" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_res_company_uvg_part_tree" model="ir.ui.view">
+            <field name="name">res.company.uvg.part.tree</field>
+            <field name="model">res.company.uvg.part</field>
+            <field name="arch" type="xml">
+                <tree string="UVG Part">
+                    <field name="name" readonly="1" />
+                    <field name="beschreibung" readonly="1" />
+                    <field name="buv_mf" readonly="1" />
+                    <field name="nbuv_mf" readonly="1" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_res_company_group_form" model="ir.ui.view">
+            <field name="name">res.company.group.form</field>
+            <field name="model">res.company.group</field>
+            <field name="arch" type="xml">
+                <form string="Company Group">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="name" />
+                            <field name="anmerkung" />
+                        </group>
+                        <group col="4" colspan="4">
+                            <field name="allowance_deduction_other_ids" readonly="1" nolabel="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_res_company_group_tree" model="ir.ui.view">
+            <field name="name">res.company.group.tree</field>
+            <field name="model">res.company.group</field>
+            <field name="arch" type="xml">
+                <tree string="Company Group">
+                    <field name="name" readonly="1" />
+                    <field name="anmerkung" readonly="1" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_allowance_deduction_other_category_form"
+            model="ir.ui.view">
+            <field name="name">hr.allowance.deduction.other.category.form</field>
+            <field name="model">hr.allowance.deduction.other.category</field>
+            <field name="arch" type="xml">
+                <form string="Allowance Deduction Other Heads">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="category_adc_id" options='{"no_open": True, "no_create": True}' required="1"
+								context="{'is_for_bruttolohn':is_for_bruttolohn, 'company_id':parent.id, 'parent_ids': parent.adc_ids}"/>
+                            <field name="group_id" options='{"no_open": True, "no_create": True}'  domain="[('company_id', '=', parent.id)]"/>
+                            <field name="group_name" invisible="1" />
+                            <newline />
+                            <field name="only_for_report" />
+                            <newline />
+                            <field name="amount_type" attrs="{'readonly':[('is_for_bruttolohn','!=',False), ('only_for_report','=',False)]}" force_save="1"/>
+                            <field name="amount" />
+                            <field name="type" />
+                            <newline />
+                            <field name="valid_from" />
+                            <field name="valid_to" />
+                            <newline />
+                            <label for="is_for_bruttolohn"/>
+                            <div>
+                                <field name="is_for_bruttolohn"/>
+                            </div>
+                            <newline/>
+                            <field name="line_type" attrs="{'invisible':[('is_for_bruttolohn','!=',False)], 'required':[('is_for_bruttolohn','=',False)]}" />
+                            <newline />
+                            <field name="description" />
+                            <field name="id" invisible="1" readonly="0"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_allowance_deduction_other_category_tree"
+            model="ir.ui.view">
+            <field name="name">hr.allowance.deduction.other.category.tree</field>
+            <field name="model">hr.allowance.deduction.other.category</field>
+            <field name="arch" type="xml">
+                <tree string="Allowance Deduction Other Heads">
+                    <field name="category_adc_id" />
+                    <field name="group_id" invisible="1" />
+                    <field name="group_name" />
+                    <field name="only_for_report" />
+                    <field name="amount_type" />
+                    <field name="amount" />
+                    <field name="type" />
+                    <field name="valid_from" />
+                    <field name="valid_to" />
+                    <field name="is_for_bruttolohn" />
+                    <field name="line_type" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_res_company_group_uvgz_form" model="ir.ui.view">
+            <field name="name">res.company.group.uvgz.form</field>
+            <field name="model">res.company.group.uvgz</field>
+            <field name="arch" type="xml">
+                <form string="UVGZ Group">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="code" readonly="1" />
+                            <field name="name" readonly="1" />
+                            <field name="anmerkung" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_res_company_group_uvgz_tree" model="ir.ui.view">
+            <field name="name">res.company.group.uvgz.tree</field>
+            <field name="model">res.company.group.uvgz</field>
+            <field name="arch" type="xml">
+                <tree string="UVGZ Group">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="anmerkung" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_res_company_group_ktg_form" model="ir.ui.view">
+            <field name="name">res.company.group.ktg.form</field>
+            <field name="model">res.company.group.ktg</field>
+            <field name="arch" type="xml">
+                <form string="KTG Group">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="code" readonly="1" />
+                            <field name="name" readonly="1" />
+                            <field name="anmerkung" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_res_company_group_ktg_tree" model="ir.ui.view">
+            <field name="name">res.company.group.ktg.tree</field>
+            <field name="model">res.company.group.ktg</field>
+            <field name="arch" type="xml">
+                <tree string="KTG Group">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="anmerkung" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_res_company_group_bvg_form" model="ir.ui.view">
+            <field name="name">res.company.group.bvg.form</field>
+            <field name="model">res.company.group.bvg</field>
+            <field name="arch" type="xml">
+                <form string="BVG Group">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <!--field name="code" readonly="1"/ -->
+                            <field name="name" readonly="1" />
+                            <field name="anmerkung" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_res_company_group_bvg_tree" model="ir.ui.view">
+            <field name="name">res.company.group.bvg.tree</field>
+            <field name="model">res.company.group.bvg</field>
+            <field name="arch" type="xml">
+                <tree string="BVG Group">
+                    <!--field name="code"/ -->
+                    <field name="name" />
+                    <field name="anmerkung" />
+                </tree>
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+        <delete model="ir.actions.report"
+            search="[('report_name','=','paylip.details'),('model','=','hr.payslip')]" />
+    </data>
+</openerp>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="single_gui_ahv_mutation_form">
+            <field name="name">single_gui_ahv_mutation.form</field>
+            <field name="model">single_gui_ahv_mutation</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Wizard AHV mutation">
+                    <sheet>
+                        <div class="oe_left oe_button_box" style="text-align:left" name="buttons">
+                            <button class="oe_inline oe_stat_button" type="action"
+                                context="{'company_id': company_id}"
+                                name="%(action_amt_user_sent)d"
+                                help="Show all sent mutations" icon="fa-pencil-square-o">
+                                <field string="Mut. Sent" name="number_ahv_mutation_sent"
+                                    widget="statinfo" />
+                            </button>
+
+                            <button class="oe_inline oe_stat_button" type="action"
+                                context="{'company_id': company_id}"
+                                name="%(action_amt_user_to_send)d"
+                                help="Show all open mutations" icon="fa-pencil-square-o">
+                                <field string="Mut. Not Sent" name="number_ahv_mutation_open"
+                                    widget="statinfo" />
+                            </button>
+                        </div>
+                        <group>
+                            <field name="number_open_sessions" groups="bt_swissdec.bt_swissdec_admin" />
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <footer>
+                            <group attrs="{'invisible': [('number_ahv_mutation_open','=', 0)]}">
+                                <group>
+                                    <separator string="What do you want to do?" colspan="4" />
+                                    <button name="open_last" class="btn-primary"
+                                        string="There is an open session. Click here to continue with it. Send AHV Mutations"
+                                        type="object" attrs="{'invisible': [('number_open_sessions','=', 0)]}" />
+                                    <newline/>
+                                    <button name="open_new" class="btn-primary" string="Send AHV Mutations "
+
+                                        type="object"
+                                        confirm="Are you sure you want to do this? Those that are open and not transmitted will be canceled."
+                                        attrs="{'invisible': [('number_open_sessions','=', 0)]}" />
+                                    <button name="open_new" class="btn-primary" string="Send AHV Mutations"
+                                        type="object" attrs="{'invisible': [('number_open_sessions','!=', 0)]}" />
+                                </group>
+                            </group>
+                            <button string="Close" class="btn-default" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

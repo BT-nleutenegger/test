@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record id="transmitter_execution_tree_view" model="ir.ui.view">
+			<field name="name">bt_swissdec.transmitter_execution_tree_view</field>
+			<field name="model">bt_swissdec.transmitter_execution</field>
+			<field name="arch" type="xml">
+				<tree string="Transmitter Execution">
+					<field name="operation" />
+					<field name="create_date" />
+					<field name="job_key" />
+					<field name="responseid" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="requestid" groups="bt_swissdec.bt_swissdec_admin" />
+					<field name="declarationid" />
+					<field name="working_offline" />
+					<field name="validity_plausibility_checking" />
+					<field name="job_finished" />
+					<button name="action_parser_all" string="Analyze" type="object"
+						icon="fa-files-o" groups="bt_swissdec.bt_swissdec_admin" />
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="transmitter_execution_form_view" model="ir.ui.view">
+			<field name="name">bt_swissdec.transmitter_execution_form_view</field>
+			<field name="model">bt_swissdec.transmitter_execution</field>
+			<field name="arch" type="xml">
+				<form string="Transmitter Execution">
+					<header>
+						<field name="operation" widget="statusbar" groups="bt_swissdec.bt_swissdec_admin" />
+					</header>
+					<sheet>
+						<notebook>
+							<page string="Transmitter" groups="bt_swissdec.bt_swissdec_admin">
+							  <group>
+    							<h2>Transmitter options</h2>
+    							<field name="working_offline"/>
+    							<field name="virtual_environment_path" colspan="4"/>
+    							<field name="output_signed_id" colspan="4"/>
+    							<field name="output_id" colspan="4"/>
+    							<field name="input_id" colspan="4"/>
+    							<field name="log_information" colspan="4"/>
+    							<field name="notifications_ids" colspan="4"/>
+    							<h2>Parent configuration</h2>
+    							<field name="transmitter_configuration_id" colspan="4"/>
+    							<field name="transmitter_id" colspan="4"/>
+    						</group>
+							</page>
+							<page string="Files" attrs="{'invisible': [('operation', 'in', ['ping'])]}">
+								<group colspan="4">
+									<field name="output_binary" filename="output_name"
+										string="Output XML" colspan="4"  groups="bt_swissdec.bt_swissdec_admin"/>
+
+									<field string="Input XML" name="input_binary"
+										filename="input_name" colspan="4"
+										groups="bt_swissdec.bt_swissdec_admin" />
+
+									<field name="output_name" invisible="1" />
+									<field name="output_signed_name" invisible="1" />
+									<field name="output_encrypted_name" invisible="1" />
+									<field name="input_name" invisible="1" />
+									<field name="input_fault_name" invisible="1" />
+								</group>
+							</page>
+							<page string="Output XML" groups="bt_swissdec.bt_swissdec_admin"
+								  attrs="{'invisible': [('operation', 'in', ['ping'])]}">
+								<field name="output" colspan="4" />
+							</page>
+							<page string="Input XML" groups="bt_swissdec.bt_swissdec_admin"
+									attrs="{'invisible': [('operation', 'in', ['ping'])]}">
+								<button name="button_print" string="Print" type="object" icon="fa-print" groups="bt_swissdec.bt_swissdec_admin" />
+
+								<field name="input" colspan="4" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+
+			</field>
+		</record>
+
+	</data>
+</openerp>

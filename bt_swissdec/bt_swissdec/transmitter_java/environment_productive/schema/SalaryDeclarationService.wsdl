@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+        name="SalaryDeclarationService"
+        targetNamespace="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationService"
+        xmlns:sds="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationService"
+        xmlns:sdst="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationServiceTypes"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <!-- state of standardisation: FINAL
+         publication: 2013-05-21
+         a. boehm
+    -->
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import namespace="http://www.swissdec.ch/schema/sd/20130514/SalaryDeclarationServiceTypes"
+                       schemaLocation="SalaryDeclarationServiceTypes.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <!-- sync -->
+    <wsdl:message name="GetResultFromDeclareSalaryRequest">
+        <wsdl:part name="parameters" element="sdst:GetResultFromDeclareSalary"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromDeclareSalaryResponse">
+        <wsdl:part name="parameters" element="sdst:GetResultFromDeclareSalaryResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromSynchronizeContractRequest">
+        <wsdl:part name="parameters" element="sdst:GetResultFromSynchronizeContract"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromSynchronizeContractResponse">
+        <wsdl:part name="parameters" element="sdst:GetResultFromSynchronizeContractResponse"/>
+    </wsdl:message>
+
+    <!-- async -->
+    <wsdl:message name="DeclareSalaryRequest">
+        <wsdl:part name="parameters" element="sdst:DeclareSalary"/>
+    </wsdl:message>
+    <wsdl:message name="DeclareSalaryResponse">
+        <wsdl:part name="parameters" element="sdst:DeclareSalaryResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusFromDeclareSalaryRequest">
+        <wsdl:part name="parameters" element="sdst:GetStatusFromDeclareSalary"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusFromDeclareSalaryResponse">
+        <wsdl:part name="parameters" element="sdst:GetStatusFromDeclareSalaryResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SynchronizeContractRequest">
+        <wsdl:part name="parameters" element="sdst:SynchronizeContract"/>
+    </wsdl:message>
+    <wsdl:message name="SynchronizeContractResponse">
+        <wsdl:part name="parameters" element="sdst:SynchronizeContractResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusFromSynchronizeContractRequest">
+        <wsdl:part name="parameters" element="sdst:GetStatusFromSynchronizeContract"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusFromSynchronizeContractResponse">
+        <wsdl:part name="parameters" element="sdst:GetStatusFromSynchronizeContractResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="PingRequest">
+        <wsdl:part name="parameters" element="sdst:Ping"/>
+    </wsdl:message>
+    <wsdl:message name="PingResponse">
+        <wsdl:part name="parameters" element="sdst:PingResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CheckInteroperabilityRequest">
+        <wsdl:part name="parameters" element="sdst:CheckInteroperability"/>
+    </wsdl:message>
+    <wsdl:message name="CheckInteroperabilityResponse">
+        <wsdl:part name="parameters" element="sdst:CheckInteroperabilityResponse"/>
+    </wsdl:message>
+
+    <!-- sync/async -->
+    <wsdl:message name="SalaryDeclarationFault">
+        <wsdl:part name="parameters" element="sdst:SalaryDeclarationFault"/>
+    </wsdl:message>
+
+    <wsdl:portType name="SalaryDeclarationPort">
+        <wsdl:operation name="DeclareSalary">
+            <wsdl:input message="sds:DeclareSalaryRequest"/>
+            <wsdl:output message="sds:DeclareSalaryResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusFromDeclareSalary">
+            <wsdl:input message="sds:GetStatusFromDeclareSalaryRequest"/>
+            <wsdl:output message="sds:GetStatusFromDeclareSalaryResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareSalary">
+            <wsdl:input message="sds:GetResultFromDeclareSalaryRequest"/>
+            <wsdl:output message="sds:GetResultFromDeclareSalaryResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="SynchronizeContract">
+            <wsdl:input message="sds:SynchronizeContractRequest"/>
+            <wsdl:output message="sds:SynchronizeContractResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusFromSynchronizeContract">
+            <wsdl:input message="sds:GetStatusFromSynchronizeContractRequest"/>
+            <wsdl:output message="sds:GetStatusFromSynchronizeContractResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromSynchronizeContract">
+            <wsdl:input message="sds:GetResultFromSynchronizeContractRequest"/>
+            <wsdl:output message="sds:GetResultFromSynchronizeContractResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="Ping">
+            <wsdl:input message="sds:PingRequest"/>
+            <wsdl:output message="sds:PingResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CheckInteroperability">
+            <wsdl:input message="sds:CheckInteroperabilityRequest"/>
+            <wsdl:output message="sds:CheckInteroperabilityResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="SalaryDeclarationSOAPBinding" type="sds:SalaryDeclarationPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="DeclareSalary">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusFromDeclareSalary">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareSalary">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SynchronizeContract">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusFromSynchronizeContract">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromSynchronizeContract">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="Ping">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CheckInteroperability">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="SalaryDeclarationService">
+        <wsdl:port name="SalaryDeclaration" binding="sds:SalaryDeclarationSOAPBinding">
+            <soap:address
+                    location="http://tst.itserve.ch/itserve/lohnstandard/piv/receiver/channel001/services/SalaryDeclaration"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

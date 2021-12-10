@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record forcecreate="True" id="ir_cron_update_has_active_contract_employee" model="ir.cron">
+            <field name="name">Update Flag 'has active contract' of hr.employee</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="model_id" ref="model_hr_employee" />
+            <field name="code">model.update_has_active_contract()</field>
+        </record>
+
+        <record forcecreate="True" id="ir_cron_check_qst_data_and_send_mail" model="ir.cron">
+            <field name="name">Check QST data of actual year and send an email to salary contact person</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="state">code</field>
+            <field name="code">model.check_qst_data_and_send_mail()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d 02:00:00')" />
+            <field eval="False" name="doall"/>
+            <field name="model_id" ref="model_hr_employee_calculationparameter_qst"/>
+        </record>
+
+        <record forcecreate="True" id="ir_cron_update_partner_address" model="ir.cron">
+            <field name="name">Update Partner Address Employee</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">model.update_address_cron()</field>
+        </record>
+
+        <record forcecreate="True" id="ir_cron_end_month_check_transfer" model="ir.cron">
+            <field name="name">Check if the transfers are done</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">1</field>
+            <field name="model_id" ref="model_account_move_line_salary"/>
+            <field name="nextcall" eval="(DateTime.now() + relativedelta(months=+1)).strftime('%Y-%m-27 02:00:00')" />
+            <field name="state">code</field>
+            <field name="code">model.end_month_check_transfer_done()</field>
+        </record>
+    </data>
+</openerp>
